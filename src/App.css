@@ -1,0 +1,134 @@
+/* .App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.red {
+  color: rgb(238, 40, 40);
+}
+
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+} */
+
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.red {
+  color: rgb(238, 40, 40);
+}
+
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Optional: Centers vertically as well */
+
+  /* Optional: Makes sure the container takes the full viewport height */
+}
+
+
+.pl-13 {
+  padding-left: 13px;
+}
+
+.sideProjectMenu {
+  padding: 4px 12px;
+}
+
+.sideProjectMenu .title {
+  padding: 0.625rem 1.3333333333px 0.625rem 12px;
+  color: #6e82a5;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  line-height: 1.25rem;
+  border-radius: 6px;
+}
+
+.sideProjectMenu .title:hover {
+  background: #ebeef2;
+}
+
+.subMenuAccodian:last-child .accordion-inner {
+  border-top: none;
+  padding: 0px 15px;
+}
