@@ -264,23 +264,40 @@ const Dashboard = () => {
             text: "" // Empty string to remove the title at the top
         },
         axisX: {
-            title: "",
-            labelFormatter: function () {
-                return "";
-            },
-            tickLength: 0,
-            gridThickness: 0, // Set gridThickness to 0 to remove vertical grid lines,
-            stripLines: 0
-        },
-        axisY: {
-            title: "",
+            // title: "",
+            // labelFormatter: function () {
+            //     return "";
+            // },
+            // tickLength: 0,
+            // gridThickness: 0,
+            // lineThickness: 0,
+            // // stripLines: false
+
+
+
             gridThickness: 0,
             tickLength: 0,
-            lineThickness: 0, // Set lineThickness to 0 to remove row side of columns
-            stripLines: 0,
+            lineThickness: 0,
             labelFormatter: function () {
-                return ""; // Empty string to remove y-axis labels
-            }
+                return " ";
+            },
+        },
+
+        axisY: {
+            // title: "",
+            // gridThickness: 0,
+            // tickLength: 0,
+            // lineThickness: 0, // Set lineThickness to 0 to remove row side of columns
+            // stripLines: false,
+            // labelFormatter: function () {
+            //     return ""; // Empty string to remove y-axis labels
+            // }
+            gridThickness: 0,
+            tickLength: 0,
+            lineThickness: 0,
+            labelFormatter: function () {
+                return " ";
+            },
         },
         data: [
             {
