@@ -17,10 +17,8 @@ import { GetGraphdata, Getuser_employeeCount, GetAppointments } from '../../API/
 // import CanvasJSReact from '@canvasjs/react-charts';
 
 // const CanvasJSChart = CanvasJSReact.CanvasJSChart;
-
 import CanvasJSReact from '@canvasjs/react-charts';
 
-const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 
@@ -257,47 +255,58 @@ const Dashboard = () => {
 
 
     }
+
+
     const options = {
-        animationEnabled: true,
-        theme: "light2",
-        width: 100,
         height: 80,
-        axisY: {
-            includeZero: true,
-            gridThickness: 0,
-            tickThickness: 0,
-            labelFormatter: function () {
-                return "";
-            }
+        // width: 100,
+        title: {
+            text: "" // Empty string to remove the title at the top
         },
         axisX: {
+            title: "",
             labelFormatter: function () {
                 return "";
+            },
+            tickLength: 0,
+            gridThickness: 0, // Set gridThickness to 0 to remove vertical grid lines,
+            stripLines: 0
+        },
+        axisY: {
+            title: "",
+            gridThickness: 0,
+            tickLength: 0,
+            lineThickness: 0, // Set lineThickness to 0 to remove row side of columns
+            stripLines: 0,
+            labelFormatter: function () {
+                return ""; // Empty string to remove y-axis labels
             }
         },
-        data: [{
-            type: "column",
-            color: "green",
-            dataPoints: [
-                { x: 10, y: 71 },
-                { x: 20, y: 55 },
-                { x: 30, y: 50 },
-                { x: 40, y: 65 },
-                { x: 50, y: 71 },
-                { x: 60, y: 68 },
-            ],
-            columnWidth: 30
-        }],
-        toolTip: {
-            content: null
-        },
-        subtitles: [{
-            text: null
-        }],
-        creditText: {
-            enabled: false
-        }
+        data: [
+            {
+                type: "column",
+                dataPointWidth: 20, // Adding the dataPointWidth property
+
+                dataPoints: [
+                    { label: "Apple", y: 10, indexLabel: " ", color: "silver" },
+                    { label: "Orange", y: 15, indexLabel: " ", color: "silver" },
+                    { label: "Banana", y: 25, indexLabel: " ", color: "silver" },
+                    { label: "Mango", y: 30, indexLabel: " ", color: "silver" },
+                    { label: "Grape", y: 28, indexLabel: " ", color: "silver" },
+                    { label: "man", y: 38, indexLabel: " ", color: "green" }
+                ],
+                lineThickness: 0,
+                gridThickness: 0,
+                tickLength: 0, // Set lineThickness to 0 to remove lines around columns
+            }
+        ], dataPointWidth: 10,
     };
+
+
+
+
+
+
 
     // Now use the options object to create your chart
 
