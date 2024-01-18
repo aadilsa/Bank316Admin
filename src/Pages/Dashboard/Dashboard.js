@@ -1113,6 +1113,12 @@ const Dashboard = () => {
                                                 <ul className="nk-support">
                                                     {
                                                         appointment.length > 0 && appointment.map((data) => {
+
+                                                            // const date = "2024-10-24T00:00:00.000Z";
+                                                            // const time = "02:00:00";
+                                                            // const concatenatedDateTime = date + "T" + time + ".000Z";
+                                                            // console.log(concatenatedDateTime);
+
                                                             console.log(data, "data")
                                                             return (
                                                                 <>

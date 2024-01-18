@@ -4,7 +4,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 
 
 const Sidebar = () => {
-    const [activeMenu, setActiveMenu] = useState(false);
+    const [activeMenu, setActiveMenu] = useState(true);
 
 
     const [activedrop, setActivedrop] = useState(false);
@@ -17,9 +17,9 @@ const Sidebar = () => {
 
     const [onboardingSubmenu, setOnboardingSubmenu] = useState(false)
 
-    const handleSideClick = () => {
-        setActiveMenu(!activeMenu);
-    };
+    // const handleSideClick = () => {
+    //     setActiveMenu(!activeMenu);
+    // };
     const location = useLocation();
     const [tab, settab] = useState("")
     const [recipienttab, setrecipientstab] = useState("")
@@ -196,14 +196,41 @@ const Sidebar = () => {
     //     }
 
     // }, [tab])
+    // localStorage.setItem('side', true);
 
+    if (localStorage.getItem('side') === null) {
+        localStorage.setItem('side', true);
+        // setActiveMenu(true)
+    }
 
+    useEffect(() => {
+        const data = JSON.parse(localStorage.getItem('side'));
+        setActiveMenu(data)
+    }, [])
 
+    const toggle = () => {
+        const data = JSON.parse(localStorage.getItem('side'));
+        // console.log(data, "daaaaaaaaa");
+
+        // Toggle the value
+        localStorage.setItem('side', !data);
+
+        var storedValue = JSON.parse(localStorage.getItem('side'));
+        console.log(storedValue, "storedValue")
+        setActiveMenu(storedValue)
+        // console.log(storedValue, "storedValue get");
+    }
+    // useEffect(() => {
+    // 
+    // }, [storedValue])
+    // console.log(object)
+    console.log(activeMenu, "llllllllll")
     return (
 
 
 
-        <div className={activeMenu == true ? "nk-sidebar nk-sidebar-fixed is-light is-compact active" : "nk-sidebar nk-sidebar-fixed is-light "} data-content="sidebarMenu">
+        <div className={activeMenu == true ? "nk-sidebar nk-sidebar-fixed is-light" : "nk-sidebar nk-sidebar-fixed is-light is-compact"} data-content="sidebarMenu">
+            <div>{activeMenu == true ? console.log("true") : console.log("false")} </div>
             <div className="nk-sidebar-element nk-sidebar-head">
                 <div className="nk-sidebar-brand">
                     <a className="logo-link nk-sidebar-logo">
@@ -212,9 +239,10 @@ const Sidebar = () => {
                         <img className="logo-small logo-img logo-img-small" src="./images/minilogo.png" srcSet="./images/minilogo.png" alt="logo-small" />
                     </a>
                 </div>
-                <div className="nk-menu-trigger me-n2" onClick={() => { handleSideClick() }}>
+                <div className="nk-menu-trigger me-n2" >
                     <a className="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu"><em className="icon ni ni-arrow-left" /></a>
-                    <a className={activeMenu == true ? "nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex compact active" : "nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex "} data-target="sidebarMenu"><em className="icon ni ni-menu" /></a>
+                    <a className={activeMenu == true ? "nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex compact active" : "nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex "} data-target="sidebarMenu"><em className="icon ni ni-menu" onClick={toggle} /></a>
+                    {/* <div>{activeMenu == true ? console.log("true") : console.log("false")} </div> */}
                 </div>
             </div>
             <div className="nk-sidebar-element">
