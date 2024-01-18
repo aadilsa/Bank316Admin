@@ -394,7 +394,9 @@ const Dashboard = () => {
 
                                                                 </div>
                                                                 <div className="card-tools">
-                                                                    <em className="card-hint icon ni ni-help-fill" data-bs-toggle="tooltip" data-bs-placement="left" title="Revenue from subscription" />
+                                                                    <span className="card-hint" tooltip="Revenue from subscription" flow="left">
+                                                                        <i className="icon ni ni-help-fill"></i>
+                                                                    </span>
                                                                 </div>
                                                             </div>
 
@@ -450,7 +452,9 @@ const Dashboard = () => {
 
                                                                 </div>
                                                                 <div className="card-tools" >
-                                                                    <em className="card-hint icon ni ni-help-fill" data-bs-toggle="tooltip" data-bs-placement="left" title="Revenue from subscription" />
+                                                                    <span className="card-hint" tooltip="Revenue from subscription" flow="left">
+                                                                        <i className="icon ni ni-help-fill"></i>
+                                                                    </span>
                                                                 </div>
                                                             </div>
 
@@ -552,7 +556,9 @@ const Dashboard = () => {
 
                                                                 </div>
                                                                 <div className="card-tools">
-                                                                    <em className="card-hint icon ni ni-help-fill" data-bs-toggle="tooltip" data-bs-placement="left" title="Revenue from subscription" />
+                                                                    <span className="card-hint" tooltip="Revenue from subscription" flow="left">
+                                                                        <i className="icon ni ni-help-fill"></i>
+                                                                    </span>
                                                                 </div>
                                                             </div>
 
@@ -611,7 +617,9 @@ const Dashboard = () => {
 
                                                                 </div>
                                                                 <div className="card-tools">
-                                                                    <em className="card-hint icon ni ni-help-fill" data-bs-toggle="tooltip" data-bs-placement="left" title="Revenue from subscription" />
+                                                                    <span className="card-hint" tooltip="Revenue from subscription" flow="left">
+                                                                        <i className="icon ni ni-help-fill"></i>
+                                                                    </span>
                                                                 </div>
                                                             </div>
 
