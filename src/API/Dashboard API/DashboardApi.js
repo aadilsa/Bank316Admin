@@ -36,3 +36,26 @@ export const GetAppointments = async (token) => {
         return err
     }
 }
+
+
+export const GetNotificatation = async (token) => {
+    try {
+        const res = await axios.get(`${Base_Url}notifications/get`, { headers: { "Authorization": `Bearer ${token}` } })
+        return res.data
+    }
+    catch (err) {
+        console.log(err)
+        return err
+    }
+}
+
+export const GetRecentTXN = async (token) => {
+    try {
+        const res = await axios.get(`${Base_Url}transactions/get`, { headers: { "Authorization": `Bearer ${token}` } })
+        return res.data
+    }
+    catch (err) {
+        console.log(err)
+        return err
+    }
+}

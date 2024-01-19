@@ -36,6 +36,20 @@ const Header = () => {
     navigate("/profile")
   }
 
+  const toggle = () => {
+    const data = JSON.parse(localStorage.getItem('side'));
+    // console.log(data, "daaaaaaaaa");
+
+    // Toggle the value
+    localStorage.setItem('side', !data);
+    console.log(".................")
+    // setActiveMenu(storedValue)
+    // console.log(storedValue, "storedValue get");
+  }
+
+
+
+
 
 
   return (
@@ -43,7 +57,7 @@ const Header = () => {
       <div className="container-fluid">
         <div className="nk-header-wrap">
           <div className="nk-menu-trigger d-xl-none ms-n1">
-            <a className="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em className="icon ni ni-menu" /></a>
+            <a className="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em className="icon ni ni-menu" onClick={toggle} /></a>
           </div>
           <div className="nk-header-brand d-xl-none">
             <a className="logo-link">

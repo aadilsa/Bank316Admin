@@ -208,6 +208,20 @@ const Sidebar = () => {
         setActiveMenu(data)
     }, [])
 
+
+
+
+    const dataaaa = JSON.parse(localStorage.getItem('side'));
+
+    useEffect(() => {
+        const data = JSON.parse(localStorage.getItem('side'));
+        setActiveMenu(data)
+        console.log(data, "Updated")
+    }, [dataaaa])
+    console.log(dataaaa, "Updated")
+
+
+
     const toggle = () => {
         const data = JSON.parse(localStorage.getItem('side'));
         // console.log(data, "daaaaaaaaa");

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 // import CanvasJSReact from '@canvasjs/react-charts';
 import Container from '../../component/container';
 import axios from 'axios';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import BaseUrl from '../../API/config';
 // import BigLoader from '../Loader/Loader'
 import BigLoader from '../Loader/BigLoader';
@@ -10,8 +11,11 @@ import { GetTotaluserdata } from '../../API/UserApi/UserApi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
 import { useRef } from 'react';
+import moment from 'moment';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // const [isHovered, setHovered] = useState(false);
-import { GetGraphdata, Getuser_employeeCount, GetAppointments } from '../../API/Dashboard API/DashboardApi';
+import { GetGraphdata, Getuser_employeeCount, GetAppointments, GetNotificatation, GetRecentTXN } from '../../API/Dashboard API/DashboardApi';
 // import Chart from '../Chart';
 
 // import CanvasJSReact from '@canvasjs/react-charts';
@@ -42,15 +46,16 @@ const Dashboard = () => {
     const [graphdata, setgraphdata] = useState([])
     const [usercount, setusercount] = useState(0)
     const [employeecount, setemployeecount] = useState(0)
-
+    const [notificatation, setnotificatation] = useState([])
     const [appointment, setappointment] = useState([])
     const [graphbutton, setgraphbutton] = useState("Last 1 Year")
     // var CanvasJS = CanvasJSReact.CanvasJS;
     // var CanvasJSChart = CanvasJSReact.CanvasJSChart;
     const [countdays, setcountdays] = useState("")
     const [buttontxt, setbuttontxt] = useState("Total Count")
+    const [RecentTxn, setRecentTxn] = useState([])
 
-
+    const [recentTab, setrecentTab] = useState("All")
     // const { CanvasJSChart } = CanvasJSReact;
     const navigate = useNavigate()
     useEffect(() => {
@@ -58,14 +63,13 @@ const Dashboard = () => {
     }, [])
 
 
-    const GetTotalCount = async () => {
+    const Notificatation = async () => {
         try {
-            const totaldata = await Getuser_employeeCount(token, countdays)
+            const totaldata = await GetNotificatation(token)
             console.log(totaldata, "GetTotalCount")
             if (totaldata?.status == true) {
-                setloader(true)
-                setusercount(totaldata?.Totaluser)
-                setemployeecount(totaldata?.TotalEmployee)
+                console.log(totaldata?.data?.rows, "//////////////////")
+                setnotificatation(totaldata?.data?.rows)
             }
             else if (totaldata?.response?.data?.message == "jwt expired") {
                 localStorage.removeItem('logintoken')
@@ -88,32 +92,32 @@ const Dashboard = () => {
         }
     }
     useEffect(() => {
-        GetTotalCount()
-    }, [countdays])
+        Notificatation()
+    }, [])
 
 
 
-    const Get_graph_data = async () => {
-        try {
-            const totaldata = await GetGraphdata(token, graphMonth)
-            if (totaldata?.status == true) {
-                setgraphdata(totaldata?.data)
-            }
-            else if (totaldata?.response?.data?.message == "jwt expired") {
-                localStorage.removeItem('logintoken')
-                navigate("/")
-            }
-            else {
+    // const Get_graph_data = async () => {
+    //     try {
+    //         const totaldata = await GetGraphdata(token, graphMonth)
+    //         if (totaldata?.status == true) {
+    //             setgraphdata(totaldata?.data)
+    //         }
+    //         else if (totaldata?.response?.data?.message == "jwt expired") {
+    //             localStorage.removeItem('logintoken')
+    //             navigate("/")
+    //         }
+    //         else {
 
-            }
-        }
-        catch (err) {
-            console.log(err, "ddddddddddddddddddddddddddd")
-        }
-    }
-    useEffect(() => {
-        Get_graph_data()
-    }, [graphMonth])
+    //         }
+    //     }
+    //     catch (err) {
+    //         console.log(err, "ddddddddddddddddddddddddddd")
+    //     }
+    // }
+    // useEffect(() => {
+    //     Get_graph_data()
+    // }, [graphMonth])
 
 
 
@@ -235,6 +239,57 @@ const Dashboard = () => {
         GetAppointmentsdata()
     }, []);
 
+
+
+    const GetRecentTransactation = async () => {
+        try {
+            const totaldata = await GetRecentTXN(token)
+            console.log(totaldata.status, "okkkkkkkkkkk")
+            if (totaldata?.status == true) {
+                setTimeout(() => {
+                    const data = totaldata.data.rows
+                    setRecentTxn(data)
+                }, 2000);
+            }
+            else if (totaldata?.response?.data?.message == "jwt expired") {
+                console.log("Adddillll")
+                localStorage.removeItem('logintoken')
+                navigate("/")
+                setTimeout(() => {
+                    setloader(false)
+                }, 2000);
+                setloader(true)
+            }
+            else {
+                setTimeout(() => {
+                    setloader(false)
+                }, 2000);
+                setloader(true)
+                console.log("dkdkdkdkdkdkkdkdkdkdkk")
+            }
+        }
+        catch (err) {
+            // console.log(err, "LLLLLLLLLLLLLLLL")
+            console.log(err, "ddddddddddddddddddddddddddd")
+            setTimeout(() => {
+                setloader(false)
+            }, 2000);
+            setloader(true)
+        }
+    }
+
+    // const chartRef = useRef(null);
+
+
+    useEffect(() => {
+        // GetAppointmentsdata()
+        GetRecentTransactation()
+    }, []);
+
+
+
+
+
     const setcountmonthdays = () => {
         const currentDate = new Date();
         const sixMonthsAgo = new Date();
@@ -247,13 +302,9 @@ const Dashboard = () => {
 
     console.log(graphdata, "totaldatatotaldata")
 
-
-
     const Custmerdetails = (id) => {
         console.log(id, "iddddddddd send")
         navigate(`/user-details`, { state: id })
-
-
     }
 
 
@@ -305,12 +356,12 @@ const Dashboard = () => {
                 dataPointWidth: 20, // Adding the dataPointWidth property
 
                 dataPoints: [
-                    { label: "Apple", y: 10, indexLabel: " ", color: "silver" },
-                    { label: "Orange", y: 15, indexLabel: " ", color: "silver" },
-                    { label: "Banana", y: 25, indexLabel: " ", color: "silver" },
-                    { label: "Mango", y: 30, indexLabel: " ", color: "silver" },
-                    { label: "Grape", y: 28, indexLabel: " ", color: "silver" },
-                    { label: "man", y: 38, indexLabel: " ", color: "green" }
+                    { label: "jan", y: 200, indexLabel: " ", color: "silver" },
+                    { label: "feb", y: 203, indexLabel: " ", color: "silver" },
+                    { label: "March", y: 205, indexLabel: " ", color: "silver" },
+                    { label: "aprail", y: 207, indexLabel: " ", color: "silver" },
+                    { label: "may", y: 201, indexLabel: " ", color: "silver" },
+                    { label: "june", y: 205, indexLabel: " ", color: "green" }
                 ],
                 lineThickness: 0,
                 gridThickness: 0,
@@ -324,10 +375,12 @@ const Dashboard = () => {
 
 
 
-
+    console.log(RecentTxn, "LLLLLLLLLLLLLLL")
     // Now use the options object to create your chart
 
-
+    const copiedInfo = () => {
+        toast.success(" Successful copy ", { autoClose: 1000 })
+    }
 
     return (
         <Container>
@@ -394,7 +447,7 @@ const Dashboard = () => {
 
                                                                 </div>
                                                                 <div className="card-tools">
-                                                                    <span className="card-hint" tooltip="Revenue from subscription" flow="left">
+                                                                    <span className="card-hint" tooltip="Total Deposits" flow="left">
                                                                         <i className="icon ni ni-help-fill"></i>
                                                                     </span>
                                                                 </div>
@@ -452,7 +505,7 @@ const Dashboard = () => {
 
                                                                 </div>
                                                                 <div className="card-tools" >
-                                                                    <span className="card-hint" tooltip="Revenue from subscription" flow="left">
+                                                                    <span className="card-hint" tooltip="Total Withdraws" flow="left">
                                                                         <i className="icon ni ni-help-fill"></i>
                                                                     </span>
                                                                 </div>
@@ -556,7 +609,7 @@ const Dashboard = () => {
 
                                                                 </div>
                                                                 <div className="card-tools">
-                                                                    <span className="card-hint" tooltip="Revenue from subscription" flow="left">
+                                                                    <span className="card-hint" tooltip="Transfer Summary" flow="left">
                                                                         <i className="icon ni ni-help-fill"></i>
                                                                     </span>
                                                                 </div>
@@ -617,7 +670,7 @@ const Dashboard = () => {
 
                                                                 </div>
                                                                 <div className="card-tools">
-                                                                    <span className="card-hint" tooltip="Revenue from subscription" flow="left">
+                                                                    <span className="card-hint" tooltip="Total Cash Balance in Account" flow="left">
                                                                         <i className="icon ni ni-help-fill"></i>
                                                                     </span>
                                                                 </div>
@@ -775,9 +828,9 @@ const Dashboard = () => {
                                                         </div>
                                                         <div className="card-tools">
                                                             <ul className="card-tools-nav">
-                                                                <li><a href="#"><span>Paid</span></a></li>
-                                                                <li><a href="#"><span>Pending</span></a></li>
-                                                                <li className="active"><a href="#"><span>All</span></a></li>
+                                                                <li className={recentTab == "paid" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("paid")}><span>Paid</span></a></li>
+                                                                <li className={recentTab == "Pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("Pending")}><span>Pending</span></a></li>
+                                                                <li className={recentTab == "All" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("All")}><span>All</span></a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -785,213 +838,100 @@ const Dashboard = () => {
                                                 <div className="card-inner p-0 border-top">
                                                     <div className="nk-tb-list nk-tb-orders">
                                                         <div className="nk-tb-item nk-tb-head">
-                                                            <div className="nk-tb-col"><span>Order No.</span></div>
                                                             <div className="nk-tb-col tb-col-sm"><span>Customer</span></div>
-                                                            <div className="nk-tb-col tb-col-md"><span>Date</span></div>
-                                                            <div className="nk-tb-col tb-col-lg"><span>Ref</span></div>
+                                                            <div className="nk-tb-col"><span>Order No.</span></div>
+                                                            {/* <div className="nk-tb-col tb-col-md"><span>Date</span></div> */}
                                                             <div className="nk-tb-col"><span>Amount</span></div>
+                                                            <div className="nk-tb-col tb-col-lg"><span>Description </span></div>
+
                                                             <div className="nk-tb-col"><span className="d-none d-sm-inline">Status</span></div>
                                                             <div className="nk-tb-col"><span>&nbsp;</span></div>
                                                         </div>
-                                                        <div className="nk-tb-item">
-                                                            <div className="nk-tb-col">
-                                                                <span className="tb-lead"><a href="#">#95954</a></span>
-                                                            </div>
-                                                            <div className="nk-tb-col tb-col-sm">
-                                                                <div className="user-card">
-                                                                    <div className="user-avatar user-avatar-sm bg-purple">
-                                                                        <span>AB</span>
-                                                                    </div>
-                                                                    <div className="user-name">
-                                                                        <span className="tb-lead">Abu Bin Ishtiyak</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="nk-tb-col tb-col-md">
-                                                                <span className="tb-sub">02/11/2020</span>
-                                                            </div>
-                                                            <div className="nk-tb-col tb-col-lg">
-                                                                <span className="tb-sub text-primary">SUB-2309232</span>
-                                                            </div>
-                                                            <div className="nk-tb-col">
-                                                                <span className="tb-sub tb-amount">4,596.75
-                                                                    <span>USD</span></span>
-                                                            </div>
-                                                            <div className="nk-tb-col">
-                                                                <span className="badge badge-dot badge-dot-xs bg-success">Paid</span>
-                                                            </div>
-                                                            <div className="nk-tb-col nk-tb-col-action">
-                                                                <div className="dropdown">
-                                                                    <a className="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
-                                                                    <div className="dropdown-menu dropdown-menu-end dropdown-menu-xs">
-                                                                        <ul className="link-list-plain">
-                                                                            <li><a href="#">View</a></li>
-                                                                            <li><a href="#">Invoice</a></li>
-                                                                            <li><a href="#">Print</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="nk-tb-item">
-                                                            <div className="nk-tb-col">
-                                                                <span className="tb-lead"><a href="#">#95850</a></span>
-                                                            </div>
-                                                            <div className="nk-tb-col tb-col-sm">
-                                                                <div className="user-card">
-                                                                    <div className="user-avatar user-avatar-sm bg-azure">
-                                                                        <span>DE</span>
-                                                                    </div>
-                                                                    <div className="user-name">
-                                                                        <span className="tb-lead">Desiree Edwards</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="nk-tb-col tb-col-md">
-                                                                <span className="tb-sub">02/02/2020</span>
-                                                            </div>
-                                                            <div className="nk-tb-col tb-col-lg">
-                                                                <span className="tb-sub text-primary">SUB-2309154</span>
-                                                            </div>
-                                                            <div className="nk-tb-col">
-                                                                <span className="tb-sub tb-amount">596.75
-                                                                    <span>USD</span></span>
-                                                            </div>
-                                                            <div className="nk-tb-col">
-                                                                <span className="badge badge-dot badge-dot-xs bg-danger">Canceled</span>
-                                                            </div>
-                                                            <div className="nk-tb-col nk-tb-col-action">
-                                                                <div className="dropdown">
-                                                                    <a className="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
-                                                                    <div className="dropdown-menu dropdown-menu-end dropdown-menu-xs">
-                                                                        <ul className="link-list-plain">
-                                                                            <li><a href="#">View</a></li>
-                                                                            <li><a href="#">Remove</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="nk-tb-item">
-                                                            <div className="nk-tb-col">
-                                                                <span className="tb-lead"><a href="#">#95812</a></span>
-                                                            </div>
-                                                            <div className="nk-tb-col tb-col-sm">
-                                                                <div className="user-card">
-                                                                    <div className="user-avatar user-avatar-sm bg-warning">
-                                                                        <img src="./images/avatar/b-sm.jpg" alt />
-                                                                    </div>
-                                                                    <div className="user-name">
-                                                                        <span className="tb-lead">Blanca Schultz</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="nk-tb-col tb-col-md">
-                                                                <span className="tb-sub">02/01/2020</span>
-                                                            </div>
-                                                            <div className="nk-tb-col tb-col-lg">
-                                                                <span className="tb-sub text-primary">SUB-2309143</span>
-                                                            </div>
-                                                            <div className="nk-tb-col">
-                                                                <span className="tb-sub tb-amount">199.99
-                                                                    <span>USD</span></span>
-                                                            </div>
-                                                            <div className="nk-tb-col">
-                                                                <span className="badge badge-dot badge-dot-xs bg-success">Paid</span>
-                                                            </div>
-                                                            <div className="nk-tb-col nk-tb-col-action">
-                                                                <div className="dropdown">
-                                                                    <a className="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
-                                                                    <div className="dropdown-menu dropdown-menu-end dropdown-menu-xs">
-                                                                        <ul className="link-list-plain">
-                                                                            <li><a href="#">View</a></li>
-                                                                            <li><a href="#">Invoice</a></li>
-                                                                            <li><a href="#">Print</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="nk-tb-item">
-                                                            <div className="nk-tb-col">
-                                                                <span className="tb-lead"><a href="#">#95256</a></span>
-                                                            </div>
-                                                            <div className="nk-tb-col tb-col-sm">
-                                                                <div className="user-card">
-                                                                    <div className="user-avatar user-avatar-sm bg-purple">
-                                                                        <span>NL</span>
-                                                                    </div>
-                                                                    <div className="user-name">
-                                                                        <span className="tb-lead">Naomi Lawrence</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="nk-tb-col tb-col-md">
-                                                                <span className="tb-sub">01/29/2020</span>
-                                                            </div>
-                                                            <div className="nk-tb-col tb-col-lg">
-                                                                <span className="tb-sub text-primary">SUB-2305684</span>
-                                                            </div>
-                                                            <div className="nk-tb-col">
-                                                                <span className="tb-sub tb-amount">1099.99
-                                                                    <span>USD</span></span>
-                                                            </div>
-                                                            <div className="nk-tb-col">
-                                                                <span className="badge badge-dot badge-dot-xs bg-success">Paid</span>
-                                                            </div>
-                                                            <div className="nk-tb-col nk-tb-col-action">
-                                                                <div className="dropdown">
-                                                                    <a className="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
-                                                                    <div className="dropdown-menu dropdown-menu-end dropdown-menu-xs">
-                                                                        <ul className="link-list-plain">
-                                                                            <li><a href="#">View</a></li>
-                                                                            <li><a href="#">Invoice</a></li>
-                                                                            <li><a href="#">Print</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="nk-tb-item">
-                                                            <div className="nk-tb-col">
-                                                                <span className="tb-lead"><a href="#">#95135</a></span>
-                                                            </div>
-                                                            <div className="nk-tb-col tb-col-sm">
-                                                                <div className="user-card">
-                                                                    <div className="user-avatar user-avatar-sm bg-success">
-                                                                        <span>CH</span>
-                                                                    </div>
-                                                                    <div className="user-name">
-                                                                        <span className="tb-lead">Cassandra Hogan</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="nk-tb-col tb-col-md">
-                                                                <span className="tb-sub">01/29/2020</span>
-                                                            </div>
-                                                            <div className="nk-tb-col tb-col-lg">
-                                                                <span className="tb-sub text-primary">SUB-2305564</span>
-                                                            </div>
-                                                            <div className="nk-tb-col">
-                                                                <span className="tb-sub tb-amount">1099.99
-                                                                    <span>USD</span></span>
-                                                            </div>
-                                                            <div className="nk-tb-col">
-                                                                <span className="badge badge-dot badge-dot-xs bg-warning">Due</span>
-                                                            </div>
-                                                            <div className="nk-tb-col nk-tb-col-action">
-                                                                <div className="dropdown">
-                                                                    <a className="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
-                                                                    <div className="dropdown-menu dropdown-menu-end dropdown-menu-xs">
-                                                                        <ul className="link-list-plain">
-                                                                            <li><a href="#">View</a></li>
-                                                                            <li><a href="#">Invoice</a></li>
-                                                                            <li><a href="#">Notify</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+
+                                                        {
+                                                            RecentTxn.length > 0 &&
+                                                            RecentTxn?.map((data) => {
+                                                                var stillUtcs = moment.utc(data.created_at).toDate();
+                                                                var timeZones = moment(stillUtcs).local().format('YYYY-MM-DD HH:mm:ss A');
+                                                                return (
+                                                                    <>
+                                                                        <div className="nk-tb-item">
+
+                                                                            <div className="nk-tb-col tb-col-sm">
+                                                                                <div className="user-card">
+                                                                                    <div className="user-avatar user-avatar-sm bg-purple">
+                                                                                        <span>AB</span>
+                                                                                    </div>
+                                                                                    <div className="user-name">
+                                                                                        {
+                                                                                            // data?.txn_type == "Debit" && 
+                                                                                            <div class="user-info" style={{ cursor: "pointer", color: "primary" }}
+                                                                                            // onClick={() => GoToUserDetail(data.client_id)}
+                                                                                            >
+                                                                                                <span class="tb-lead" style={{ textTransform: "capitalize" }}>abu bin istiyak<span class="dot dot-success d-md-none ms-1"></span></span>
+                                                                                                <span>{data.sender?.phone}9644940027</span>
+                                                                                            </div>
+                                                                                        }
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div className="nk-tb-col">
+                                                                                <span className="tb-lead text-primary"><a ><span style={{ cursor: "pointer" }}
+                                                                                // onClick={() => GoTransDetail(data.id, data.client_id)}
+                                                                                >{data?.txn_id}</span>
+                                                                                    <CopyToClipboard text={data.txn_id} style={{ height: '25px', width: '25px', padding: 2 }}>
+                                                                                        <span className='btn btn-primary btn-sm ms-1' onClick={() => copiedInfo()}><e className="fa fa-copy fa fa-solid text-white" style={{ fontSize: '17px' }}></e></span>
+                                                                                    </CopyToClipboard>
+                                                                                    <br></br>
+                                                                                    {
+                                                                                        data?.txn_type == "Credit" ? <span className="badge badge-dot  bg-success">CREDIT</span> :
+                                                                                            <span className="badge badge-dot bg-danger">DEBIT</span>
+                                                                                    }<br></br>
+                                                                                </a></span>
+                                                                            </div>
+                                                                            {/* <div className="nk-tb-col tb-col-md">
+                                                                                <span className="tb-sub">{timeZones}</span>
+                                                                            </div> */}
+
+                                                                            <div className="nk-tb-col">
+                                                                                <span className="tb-sub tb-amount">{data.currency_symbol}
+                                                                                    <span>{data.amount}</span></span>
+                                                                            </div>
+                                                                            <div className="nk-tb-col tb-col-lg">
+                                                                                <span className="tb-sub">{data.title}</span>
+                                                                            </div>
+                                                                            <div className="nk-tb-col">
+                                                                                {
+                                                                                    data.payment_status == "pending" && <span className="badge badge-dot badge-dot-xs bg-warning">pending</span>
+                                                                                }
+                                                                                {
+                                                                                    data.payment_status == "success" && <span className="badge badge-dot badge-dot-xs bg-success">success</span>
+                                                                                }
+                                                                                {
+                                                                                    data.payment_status == "failed" && <span className="badge badge-dot badge-dot-xs bg-danger">failed</span>
+                                                                                }
+                                                                                {/* // <span className="badge badge-dot badge-dot-xs bg-success">Paid</span> */}
+                                                                            </div>
+                                                                            <div className="nk-tb-col nk-tb-col-action">
+                                                                                <div className="dropdown">
+                                                                                    <a className="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
+                                                                                    <div className="dropdown-menu dropdown-menu-end dropdown-menu-xs">
+                                                                                        <ul className="link-list-plain">
+                                                                                            <li><a href="#">View</a></li>
+                                                                                            <li><a href="#">Invoice</a></li>
+                                                                                            <li><a href="#">Print</a></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </>
+                                                                )
+                                                            })
+
+                                                        }
                                                     </div>
                                                 </div>
                                                 <div className="card-inner-sm border-top text-center d-sm-none">
@@ -1122,10 +1062,16 @@ const Dashboard = () => {
                                                     {
                                                         appointment.length > 0 && appointment.map((data) => {
 
-                                                            // const date = "2024-10-24T00:00:00.000Z";
-                                                            // const time = "02:00:00";
-                                                            // const concatenatedDateTime = date + "T" + time + ".000Z";
-                                                            // console.log(concatenatedDateTime);
+                                                            // const date = data.date;
+                                                            // const time = data.time;
+                                                            // const combinedDateTime = `${date}T${time}.000Z`;
+                                                            // const combinedDateTimeString1 = String(combinedDateTime);
+
+                                                            // console.log(combinedDateTimeString1, "????????????");
+                                                            // Given time
+                                                            // const tms = combinedDateTime
+
+
 
                                                             console.log(data, "data")
                                                             return (
@@ -1152,62 +1098,59 @@ const Dashboard = () => {
                                                 </ul>
                                             </div>{/* .card */}
                                         </div>{/* .col */}
+
                                         <div className="col-lg-6 col-xxl-4">
                                             <div className="card h-100">
                                                 <div className="card-inner border-bottom">
                                                     <div className="card-title-group">
                                                         <div className="card-title">
-                                                            {/* <h6 className="title">Notifications</h6> */}
+                                                            <h6 className="title">Notifications</h6>
                                                         </div>
                                                         <div className="card-tools">
                                                             <a href="#" className="link">View All</a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {/* <div className="card-inner">
-                                            <div className="timeline">
-                                                <h6 className="timeline-head">November, 2019</h6>
-                                                <ul className="timeline-list">
-                                                    <li className="timeline-item">
-                                                        <div className="timeline-status bg-primary is-outline">
-                                                        </div>
-                                                        <div className="timeline-date">13 Nov <em className="icon ni ni-alarm-alt" /></div>
-                                                        <div className="timeline-data">
-                                                            <h6 className="timeline-title">Submitted KYC Application
-                                                            </h6>
-                                                            <div className="timeline-des">
-                                                                <p>Re-submitted KYC Application form.</p>
-                                                                <span className="time">09:30am</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li className="timeline-item">
-                                                        <div className="timeline-status bg-primary" />
-                                                        <div className="timeline-date">13 Nov <em className="icon ni ni-alarm-alt" /></div>
-                                                        <div className="timeline-data">
-                                                            <h6 className="timeline-title">Submitted KYC Application
-                                                            </h6>
-                                                            <div className="timeline-des">
-                                                                <p>Re-submitted KYC Application form.</p>
-                                                                <span className="time">09:30am</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li className="timeline-item">
-                                                        <div className="timeline-status bg-pink" />
-                                                        <div className="timeline-date">13 Nov <em className="icon ni ni-alarm-alt" /></div>
-                                                        <div className="timeline-data">
-                                                            <h6 className="timeline-title">Submitted KYC Application
-                                                            </h6>
-                                                            <div className="timeline-des">
-                                                                <p>Re-submitted KYC Application form.</p>
-                                                                <span className="time">09:30am</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div> */}
+                                                <div className="card-inner">
+                                                    <div className="timeline">
+                                                        <h6 className="timeline-head">{new Date().toLocaleString('default', { month: 'long' })} ,{new Date().toLocaleString('default', { month: 'long', year: 'numeric' })}</h6>
+                                                        <ul className="timeline-list">
+                                                            {
+                                                                notificatation?.map((data) => {
+                                                                    console.log(data.created_at)
+                                                                    const created_at = new Date(data.created_at);
+
+                                                                    // Get the time in AM/PM format
+                                                                    const timeAMPM = created_at.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+
+                                                                    const options = { day: 'numeric', month: 'short' };
+                                                                    const formattedDate = created_at.toLocaleDateString(undefined, options);
+
+                                                                    console.log(formattedDate);
+                                                                    return (
+                                                                        <>
+                                                                            <li className="timeline-item">
+                                                                                <div className="timeline-status bg-pink" />
+                                                                                <div className="timeline-date">{formattedDate} <em className="icon ni ni-alarm-alt" /></div>
+                                                                                <div className="timeline-data">
+                                                                                    <h6 className="timeline-title">{data?.title}
+                                                                                    </h6>
+                                                                                    <div className="timeline-des">
+                                                                                        <p>{data.body}</p>
+                                                                                        <span className="time">{timeAMPM}</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </li>
+
+                                                                        </>
+                                                                    )
+                                                                })
+                                                            }
+
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                             </div>{/* .card */}
                                         </div>{/* .col */}
                                     </div>{/* .row */}
