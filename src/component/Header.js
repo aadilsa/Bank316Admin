@@ -5,10 +5,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import BaseUrl from '../API/config';
 import axios from 'axios';
 import { date } from 'yup';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { setHeaderState } from "../Services/store"
 const Header = () => {
   const [data, setdata] = useState()
   const [user_type, setuser_type] = useState(null)
 
+
+  const dispatch = useDispatch();
+
+  // Use useSelector to access the header state from the Redux store
+  // const headerState = useSelector((state) => state.app.header);
 
   const token = localStorage.getItem('logintoken')
   const Profile = JSON.parse(localStorage.getItem("Profiledata"))
@@ -36,19 +44,21 @@ const Header = () => {
     navigate("/profile")
   }
 
+
+
+
+  const headerState = useSelector((state) => state.app.header);
+  console.log(headerState, "Headr redux store")
+
   const toggle = () => {
-    const data = JSON.parse(localStorage.getItem('side'));
-    // console.log(data, "daaaaaaaaa");
+    // Toggle the value of isOpen
+    const newHeaderState = {
+      isOpen: !headerState.isOpen,
+    };
 
-    // Toggle the value
-    localStorage.setItem('side', !data);
-    console.log(".................")
-    // setActiveMenu(storedValue)
-    // console.log(storedValue, "storedValue get");
+    // Dispatch the action to update the Redux state
+    dispatch(setHeaderState(newHeaderState));
   }
-
-
-
 
 
 

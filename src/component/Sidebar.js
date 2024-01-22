@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setHeaderState } from "../Services/store"
 
 const Sidebar = () => {
     const [activeMenu, setActiveMenu] = useState(true);
-
-
     const [activedrop, setActivedrop] = useState(false);
     const [TransDrop, setTransDrop] = useState(false)
     const [DashboardDrop, setDashboardDrop] = useState(false)
@@ -14,9 +12,7 @@ const Sidebar = () => {
     const [rolesDrop, setrolesDrop] = useState(false)
     const [ManagementDrop, setManagementDrop] = useState(false)
     // const [togelltran, setTogellTran] = useState(false);
-
     const [onboardingSubmenu, setOnboardingSubmenu] = useState(false)
-
     // const handleSideClick = () => {
     //     setActiveMenu(!activeMenu);
     // };
@@ -31,6 +27,11 @@ const Sidebar = () => {
     //     setTransDrop(true)
     //     setrolesDrop(true)
     // }, [])
+
+    const dispatch = useDispatch();
+    // const headerState = useSelector((state) => state.app.header);
+
+
     useEffect(() => {
         settab(location.pathname)
     }, [location.pathname])
@@ -216,35 +217,50 @@ const Sidebar = () => {
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem('side'));
         setActiveMenu(data)
-        console.log(data, "Updated")
+        // console.log(data, "Updated")
     }, [dataaaa])
-    console.log(dataaaa, "Updated")
+    // console.log(dataaaa, "Updated")
 
 
-
+    // const headerState = useSelector((state) => state.app.header);
+    // console.log(headerState.isOpen, "sidebar redux store")
+    const headerState = useSelector((state) => state.app.header);
     const toggle = () => {
-        const data = JSON.parse(localStorage.getItem('side'));
-        // console.log(data, "daaaaaaaaa");
+        // Toggle the value of isOpen
+        const newHeaderState = {
+            isOpen: !headerState.isOpen,
+        };
 
-        // Toggle the value
-        localStorage.setItem('side', !data);
+        // Dispatch the action to update the Redux state
+        dispatch(setHeaderState(newHeaderState));
+    }
 
-        var storedValue = JSON.parse(localStorage.getItem('side'));
-        console.log(storedValue, "storedValue")
-        setActiveMenu(storedValue)
-        // console.log(storedValue, "storedValue get");
+
+
+    const handleSideBar = () => {
+        const newHeaderState = {
+            isOpen: !headerState.isOpen,
+        };
+
+        // Dispatch the action to update the Redux state
+        dispatch(setHeaderState(newHeaderState));
     }
     // useEffect(() => {
     // 
     // }, [storedValue])
     // console.log(object)
-    console.log(activeMenu, "llllllllll")
+    // console.log(activeMenu, "llllllllll")
+    // const headerState = useSelector((state) => state.app.header);
+    // console.log(headerState.isOpen, "sidebar redux store")
+    // console.log(activeMenu, "activeMenu")
+    const headerStatedata = useSelector((state) => state.app.header);
+    console.log(headerStatedata, "sidebar")
     return (
 
 
 
-        <div className={activeMenu == true ? "nk-sidebar nk-sidebar-fixed is-light" : "nk-sidebar nk-sidebar-fixed is-light is-compact"} data-content="sidebarMenu">
-            <div>{activeMenu == true ? console.log("true") : console.log("false")} </div>
+        <div className={headerStatedata.isOpen == true ? "nk-sidebar nk-sidebar-fixed is-light nk-sidebar-active" : "nk-sidebar nk-sidebar-fixed is-light is-compact"} data-content="sidebarMenu">
+            <div> </div>
             <div className="nk-sidebar-element nk-sidebar-head">
                 <div className="nk-sidebar-brand">
                     <a className="logo-link nk-sidebar-logo">
@@ -254,8 +270,10 @@ const Sidebar = () => {
                     </a>
                 </div>
                 <div className="nk-menu-trigger me-n2" >
-                    <a className="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu"><em className="icon ni ni-arrow-left" /></a>
-                    <a className={activeMenu == true ? "nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex compact active" : "nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex "} data-target="sidebarMenu"><em className="icon ni ni-menu" onClick={toggle} /></a>
+
+
+                    <a className="nk-nav-toggle nk-quick-nav-icon d-xl-none" onClick={e => handleSideBar()}><em className="icon ni ni-arrow-left"></em></a>
+                    <a className="nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex" onClick={e => handleSideBar()}><em className="icon ni ni-menu" style={{ fontSize: "1.5rem", marginTop: "0px", marginRight: "0px" }} /></a>
                     {/* <div>{activeMenu == true ? console.log("true") : console.log("false")} </div> */}
                 </div>
             </div>
@@ -263,9 +281,9 @@ const Sidebar = () => {
                 <div className="nk-sidebar-content">
                     <div className="nk-sidebar-menu" data-simplebar>
                         <ul className="nk-menu">
-                            <li className="nk-menu-heading">
+                            {/* <li className="nk-menu-heading">
                                 <h6 className="overline-title text-primary-alt">Menu</h6>
-                            </li>
+                            </li> */}
 
                             {/* <li className={tab == "/dashboard" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                 <Link to={"/dashboard"} className={location.pathname == "/users" ? "nk-menu-link" : "nk-menu-link active current-page"}>
@@ -312,14 +330,14 @@ const Sidebar = () => {
 
                             <li className={tab == "/admin/deposits" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                 <Link to={"/admin/deposits"} className={"nk-menu-link "}>
-                                    <span className="nk-menu-icon"><em className="icon ni ni-layers-fill" /></span>
+                                    <span className="nk-menu-icon"><em className="icon ni ni-wallet-in" /></span>
                                     <span className="nk-menu-text">Deposits</span>
                                 </Link>
                             </li>
 
                             <li className={tab == "/admin/withdrawals" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                 <Link to={"/admin/withdrawals"} className={"nk-menu-link "}>
-                                    <span className="nk-menu-icon"><em className="icon ni ni-layers-fill" /></span>
+                                    <span className="nk-menu-icon"><em className="icon ni ni-wallet-out" /></span>
                                     <span className="nk-menu-text">Withdrawals</span>
                                 </Link>
                             </li>

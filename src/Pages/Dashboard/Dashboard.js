@@ -1078,7 +1078,7 @@ const Dashboard = () => {
                                                                 <>
                                                                     <li className="nk-support-item">
                                                                         <div className="user-avatar">
-                                                                            <Image src={data.avatar} />
+                                                                            <Image src={data?.image} />
                                                                         </div>
                                                                         <div className="nk-support-content">
                                                                             <div className="title">
@@ -1113,7 +1113,7 @@ const Dashboard = () => {
                                                 </div>
                                                 <div className="card-inner">
                                                     <div className="timeline">
-                                                        <h6 className="timeline-head">{new Date().toLocaleString('default', { month: 'long' })} ,{new Date().toLocaleString('default', { month: 'long', year: 'numeric' })}</h6>
+                                                        <h6 className="timeline-head"> {new Date().toLocaleString('default', { month: 'long', year: 'numeric' })}</h6>
                                                         <ul className="timeline-list">
                                                             {
                                                                 notificatation?.map((data) => {
