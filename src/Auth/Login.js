@@ -83,90 +83,83 @@ const Login = () => {
     }
 
     return (
-        <div className="nk-body bg-white npc-default pg-auth">
-            <div className="nk-app-root">
-                {/* main @s */}
-                <div className="nk-main ">
-                    {/* wrap @s */}
-                    <div className="nk-wrap nk-wrap-nosidebar">
-                        {/* content @s */}
-                        <div className="nk-content ">
-                            <div className="nk-block nk-block-middle nk-auth-body  wide-xs">
-                                <div className="brand-logo pb-4 text-center">
-                                    <a className="logo-link"  >
-                                        {/* <img className="logo-light logo-img logo-img-lg" src="./images/logo.png" srcSet="./images/logo2x.png 2x" alt="logo" /> */}
-                                        <img className="logo-dark logo-img logo-img-lg"
-                                            src="./images/minilogo.png"
-                                            srcSet="./images/minilogo.png"
-                                            alt="logo-dark"
-                                            style={{ height: '300px', width: '70px' }} />
-                                    </a>
-                                </div>
 
-                                <div className="card">
-                                    <div className="card-inner card-inner-lg">
+
+
+
+
+
+                <div className="login-page-new">
+                    <div className="container-fluid pt-3">
+                        <div className="row pddd align-items-center justify-betweenBox">
+                            <div className="col-6">
+                                 <img src="./images/Bank316Money.png" alt="" style={{ width:'125px',}}/>
+                            </div>
+                            <div className="col-6">
+                               <p className="signUpFlex"><span>Don't have an account? </span>
+                               <a href='' className="signUpBtn">Request Access</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="login-page-new__main-top-divider"></div>
+                         <div className="login-page-new__main">
+                               <div class="login-page-new__main-bg"></div>
+                                 <div className="card newLoginBox">
+                                    <div className="card-inner pno">
                                         <div className="nk-block-head">
-                                            <div className="nk-block-head-content">
-                                                <h4 className="nk-block-title">Sign-In</h4>
-                                                <div className="nk-block-des">
+                                            <div className="nk-block-head-content text-center">
+                                                <h4 className="nk-block-title welcomeTxt">Welcome back!</h4>
+                                                {/*<div className="nk-block-des">
                                                     <p>Access the Bank316  panel using your email and passcode.</p>
-                                                </div>
+                                                </div>*/}
                                             </div>
                                         </div>
                                         <form onSubmit={handleSubmit}>
                                             <div className="form-group">
                                                 <div className="form-label-group">
-                                                    <label className="form-label" htmlFor="default-01">Email or Username</label>
+                                                    <label className="form-label loginLabel" htmlFor="default-01">Email</label>
                                                 </div>
                                                 <div className="form-control-wrap">
-                                                    <input type="text" className="form-control form-control-lg" id="default-01" placeholder="Enter your email address or username"
+                                                    <input type="text" className="form-control form-control-lg" id="default-01" placeholder="Enter your email"
                                                         name="email" value={values.email} onChange={handleChange} onBlur={handleBlur}
                                                     />
-                                                    {error == "Please Enter the Correct Email and Password" ? <p className='red' style={{ marginTop: 5 }}>User Not Found</p> : errors.email && touched.email ? <p className='red' style={{ marginTop: 5 }}>{errors.email}</p> : null}
+                                                    {error == "Please Enter the Correct Email and Password" ? <p className='red' style={{ marginTop: '0px', fontWeight:'500', fontSize:'10px', }}>User Not Found</p> : errors.email && touched.email ? <p className='red' style={{ marginTop: '0px', fontWeight:'500', fontSize:'10px', }}>{errors.email}</p> : null}
                                                 </div>
                                             </div>
 
                                             <div className="form-group">
                                                 <div className="form-label-group">
-                                                    <label className="form-label" htmlFor="password">Passcode</label>
-                                                    <a className="link  link-sm" style={{ cursor: 'pointer', color: "#163300" }} onClick={forgetpass}>Forgot Code?</a>
+                                                    <label className="form-label loginLabel" htmlFor="password">Password</label>
+                                                    <a className="link  link-sm" style={{ cursor: 'pointer', color: "#163300" }} onClick={forgetpass}>Forgot Password?</a>
                                                 </div>
                                                 <div className="form-control-wrap">
-                                                    <a className={show == false ? "form-icon form-icon-right passcode-switch lg is-hidden" : "form-icon form-icon-right passcode-switch lg is-shown"} data-target="password" >
+                                                    <a style={{height:'40px,'}} className={show == false ? "form-icon form-icon-right passcode-switch lg is-hidden" : "form-icon form-icon-right passcode-switch lg is-shown"} data-target="password" >
                                                         <em className="passcode-icon icon-show icon ni ni-eye" onClick={toggle} style={{ cursor: "pointer" }} />
                                                         <em className="passcode-icon icon-hide icon ni ni-eye-off" onClick={toggle} style={{ cursor: "pointer" }} />
                                                     </a>
-                                                    <input type={show == false ? "password" : "text"} className={show == false ? "form-control form-control-lg is-hidden" : "form-control form-control-lg is-shown"} id="password" placeholder="Enter your passcode"
+                                                    <input type={show == false ? "password" : "text"} className={show == false ? "form-control form-control-lg is-hidden" : "form-control form-control-lg is-shown"} id="password" placeholder="Enter your password"
                                                         name="password" value={values.password} onChange={handleChange} onBlur={handleBlur}
                                                     />
-                                                    {error == "Password is not match" ? <p className='red' style={{ marginTop: 5 }}>Password is not match</p> : errors.password && touched.password ? <p className='red' style={{ marginTop: 5 }}>{errors.password}</p> : null}
+                                                    {error == "Password is not match" ? <p className='red' style={{ marginTop: '0px', fontWeight:'500', fontSize:'10px', }}>Password is not match</p> : errors.password && touched.password ? <p className='red' style={{ marginTop: '0px', fontWeight:'500', fontSize:'10px', }}>{errors.password}</p> : null}
                                                 </div>
                                             </div>
                                             <div className="form-group" >
-                                                <button className="btn btn-lg btn-block" type="submit" style={{ backgroundColor: "#163300", color: "#ffffff" }} >Sign in</button>
+                                                <button className="btn btn-lg btn-block" type="submit" style={{ backgroundColor: "#163300", color: "#ffffff" }} >Log In</button>
                                             </div>
                                         </form>
-                                        {/* <div className="form-note-s2 text-center pt-4"> New on our platform? <a style={{ color: "#163300" }}>Create an account</a>
-                                        </div>
-                                        <div className="text-center pt-4 pb-3">
-                                            <h6 className="overline-title overline-title-sap"><span>OR</span></h6>
-                                        </div> */}
-                                        {/* <ul className="nav justify-center gx-4">
-                                            <li className="nav-item"><a className="nav-link" style={{ color: "#163300" }}>Facebook</a></li>
-                                            <li className="nav-item"><a className="nav-link" style={{ color: "#163300" }}>Google</a></li>
-                                        </ul> */}
                                     </div>
                                 </div>
+
+                            <div class="login-page-new__main-bot">
+                                <div class="login-page-new__main-bot-text ng-star-inserted"> Don't have an account? 
+                                    <a data-test="login__main-bot-text-link" class="login-page-new__main-bot-text-link" href=""> Request Access</a>
+                                </div>
                             </div>
-                        </div>
-                        {/* wrap @e */}
-                    </div>
-                    {/* content @e */}
-                </div>
-                {/* main @e */}
-            </div>
+                           
+              </div>
             <ToastContainer />
-        </div>
+        </div> 
 
     );
 }
