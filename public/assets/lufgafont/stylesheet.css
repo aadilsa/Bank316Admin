@@ -1,0 +1,68 @@
+body {
+	font-family: 'Lufga';
+}
+
+@font-face {
+    font-family: 'Lufga';
+    src: url('Lufga-Bold.eot');
+    src: url('Lufga-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Lufga-Bold.woff2') format('woff2'),
+        url('Lufga-Bold.woff') format('woff'),
+        url('Lufga-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lufga';
+    src: url('Lufga-SemiBold.eot');
+    src: url('Lufga-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('Lufga-SemiBold.woff2') format('woff2'),
+        url('Lufga-SemiBold.woff') format('woff'),
+        url('Lufga-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lufga';
+    src: url('Lufga-Medium.eot');
+    src: url('Lufga-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Lufga-Medium.woff2') format('woff2'),
+        url('Lufga-Medium.woff') format('woff'),
+        url('Lufga-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lufga';
+    src: url('Lufga-Regular.eot');
+    src: url('Lufga-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Lufga-Regular.woff2') format('woff2'),
+        url('Lufga-Regular.woff') format('woff'),
+        url('Lufga-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+.bankTemplate316 {
+    width: 420px;
+    display: block;
+    margin: 0px auto;
+    background: #fff;
+    padding: 0px;
+}
+
+@media (min-width: 320px) and (max-width: 767px) { 
+.bankTemplate316 {
+    width: 100%;
+}
+
+}

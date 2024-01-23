@@ -24,6 +24,8 @@
 * 07. PREVIEWS
 ---------------------- **/
 /** 01. FONTS */
+
+/**
 @font-face {
   font-family: "DM Sans";
   src: url("../fonts/DMSans-Bold.eot");
@@ -47,6 +49,7 @@
   font-weight: normal;
   font-style: normal;
 }
+***/
 
 /** Bootstrap v5.3.0 */
 /*!
@@ -124,10 +127,10 @@
   --bs-dark-border-subtle: #adb5bd;
   --bs-white-rgb: 255, 255, 255;
   --bs-black-rgb: 0, 0, 0;
-  --bs-font-sans-serif: "DM Sans", sans-serif;
+  --bs-font-sans-serif: 'Lufga';
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-body-font-family: "DM Sans", sans-serif;
+  --bs-body-font-family: 'Lufga';
   --bs-body-font-size: 0.875rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.65;
@@ -279,7 +282,7 @@ h1,
 .h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   font-weight: 700;
   line-height: 1.1;
   color: var(--bs-heading-color);
@@ -6780,7 +6783,7 @@ fieldset:disabled .dual-listbox .dual-listbox__button,
   z-index: var(--bs-tooltip-zindex);
   display: block;
   margin: var(--bs-tooltip-margin);
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   font-style: normal;
   font-weight: 400;
   line-height: 1.65;
@@ -6905,7 +6908,7 @@ fieldset:disabled .dual-listbox .dual-listbox__button,
   z-index: var(--bs-popover-zindex);
   display: block;
   max-width: var(--bs-popover-max-width);
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   font-style: normal;
   font-weight: 400;
   line-height: 1.65;
@@ -16783,7 +16786,7 @@ svg {
   position: relative;
   border: 1px solid currentColor;
   line-height: 1.125rem;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   font-size: 0.675rem;
   letter-spacing: 0.01em;
   vertical-align: middle;
@@ -17570,7 +17573,7 @@ a.alert:hover {
   align-items: center;
   font-size: 0.85rem;
   font-weight: 500;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   line-height: 1;
   border: none;
   background: transparent;
@@ -18769,7 +18772,7 @@ a:hover .btn-trigger:before {
 
 .card-subtitle {
   color: #8094ae;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   font-weight: normal;
 }
 
@@ -20661,7 +20664,7 @@ div.dataTables_wrapper div.dataTables_length select {
 }
 
 .nav-tabs {
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   margin: 0;
   font-size: 0.8125rem;
   border-bottom: 1px solid #dbdfea;
@@ -20802,7 +20805,7 @@ div.dataTables_wrapper div.dataTables_length select {
 .nav-tabs-card {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
 }
 
 @media (min-width: 576px) {
@@ -25713,7 +25716,7 @@ ol.linenums li {
   border-radius: 4px;
   box-shadow: none;
   border: 1px solid #dbdfea;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   font-size: 13px;
   font-weight: 400;
   display: block;
@@ -25831,7 +25834,7 @@ ol.linenums li {
 
 .select2-container--default .select2-selection--single {
   height: calc(2.125rem + 2px);
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   font-size: 13px;
   font-weight: 400;
   background-color: #fff;
@@ -25975,7 +25978,7 @@ ol.linenums li {
   background-color: #fff;
   border: 1px solid #dbdfea;
   border-radius: 4px;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   font-size: 13px;
   font-weight: 400;
   cursor: text;
@@ -31192,7 +31195,7 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
 .fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk .dual-listbox .dual-listbox__button,
 .dual-listbox .fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk .dual-listbox__button {
   position: relative;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   font-weight: 700;
   font-size: 12px;
   background: transparent;
@@ -35448,7 +35451,7 @@ div.dataTables_wrapper div.dataTables_filter .nk-header-search input,
 .nk-menu-link {
   padding: 0.625rem 1.3333333333px 0.625rem 12px;
   color: #6e82a5;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   font-weight: 700;
   font-size: 15px;
   letter-spacing: 0.01em;
@@ -35485,7 +35488,7 @@ div.dataTables_wrapper div.dataTables_filter .nk-header-search input,
 
 .nk-menu-sub .nk-menu-link {
   padding: 0.375rem 40px 0.375rem 36px;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   font-weight: 400;
   font-size: 14px;
   letter-spacing: normal;
@@ -35812,7 +35815,7 @@ div.dataTables_wrapper div.dataTables_filter .nk-header-search input,
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   color: #8094ae;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   font-weight: 500;
 }
 
@@ -37466,7 +37469,7 @@ select:-webkit-autofill:focus {
 }
 
 .page-title {
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   font-size: 1.5rem;
   font-weight: 700;
 }
@@ -37484,7 +37487,7 @@ select:-webkit-autofill:focus {
   color: #8094ae;
   text-transform: uppercase;
   font-weight: 700;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
 }
 
 .text-light .overline-title {
@@ -37500,7 +37503,7 @@ select:-webkit-autofill:focus {
 }
 
 .overline-title-alt {
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: 0.15em;
@@ -39396,7 +39399,7 @@ body.toggle-shown {
   border-radius: 20px;
   position: static;
   text-transform: uppercase;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   font-weight: 700;
   font-size: 12px;
   color: #8094ae;
@@ -39442,7 +39445,7 @@ body.toggle-shown {
   border-radius: 0;
   position: static;
   text-transform: uppercase;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   font-weight: 700;
   font-size: 12px;
   color: #8094ae;
@@ -47967,7 +47970,7 @@ div.dataTables_wrapper div.dataTables_filter .nk-chat-editor-form input,
 .components-preview .title.h5 {
   font-size: 1.25rem;
   letter-spacing: -0.01rem;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Lufga';
   font-weight: 500;
 }
 
