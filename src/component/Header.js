@@ -81,18 +81,19 @@ const Header = () => {
           </div>{/* .nk-header-news */}
           <div className="nk-header-tools">
             <ul className="nk-quick-nav">
-
               <li className="dropdown chats-dropdown hide-mb-xs">
-
+                <a href="#" className="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
+                  <div className="icon-status icon-status-na"><em className="icon ni ni-comments" /></div>
+                </a>
                 <div className="dropdown-menu dropdown-menu-xl dropdown-menu-end">
                   <div className="dropdown-head">
                     <span className="sub-title nk-dropdown-title">Recent Chats</span>
-                    <a >Setting</a>
+                    <a href="#">Setting</a>
                   </div>
                   <div className="dropdown-body">
                     <ul className="chat-list">
                       <li className="chat-item">
-                        <a className="chat-link" >
+                        <a className="chat-link" href="html/apps-chats.html">
                           <div className="chat-media user-avatar">
                             <span>IH</span>
                             <span className="status dot dot-lg dot-gray" />
@@ -103,7 +104,8 @@ const Header = () => {
                               <span className="time">Now</span>
                             </div>
                             <div className="chat-context">
-                              <div className="text">You: Please confrim if you got my last messages.</div>
+                              <div className="text">You: Please confrim if you got my
+                                last messages.</div>
                               <div className="status delivered">
                                 <em className="icon ni ni-check-circle-fill" />
                               </div>
@@ -112,18 +114,19 @@ const Header = () => {
                         </a>
                       </li>{/* .chat-item */}
                       <li className="chat-item is-unread">
-                        <a className="chat-link">
+                        <a className="chat-link" href="html/apps-chats.html">
                           <div className="chat-media user-avatar bg-pink">
                             <span>AB</span>
                             <span className="status dot dot-lg dot-success" />
                           </div>
                           <div className="chat-info">
                             <div className="chat-from">
-                              <div className="name">Admin</div>
+                              <div className="name">Abu Bin Ishtiyak</div>
                               <span className="time">4:49 AM</span>
                             </div>
                             <div className="chat-context">
-                              <div className="text">Hi, I am Ishtiyak, can you help me with this problem ?</div>
+                              <div className="text">Hi, I am Ishtiyak, can you help me
+                                with this problem ?</div>
                               <div className="status unread">
                                 <em className="icon ni ni-bullet-fill" />
                               </div>
@@ -132,9 +135,9 @@ const Header = () => {
                         </a>
                       </li>{/* .chat-item */}
                       <li className="chat-item">
-                        <a className="chat-link" >
+                        <a className="chat-link" href="html/apps-chats.html">
                           <div className="chat-media user-avatar">
-                            <img src="./images/avatar/b-sm.jpg" alt="img" />
+                            <img src="./images/avatar/b-sm.jpg" alt />
                           </div>
                           <div className="chat-info">
                             <div className="chat-from">
@@ -142,16 +145,17 @@ const Header = () => {
                               <span className="time">6 Apr</span>
                             </div>
                             <div className="chat-context">
-                              <div className="text">Have you seens the claim from Rose?</div>
+                              <div className="text">Have you seens the claim from
+                                Rose?</div>
                             </div>
                           </div>
                         </a>
                       </li>{/* .chat-item */}
                       <li className="chat-item">
-                        <a className="chat-link" >
+                        <a className="chat-link" href="html/apps-chats.html">
                           <div className="chat-media user-avatar user-avatar-multiple">
                             <div className="user-avatar">
-                              <img src="./images/avatar/c-sm.jpg" alt="img" />
+                              <img src="./images/avatar/c-sm.jpg" alt />
                             </div>
                             <div className="user-avatar">
                               <span>AB</span>
@@ -163,7 +167,8 @@ const Header = () => {
                               <span className="time">27 Mar</span>
                             </div>
                             <div className="chat-context">
-                              <div className="text">You: I just bought a new computer but i am having some problem</div>
+                              <div className="text">You: I just bought a new computer
+                                but i am having some problem</div>
                               <div className="status sent">
                                 <em className="icon ni ni-check-circle" />
                               </div>
@@ -172,9 +177,9 @@ const Header = () => {
                         </a>
                       </li>{/* .chat-item */}
                       <li className="chat-item">
-                        <a className="chat-link">
+                        <a className="chat-link" href="html/apps-chats.html">
                           <div className="chat-media user-avatar">
-                            <img src="./images/avatar/a-sm.jpg" alt="img" />
+                            <img src="./images/avatar/a-sm.jpg" alt />
                             <span className="status dot dot-lg dot-success" />
                           </div>
                           <div className="chat-info">
@@ -189,7 +194,7 @@ const Header = () => {
                         </a>
                       </li>{/* .chat-item */}
                       <li className="chat-item">
-                        <a className="chat-link" >
+                        <a className="chat-link" href="html/apps-chats.html">
                           <div className="chat-media user-avatar bg-purple">
                             <span>TW</span>
                           </div>
@@ -199,7 +204,8 @@ const Header = () => {
                               <span className="time">27 Mar</span>
                             </div>
                             <div className="chat-context">
-                              <div className="text">You: I just bought a new computer but i am having some problem</div>
+                              <div className="text">You: I just bought a new computer
+                                but i am having some problem</div>
                               <div className="status sent">
                                 <em className="icon ni ni-check-circle" />
                               </div>
@@ -210,15 +216,271 @@ const Header = () => {
                     </ul>{/* .chat-list */}
                   </div>{/* .nk-dropdown-body */}
                   <div className="dropdown-foot center">
-                    <a >View All</a>
+                    <a href="html/apps-chats.html">View All</a>
+                  </div>
+                </div>
+              </li>
+              <li className="dropdown language-dropdown d-none d-sm-block me-n1">
+                <a className="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
+                  <div className="quick-icon border border-light">
+                    <img className="icon" src="./images/download.png" alt />
+                  </div>
+                </a>
+                <div className="dropdown-menu dropdown-menu-end dropdown-menu-s1">
+                  <ul className="language-list">
+                    <li>
+                      <a href="#" className="language-item">
+                        <img src="./images/download.png" alt className="language-flag" />
+                        <span className="language-name">English</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="language-item">
+                        <img src="./images/flags/spanish.png" alt className="language-flag" />
+                        <span className="language-name">Español</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="language-item">
+                        <img src="./images/flags/french.png" alt className="language-flag" />
+                        <span className="language-name">Français</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="language-item">
+                        <img src="./images/flags/turkey.png" alt className="language-flag" />
+                        <span className="language-name">Türkçe</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>{/* .dropdown */}
+              <li className="dropdown chats-dropdown hide-mb-xs">
+                <a href="#" className="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
+                  <div className="icon-status icon-status-na"><em className="icon ni ni-comments" /></div>
+                </a>
+                <div className="dropdown-menu dropdown-menu-xl dropdown-menu-end">
+                  <div className="dropdown-head">
+                    <span className="sub-title nk-dropdown-title">Recent Chats</span>
+                    <a href="#">Setting</a>
+                  </div>
+                  <div className="dropdown-body">
+                    <ul className="chat-list">
+                      <li className="chat-item">
+                        <a className="chat-link" href="html/apps-chats.html">
+                          <div className="chat-media user-avatar">
+                            <span>IH</span>
+                            <span className="status dot dot-lg dot-gray" />
+                          </div>
+                          <div className="chat-info">
+                            <div className="chat-from">
+                              <div className="name">Iliash Hossain</div>
+                              <span className="time">Now</span>
+                            </div>
+                            <div className="chat-context">
+                              <div className="text">You: Please confrim if you got my
+                                last messages.</div>
+                              <div className="status delivered">
+                                <em className="icon ni ni-check-circle-fill" />
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </li>{/* .chat-item */}
+                      <li className="chat-item is-unread">
+                        <a className="chat-link" href="html/apps-chats.html">
+                          <div className="chat-media user-avatar bg-pink">
+                            <span>AB</span>
+                            <span className="status dot dot-lg dot-success" />
+                          </div>
+                          <div className="chat-info">
+                            <div className="chat-from">
+                              <div className="name">Abu Bin Ishtiyak</div>
+                              <span className="time">4:49 AM</span>
+                            </div>
+                            <div className="chat-context">
+                              <div className="text">Hi, I am Ishtiyak, can you help me
+                                with this problem ?</div>
+                              <div className="status unread">
+                                <em className="icon ni ni-bullet-fill" />
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </li>{/* .chat-item */}
+                      <li className="chat-item">
+                        <a className="chat-link" href="html/apps-chats.html">
+                          <div className="chat-media user-avatar">
+                            <img src="./images/avatar/b-sm.jpg" alt />
+                          </div>
+                          <div className="chat-info">
+                            <div className="chat-from">
+                              <div className="name">George Philips</div>
+                              <span className="time">6 Apr</span>
+                            </div>
+                            <div className="chat-context">
+                              <div className="text">Have you seens the claim from
+                                Rose?</div>
+                            </div>
+                          </div>
+                        </a>
+                      </li>{/* .chat-item */}
+                      <li className="chat-item">
+                        <a className="chat-link" href="html/apps-chats.html">
+                          <div className="chat-media user-avatar user-avatar-multiple">
+                            <div className="user-avatar">
+                              <img src="./images/avatar/c-sm.jpg" alt />
+                            </div>
+                            <div className="user-avatar">
+                              <span>AB</span>
+                            </div>
+                          </div>
+                          <div className="chat-info">
+                            <div className="chat-from">
+                              <div className="name">Softnio Group</div>
+                              <span className="time">27 Mar</span>
+                            </div>
+                            <div className="chat-context">
+                              <div className="text">You: I just bought a new computer
+                                but i am having some problem</div>
+                              <div className="status sent">
+                                <em className="icon ni ni-check-circle" />
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </li>{/* .chat-item */}
+                      <li className="chat-item">
+                        <a className="chat-link" href="html/apps-chats.html">
+                          <div className="chat-media user-avatar">
+                            <img src="./images/avatar/a-sm.jpg" alt />
+                            <span className="status dot dot-lg dot-success" />
+                          </div>
+                          <div className="chat-info">
+                            <div className="chat-from">
+                              <div className="name">Larry Hughes</div>
+                              <span className="time">3 Apr</span>
+                            </div>
+                            <div className="chat-context">
+                              <div className="text">Hi Frank! How is you doing?</div>
+                            </div>
+                          </div>
+                        </a>
+                      </li>{/* .chat-item */}
+                      <li className="chat-item">
+                        <a className="chat-link" href="html/apps-chats.html">
+                          <div className="chat-media user-avatar bg-purple">
+                            <span>TW</span>
+                          </div>
+                          <div className="chat-info">
+                            <div className="chat-from">
+                              <div className="name">Tammy Wilson</div>
+                              <span className="time">27 Mar</span>
+                            </div>
+                            <div className="chat-context">
+                              <div className="text">You: I just bought a new computer
+                                but i am having some problem</div>
+                              <div className="status sent">
+                                <em className="icon ni ni-check-circle" />
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </li>{/* .chat-item */}
+                    </ul>{/* .chat-list */}
+                  </div>{/* .nk-dropdown-body */}
+                  <div className="dropdown-foot center">
+                    <a href="html/apps-chats.html">View All</a>
                   </div>
                 </div>
               </li>
               <li className="dropdown notification-dropdown">
-                {/* <a className="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
+                <a href="#" className="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
+                  <div className="icon-status icon-status-info"><em className="icon ni ni-bell" />
+                  </div>
+                </a>
+                <div className="dropdown-menu dropdown-menu-xl dropdown-menu-end">
+                  <div className="dropdown-head">
+                    <span className="sub-title nk-dropdown-title">Notifications</span>
+                    <a href="#">Mark All as Read</a>
+                  </div>
+                  <div className="dropdown-body">
+                    <div className="nk-notification">
+                      <div className="nk-notification-item dropdown-inner">
+                        <div className="nk-notification-icon">
+                          <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right" />
+                        </div>
+                        <div className="nk-notification-content">
+                          <div className="nk-notification-text">You have requested to
+                            <span>Widthdrawl</span>
+                          </div>
+                          <div className="nk-notification-time">2 hrs ago</div>
+                        </div>
+                      </div>
+                      <div className="nk-notification-item dropdown-inner">
+                        <div className="nk-notification-icon">
+                          <em className="icon icon-circle bg-success-dim ni ni-curve-down-left" />
+                        </div>
+                        <div className="nk-notification-content">
+                          <div className="nk-notification-text">Your <span>Deposit
+                            Order</span> is placed</div>
+                          <div className="nk-notification-time">2 hrs ago</div>
+                        </div>
+                      </div>
+                      <div className="nk-notification-item dropdown-inner">
+                        <div className="nk-notification-icon">
+                          <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right" />
+                        </div>
+                        <div className="nk-notification-content">
+                          <div className="nk-notification-text">You have requested to
+                            <span>Widthdrawl</span>
+                          </div>
+                          <div className="nk-notification-time">2 hrs ago</div>
+                        </div>
+                      </div>
+                      <div className="nk-notification-item dropdown-inner">
+                        <div className="nk-notification-icon">
+                          <em className="icon icon-circle bg-success-dim ni ni-curve-down-left" />
+                        </div>
+                        <div className="nk-notification-content">
+                          <div className="nk-notification-text">Your <span>Deposit
+                            Order</span> is placed</div>
+                          <div className="nk-notification-time">2 hrs ago</div>
+                        </div>
+                      </div>
+                      <div className="nk-notification-item dropdown-inner">
+                        <div className="nk-notification-icon">
+                          <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right" />
+                        </div>
+                        <div className="nk-notification-content">
+                          <div className="nk-notification-text">You have requested to
+                            <span>Widthdrawl</span>
+                          </div>
+                          <div className="nk-notification-time">2 hrs ago</div>
+                        </div>
+                      </div>
+                      <div className="nk-notification-item dropdown-inner">
+                        <div className="nk-notification-icon">
+                          <em className="icon icon-circle bg-success-dim ni ni-curve-down-left" />
+                        </div>
+                        <div className="nk-notification-content">
+                          <div className="nk-notification-text">Your <span>Deposit
+                            Order</span> is placed</div>
+                          <div className="nk-notification-time">2 hrs ago</div>
+                        </div>
+                      </div>
+                    </div>{/* .nk-notification */}
+                  </div>{/* .nk-dropdown-body */}
+                  <div className="dropdown-foot center">
+                    <a href="#">View All</a>
+                  </div>
+                </div>
+              </li>
+              {/* <li className="dropdown notification-dropdown">
+                <a className="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
                   <div className="icon-status icon-status-info"><em className="icon ni ni-bell" /></div>
-                </a> */}
-                {/* <div className="dropdown-menu dropdown-menu-xl dropdown-menu-end">
+                </a>
+                <div className="dropdown-menu dropdown-menu-xl dropdown-menu-end">
                   <div className="dropdown-head">
                     <span className="sub-title nk-dropdown-title">Notifications</span>
                     <a >Mark All as Read</a>
@@ -284,8 +546,8 @@ const Header = () => {
                   <div className="dropdown-foot center">
                     <a >View All</a>
                   </div>
-                </div> */}
-              </li>
+                </div>
+              </li> */}
               <li className="dropdown user-dropdown">
                 <a className="dropdown-toggle me-n1" data-bs-toggle="dropdown">
                   <div className="user-toggle">
@@ -323,6 +585,11 @@ const Header = () => {
                 </div>
               </li>
             </ul>
+
+            <ul className="nk-quick-nav">
+
+            </ul>
+
           </div>
         </div>{/* .nk-header-wrap */}
       </div>{/* .container-fliud */}
