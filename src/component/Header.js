@@ -117,9 +117,12 @@ const Header = () => {
             <ul className="nk-quick-nav">
 
 
+              {/* <li>
+                <div className="icon-status icon-status-na"><em class="icon ni ni-maximize" onClick={() => { toggleFullScreen() }}></em></div>
+              </li> */}
               <li className="dropdown chats-dropdown hide-mb-xs">
-                <a className="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
-                  <div className="icon-status icon-status-na"><em class="icon ni ni-grid-fill" onClick={toggleFullScreen}></em></div>
+                <a className="dropdown-toggle nk-quick-nav-icon">
+                  <div className="icon-status icon-status-na"><em class="icon ni ni-maximize" onClick={() => { toggleFullScreen() }}></em></div>
                 </a>
 
               </li>
