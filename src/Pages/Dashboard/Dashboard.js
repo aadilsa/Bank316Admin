@@ -55,7 +55,7 @@ const Dashboard = () => {
     const [buttontxt, setbuttontxt] = useState("Total Count")
     const [RecentTxn, setRecentTxn] = useState([])
 
-    const [recentTab, setrecentTab] = useState("All")
+    const [recentTab, setrecentTab] = useState("")
     // const { CanvasJSChart } = CanvasJSReact;
     const navigate = useNavigate()
     useEffect(() => {
@@ -243,13 +243,12 @@ const Dashboard = () => {
 
     const GetRecentTransactation = async () => {
         try {
-            const totaldata = await GetRecentTXN(token)
+            const totaldata = await GetRecentTXN(token, recentTab)
             console.log(totaldata.status, "okkkkkkkkkkk")
             if (totaldata?.status == true) {
-                setTimeout(() => {
-                    const data = totaldata.data.rows
-                    setRecentTxn(data)
-                }, 2000);
+                const data = totaldata.data.rows
+                setRecentTxn(data)
+
             }
             else if (totaldata?.response?.data?.message == "jwt expired") {
                 console.log("Adddillll")
@@ -264,7 +263,7 @@ const Dashboard = () => {
                 setTimeout(() => {
                     setloader(false)
                 }, 2000);
-                setloader(true)
+                // setloader(true)
                 console.log("dkdkdkdkdkdkkdkdkdkdkk")
             }
         }
@@ -284,7 +283,7 @@ const Dashboard = () => {
     useEffect(() => {
         // GetAppointmentsdata()
         GetRecentTransactation()
-    }, []);
+    }, [recentTab]);
 
 
 
@@ -828,9 +827,9 @@ const Dashboard = () => {
                                                         </div>
                                                         <div className="card-tools">
                                                             <ul className="card-tools-nav">
-                                                                <li className={recentTab == "paid" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("paid")}><span>Paid</span></a></li>
-                                                                <li className={recentTab == "Pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("Pending")}><span>Pending</span></a></li>
-                                                                <li className={recentTab == "All" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("All")}><span>All</span></a></li>
+                                                                <li className={recentTab == "success" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("success")}><span>Complete </span></a></li>
+                                                                <li className={recentTab == "pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("pending")}><span>In progress</span></a></li>
+                                                                <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("")}><span>All</span></a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -849,9 +848,44 @@ const Dashboard = () => {
                                                         </div>
 
                                                         {
+                                                            RecentTxn.length == 0 &&
+                                                            <div className="nk-tb-item">
+
+                                                                <div className="nk-tb-col tb-col-sm">
+                                                                    <div className="user-card">
+
+                                                                        <div className="user-name">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div className="nk-tb-col">
+
+                                                                </div>
+                                                                {/* <div className="nk-tb-col tb-col-md">
+            <span className="tb-sub">{timeZones}</span>
+        </div> */}
+
+                                                                <div className="nk-tb-col">
+                                                                    <h6> No data available
+                                                                    </h6>
+                                                                </div>
+                                                                <div className="nk-tb-col tb-col-lg">
+                                                                </div>
+                                                                <div className="nk-tb-col">
+
+                                                                </div>
+                                                                <div className="nk-tb-col nk-tb-col-action">
+
+
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        {
                                                             RecentTxn.length > 0 &&
                                                             RecentTxn?.map((data) => {
-                                                                var stillUtcs = moment.utc(data.created_at).toDate();
+                                                                var stillUtcs = moment.utc(data?.created_at).toDate();
                                                                 var timeZones = moment(stillUtcs).local().format('YYYY-MM-DD HH:mm:ss A');
                                                                 return (
                                                                     <>
@@ -859,8 +893,9 @@ const Dashboard = () => {
 
                                                                             <div className="nk-tb-col tb-col-sm">
                                                                                 <div className="user-card">
-                                                                                    <div className="user-avatar user-avatar-sm bg-purple">
-                                                                                        <span>AB</span>
+                                                                                    <div className={data?.txn_for == "transfer" ? "user-avatar user-avatar-sm bg-purple" : "user-avatar user-avatar-sm bg-purple"}>
+                                                                                        {/* <span>{data.client.first_name.split(' ')[0].charAt(0)}{data.client.last_name.split(' ')[0].charAt(0)}</span> */}
+                                                                                        <div className={data?.is_complete == 0 && "nk-activity-media user-avatar bg-purple"}>{data?.client?.first_name.split(' ')[0].charAt(0).toUpperCase()}{data?.client?.last_name.split(' ')[0].charAt(0).toUpperCase()}</div>
                                                                                     </div>
                                                                                     <div className="user-name">
                                                                                         {
@@ -868,8 +903,8 @@ const Dashboard = () => {
                                                                                             <div class="user-info" style={{ cursor: "pointer", color: "primary" }}
                                                                                             // onClick={() => GoToUserDetail(data.client_id)}
                                                                                             >
-                                                                                                <span class="tb-lead" style={{ textTransform: "capitalize" }}>abu bin istiyak<span class="dot dot-success d-md-none ms-1"></span></span>
-                                                                                                <span>{data.sender?.phone}9644940027</span>
+                                                                                                <span class="tb-lead" style={{ textTransform: "capitalize" }}>{data?.client.first_name} {data?.client?.last_name}<span class="dot dot-success d-md-none ms-1"></span></span>
+                                                                                                <span>{data?.client?.phone}</span>
                                                                                             </div>
                                                                                         }
                                                                                     </div>
@@ -880,7 +915,7 @@ const Dashboard = () => {
                                                                                 <span className="tb-lead text-primary"><a ><span style={{ cursor: "pointer" }}
                                                                                 // onClick={() => GoTransDetail(data.id, data.client_id)}
                                                                                 >{data?.txn_id}</span>
-                                                                                    <CopyToClipboard text={data.txn_id} style={{ height: '25px', width: '25px', padding: 2 }}>
+                                                                                    <CopyToClipboard text={data?.txn_id} style={{ height: '25px', width: '25px', padding: 2 }}>
                                                                                         <span className='btn btn-primary btn-sm ms-1' onClick={() => copiedInfo()}><e className="fa fa-copy fa fa-solid text-white" style={{ fontSize: '17px' }}></e></span>
                                                                                     </CopyToClipboard>
                                                                                     <br></br>
@@ -895,35 +930,55 @@ const Dashboard = () => {
                                                                             </div> */}
 
                                                                             <div className="nk-tb-col">
-                                                                                <span className="tb-sub tb-amount">{data.currency_symbol}
-                                                                                    <span>{data.amount}</span></span>
+                                                                                <span className="tb-sub tb-amount">
+                                                                                    <span>{data?.amount} {data?.currency_name}</span></span>
                                                                             </div>
                                                                             <div className="nk-tb-col tb-col-lg">
-                                                                                <span className="tb-sub">{data.title}</span>
+                                                                                <span className="tb-sub">{data?.title}</span>
                                                                             </div>
                                                                             <div className="nk-tb-col">
                                                                                 {
-                                                                                    data.payment_status == "pending" && <span className="badge badge-dot badge-dot-xs bg-warning">pending</span>
+                                                                                    data?.payment_status == "pending" && <span className="badge badge-dot badge-dot-xs bg-warning">Pending </span>
                                                                                 }
                                                                                 {
-                                                                                    data.payment_status == "success" && <span className="badge badge-dot badge-dot-xs bg-success">success</span>
+                                                                                    data?.payment_status == "success" && <span className="badge badge-dot badge-dot-xs bg-success">Complete </span>
                                                                                 }
                                                                                 {
-                                                                                    data.payment_status == "failed" && <span className="badge badge-dot badge-dot-xs bg-danger">failed</span>
+                                                                                    data?.payment_status == "failed" && <span className="badge badge-dot badge-dot-xs bg-danger">Failed</span>
                                                                                 }
                                                                                 {/* // <span className="badge badge-dot badge-dot-xs bg-success">Paid</span> */}
                                                                             </div>
                                                                             <div className="nk-tb-col nk-tb-col-action">
-                                                                                <div className="dropdown">
-                                                                                    <a className="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
-                                                                                    <div className="dropdown-menu dropdown-menu-end dropdown-menu-xs">
-                                                                                        <ul className="link-list-plain">
-                                                                                            <li><a href="#">View</a></li>
-                                                                                            <li><a href="#">Invoice</a></li>
-                                                                                            <li><a href="#">Print</a></li>
-                                                                                        </ul>
+                                                                                {
+                                                                                    data?.payment_status == "pending" && <div class="drodown">
+                                                                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                                                            <ul class="link-list-opt no-bdr">
+                                                                                                <li><a href="html/ecommerce/customer-details.html"><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                                                <li><a href="#"><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
+                                                                                                {/* <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Activities</span></a></li> */}
+                                                                                                <li class="divider"></li>
+                                                                                                <li><a href="#"><em class="icon ni ni-check-circle-cut"></em><span>Confrim</span></a></li>
+                                                                                                <li><a href="#"><em class="icon ni ni-cross-c"></em><span>Reject</span></a></li>
+                                                                                            </ul>
+                                                                                        </div>
                                                                                     </div>
-                                                                                </div>
+                                                                                }
+
+
+                                                                                {
+                                                                                    data?.payment_status == "success" && <div class="drodown">
+                                                                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                                                            <ul class="link-list-opt no-bdr">
+                                                                                                <li><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                                                <li><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
+
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                }
+
                                                                             </div>
                                                                         </div>
 
@@ -1017,11 +1072,56 @@ const Dashboard = () => {
                                                                     <div className="card-inner card-inner-md">
                                                                         <div className="user-card">
                                                                             <div className="user-avatar bg-primary-dim">
-                                                                                <Image src={data?.avatar} />
+                                                                                {/* {
+                                                                                    (data?.doc_verified_status === "pending" || data?.email_verified_at == null) && <div className="nk-activity-media user-avatar bg-pink">{data.first_name?.split(' ')[0].charAt(0).toUpperCase()}{data.last_name?.split(' ')[0].charAt(0).toUpperCase()}</div>
+                                                                                } */}
+
+
+                                                                                {
+                                                                                    (data?.doc_verified_status === "approved" && data?.email_verified_at !== null) && <div className="nk-activity-media user-avatar bg-green">{data.first_name?.split(' ')[0].charAt(0).toUpperCase()}{data.last_name?.split(' ')[0].charAt(0).toUpperCase()}</div>
+
+                                                                                }
+
+
+                                                                                {
+                                                                                    (data?.doc_verified_status === "pending" && data?.email_verified_at == null) && <div className="nk-activity-media user-avatar bg-pink">{data.first_name?.split(' ')[0].charAt(0).toUpperCase()}{data.last_name?.split(' ')[0].charAt(0).toUpperCase()}</div>
+
+                                                                                }
+
+
+                                                                                {
+                                                                                    (data?.doc_verified_status === "pending" && data?.email_verified_at !== null) && <div className="nk-activity-media user-avatar bg-blue">{data.first_name?.split(' ')[0].charAt(0).toUpperCase()}{data.last_name?.split(' ')[0].charAt(0).toUpperCase()}</div>
+
+                                                                                }
+
+                                                                                {
+                                                                                    (data?.doc_verified_status === "Not_applied" && data?.email_verified_at == null) && <div className="nk-activity-media user-avatar bg-danger">{data.first_name?.split(' ')[0].charAt(0).toUpperCase()}{data.last_name?.split(' ')[0].charAt(0).toUpperCase()}</div>
+
+                                                                                }
+                                                                                {/* <div className="nk-activity-media user-avatar bg-purple">{data.first_name?.split(' ')[0].charAt(0).toUpperCase()}{data.last_name?.split(' ')[0].charAt(0).toUpperCase()}
+                                                                                </div> */}
                                                                             </div>
                                                                             <div className="user-info" onClick={() => { Custmerdetails(data.id) }} style={{ cursor: "pointer" }}>
                                                                                 <span className="lead-text">{data?.first_name} {data?.middle_name} {data?.last_name}</span>
                                                                                 <span className="sub-text">{data?.email == null ? <span>N/A</span> : data?.email}</span>
+                                                                                <span className="sub-text">Email :-  {data?.email_verified_at == null ? <span className="badge  badge-dim bg-warning"><span> Not Verified </span></span> : <span className="badge badge-dim bg-success"><span> Verified</span></span>}
+                                                                                    ID :-  {
+                                                                                        data?.doc_verified_status == "approved" && <span className="badge badge-dim bg-success"><span>Approved</span></span>
+                                                                                    }
+
+                                                                                    {
+                                                                                        data?.doc_verified_status == "pending" && <span className="badge badge-dim bg-warning"><span>Pending</span></span>
+                                                                                    }
+
+                                                                                    {
+                                                                                        data?.doc_verified_status == "rejected" && <span className="badge badge-dim bg-danger"><span>Rejected</span></span>
+                                                                                    }
+
+                                                                                    {
+                                                                                        data?.doc_verified_status == "Not_applied" && <span className="badge badge-dim bg-danger"><span>Not Applied</span></span>
+                                                                                    }
+                                                                                </span>
+                                                                                {/* emailVarified == null ? <span className="badge  badge-dim bg-warning"><span>Pending Verify </span></span> : <span className="badge badge-dim bg-success"><span>Success Verify</span></span> */}
                                                                             </div>
                                                                             <div className="user-action">
                                                                                 <div className="drodown">
@@ -1074,15 +1174,15 @@ const Dashboard = () => {
 
 
                                                             console.log(data, "data")
+                                                            const [startingLetter, endingLetter] = [data?.name.split(' ')[0].charAt(0), data?.name.split(' ').pop().charAt(0)];
                                                             return (
                                                                 <>
                                                                     <li className="nk-support-item">
                                                                         <div className="user-avatar">
-                                                                            <Image src={data?.image} />
-                                                                        </div>
+                                                                            <div className={data.is_complete == 0 ? "nk-activity-media user-avatar bg-pink" : "nk-activity-media user-avatar bg-success"}>{startingLetter}{endingLetter}</div>                                                                        </div>
                                                                         <div className="nk-support-content">
                                                                             <div className="title">
-                                                                                <span>{data?.name} </span>{data.is_complete == 0 ? <span className="badge badge-dot badge-dot-xs bg-warning ms-1">Pending</span> : <span className="badge badge-dot badge-dot-xs bg-success ms-1">Success</span>}
+                                                                                <span>{data?.name} </span>{data.is_complete == 0 ? <span className="badge badge-dot badge-dot-xs bg-warning ms-1">Pending</span> : <span className="badge badge-dot badge-dot-xs bg-success ms-1">Complete </span>}
                                                                             </div>
                                                                             <p>{data?.reason}</p>
                                                                             <span className="time">{data?.time}</span>

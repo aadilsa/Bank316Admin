@@ -49,9 +49,9 @@ export const GetNotificatation = async (token) => {
     }
 }
 
-export const GetRecentTXN = async (token) => {
+export const GetRecentTXN = async (token, recentTab) => {
     try {
-        const res = await axios.get(`${Base_Url}transactions/get`, { headers: { "Authorization": `Bearer ${token}` } })
+        const res = await axios.get(`${Base_Url}transactions/get?status=${recentTab}`, { headers: { "Authorization": `Bearer ${token}` } })
         return res.data
     }
     catch (err) {
