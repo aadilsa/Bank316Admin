@@ -120,9 +120,9 @@ const Header = () => {
               {/* <li>
                 <div className="icon-status icon-status-na"><em class="icon ni ni-maximize" onClick={() => { toggleFullScreen() }}></em></div>
               </li> */}
-              <li className="dropdown chats-dropdown hide-mb-xs">
+              <li className="dropdown chats-dropdown hide-mb-xs" onClick={() => { toggleFullScreen() }}>
                 <a className="dropdown-toggle nk-quick-nav-icon">
-                  <div className="icon-status icon-status-na"><em class="icon ni ni-maximize" onClick={() => { toggleFullScreen() }}></em></div>
+                  <div className="icon-status icon-status-na"><em class="icon ni ni-maximize" ></em></div>
                 </a>
 
               </li>
