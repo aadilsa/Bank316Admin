@@ -15,7 +15,7 @@ import moment from 'moment';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // const [isHovered, setHovered] = useState(false);
-import { GetGraphdata, Getuser_employeeCount, GetAppointments, GetNotificatation, GetRecentTXN } from '../../API/Dashboard API/DashboardApi';
+import { GetGraphdata, Getuser_employeeCount, GetAppointments, GetNotificatation, GetRecentTXN, Getactivities } from '../../API/Dashboard API/DashboardApi';
 // import Chart from '../Chart';
 
 // import CanvasJSReact from '@canvasjs/react-charts';
@@ -54,7 +54,7 @@ const Dashboard = () => {
     const [countdays, setcountdays] = useState("")
     const [buttontxt, setbuttontxt] = useState("Total Count")
     const [RecentTxn, setRecentTxn] = useState([])
-
+    const [activities, setactivities] = useState([])
     const [recentTab, setrecentTab] = useState("")
     // const { CanvasJSChart } = CanvasJSReact;
     const navigate = useNavigate()
@@ -96,6 +96,33 @@ const Dashboard = () => {
     }, [])
 
 
+
+
+    const getactivities = async () => {
+        try {
+            const totaldata = await Getactivities(token)
+            console.log(totaldata, "GetTotalCount")
+            if (totaldata?.status == true) {
+                console.log(totaldata?.data?.rows, "//////////////////")
+                setactivities(totaldata?.data?.rows)
+            }
+            else if (totaldata?.response?.data?.message == "jwt expired") {
+                localStorage.removeItem('logintoken')
+                navigate("/")
+            }
+            else {
+                setloader(false)
+            }
+        }
+        catch (err) {
+            // console.log(err, "LLLLLLLLLLLLLLLL")
+            console.log(err, "ddddddddddddddddddddddddddd")
+            setloader(false)
+        }
+    }
+    useEffect(() => {
+        getactivities()
+    }, [])
 
     // const Get_graph_data = async () => {
     //     try {
@@ -499,12 +526,12 @@ const Dashboard = () => {
                                                             <div className="card-title-group align-start mb-0">
                                                                 <div className="card-title">
                                                                     {/* <h6 className="title">Total Deposit</h6> */}
-                                                                    <span className="sub-title">Total Withdraws</span><br></br>
+                                                                    <span className="sub-title">Total Withdrawals</span><br></br>
                                                                     <span className="amount bigAmount">14,299.59 <span className="change down text-danger"><em className="icon ni ni-arrow-long-down" />16.93%</span></span>
 
                                                                 </div>
                                                                 <div className="card-tools" >
-                                                                    <span className="card-hint" tooltip="Total Withdraws" flow="left">
+                                                                    <span className="card-hint" tooltip="Total Withdrawals" flow="left">
                                                                         <i className="icon ni ni-help-fill"></i>
                                                                     </span>
                                                                 </div>
@@ -1009,16 +1036,24 @@ const Dashboard = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <ul className="nk-activity">
-                                                    <li className="nk-activity-item">
-                                                        <div className="nk-activity-media user-avatar bg-success"><img src="./images/avatar/c-sm.jpg" alt /></div>
-                                                        <div className="nk-activity-data">
-                                                            <div className="label">Keith Jensen requested to Widthdrawl.
-                                                            </div>
-                                                            <span className="time">2 hours ago</span>
-                                                        </div>
-                                                    </li>
-                                                    <li className="nk-activity-item">
+                                                <ul className="nk-activity">{
+                                                    activities.length > 0 && activities.map((data) => {
+                                                        return (
+                                                            <>
+                                                                <li className="nk-activity-item">
+                                                                    <div className="nk-activity-media user-avatar bg-success"><img src="./images/avatar/c-sm.jpg" alt /></div>
+                                                                    <div className="nk-activity-data">
+                                                                        <div className="label">{data?.body}
+                                                                        </div>
+                                                                        <span className="time">2 hours ago</span>
+                                                                    </div>
+                                                                </li>
+                                                            </>
+                                                        )
+                                                    })
+                                                }
+
+                                                    {/* <li className="nk-activity-item">
                                                         <div className="nk-activity-media user-avatar bg-warning">HS</div>
                                                         <div className="nk-activity-data">
                                                             <div className="label">Harry Simpson placed a Order.</div>
@@ -1046,7 +1081,7 @@ const Dashboard = () => {
                                                             <div className="label">Timothy Moreno placed a Order.</div>
                                                             <span className="time">2 hours ago</span>
                                                         </div>
-                                                    </li>
+                                                    </li> */}
                                                 </ul>
                                             </div>{/* .card */}
                                         </div>{/* .col */}

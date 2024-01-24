@@ -59,3 +59,14 @@ export const GetRecentTXN = async (token, recentTab) => {
         return err
     }
 }
+
+export const Getactivities = async (token) => {
+    try {
+        const res = await axios.get(`${Base_Url}recent-activities`, { headers: { "Authorization": `Bearer ${token}` } })
+        return res.data
+    }
+    catch (err) {
+        console.log(err)
+        return err
+    }
+}

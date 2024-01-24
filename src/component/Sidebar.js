@@ -27,6 +27,10 @@ const Sidebar = () => {
     //     setTransDrop(true)
     //     setrolesDrop(true)
     // }, [])
+    useEffect(() => {
+        settab("/admin/dashboard")
+    }, [])
+
 
     const dispatch = useDispatch();
     // const headerState = useSelector((state) => state.app.header);
@@ -128,6 +132,7 @@ const Sidebar = () => {
 
 
     useEffect(() => {
+
         if (tab == "/admin/dashboard" || tab == "/admin/balance-dashboard" || tab == "/admin/users-dashboard") {
             setDashboardDrop(true);
         }
@@ -315,14 +320,14 @@ const Sidebar = () => {
                                     <span className="nk-menu-text">Dashboards</span>
                                 </a>
                                 <ul className="nk-menu-sub dropdown-contain" style={{ display: DashboardDrop ? 'block' : 'none', marginLeft: 10, paddingLeft: 2 }}>
-                                    <li className={tab == "/admin/dashboard" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                    <li className={tab == "/admin/dashboard" ? "nk-menu-item active current-page" : "nk-menu-item"} onClick={() => { setDashboardDrop(true) }}>
                                         <Link to="/admin/dashboard" className="nk-menu-link"><span className="nk-menu-text">Main Dashboard</span></Link>
                                     </li>
-                                    <li className={tab == "/admin/balance-dashboard" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                    <li className={tab == "/admin/balance-dashboard" ? "nk-menu-item active current-page" : "nk-menu-item"} onClick={() => { setDashboardDrop(true) }}>
                                         <Link to="/admin/balance-dashboard" className="nk-menu-link"><span className="nk-menu-text">Balance Dashboard</span></Link>
                                     </li>
 
-                                    <li className={tab == "/admin/users-dashboard" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                    <li className={tab == "/admin/users-dashboard" ? "nk-menu-item active current-page" : "nk-menu-item"} onClick={() => { setDashboardDrop(true) }}>
                                         <Link to="/admin/users-dashboard" className="nk-menu-link"><span className="nk-menu-text">Users Dashboard</span></Link>
                                     </li>
                                 </ul>
