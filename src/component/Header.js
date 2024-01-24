@@ -121,15 +121,10 @@ const Header = () => {
                 <div className="icon-status icon-status-na"><em class="icon ni ni-maximize" onClick={() => { toggleFullScreen() }}></em></div>
               </li> */}
               <li className="dropdown chats-dropdown hide-mb-xs">
-<<<<<<< HEAD
                 <a className="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
                   <div className="icon-status icon-status-na">
                      <em class="icon ni ni-maximize" onClick={toggleFullScreen}></em>
                   </div>
-=======
-                <a className="dropdown-toggle nk-quick-nav-icon">
-                  <div className="icon-status icon-status-na"><em class="icon ni ni-maximize" onClick={() => { toggleFullScreen() }}></em></div>
->>>>>>> ce5da791057b59b13beaa2a13ba5d742f8d12fdb
                 </a>
 
               </li>
