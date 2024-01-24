@@ -1038,6 +1038,22 @@ const Dashboard = () => {
                                                 </div>
                                                 <ul className="nk-activity">{
                                                     activities.length > 0 && activities.map((data) => {
+                                                        const createdAtDate = new Date(data.created_at);
+                                                        const currentDate = new Date();
+
+                                                        const timeDifferenceInMilliseconds = currentDate - createdAtDate;
+
+                                                        // Convert milliseconds to seconds, minutes, hours, and days
+                                                        const seconds = Math.floor(timeDifferenceInMilliseconds / 1000);
+                                                        const minutes = Math.floor(seconds / 60);
+                                                        const hours = Math.floor(minutes / 60);
+                                                        const days = Math.floor(hours / 24);
+
+                                                        // Calculate remaining hours, minutes, and seconds
+                                                        const remainingHours = hours % 24;
+                                                        const remainingMinutes = minutes % 60;
+                                                        const remainingSeconds = seconds % 60;
+
                                                         return (
                                                             <>
                                                                 <li className="nk-activity-item">
@@ -1045,7 +1061,14 @@ const Dashboard = () => {
                                                                     <div className="nk-activity-data">
                                                                         <div className="label">{data?.body}
                                                                         </div>
-                                                                        <span className="time">2 hours ago</span>
+                                                                        {
+                                                                            days == 0 && <span className="time"> {remainingHours} hours ago</span>
+                                                                        }
+                                                                        {
+                                                                            days !== 0 && <span className="time">{days} day {remainingHours} hours ago</span>
+                                                                        }
+                                                                        {/* <span className="time">{days} day {remainingHours} hours ago</span> */}
+
                                                                     </div>
                                                                 </li>
                                                             </>
