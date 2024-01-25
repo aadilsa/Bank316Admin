@@ -50909,6 +50909,60 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   background-color: #f3f7f9;
 }
 
+
+.side-barNew .item {
+  position: relative;
+  cursor: pointer;
+  padding: 0px 0px;
+}
+.side-barNew .item a {
+  color: #fff;
+  font-size: 15px;
+  text-decoration: none;
+  display: flex;
+  padding: 10px 10px;
+  line-height: normal;
+  border-radius: 5px;
+}
+
+.side-barNew .item a:hover{
+  transition: 0.3s ease;
+  color:#fff;
+}
+.side-barNew:hover .nk-menu-toggle:after {
+  color: #5aac4e;
+}
+.side-barNew .item a.active {
+  background: #ebeef2;
+  transition: 0.3s ease;
+  color:##5aac4e;
+ }
+ 
+.side-barNew .item i{
+ margin-right: 15px;
+}
+
+.side-barNew .item a .dropdown{
+ position: absolute;
+ right: 0;
+ margin: 20px;
+ transition: 0.3s ease;
+}
+
+.side-barNew .item .sub-menu{
+ display: none;
+}
+
+.side-barNew .item .sub-menu a{
+ padding-left: 80px;
+}
+
+.rotate{
+ transform: rotate(90deg);
+}
+
+
+
 @media (min-width: 320px) and (max-width: 767px) {
   .cardInnerBorder canvas {
     width: 100%;
