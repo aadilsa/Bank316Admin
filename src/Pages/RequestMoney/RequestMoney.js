@@ -256,7 +256,7 @@ function RequestMoney() {
                                 </div>
                             </div>
                             <div className="card card-full">
-                               <div className="card-inner">
+                               <div className="card-inner" style={{borderBottom:'1px solid #ddd',}}>
                                     <div className="card-title-group">
                                     {/* <div className="card-title">
                                         <h6 className="title"><span className="me-2"> Recent Transactions </span> <a href="#" className="link d-none d-sm-inline">See
