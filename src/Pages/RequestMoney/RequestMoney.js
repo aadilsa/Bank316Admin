@@ -255,8 +255,9 @@ function RequestMoney() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="card-inner">
-                                <div className="card-title-group">
+                            <div className="card card-full">
+                               <div className="card-inner">
+                                    <div className="card-title-group">
                                     {/* <div className="card-title">
                                         <h6 className="title"><span className="me-2"> Recent Transactions </span> <a href="#" className="link d-none d-sm-inline">See
                                             History</a></h6>
@@ -270,8 +271,10 @@ function RequestMoney() {
                                             {/* <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("")}><span>All</span></a></li> */}
                                         </ul>
                                     </div>
+                                    </div>
                                 </div>
                             </div>
+                            
 
                             <div className="nk-block">
                                 <div className="nk-tb-list is-separate mb-3">
@@ -546,6 +549,8 @@ function RequestMoney() {
                                     </div>
                                 </div>{/* .card */}
                             </div>
+
+
                         </div>
                     </div>
                 </div>
