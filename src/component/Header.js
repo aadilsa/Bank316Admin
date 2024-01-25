@@ -136,31 +136,56 @@ const Header = () => {
                   <div class="row g-0 siXicon">
                     <div class="col">
                       <a class="dropdown-icon-item" href="">
-                        <img src="./images/d1.png" alt="" /><span>Slack</span></a>
+                        <img src="./images/d1.png" alt="" /><span>Wise</span></a>
                     </div>
 
                     <div class="col"><a class="dropdown-icon-item" href="">
-                      <img src="./images/d2.png" alt="" /><span>GitHub</span></a>
+                      <img src="./images/d2.png" alt="" /><span>MailChamp</span></a>
                     </div>
 
                     <div class="col"><a class="dropdown-icon-item" href="">
-                      <img src="./images/d3.png" alt="" /><span>Dribbble</span></a>
+                      <img src="./images/d3.png" alt="" /><span>Google Drive</span></a>
                     </div>
                   </div>
                   <div class="row g-0 siXicon">
                     <div class="col">
                       <a class="dropdown-icon-item" href="">
-                        <img src="./images/d4.png" alt="" /><span>Bitbucket</span></a>
+                        <img src="./images/d4.png" alt="" /><span>Stripe</span></a>
                     </div>
 
                     <div class="col"><a class="dropdown-icon-item" href="">
-                      <img src="./images/d5.png" alt="" /><span>Dropbox</span></a>
+                      <img src="./images/d5.png" alt="" /><span>AWS</span></a>
                     </div>
-
                     <div class="col"><a class="dropdown-icon-item" href="">
-                      <img src="./images/d6.png" alt="" /><span>G Suite</span></a>
+                      <img src="./images/banklogo.png" alt="" /><span>316 Trade</span></a>
                     </div>
                   </div>
+                  <div class="row g-0 siXicon">
+                    
+                    <div class="col"><a class="dropdown-icon-item" href="">
+                      <img src="./images/d6.png" alt="" /><span>Brevo</span></a>
+                    </div>
+                    <div class="col-4"><a class="dropdown-icon-item" href="">
+                      <img src="./images/d6.png" alt="" /><span>Brevo Phone</span></a>
+                    </div>
+                    <div class="col-4"><a class="dropdown-icon-item" href="">
+                      <img src="./images/d6.png" alt="" /><span>Brevo Meeting</span></a>
+                    </div>
+                  </div>
+                  <div class="row g-0 siXicon">
+                    
+                    <div class="col-4"><a class="dropdown-icon-item" href="">
+                      <img src="./images/d9.png" alt="" /><span>Slack</span></a>
+                    </div>
+                    <div class="col-4"><a class="dropdown-icon-item" href="">
+                      <img src="./images/d8.png" alt="" /><span>GitHub</span></a>
+                    </div>
+                  </div>
+
+
+
+
+
                 </div>
               </li>
 

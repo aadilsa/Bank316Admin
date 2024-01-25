@@ -375,6 +375,22 @@ const Sidebar = () => {
                             </li> */}
 
 
+                            {/*<div className="nk-menu-item side-barNew">
+                                <div class="item">
+                                    <a class="nk-menu-link nk-menu-toggle sub-btn">
+                                        <span className="nk-menu-icon"><em className="icon ni ni-dashboard-fill"></em></span>
+                                        <span className="nk-menu-text">try explame</span></a>
+                                      <div class="sub-menu">
+                                        <a href="#" class="sub-item">Sub Item 01</a>
+                                        <a href="#" class="sub-item">Sub Item 02</a>
+                                        <a href="#" class="sub-item">Sub Item 03</a>
+                                    </div>
+                                </div>
+                        </div>*/}
+
+
+
+
                             <li className={ManagementDrop == true ? "nk-menu-item has-sub active" : "nk-menu-item has-sub"} >
                                 <a className="nk-menu-link nk-menu-toggle" onClick={ManagementDropdown} style={{ cursor: "pointer" }}>
                                     <span className="nk-menu-icon"><em className="icon ni ni-dashboard-fill"></em></span>
