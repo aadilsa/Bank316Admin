@@ -256,25 +256,25 @@ function RequestMoney() {
                                 </div>
                             </div>
                             <div className="card card-full">
-                               <div className="card-inner">
+                                <div className="card-inner">
                                     <div className="card-title-group">
-                                    {/* <div className="card-title">
+                                        {/* <div className="card-title">
                                         <h6 className="title"><span className="me-2"> Recent Transactions </span> <a href="#" className="link d-none d-sm-inline">See
                                             History</a></h6>
                                     </div> */}
-                                    <div className="card-tools">
-                                        <ul className="card-tools-nav">
-                                            <li className={recentTab == "All deposits" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("All deposits")}><span>All deposits </span></a></li>
-                                            <li className={recentTab == "In progress" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("In progress")}><span>In progress</span></a></li>
-                                            <li className={recentTab == "Oh - hold" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("Oh - hold")}><span>Oh - hold</span></a></li>
-                                            <li className={recentTab == "Processed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("Processed")}><span>Processed </span></a></li>
-                                            {/* <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("")}><span>All</span></a></li> */}
-                                        </ul>
-                                    </div>
+                                        <div className="card-tools">
+                                            <ul className="card-tools-nav">
+                                                <li className={recentTab == "All deposits" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("All deposits")}><span>All deposits </span></a></li>
+                                                <li className={recentTab == "In progress" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("In progress")}><span>In progress</span></a></li>
+                                                <li className={recentTab == "Oh - hold" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("Oh - hold")}><span>Oh - hold</span></a></li>
+                                                <li className={recentTab == "Processed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("Processed")}><span>Processed </span></a></li>
+                                                {/* <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("")}><span>All</span></a></li> */}
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            
+
 
                             <div className="nk-block">
                                 <div className="nk-tb-list is-separate mb-3">
