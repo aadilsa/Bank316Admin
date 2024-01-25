@@ -40,7 +40,7 @@ export const GetAppointments = async (token) => {
 
 export const GetNotificatation = async (token) => {
     try {
-        const res = await axios.get(`${Base_Url}notifications/get`, { headers: { "Authorization": `Bearer ${token}` } })
+        const res = await axios.get(`${Base_Url}notifications/get/v1`, { headers: { "Authorization": `Bearer ${token}` } })
         return res.data
     }
     catch (err) {

@@ -1057,16 +1057,35 @@ const Dashboard = () => {
                                                         return (
                                                             <>
                                                                 <li className="nk-activity-item">
-                                                                    <div className="nk-activity-media user-avatar bg-success"><img src="./images/avatar/c-sm.jpg" alt /></div>
+                                                                    <div className="nk-activity-media user-avatar bg-success">{data?.client?.first_name?.split(' ')[0].charAt(0).toUpperCase()}{data?.client?.last_name?.split(' ')[0].charAt(0).toUpperCase()}</div>
                                                                     <div className="nk-activity-data">
                                                                         <div className="label">{data?.body}
+
                                                                         </div>
+
                                                                         {
-                                                                            days == 0 && <span className="time"> {remainingHours} hours ago</span>
+                                                                            (days == 0 && remainingHours == 0) && <span className="time"> {remainingMinutes} Minutes ago </span>
                                                                         }
                                                                         {
-                                                                            days !== 0 && <span className="time">{days} day {remainingHours} hours ago</span>
+                                                                            (days !== 0 && remainingHours > 24) && <span className="time"> {days} days ago </span>
                                                                         }
+                                                                        {
+                                                                            (days == 0 && remainingHours > 0) && <span className="time"> {remainingHours} Hours ago </span>
+                                                                        }
+                                                                        {/* {
+                                                                            days == 0 && <span className="time"> {remainingHours} hours ago </span>
+                                                                        }
+                                                                        {
+                                                                            (days !== 0 && remainingHours !== 0) && <span className="time">{days} day {remainingHours} hours ago</span>
+                                                                        }
+
+                                                                        {
+                                                                            (days !== 0 && remainingHours == 0) && <span className="time">{days} day ago</span>
+                                                                        }
+
+                                                                        {
+                                                                            (days == 0 && remainingHours == 0 && remainingMinutes !== 0) && <span className="time">{remainingMinutes} Minutes ago</span>
+                                                                        } */}
                                                                         {/* <span className="time">{days} day {remainingHours} hours ago</span> */}
 
                                                                     </div>

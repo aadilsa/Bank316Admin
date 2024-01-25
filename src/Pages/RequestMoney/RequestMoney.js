@@ -43,7 +43,7 @@ function RequestMoney() {
     const [orderBy, setOrderBy] = useState('desc')
     const token = localStorage.getItem("logintoken")
     const [selectedValue, setSelectedValue] = useState(true)
-
+    const [recentTab, setrecentTab] = useState('All deposits')
     const [reqmoneymsg, setreqmoneymsg] = useState("")
     const navigate = useNavigate()
     const ref2 = useRef()
@@ -158,6 +158,8 @@ function RequestMoney() {
     useEffect(() => {
         GetRequestMoneyData()
     }, [sortedBy, orderBy, search, pageNumber])
+
+
     const sortChange = (col) => {
         if (col === sortedBy) {
             setSortedBy(col);
@@ -253,9 +255,27 @@ function RequestMoney() {
                                     </div>
                                 </div>
                             </div>
+                            <div className="card-inner">
+                                <div className="card-title-group">
+                                    {/* <div className="card-title">
+                                        <h6 className="title"><span className="me-2"> Recent Transactions </span> <a href="#" className="link d-none d-sm-inline">See
+                                            History</a></h6>
+                                    </div> */}
+                                    <div className="card-tools">
+                                        <ul className="card-tools-nav">
+                                            <li className={recentTab == "All deposits" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("All deposits")}><span>All deposits </span></a></li>
+                                            <li className={recentTab == "In progress" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("In progress")}><span>In progress</span></a></li>
+                                            <li className={recentTab == "Oh - hold" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("Oh - hold")}><span>Oh - hold</span></a></li>
+                                            <li className={recentTab == "Processed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("Processed")}><span>Processed </span></a></li>
+                                            {/* <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("")}><span>All</span></a></li> */}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div className="nk-block">
                                 <div className="nk-tb-list is-separate mb-3">
+
                                     <div className="nk-tb-item nk-tb-head">
                                         <div className="nk-tb-col "><span className="sub-text fw-bold">Name{sortedBy == "first_name" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("first_name") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("first_name") }} />} </span></div>
                                         <div className="nk-tb-col tb-col-lg"><span className="sub-text fw-bold">TXN ID{sortedBy == "txn_id" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("txn_id") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("txn_id") }} />} </span></div>

@@ -483,7 +483,7 @@ const Sidebar = () => {
                             </li>
 
 
-
+                            {/* 
                             <li className={Recipients == true ? "nk-menu-item has-sub active" : "nk-menu-item has-sub"} >
                                 <a className="nk-menu-link nk-menu-toggle" onClick={RecipientsDropdown} style={{ cursor: "pointer" }}>
                                     <span className="nk-menu-icon"><em className="icon ni ni-template"></em></span>
@@ -497,7 +497,7 @@ const Sidebar = () => {
                                         <Link to="/outside-recipients" className="nk-menu-link"><span className="nk-menu-text">Call Bookings</span></Link>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> */}
                             {/* 
                             <li className={tab == "/transactions" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                 <Link to={"/transactions"} className="nk-menu-link ">
