@@ -43,7 +43,7 @@ function RequestMoney() {
     const [orderBy, setOrderBy] = useState('desc')
     const token = localStorage.getItem("logintoken")
     const [selectedValue, setSelectedValue] = useState(true)
-    const [recentTab, setrecentTab] = useState('All deposits')
+    const [recentTab, setrecentTab] = useState("")
     const [reqmoneymsg, setreqmoneymsg] = useState("")
     const navigate = useNavigate()
     const ref2 = useRef()
@@ -119,7 +119,7 @@ function RequestMoney() {
 
     const GetRequestMoneyData = async () => {
         try {
-            const totaldata = await RequestMoneyData(token, sortedBy, orderBy, search, pageNumber)
+            const totaldata = await RequestMoneyData(token, recentTab, sortedBy, orderBy, search, pageNumber)
             console.log(totaldata.data.rows, "daatattadsddddddd")
             if (totaldata.status == true) {
                 setTimeout(() => {
@@ -157,7 +157,7 @@ function RequestMoney() {
     }
     useEffect(() => {
         GetRequestMoneyData()
-    }, [sortedBy, orderBy, search, pageNumber])
+    }, [sortedBy, orderBy, search, pageNumber, recentTab])
 
 
     const sortChange = (col) => {
@@ -256,7 +256,7 @@ function RequestMoney() {
                                 </div>
                             </div>
                             <div className="card card-full">
-                                <div className="card-inner">
+                                <div className="card-inner" style={{ borderBottom: "1px solid #ddd" }}>
                                     <div className="card-title-group">
                                         {/* <div className="card-title">
                                         <h6 className="title"><span className="me-2"> Recent Transactions </span> <a href="#" className="link d-none d-sm-inline">See
@@ -264,10 +264,12 @@ function RequestMoney() {
                                     </div> */}
                                         <div className="card-tools">
                                             <ul className="card-tools-nav">
-                                                <li className={recentTab == "All deposits" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("All deposits")}><span>All deposits </span></a></li>
-                                                <li className={recentTab == "In progress" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("In progress")}><span>In progress</span></a></li>
-                                                <li className={recentTab == "Oh - hold" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("Oh - hold")}><span>Oh - hold</span></a></li>
-                                                <li className={recentTab == "Processed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("Processed")}><span>Processed </span></a></li>
+                                                <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("")}><span >{recentTab == "" ? <b>All deposits</b> : <span>All deposits</span>}</span></a></li>
+                                                <li className={recentTab == "pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("pending")}><span>{recentTab == "pending" ? <b>In progress</b> : <span>In progress</span>}</span></a></li>
+                                                {/* <li className={recentTab == "Oh - hold" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("Oh - hold")}><span>Oh - hold</span></a></li> */}
+                                                <li className={recentTab == "rejected" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("rejected")}><span>{recentTab == "rejected" ? <b>Rejected</b> : <span>Rejected</span>}</span></a></li>
+                                                <li className={recentTab == "completed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("completed")}><span> {recentTab == "completed" ? <b>Processed</b> : <span>Processed</span>}</span></a></li>
+                                                <li className={recentTab == "approved by receiver" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("approved by receiver")}><span> {recentTab == "approved by receiver" ? <b>Approved by receiver</b> : <span>Approved by receiver</span>}</span></a></li>
                                                 {/* <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("")}><span>All</span></a></li> */}
                                             </ul>
                                         </div>

@@ -126,8 +126,8 @@ const Header = () => {
                     <em class="icon ni ni-maximize" ></em>
                   </div>
                 </a>
-
               </li>
+
               <li className="dropdown chats-dropdown hide-mb-xs">
                 <a href="#" className="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
                   <div className="icon-status icon-status-na"><em class="icon ni ni-grid-fill" ></em></div>
