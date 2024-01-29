@@ -100,8 +100,11 @@ const Header = () => {
     <div className="nk-header nk-header-fixed is-light">
       <div className="container-fluid">
         <div className="nk-header-wrap">
-          <div className="nk-menu-trigger d-xl-none ms-n1">
-            <a className="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em className="icon ni ni-menu" onClick={toggle} /></a>
+          {/* <div className="nk-menu-trigger d-xl-none ms-n1">
+            <a className="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em className="icon ni ni-menu"  /></a>
+          </div> */}
+          <div class="nk-menu-trigger d-xl-none ms-n1">
+            <a class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em class="icon ni ni-menu" onClick={toggle}></em></a>
           </div>
           <div className="nk-header-brand d-xl-none">
             <a className="logo-link">
@@ -135,49 +138,49 @@ const Header = () => {
                 <div className="dropdown-menu dropdown-menu-xl dropdown-menu-end">
                   <div class="row g-0 siXicon">
                     <div class="col">
-                      <a class="dropdown-icon-item" href="">
+                      <a class="dropdown-icon-item" href="https://wise.com/login" target="_blank">
                         <img src="./images/d1.png" alt="" /><span>Wise</span></a>
                     </div>
 
-                    <div class="col"><a class="dropdown-icon-item" href="">
+                    <div class="col"><a class="dropdown-icon-item" href="https://login.mailchimp.com" target="_blank">
                       <img src="./images/d2.png" alt="" /><span>MailChamp</span></a>
                     </div>
 
-                    <div class="col"><a class="dropdown-icon-item" href="">
+                    <div class="col"><a class="dropdown-icon-item" href="https://www.google.com" target="_blank">
                       <img src="./images/d3.png" alt="" /><span>Google Drive</span></a>
                     </div>
                   </div>
                   <div class="row g-0 siXicon">
                     <div class="col">
-                      <a class="dropdown-icon-item" href="">
+                      <a class="dropdown-icon-item" href="https://dashboard.stripe.com/login" target="_blank">
                         <img src="./images/d4.png" alt="" /><span>Stripe</span></a>
                     </div>
 
-                    <div class="col"><a class="dropdown-icon-item" href="">
+                    <div class="col"><a class="dropdown-icon-item" href="https://signin.aws.amazon.com" target="_blank">
                       <img src="./images/d5.png" alt="" /><span>AWS</span></a>
                     </div>
-                    <div class="col"><a class="dropdown-icon-item" href="">
+                    <div class="col"><a class="dropdown-icon-item" href="https://316startups.com" target="_blank">
                       <img src="./images/banklogo.png" alt="" /><span>316 Trade</span></a>
                     </div>
                   </div>
                   <div class="row g-0 siXicon">
-                    
-                    <div class="col"><a class="dropdown-icon-item" href="">
+
+                    <div class="col"><a class="dropdown-icon-item" href="https://account-app.brevo.com" target="_blank">
                       <img src="./images/d6.png" alt="" /><span>Brevo</span></a>
                     </div>
-                    <div class="col-4"><a class="dropdown-icon-item" href="">
+                    <div class="col-4"><a class="dropdown-icon-item" href="https://phone.brevo.com" target="_blank">
                       <img src="./images/d6.png" alt="" /><span>Brevo Phone</span></a>
                     </div>
-                    <div class="col-4"><a class="dropdown-icon-item" href="">
+                    <div class="col-4"><a class="dropdown-icon-item" href="https://app.brevo.com/meetings/appointments" target="_blank">
                       <img src="./images/d6.png" alt="" /><span>Brevo Meeting</span></a>
                     </div>
                   </div>
                   <div class="row g-0 siXicon">
-                    
-                    <div class="col-4"><a class="dropdown-icon-item" href="">
+
+                    <div class="col-4"><a class="dropdown-icon-item" href="https://slack.com" target="_blank">
                       <img src="./images/d9.png" alt="" /><span>Slack</span></a>
                     </div>
-                    <div class="col-4"><a class="dropdown-icon-item" href="">
+                    <div class="col-4"><a class="dropdown-icon-item" href="https://github.com" target="_blank">
                       <img src="./images/d8.png" alt="" /><span>GitHub</span></a>
                     </div>
                   </div>

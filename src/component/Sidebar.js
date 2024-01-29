@@ -274,12 +274,16 @@ const Sidebar = () => {
                         <img className="logo-small logo-img logo-img-small" src="./images/minilogo.png" srcSet="./images/minilogo.png" alt="logo-small" />
                     </a>
                 </div>
-                <div className="nk-menu-trigger me-n2" >
+                {/* <div className="nk-menu-trigger me-n2" >
 
 
                     <a className="nk-nav-toggle nk-quick-nav-icon d-xl-none" onClick={e => handleSideBar()}><em className="icon ni ni-arrow-left"></em></a>
                     <a className="nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex" onClick={e => handleSideBar()}><em className="icon ni ni-menu" style={{ fontSize: "1.5rem", marginTop: "0px", marginRight: "0px" }} /></a>
-                    {/* <div>{activeMenu == true ? console.log("true") : console.log("false")} </div> */}
+                </div> */}
+
+                <div class="nk-menu-trigger me-n2">
+                    <a class="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu" onClick={e => handleSideBar()}><em class="icon ni ni-arrow-left"></em></a>
+                    <a class="nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex" data-target="sidebarMenu" onClick={e => handleSideBar()}><em class="icon ni ni-menu"></em></a>
                 </div>
             </div>
             <div className="nk-sidebar-element">
@@ -333,12 +337,22 @@ const Sidebar = () => {
                                 </ul>
                             </li>
 
+                            <li className={tab == "/users" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                <Link to={"/users"} className={"nk-menu-link "}>
+                                    <span className="nk-menu-icon"><em className="icon ni ni-users" /></span>
+                                    <span className="nk-menu-text">Customers</span>
+                                </Link>
+                            </li>
+
+
                             <li className={tab == "/admin/deposits" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                 <Link to={"/admin/deposits"} className={"nk-menu-link "}>
                                     <span className="nk-menu-icon"><em className="icon ni ni-wallet-in" /></span>
                                     <span className="nk-menu-text">Deposits</span>
                                 </Link>
                             </li>
+
+
 
                             <li className={tab == "/admin/withdrawals" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                 <Link to={"/admin/withdrawals"} className={"nk-menu-link "}>
