@@ -18800,7 +18800,7 @@ a:hover .btn-trigger:before {
   right: 0;
   height: 2px;
   content: "";
-  background: #854fff;
+  background: #5aac4e;
   opacity: 0;
 }
 
@@ -18830,6 +18830,7 @@ a:hover .btn-trigger:before {
   color: #b1b1b1;
   cursor: pointer;
 }
+
 .card-tools {
   display: flex;
 }
@@ -34854,6 +34855,7 @@ div.dataTables_wrapper div.dataTables_filter .nk-header-search input,
 .nk-header-tools .nk-quick-nav-icon {
   color: #526484;
 }
+
 .is-dark .nk-quick-nav-icon {
   color: #9faec2;
 }
@@ -35199,8 +35201,8 @@ div.dataTables_wrapper div.dataTables_filter .nk-header-search input,
 }
 
 .nk-sidebar.is-light {
-    background: #5aac4e;
-    border-right-color: #5aac4e;
+  background: #5aac4e;
+  border-right-color: #5aac4e;
 }
 
 .nk-sidebar.is-theme {
@@ -50653,14 +50655,17 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
 
 /* START TOOLTIP STYLES */
 [tooltip] {
-  position: relative; /* opinion 1 */
+  position: relative;
+  /* opinion 1 */
 }
 
 /* Applies to all tooltips */
 [tooltip]::before,
 [tooltip]::after {
-  text-transform: none; /* opinion 2 */
-  font-size: .9em; /* opinion 3 */
+  text-transform: none;
+  /* opinion 2 */
+  font-size: .9em;
+  /* opinion 3 */
   line-height: 1;
   user-select: none;
   pointer-events: none;
@@ -50668,18 +50673,23 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   display: none;
   opacity: 0;
 }
+
 [tooltip]::before {
   content: '';
-  border: 5px solid transparent; /* opinion 4 */
-  z-index: 1001; /* absurdity 1 */
+  border: 5px solid transparent;
+  /* opinion 4 */
+  z-index: 1001;
+  /* absurdity 1 */
 }
+
 [tooltip]::after {
-  content: attr(tooltip); /* magic! */
-  
+  content: attr(tooltip);
+  /* magic! */
+
   /* most of the rest of this is opinion */
   font-family: Helvetica, sans-serif;
   text-align: center;
-  
+
   /* 
     Let the content set the size of the tooltips 
     but this will also keep them from being obnoxious
@@ -50694,7 +50704,8 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35);
   background: #333;
   color: #fff;
-  z-index: 1000; /* absurdity 2 */
+  z-index: 1000;
+  /* absurdity 2 */
 }
 
 /* Make the tooltips respond to hover */
@@ -50717,6 +50728,7 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   left: calc(0em - 5px);
   transform: translate(-.5em, -50%);
 }
+
 [tooltip][flow^="left"]::after {
   top: 50%;
   right: calc(100% + 5px);
@@ -50756,16 +50768,21 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   padding: 30px 30px;
   position: relative;
 }
-.pno { padding:0px; }
+
+.pno {
+  padding: 0px;
+}
+
 .login-page-new .loginLabel {
   font-size: 11px;
-    font-weight: 500;
-    line-height: 11px;
-    display: block;
-    color: #292d34;
-    padding: 0 0 0px 2px;
+  font-weight: 500;
+  line-height: 11px;
+  display: block;
+  color: #292d34;
+  padding: 0 0 0px 2px;
 }
-.login-page-new .newLoginBox input { 
+
+.login-page-new .newLoginBox input {
   height: 40px;
   font-size: 14px;
   border-radius: 9px;
@@ -50774,39 +50791,46 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
 }
 
 .login-page-new .welcomeTxt {
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 46px;
-    color: #292d34;
-    text-align: center;
-    margin-bottom: 20px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 46px;
+  color: #292d34;
+  text-align: center;
+  margin-bottom: 20px;
 }
+
 .login-page-new .signUpBtn {
-    display: flex;
-    align-items: center;
-    background-color: rgb(22, 51, 0);
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 1;
-    transition: transform .2s cubic-bezier(.785,.135,.15,.86),background-color .2s cubic-bezier(.785,.135,.15,.86);
-    letter-spacing: .4px;
-    padding: 0 20px;
-    height: 40px;
-    color: #fff;
-    border-radius: 9px;
-    cursor: pointer;
-    box-shadow:0 10px 25px #a1f76085;
+  display: flex;
+  align-items: center;
+  background-color: rgb(22, 51, 0);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  transition: transform .2s cubic-bezier(.785, .135, .15, .86), background-color .2s cubic-bezier(.785, .135, .15, .86);
+  letter-spacing: .4px;
+  padding: 0 20px;
+  height: 40px;
+  color: #fff;
+  border-radius: 9px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px #a1f76085;
 }
+
 .login-page-new .justify-betweenBox {
   justify-content: space-between;
 }
+
 .login-page-new .signUpFlex {
   display: flex;
   align-items: center;
   gap: 20px;
   justify-content: end;
 }
-.pddd {--bs-gutter-x: 10px;}
+
+.pddd {
+  --bs-gutter-x: 10px;
+}
+
 .login-page-new {
   display: flex;
   position: relative;
@@ -50816,10 +50840,12 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   overflow-y: auto;
   background-color: #fafbfc;
 }
+
 .login-page-new__main-top-divider {
   height: 100px;
   flex-shrink: 0;
 }
+
 .login-page-new__main {
   position: relative;
   flex-grow: 1;
@@ -50831,29 +50857,30 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   flex-wrap: wrap;
 }
 
-  .login-page-new__main-bg:after {
-      content: "";
-      display: block;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background: url(../../images/loginbg-top.svg) center top no-repeat;
-      background-size: 100%;
-  }
-  
-.login-page-new__main-bg {
-    position: absolute;
-    height: calc(100% - 0vh);
-    width: 100%;
-    top: 0vh;
-    left: 0;
-    overflow: hidden;
-    pointer-events: none;
-    background: url(../../images/login__bg.svg) center 10px no-repeat;
-    background-size: cover;
+.login-page-new__main-bg:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: url(../../images/loginbg-top.svg) center top no-repeat;
+  background-size: 100%;
 }
+
+.login-page-new__main-bg {
+  position: absolute;
+  height: calc(100% - 0vh);
+  width: 100%;
+  top: 0vh;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: url(../../images/login__bg.svg) center 10px no-repeat;
+  background-size: cover;
+}
+
 .login-page-new__main-bg:before {
   content: "";
   display: block;
@@ -50865,6 +50892,7 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   background: url(../../images/login__bg-dots.svg);
   transform: rotate(-28deg);
 }
+
 .login-page-new__main-bot {
   width: 100%;
   display: flex;
@@ -50873,16 +50901,18 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   margin-top: 0px;
   z-index: 1;
 }
+
 .login-page-new__main-bot-text {
   font-size: 14px;
   font-weight: 400;
   line-height: 1;
   color: #fff;
 }
+
 .login-page-new__main-bot-text-link {
-  transition: border-bottom-color .2s cubic-bezier(.785,.135,.15,.86) 0s;
+  transition: border-bottom-color .2s cubic-bezier(.785, .135, .15, .86) 0s;
   color: #fff;
-  border-bottom: solid 1px rgba(255,255,255,.4);
+  border-bottom: solid 1px rgba(255, 255, 255, .4);
   padding-bottom: 1px;
 }
 
@@ -50896,15 +50926,18 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   padding: 15px 0 9px;
   text-align: center;
 }
+
 .siXicon .dropdown-icon-item img {
   height: 24px;
 }
+
 .siXicon .dropdown-icon-item span {
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 .siXicon .dropdown-icon-item:hover {
   background-color: #f3f7f9;
 }
@@ -50915,6 +50948,7 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   cursor: pointer;
   padding: 0px 0px;
 }
+
 .side-barNew .item a {
   color: #fff;
   font-size: 15px;
@@ -50925,40 +50959,42 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   border-radius: 5px;
 }
 
-.side-barNew .item a:hover{
+.side-barNew .item a:hover {
   transition: 0.3s ease;
-  color:#fff;
+  color: #fff;
 }
+
 .side-barNew:hover .nk-menu-toggle:after {
   color: #5aac4e;
 }
+
 .side-barNew .item a.active {
   background: #ebeef2;
   transition: 0.3s ease;
-  color:##5aac4e;
- }
- 
-.side-barNew .item i{
- margin-right: 15px;
+  color: #5aac4e;
 }
 
-.side-barNew .item a .dropdown{
- position: absolute;
- right: 0;
- margin: 20px;
- transition: 0.3s ease;
+.side-barNew .item i {
+  margin-right: 15px;
 }
 
-.side-barNew .item .sub-menu{
- display: none;
+.side-barNew .item a .dropdown {
+  position: absolute;
+  right: 0;
+  margin: 20px;
+  transition: 0.3s ease;
 }
 
-.side-barNew .item .sub-menu a{
- padding-left: 80px;
+.side-barNew .item .sub-menu {
+  display: none;
 }
 
-.rotate{
- transform: rotate(90deg);
+.side-barNew .item .sub-menu a {
+  padding-left: 80px;
+}
+
+.rotate {
+  transform: rotate(90deg);
 }
 
 
@@ -50972,10 +51008,14 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   .canvasjs-chart-container {
     margin-top: 0px;
   }
-  .signUpFlex span { display:none;}
+
+  .signUpFlex span {
+    display: none;
+  }
+
   .login-page-new__main {
     padding: 0px 10px;
-   }
+  }
 }
 
 

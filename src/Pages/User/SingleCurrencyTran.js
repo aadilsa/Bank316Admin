@@ -185,6 +185,13 @@ const SingleCurrencyTran = () => {
 
                                                                                         <div className="profile-ud-item">
                                                                                             <div className="profile-ud wider">
+                                                                                                <span className="profile-ud-label">Payment Status</span>
+                                                                                                {data?.txndata?.payment_status == "failed" ? <span className="profile-ud-value"><span className="tb-status badge rounded-pill bg-danger">Failed</span></span> : <span className="profile-ud-value"><span className="tb-status badge rounded-pill bg-success">Sucess</span></span>}
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div className="profile-ud-item">
+                                                                                            <div className="profile-ud wider">
                                                                                                 <span className="profile-ud-label">Closing Balance</span>
                                                                                                 <span className="profile-ud-value">{sender?.currencywallets[0]?.currency?.symbol} {data?.txndata?.closing_balance}</span>
                                                                                             </div>
@@ -207,12 +214,7 @@ const SingleCurrencyTran = () => {
                                                                                                 <span className="profile-ud-value"> {sender?.currencywallets[0]?.currency?.symbol} {data?.txndata?.txn_charge_amount} </span>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div className="profile-ud-item">
-                                                                                            <div className="profile-ud wider">
-                                                                                                <span className="profile-ud-label">Transaction Time</span>
-                                                                                                <span className="profile-ud-value">{timeZones}</span>
-                                                                                            </div>
-                                                                                        </div>
+
 
                                                                                         <div className="profile-ud-item">
                                                                                             <div className="profile-ud wider">
@@ -231,8 +233,8 @@ const SingleCurrencyTran = () => {
 
                                                                                         <div className="profile-ud-item">
                                                                                             <div className="profile-ud wider">
-                                                                                                <span className="profile-ud-label">Payment Status</span>
-                                                                                                {data?.txndata?.payment_status == "failed" ? <span className="profile-ud-value"><span className="tb-status badge rounded-pill bg-danger">Failed</span></span> : <span className="profile-ud-value"><span className="tb-status badge rounded-pill bg-success">Sucess</span></span>}
+                                                                                                <span className="profile-ud-label">Transaction Time</span>
+                                                                                                <span className="profile-ud-value">{timeZones}</span>
                                                                                             </div>
                                                                                         </div>
 
@@ -1343,10 +1345,14 @@ const SingleCurrencyTran = () => {
                                                                             </div>
                                                                             <div className="profile-ud-item">
                                                                                 <div className="profile-ud wider">
-                                                                                    <span className="profile-ud-label">Customer Image</span>
-                                                                                    <span className="profile-ud-value"><Image src={sender?.avatar} height={50} width={70} /> </span>
+                                                                                    <span className="profile-ud-label">Transaction Id</span>
+                                                                                    <span className="profile-ud-value">{data?.txndata?.txn_id}</span>
+
+
                                                                                 </div>
                                                                             </div>
+
+
 
                                                                         </div>
                                                                     </div>
@@ -1356,15 +1362,18 @@ const SingleCurrencyTran = () => {
                                                                             <h6 className="title overline-title text-base">Order Details</h6>
                                                                         </div>
                                                                         <div className="profile-ud-list">
+
+
+
+
                                                                             <div className="profile-ud-item">
                                                                                 <div className="profile-ud wider">
-                                                                                    <span className="profile-ud-label">Transaction Id</span>
-                                                                                    <span className="profile-ud-value">{data?.txndata?.txn_id}</span>
-
-
+                                                                                    <span className="profile-ud-label">Payment Status</span>
+                                                                                    {data?.txndata?.payment_status == "failed" && <span className="profile-ud-value"><span className="tb-status badge rounded-pill bg-danger">Failed</span></span>}
+                                                                                    {data?.txndata?.payment_status == "success" && <span className="profile-ud-value"><span className="tb-status badge rounded-pill bg-success">Success</span></span>}
+                                                                                    {data?.txndata?.payment_status == "pending" && <span className="profile-ud-value"><span className="tb-status badge rounded-pill bg-warning">Pending</span></span>}
                                                                                 </div>
                                                                             </div>
-
 
 
                                                                             <div className="profile-ud-item">
@@ -1498,19 +1507,20 @@ const SingleCurrencyTran = () => {
                                                                                 </div>
                                                                             </div> */}
 
+
                                                                             <div className="profile-ud-item">
                                                                                 <div className="profile-ud wider">
-                                                                                    <span className="profile-ud-label">Payment Status</span>
-                                                                                    {data?.txndata?.payment_status == "failed" && <span className="profile-ud-value"><span className="tb-status badge rounded-pill bg-danger">Failed</span></span>}
-                                                                                    {data?.txndata?.payment_status == "success" && <span className="profile-ud-value"><span className="tb-status badge rounded-pill bg-success">Success</span></span>}
-                                                                                    {data?.txndata?.payment_status == "pending" && <span className="profile-ud-value"><span className="tb-status badge rounded-pill bg-warning">Pending</span></span>}
+                                                                                    <span className="profile-ud-label">Customer Image</span>
+                                                                                    <span className="profile-ud-value"><Image src={sender?.avatar} height={50} width={70} /> </span>
                                                                                 </div>
                                                                             </div>
+
+
 
                                                                             <div className="profile-ud-item">
                                                                                 <div className="profile-ud wider">
                                                                                     <span className="profile-ud-label">Currency Icon</span>
-                                                                                    <span className="profile-ud-value"><Image src={data?.txndata?.currencywallet?.currency?.icon} height={40} width={70} /></span>
+                                                                                    <span className="profile-ud-value"><Image src={data?.txndata?.currencywallet?.currency?.icon} height={50} width={70} /></span>
                                                                                 </div>
                                                                             </div>
 

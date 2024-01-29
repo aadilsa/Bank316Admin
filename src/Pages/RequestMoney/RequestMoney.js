@@ -264,12 +264,12 @@ function RequestMoney() {
                                     </div> */}
                                         <div className="card-tools">
                                             <ul className="card-tools-nav">
-                                                <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("")}><span >{recentTab == "" ? <b>All deposits</b> : <span>All deposits</span>}</span></a></li>
-                                                <li className={recentTab == "pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("pending")}><span>{recentTab == "pending" ? <b>In progress</b> : <span>In progress</span>}</span></a></li>
+                                                <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab(""); setTotalSize(0) }}><span >{recentTab == "" ? <b>All deposits</b> : <span>All deposits</span>}</span></a></li>
+                                                <li className={recentTab == "pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("pending"); setTotalSize(0) }}><span>{recentTab == "pending" ? <b>In progress</b> : <span>In progress</span>}</span></a></li>
                                                 {/* <li className={recentTab == "Oh - hold" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("Oh - hold")}><span>Oh - hold</span></a></li> */}
-                                                <li className={recentTab == "rejected" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("rejected")}><span>{recentTab == "rejected" ? <b>Rejected</b> : <span>Rejected</span>}</span></a></li>
-                                                <li className={recentTab == "completed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("completed")}><span> {recentTab == "completed" ? <b>Processed</b> : <span>Processed</span>}</span></a></li>
-                                                <li className={recentTab == "approved by receiver" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("approved by receiver")}><span> {recentTab == "approved by receiver" ? <b>Approved by receiver</b> : <span>Approved by receiver</span>}</span></a></li>
+                                                <li className={recentTab == "rejected" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("rejected"); setTotalSize(0) }}><span>{recentTab == "rejected" ? <b>Rejected</b> : <span>Rejected</span>}</span></a></li>
+                                                <li className={recentTab == "completed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("completed"); setTotalSize(0) }}><span> {recentTab == "completed" ? <b>Processed</b> : <span>Processed</span>}</span></a></li>
+                                                <li className={recentTab == "approved by receiver" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("approved by receiver"); setTotalSize(0) }}><span> {recentTab == "approved by receiver" ? <b>Approved by receiver</b> : <span>Approved by receiver</span>}</span></a></li>
                                                 {/* <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("")}><span>All</span></a></li> */}
                                             </ul>
                                         </div>
@@ -369,7 +369,7 @@ function RequestMoney() {
                                                                         <div className="user-card" >
                                                                             {
                                                                                 data.txn_id == null ? <div className="user-info">
-                                                                                    <span className="tb-lead">N/A<span className="dot dot-success d-md-none ms-1" /></span>
+                                                                                    <span className="tb-lead" onClick={() => { GoAllreqTxn(data.id) }} style={{ cursor: "pointer" }}>N/A<span className="dot dot-success d-md-none ms-1" /></span>
                                                                                 </div> : <div className="user-info" style={{ cursor: "pointer", }}>
                                                                                     <span className="tb-lead text-primary" ><span onClick={() => { GoAllreqTxn(data.id) }}>{data.txn_id}</span><span><CopyToClipboard text={data.txn_id} style={{ height: '25px', width: '25px', padding: 2 }} >
                                                                                         <span className='btn btn-primary btn-sm ms-1' onClick={() => copiedInfo()}><e className="fa fa-copy fa fa-solid text-white" style={{ fontSize: '17px' }}></e></span>
@@ -615,7 +615,7 @@ function RequestMoney() {
                 </div>
             </div>
 
-        </Container>
+        </Container >
 
 
     )
