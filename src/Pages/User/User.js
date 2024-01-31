@@ -301,11 +301,11 @@ const User = () => {
                                 <div className="nk-tb-list is-separate mb-3">
                                     <div className="nk-tb-item nk-tb-head">
 
-                                        <div className="nk-tb-col "><span className="sub-text fw-bold">User Detail  {sortedBy == "first_name" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('first_name') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('first_name') }} />} </span></div>
+                                        {/* <div className="nk-tb-col "><span className="sub-text fw-bold">User Detail  {sortedBy == "first_name" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('first_name') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('first_name') }} />} </span></div>
                                         <div className="nk-tb-col tb-col-lg"><span className="sub-text fw-bold">DOB  {sortedBy == "date_of_birth" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('date_of_birth') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('date_of_birth') }} />}</span></div>
                                         <div className="nk-tb-col tb-col-lg"><span className="sub-text fw-bold">Verified  {sortedBy == "email_verified_at" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('email_verified_at') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('email_verified_at') }} />}</span></div>
                                         <div className="nk-tb-col tb-col-lg"><span className="sub-text fw-bold">Created At  {sortedBy == "created_at" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} />}</span></div>
-                                        <div className="nk-tb-col tb-col-md"><span className="sub-text fw-bold">Referral Id  {sortedBy == "referral_code" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('referral_code') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('referral_code') }} />}</span></div>
+                                        <div className="nk-tb-col tb-col-md"><span className="sub-text fw-bold">Referral Id  {sortedBy == "date_of_birth" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('referral_code') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('referral_code') }} />}</span></div>
                                         <div className="nk-tb-col nk-tb-col-tools">
                                             {
                                                 (get_single_client == true || profile?.user_type == "SUPERADMIN") &&
@@ -319,34 +319,57 @@ const User = () => {
                                                 </ul>
 
                                             }
+                                        </div> */}
+
+                                        <div className="nk-tb-col"><span className="sub-text">User {sortedBy == "first_name" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("first_name") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("first_name") }} />}</span></div>
+                                        <div className="nk-tb-col tb-col-mb"><span className="sub-text">
+                                            Verified {sortedBy == "txn_id" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("txn_id") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("txn_id") }} />}</span></div>
+                                        <div className="nk-tb-col tb-col-md"><span className="sub-text">Phone {sortedBy == 'phone' && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('phone') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('phone') }} />}</span></div>
+                                        <div className="nk-tb-col tb-col-lg"><span className="sub-text">DOB {sortedBy == "date_of_birth" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("date_of_birth") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("date_of_birth") }} />}</span></div>
+                                        <div className="nk-tb-col tb-col-lg"><span className="sub-text">Created At {sortedBy == 'created_at' && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} />}</span>
+                                        </div>
+                                        <div className="nk-tb-col tb-col-md"><span className="sub-text">Referral Code {sortedBy == "referral_code" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("referral_code") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("referral_code") }} />}</span></div>
+                                        <div className="nk-tb-col nk-tb-col-tools">
+                                            <ul className="nk-tb-actions gx-1 my-n1">
+                                                <li>
+                                                    <div className="drodown">
+                                                        <a className="sub-text" >Action</a>
+
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>{/* .nk-tb-item */}
                                     {
                                         loader == true ?
                                             <div className="nk-tb-item">
-                                                <div className="nk-tb-col tb-col-lg"></div>
-                                                <div className="nk-tb-col tb-col-lg"></div>
-                                                <div className="nk-tb-col">
-                                                    {<Loader />}
+                                                <div className="nk-tb-col"></div>
+                                                <div className="nk-tb-col tb-col-mb"></div>
+                                                <div className="nk-tb-col tb-col-md">
+
                                                 </div>
-                                                <div className="nk-tb-col tb-col-lg"></div>
+                                                <div className="nk-tb-col tb-col-lg">  {<Loader />}</div>
                                                 <div className="nk-tb-col tb-col-lg">
                                                 </div>
-                                                <div className="nk-tb-col "></div>
+                                                <div className="nk-tb-col tb-col-md "></div>
+                                                <div className="nk-tb-col nk-tb-col-tools"></div>
                                             </div> :
                                             <>
                                                 {
                                                     userdata.length == 0 &&
+
+
                                                     <div className="nk-tb-item">
-                                                        <div className="nk-tb-col tb-col-lg"></div>
-                                                        <div className="nk-tb-col tb-col-lg"></div>
-                                                        <div className="nk-tb-col ">
-                                                            {scroll == true ? <h6>No Customer Data Available</h6> : <Loader />}
+                                                        <div className="nk-tb-col"></div>
+                                                        <div className="nk-tb-col tb-col-mb"></div>
+                                                        <div className="nk-tb-col tb-col-md">
+
                                                         </div>
-                                                        <div className="nk-tb-col tb-col-lg"></div>
+                                                        <div className="nk-tb-col tb-col-lg">     {scroll == true ? <h6>No Customer Data Available</h6> : <Loader />}</div>
                                                         <div className="nk-tb-col tb-col-lg">
                                                         </div>
-                                                        <div className="nk-tb-col "></div>
+                                                        <div className="nk-tb-col tb-col-md "></div>
+                                                        <div className="nk-tb-col nk-tb-col-tools"></div>
                                                     </div>
                                                 }
 
@@ -357,118 +380,217 @@ const User = () => {
                                                         var timeZones = moment(stillUtcs).local().format('YYYY-MM-DD HH:mm:ss A');
 
                                                         return (
-                                                            <div className="nk-tb-item" key={data.id} >
-                                                                <div className="nk-tb-col" >
-                                                                    <a >
-                                                                        <div className="user-card">
-                                                                            <div className="user-avatar bg-primary">
-                                                                                <span><Image src={data.avatar} alt='img' width={40} height={40} style={{ objectFit: 'cover' }} /></span>
+                                                            //         <div className="nk-tb-item" key={data.id} >
+                                                            //             <div className="nk-tb-col" >
+                                                            //                 <a >
+                                                            //                     <div className="user-card">
+                                                            //                         <div className="user-avatar bg-primary">
+                                                            //                             <span><Image src={data.avatar} alt='img' width={40} height={40} style={{ objectFit: 'cover' }} /></span>
+                                                            //                         </div>
+                                                            //                         {
+                                                            //                             data?.first_name == null ? <div className="user-info text-primary" >
+                                                            //                                 <span className="tb-lead text-primary" onClick={() => { Custmerdetails(data.id) }} style={{ cursor: "pointer" }}>N/A<span className="dot dot-success d-md-none ms-1" /></span>
+                                                            //                             </div> : <div className="user-info " onClick={() => { Custmerdetails(data.id) }} style={{ cursor: "pointer" }}>
+                                                            //                                 <span className="tb-lead text-primary" style={{ textTransform: "capitalize" }}>{data?.first_name} {data?.middle_name} {data?.last_name}<span className="dot dot-success d-md-none ms-1" /></span>
+                                                            //                                 <span>{data?.email}</span><br></br>
+                                                            //                                 <span>+{data?.phone_code}{data?.phone}</span>
+                                                            //                             </div>
+                                                            //                         }
+                                                            //                     </div>
+                                                            //                 </a>
+                                                            //             </div>
+
+                                                            //             {
+                                                            //                 data?.date_of_birth == null ? <div className="nk-tb-col tb-col-lg">
+                                                            //                     <span>N/A</span>
+                                                            //                 </div> : <div className="nk-tb-col tb-col-lg">
+                                                            //                     <span>{data?.date_of_birth}</span><br></br>
+                                                            //                 </div>
+                                                            //             }
+
+
+
+                                                            //             <div className="nk-tb-col tb-col-lg">
+                                                            //                 <ul className="list-status">
+                                                            //                     {
+                                                            //                         data?.email_verified_at == null ? <li><em className="icon text-danger ni ni-cross-circle" /> <span>Email</span></li> : <li><em className="icon text-success ni ni-check-circle" /> <span>Email</span></li>
+                                                            //                     }
+                                                            //                     {/* <li><em className="icon ni ni-alert-circle" /> <span>KYC</span></li> */}
+                                                            //                 </ul>
+                                                            //             </div>
+
+
+                                                            //             {/* <div className="nk-tb-col tb-col-md">
+                                                            //                 <span className="tb-status text-success">Active</span>
+                                                            //             </div> */}
+
+
+                                                            //             {
+                                                            //                 data?.created_at == null ? <div className="nk-tb-col tb-col-lg">
+                                                            //                     <span>N/A</span>
+                                                            //                 </div> : <div className="nk-tb-col tb-col-lg">
+                                                            //                     <span>{timeZones}</span>
+                                                            //                 </div>
+                                                            //             }
+
+
+
+                                                            //             {/* {
+                                                            //     data?.addresses.length == 0 ? <div className="nk-tb-col tb-col-lg">
+                                                            //         <span>N/A</span>
+                                                            //     </div> :
+                                                            //         //   max-width: 240px;
+                                                            //         //   display: inline-block;
+                                                            //         //   white-space: break-spaces;
+                                                            //         <div className="nk-tb-col tb-col-lg" style={{ maxWidth: "240px", display: 'inline-block', whiteSpace: 'break-spaces' }}>
+                                                            //             <span>{data?.addresses[0]?.street}<br></br> {data?.addresses[0]?.apartment}   {data?.addresses[0]?.city}  {data?.addresses[0]?.state} {data?.addresses[0]?.country}</span>
+                                                            //         </div>
+                                                            // } */}
+                                                            //             <div className="nk-tb-col tb-col-md">
+                                                            //                 {data?.referral_code == null ? <span>N/A</span> : <span>{data?.referral_code}</span>}
+
+                                                            //             </div>
+
+
+                                                            //             <div className="nk-tb-col nk-tb-col-tools">
+                                                            //                 <ul className="nk-tb-actions gx-1">
+                                                            //                     {/* <li className="nk-tb-action-hidden">
+                                                            //                         <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Wallet">
+                                                            //                             <em className="icon ni ni-wallet-fill" />
+                                                            //                         </a>
+                                                            //                     </li>
+                                                            //                     <li className="nk-tb-action-hidden">
+                                                            //                         <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
+                                                            //                             <em className="icon ni ni-mail-fill" />
+                                                            //                         </a>
+                                                            //                     </li>
+                                                            //                     <li className="nk-tb-action-hidden">
+                                                            //                         <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                            //                             <em className="icon ni ni-user-cross-fill" />
+                                                            //                         </a>
+                                                            //                     </li> */}
+
+                                                            //                     {
+                                                            //                         (get_single_client == true || profile.user_type == "SUPERADMIN") &&
+
+                                                            //                         <li onClick={() => { setid(data.id) }}>
+                                                            //                             <div className="drodown">
+                                                            //                                 <a className="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
+
+                                                            //                                 <div className="dropdown-menu dropdown-menu-end">
+                                                            //                                     <ul className="link-list-opt no-bdr">
+                                                            //                                         <li onClick={() => { Custmerdetails(data.id) }}><a ><em className="icon ni ni-eye" /><span style={{ cursor: "pointer" }}>View Details</span></a></li>
+                                                            //                                         <li onClick={() => { recipientsdetails(data.id) }}><a ><em className="icon ni ni-eye" /><span style={{ cursor: "pointer" }}>Inside Recipient</span></a></li>
+                                                            //                                         <li onClick={() => { outesideRecipientData(data.id) }}><a ><em className="icon ni ni-eye" /><span style={{ cursor: "pointer" }}>Outside Recipient</span></a></li>
+                                                            //                                     </ul>
+                                                            //                                 </div>
+
+                                                            //                             </div>
+                                                            //                         </li>
+                                                            //                     }
+
+                                                            //                 </ul>
+                                                            //             </div>
+                                                            //         </div>
+                                                            <>
+                                                                <div className="nk-tb-item" key={data.id}>
+                                                                    {/* <div className="nk-tb-col nk-tb-col-check">
+                                                                            <div className="custom-control custom-control-sm custom-checkbox notext">
+                                                                                <input type="checkbox" className="custom-control-input" id="uid1" />
+                                                                                <label className="custom-control-label" htmlFor="uid1" />
                                                                             </div>
-                                                                            {
-                                                                                data?.first_name == null ? <div className="user-info text-primary" >
-                                                                                    <span className="tb-lead text-primary" onClick={() => { Custmerdetails(data.id) }} style={{ cursor: "pointer" }}>N/A<span className="dot dot-success d-md-none ms-1" /></span>
-                                                                                </div> : <div className="user-info " onClick={() => { Custmerdetails(data.id) }} style={{ cursor: "pointer" }}>
-                                                                                    <span className="tb-lead text-primary" style={{ textTransform: "capitalize" }}>{data?.first_name} {data?.middle_name} {data?.last_name}<span className="dot dot-success d-md-none ms-1" /></span>
-                                                                                    <span>{data?.email}</span><br></br>
-                                                                                    <span>+{data?.phone_code}{data?.phone}</span>
+                                                                        </div> */}
+                                                                    <div className="nk-tb-col">
+                                                                        <a >
+                                                                            <div className="user-card">
+                                                                                <div className="user-avatar bg-primary">
+                                                                                    <span><Image src={data.avatar} alt='img' width={40} height={40} style={{ objectFit: 'cover' }} /></span>
+
                                                                                 </div>
-                                                                            }
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
+                                                                                <div className="user-info" style={{ cursor: "pointer", }}
+                                                                                    onClick={() => { Custmerdetails(data.id) }}
+                                                                                >
+                                                                                    <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.first_name} {data?.middle_name} {data?.last_name} <span className="dot dot-success d-md-none ms-1" /></span>
+                                                                                    <span>{data?.email}</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div >
+                                                                    {/* data?.email_verified_at == null ? <li><em className="icon text-danger ni ni-cross-circle" /> <span>Email</span></li> : <li><em className="icon text-success ni ni-check-circle" /> <span>Email</span></li> */}
+                                                                    <div className="nk-tb-col tb-col-mb">
 
-                                                                {
-                                                                    data?.date_of_birth == null ? <div className="nk-tb-col tb-col-lg">
-                                                                        <span>N/A</span>
-                                                                    </div> : <div className="nk-tb-col tb-col-lg">
-                                                                        <span>{data?.date_of_birth}</span><br></br>
-                                                                    </div>
-                                                                }
-
-
-
-                                                                <div className="nk-tb-col tb-col-lg">
-                                                                    <ul className="list-status">
                                                                         {
-                                                                            data?.email_verified_at == null ? <li><em className="icon text-danger ni ni-cross-circle" /> <span>Email</span></li> : <li><em className="icon text-success ni ni-check-circle" /> <span>Email</span></li>
+                                                                            data?.email_verified_at == null ? <span><em className="icon text-danger ni ni-cross-circle" /> <span>Email</span></span> : <span><em className="icon text-success ni ni-check-circle" /> <span>Email</span></span>
                                                                         }
                                                                         {/* <li><em className="icon ni ni-alert-circle" /> <span>KYC</span></li> */}
-                                                                    </ul>
-                                                                </div>
 
-
-                                                                {/* <div className="nk-tb-col tb-col-md">
-                                                                    <span className="tb-status text-success">Active</span>
-                                                                </div> */}
-
-
-                                                                {
-                                                                    data?.created_at == null ? <div className="nk-tb-col tb-col-lg">
-                                                                        <span>N/A</span>
-                                                                    </div> : <div className="nk-tb-col tb-col-lg">
+                                                                    </div>
+                                                                    <div className="nk-tb-col tb-col-md">
+                                                                        <span>+{data?.phone_code} {data?.phone}</span>
+                                                                    </div>
+                                                                    {
+                                                                        data?.date_of_birth == null ? <div className="nk-tb-col tb-col-lg">
+                                                                            <span>N/A</span>
+                                                                        </div> : <div className="nk-tb-col tb-col-lg">
+                                                                            <span>{data?.date_of_birth}</span><br></br>
+                                                                        </div>
+                                                                    }
+                                                                    <div className="nk-tb-col tb-col-lg">
                                                                         <span>{timeZones}</span>
                                                                     </div>
-                                                                }
+                                                                    <div className="nk-tb-col tb-col-md">
+                                                                        {data?.referral_code == null ? <span>N/A</span> : <span>{data?.referral_code}</span>}
+                                                                    </div>
+                                                                    <div className="nk-tb-col nk-tb-col-tools">
+                                                                        <ul className="nk-tb-actions gx-1">
+                                                                            <li className="nk-tb-action-hidden">
+                                                                                <a
+                                                                                    // onClick={() => GoToUserDetail(data.client_id)}
+                                                                                    className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
+                                                                                    <em class="icon ni ni-user-alt"></em>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li className="nk-tb-action-hidden">
+                                                                                <a
+                                                                                    //  onClick={() => GoToUserDetail(data.client_id)} 
+                                                                                    className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                                                    <em class="icon ni ni-eye"></em>
+                                                                                </a>
+                                                                            </li>
 
 
-
-                                                                {/* {
-                                                        data?.addresses.length == 0 ? <div className="nk-tb-col tb-col-lg">
-                                                            <span>N/A</span>
-                                                        </div> :
-                                                            //   max-width: 240px;
-                                                            //   display: inline-block;
-                                                            //   white-space: break-spaces;
-                                                            <div className="nk-tb-col tb-col-lg" style={{ maxWidth: "240px", display: 'inline-block', whiteSpace: 'break-spaces' }}>
-                                                                <span>{data?.addresses[0]?.street}<br></br> {data?.addresses[0]?.apartment}   {data?.addresses[0]?.city}  {data?.addresses[0]?.state} {data?.addresses[0]?.country}</span>
-                                                            </div>
-                                                    } */}
-                                                                <div className="nk-tb-col tb-col-md">
-                                                                    {data?.referral_code == null ? <span>N/A</span> : <span>{data?.referral_code}</span>}
-
-                                                                </div>
-
-
-                                                                <div className="nk-tb-col nk-tb-col-tools">
-                                                                    <ul className="nk-tb-actions gx-1">
-                                                                        {/* <li className="nk-tb-action-hidden">
-                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Wallet">
-                                                                                <em className="icon ni ni-wallet-fill" />
-                                                                            </a>
-                                                                        </li>
-                                                                        <li className="nk-tb-action-hidden">
-                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
-                                                                                <em className="icon ni ni-mail-fill" />
-                                                                            </a>
-                                                                        </li>
-                                                                        <li className="nk-tb-action-hidden">
-                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                                <em className="icon ni ni-user-cross-fill" />
-                                                                            </a>
-                                                                        </li> */}
-
-                                                                        {
-                                                                            (get_single_client == true || profile.user_type == "SUPERADMIN") &&
-
-                                                                            <li onClick={() => { setid(data.id) }}>
+                                                                            <li>
                                                                                 <div className="drodown">
-                                                                                    <a className="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
+                                                                                    <a href="#" className="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
 
-                                                                                    <div className="dropdown-menu dropdown-menu-end">
-                                                                                        <ul className="link-list-opt no-bdr">
-                                                                                            <li onClick={() => { Custmerdetails(data.id) }}><a ><em className="icon ni ni-eye" /><span style={{ cursor: "pointer" }}>View Details</span></a></li>
-                                                                                            <li onClick={() => { recipientsdetails(data.id) }}><a ><em className="icon ni ni-eye" /><span style={{ cursor: "pointer" }}>Inside Recipient</span></a></li>
-                                                                                            <li onClick={() => { outesideRecipientData(data.id) }}><a ><em className="icon ni ni-eye" /><span style={{ cursor: "pointer" }}>Outside Recipient</span></a></li>
-                                                                                        </ul>
-                                                                                    </div>
+                                                                                    {/* {
+                                                                                        data?.transcation?.payment_status == "pending" && <div className="dropdown-menu dropdown-menu-end">
+                                                                                            <ul className="link-list-opt no-bdr">
+                                                                                                <li onClick={() => GoToUserDetail(data?.transcation?.client_id)} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
+                                                                                                <li onClick={() => { GoWithdrwal(data) }} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+
+                                                                                                <li class="divider"></li>
+                                                                                                <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-check-circle-cut  "></em><span>Confrim</span></a></li>
+                                                                                                <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-cross-c"></em><span>Reject</span></a></li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    }{
+                                                                                        (data?.transcation?.payment_status == "failed" || data?.transcation?.payment_status == "success") &&
+                                                                                        <div className="dropdown-menu dropdown-menu-end">
+                                                                                            <ul className="link-list-opt no-bdr">
+                                                                                                <li onClick={() => GoToUserDetail(data?.transcation?.client_id)} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
+                                                                                                <li onClick={() => { GoWithdrwal(data) }} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    } */}
 
                                                                                 </div>
                                                                             </li>
-                                                                        }
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>{/* .nk-tb-item */}
+                                                            </>
 
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
                                                         )
 
 
@@ -478,8 +600,8 @@ const User = () => {
                                             </>
                                     }
 
-                                </div>{/* .nk-tb-list */}
-                                <div className="card">
+                                </div > {/* .nk-tb-list */}
+                                <div className="card" >
                                     <div className="card-inner">
                                         <div className="nk-block-between-md g-3">
                                             <div className="g">

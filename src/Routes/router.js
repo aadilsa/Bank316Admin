@@ -51,10 +51,11 @@ import { AllInsideRecipients } from '../Pages/Allrecipients/AllInsideRecipients'
 import { Outsidetxns } from '../Pages/Allrecipients/Outsidetxns';
 import Outsidetxn from '../Pages/Allrecipients/Outsidetxn';
 import AccountManagers from '../Pages/AccountManagers/AccountManagers';
-
+import Conversions from '../Pages/Conversions/Conversions';
 import FAQ from '../Pages/FAQ/FAQ';
 import CreateFAQ from "../Pages/FAQ/CreateFAQ";
 import UpdateFAQ from '../Pages/FAQ/UpdateFAQ';
+import Referrals from '../Pages/Referrals/Referrals';
 // import FAQ from '../Pages/faq';
 // import CreateFAQ from '../Pages/admin/faq/CreateFAQ';
 // import UpdateFAQ from '../Pages/admin/faq/UpdateFAQ';
@@ -72,6 +73,7 @@ import PaymentLinkSeco from '../Pages/pageForAPK/PaymentLinkSeco';
 import BalanceDashboard from '../Pages/Dashboard/Balance_Dashboard';
 import UsersDashboard from '../Pages/Dashboard/UsersDashboard';
 import Withdrawals from '../Pages/Withdrawals/Withdrawals';
+import Withdrawal from '../Pages/Withdrawals/Withdrawal';
 // import PaymentLinkThree from '../Pages/pageForAPK/paymentLinkThree';
 // import PaymentLinkThree from '../Pages/pageForAPK/PaymentLinkThird';
 // import PaymentLinkThree from '../Pages/pageForAPK/PaymentLinkThree';
@@ -96,7 +98,10 @@ const Router = () => {
                 <Route path="/admin/deposits/transactions" element={<PrivateRoute><ReqMoneyTxn /></PrivateRoute>} />
 
                 <Route path="/admin/withdrawals" element={<PrivateRoute><Withdrawals /></PrivateRoute>} />
+                <Route path="/admin/withdrawal" element={<PrivateRoute><Withdrawal /></PrivateRoute>} />
 
+                <Route path="/admin/Referrals" element={<PrivateRoute><Referrals /></PrivateRoute>} />
+                <Route path="/admin/conversions" element={<PrivateRoute><Conversions /></PrivateRoute>} />
 
                 <Route path="/change-password" element={<PrivateRoute><ChangePassword /></PrivateRoute>} />
                 <Route path="/bank-list" element={<PrivateRoute><BankList /></PrivateRoute>} />
@@ -148,6 +153,7 @@ const Router = () => {
                 <Route path="/payment-link/request" element={<PaymentLinkFirst />} />
                 <Route path="/payment-link/options" element={<PaymentLinkSeco />} />
                 <Route path="/payment-link/ok" element={<PaymentLinkThird />} />
+
 
                 {/* <Route path="/PayLinkFirst" element={<Pay>} /> */}
 

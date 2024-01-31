@@ -408,6 +408,12 @@ const Dashboard = () => {
         toast.success(" Successful copy ", { autoClose: 1000 })
     }
 
+
+
+    const GoToUserDetail = (id) => {
+        console.log(id, "iddddddddddddddddd")
+        navigate("/user-details", { state: id })
+    }
     return (
         <Container>
             <div className="nk-content ">
@@ -928,7 +934,7 @@ const Dashboard = () => {
                                                                                         {
                                                                                             // data?.txn_type == "Debit" && 
                                                                                             <div class="user-info" style={{ cursor: "pointer", color: "primary" }}
-                                                                                            // onClick={() => GoToUserDetail(data.client_id)}
+                                                                                                onClick={() => GoToUserDetail(data.client_id)}
                                                                                             >
                                                                                                 <span class="tb-lead" style={{ textTransform: "capitalize" }}>{data?.client.first_name} {data?.client?.last_name}<span class="dot dot-success d-md-none ms-1"></span></span>
                                                                                                 <span>{data?.client?.phone}</span>

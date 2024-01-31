@@ -360,6 +360,21 @@ const Sidebar = () => {
                                     <span className="nk-menu-text">Withdrawals</span>
                                 </Link>
                             </li>
+
+
+                            {/* <li className={tab == "/admin/conversions" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                <Link to={"/admin/conversions"} className={"nk-menu-link "}>
+                                    <span className="nk-menu-icon"><em className="icon ni ni-wallet-out" /></span>
+                                    <span className="nk-menu-text">Conversions</span>
+                                </Link>
+                            </li> */}
+
+                            <li className={tab == "/admin/Referrals" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                <Link to={"/admin/Referrals"} className={"nk-menu-link "}>
+                                    <span className="nk-menu-icon"><em className="icon ni ni-percent" /></span>
+                                    <span className="nk-menu-text">Referral</span>
+                                </Link>
+                            </li>
                             {/* 
                             <li className={tab == "/users" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                 <Link to={"/users"} className={tab == `/users` ? "nk-menu-link active current-page" : "nk-menu-link "}>
