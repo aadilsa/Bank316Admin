@@ -354,204 +354,11 @@ function RequestMoney() {
                                                         var timeZones = moment(stillUtcs).local().format('YYYY-MM-DD HH:mm:ss A');
                                                         // console.log(data, "setreqmoneymsgsetreqmoneymsgsetreqmoneymsg")
                                                         return (
-                                                            //         <div className="nk-tb-item" key={data.id}>
-                                                            //             <div className="nk-tb-col">
-                                                            //                 <a >
-                                                            //                     <div className="user-card" >
-                                                            //                         {
-                                                            //                             <div className="user-info " style={{ cursor: "pointer", }} onClick={() => GoToUserDetail(data.client_id)}>
-                                                            //                                 <span className="tb-lead " ><span style={{ textTransform: "capitalize" }}>{data?.client.first_name} {data?.client.last_name}</span>
-                                                            //                                     <br></br> {data?.client.email}<br></br>
-                                                            //                                     {data?.client.phone}
-                                                            //                                     <span className="dot dot-success d-md-none ms-1" /></span>
-                                                            //                             </div>
-                                                            //                         }
-                                                            //                     </div>
-                                                            //                 </a>
-                                                            //             </div>
-
-                                                            //             {/* <div className="nk-tb-col tb-col-lg">
-                                                            //                 <a > */}
-                                                            //             {/* <div className="user-card" > */}
-                                                            //             {/* key-request_identity, value-International Send,
-                                                            //                      key-request_type, value-Easy Bank Manual, wallet, Google-pay, card, Manual Bank */}
-
-                                                            //             {
-                                                            //                 // (data.request_identity === "International Send" && (data.request_type === "wallet" || data.request_type === "Google-pay" || data.request_type === "Manual Bank" || data.request_type === "card" || data.request_type === "Easy Bank Manual"))
-                                                            //                 // && <div className="user-info">
-                                                            //                 //     <span className="tb-lead">
-                                                            //                 //         {data.request_type}<span className="dot dot-success d-md-none ms-1" /></span>
-                                                            //                 // </div>
-                                                            //                 // <div className="user-info">
-                                                            //                 //     <span className="tb-lead">{data.ref_id}<span className="dot dot-success d-md-none ms-1" /></span>
-                                                            //                 // </div>
-                                                            //             }
-                                                            //             {/* </div> */}
-                                                            //             {/* </a>
-                                                            //             </div> */}
-
-
-                                                            //             <div className="nk-tb-col tb-col-lg">
-                                                            //                 <a >
-                                                            //                     <div className="user-card" >
-                                                            //                         {
-                                                            //                             data.txn_id == null ? <div className="user-info">
-                                                            //                                 <span className="tb-lead" onClick={() => { GoAllreqTxn(data.id) }} style={{ cursor: "pointer" }}>N/A<span className="dot dot-success d-md-none ms-1" /></span>
-                                                            //                             </div> : <div className="user-info" style={{ cursor: "pointer", }}>
-                                                            //                                 <span className="tb-lead text-primary" ><span onClick={() => { GoAllreqTxn(data.id) }}>{data.txn_id}</span><span><CopyToClipboard text={data.txn_id} style={{ height: '25px', width: '25px', padding: 2 }} >
-                                                            //                                     <span className='btn btn-primary btn-sm ms-1' onClick={() => copiedInfo()}><e className="fa fa-copy fa fa-solid text-white" style={{ fontSize: '17px' }}></e></span>
-                                                            //                                 </CopyToClipboard> </span>
-                                                            //                                 </span>
-                                                            //                             </div>
-                                                            //                         }
-                                                            //                     </div>
-                                                            //                 </a>
-                                                            //             </div>
-
-
-                                                            //             <div className="nk-tb-col tb-col-lg">
-                                                            //                 <ul className="list-status">
-                                                            //                     {
-                                                            //                         data.amount == null ? <li> <span>N/A</span></li> : <li> <span >{data?.currencyWalletDetail?.currencyDetail?.symbol} {data.amount}</span></li>
-                                                            //                     }
-                                                            //                     {/* <li><em className="icon ni ni-alert-circle" /> <span>KYC</span></li> */}
-                                                            //                 </ul>
-                                                            //             </div>
-
-                                                            //             <div className="nk-tb-col tb-col-lg">
-                                                            //                 <ul className="list-status">
-                                                            //                     {
-                                                            //                         timeZones == null ? <li> <span>N/A</span></li> : <li> <span >{timeZones}</span></li>
-
-                                                            //                     }
-                                                            //                     {/* <li><em className="icon ni ni-alert-circle" /> <span>KYC</span></li> */}
-                                                            //                 </ul>
-                                                            //             </div>
-
-
-                                                            //             <div className="nk-tb-col tb-col-lg">
-                                                            //                 <ul className="list-status">
-                                                            //                     {
-                                                            //                         data?.status == "pending" && <span className="badge badge-sm badge-dot has-bg bg-warning d-none d-sm-inline-flex">Pending</span>
-                                                            //                     }
-                                                            //                     {
-                                                            //                         data?.status == "completed" && <span className="badge badge-sm badge-dot has-bg bg-success d-none d-sm-inline-flex">Completed</span>
-                                                            //                     }
-                                                            //                     {
-                                                            //                         data?.status == "rejected" && <span className="badge badge-sm badge-dot has-bg bg-danger d-none d-sm-inline-flex">Rejected</span>
-                                                            //                     }
-                                                            //                 </ul>
-                                                            //             </div>
-
-
-                                                            //             <div className="nk-tb-col">
-                                                            //                 <ul onClick={() => reqmoneystatus(data)}>
-                                                            //                     {/* {
-                                                            //                         data?.status == "pending" && <button className="btn btn-primary" style={{ padding: "4px 15px", fontSize: "12px" }} data-bs-toggle="modal" data-bs-target="#modal-report"  ><span>Process</span></button>
-                                                            //                     }
-                                                            //                     {
-                                                            //                         data?.status == "completed" && <button className="btn btn-primary" style={{ padding: "4px 15px", fontSize: "12px" }} data-bs-toggle="modal" data-bs-target="#modal-report" disabled><span>Process</span></button>
-                                                            //                     }
-                                                            //                     {
-                                                            //                         data?.status == "rejected" && <button className="btn btn-primary" style={{ padding: "4px 15px", fontSize: "12px" }} data-bs-toggle="modal" data-bs-target="#modal-report" disabled><span>Process</span></button>
-                                                            //                     } */}
-
-                                                            //                     {
-                                                            //                         data?.status == "pending" && <div class="drodown">
-                                                            //                             <a class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                                            //                             <div class="dropdown-menu dropdown-menu-end">
-                                                            //                                 <ul class="link-list-opt no-bdr">
-                                                            //                                     <li onClick={() => GoToUserDetail(data.client_id)} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
-                                                            //                                     <li onClick={() => { GoAllreqTxn(data.id) }} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
-
-                                                            //                                     {/* <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Activities</span></a></li> */}
-                                                            //                                     <li class="divider"></li>
-                                                            //                                     <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-check-circle-cut  "></em><span>Confrim</span></a></li>
-                                                            //                                     <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-cross-c"></em><span>Reject</span></a></li>
-                                                            //                                 </ul>
-                                                            //                             </div>
-                                                            //                         </div>
-                                                            //                     }
-
-
-                                                            //                     {
-                                                            //                         (data?.status == "rejected" || data?.status == "completed") && <div class="drodown">
-                                                            //                             <a class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                                            //                             <div class="dropdown-menu dropdown-menu-end">
-                                                            //                                 <ul class="link-list-opt no-bdr">
-                                                            //                                     <li onClick={() => GoToUserDetail(data.client_id)} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
-                                                            //                                     <li onClick={() => { GoAllreqTxn(data.id) }} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
-                                                            //                                 </ul>
-                                                            //                             </div>
-                                                            //                         </div>
-                                                            //                     }
-
-                                                            //                 </ul>
-                                                            //             </div>
-
-
-
-
-
-                                                            //             {/* <div className="nk-tb-col ">
-                                                            //                 <ul onClick={() => { setid(data.id) }}>
-                                                            //                     {
-                                                            //                         data?.status == "pending" && <button className="btn btn-primary" style={{ padding: "4px 15px", fontSize: "12px" }} data-bs-toggle="modal" data-bs-target="#modal-report"  ><span>Pdfgdg</span></button>
-                                                            //                     }
-
-                                                            //                     {
-                                                            //                         data?.status == "completed" && <button className="btn btn-primary" style={{ padding: "4px 15px", fontSize: "12px" }} data-bs-toggle="modal" data-bs-target="#modal-report" disabled><span>Pdsfsd</span></button>
-                                                            //                     }
-
-
-                                                            //                     {
-                                                            //                         data?.status == "rejected" && <button className="btn btn-primary" style={{ padding: "4px 15px", fontSize: "12px" }} data-bs-toggle="modal" data-bs-target="#modal-report" disabled><span>Pdfsd</span></button>
-                                                            //                     }
-
-
-                                                            //                 </ul>
-                                                            //             </div> */}
-
-                                                            //             {/* ; documentVerifyedstatus(e) */}
-
-
-
-
-                                                            //             {/* <div className="nk-tb-col nk-tb-col-tools">
-                                                            //     <ul className="nk-tb-actions gx-1">
-
-                                                            //         <li onClick={() => { setid(data.id) }}>
-                                                            //             <div className="drodown"> */}
-                                                            //             {/* <a className="dropdown-toggle btn btn-icon btn-trigger"
-                                                            //                 data-bs-toggle="dropdown"
-                                                            //                 ><em className="icon ni ni-more-h" /></a> */}
-                                                            //             {/* <div className="dropdown-menu dropdown-menu-end">
-                                                            //                     <ul className="link-list-opt no-bdr"> */}
-
-                                                            //             {/* <li ><a ><em className="icon ni ni-eye" /><span style={{ cursor: "pointer" }}>View Details</span></a></li> */}
-                                                            //             {/* <li style={{ color: "blue", cursor: "pointer" }} onClick={getCurrencyDatabyid} data-bs-toggle="modal" data-bs-target="#modal-reportUpdate" ><a ><em className="icon ni ni-edit" /><span style={{ cursor: "pointer" }}>Edit</span></a></li>
-                                                            //                         <li onClick={handleDelete} style={{ color: "red", cursor: "pointer" }} ><a ><em className="icon ni ni-trash" /><span>Delete</span></a></li> */}
-                                                            //             {/* <li className="divider" />
-                                                            //                                     <li><a ><em className="icon ni ni-shield-star" /><span>Reset Pass</span></a></li>
-                                                            //                                     <li><a ><em className="icon ni ni-shield-off" /><span>Reset 2FA</span></a></li>
-                                                            //                                     <li><a ><em className="icon ni ni-na" /><span>Suspend User</span></a></li> */}
-                                                            //             {/* </ul>
-                                                            //                 </div> */}
-                                                            //             {/* </div>
-                                                            //         </li>
-                                                            //     </ul>
-                                                            // </div> */}
-                                                            //         </div>
 
 
                                                             <>
                                                                 <div className="nk-tb-item" key={data.id}>
-                                                                    {/* <div className="nk-tb-col nk-tb-col-check">
-                                                                            <div className="custom-control custom-control-sm custom-checkbox notext">
-                                                                                <input type="checkbox" className="custom-control-input" id="uid1" />
-                                                                                <label className="custom-control-label" htmlFor="uid1" />
-                                                                            </div>
-                                                                        </div> */}
+
                                                                     <div className="nk-tb-col">
                                                                         <a >
                                                                             <div className="user-card">
@@ -593,29 +400,61 @@ function RequestMoney() {
                                                                             data?.status == "rejected" && <span className="tb-status text-danger">Rejected</span>
                                                                         }
                                                                     </div>
+
                                                                     <div className="nk-tb-col nk-tb-col-tools">
                                                                         <ul className="nk-tb-actions gx-1">
-                                                                            <li className="nk-tb-action-hidden">
-                                                                                <a onClick={() => GoToUserDetail(data.client_id)} className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
-                                                                                    <em class="icon ni ni-user-alt"></em>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li className="nk-tb-action-hidden">
-                                                                                <a onClick={() => GoToUserDetail(data.client_id)} className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                                    <em class="icon ni ni-eye"></em>
-                                                                                </a>
-                                                                            </li>
 
+                                                                            {
+                                                                                data?.status == "pending" &&
+                                                                                <>
 
+                                                                                    <li className="nk-tb-action-hidden">
+                                                                                        <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
+                                                                                            <em class="icon ni ni-user-alt" onClick={() => GoToUserDetail(data.client_id)}></em>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <li className="nk-tb-action-hidden" >
+                                                                                        <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                                                            <em class="icon ni ni-check-circle-cut  "></em>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <li className="nk-tb-action-hidden" >
+                                                                                        <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                                                            <em class="icon ni ni-cross-c"></em>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                </>
+                                                                            }
+
+                                                                            {
+                                                                                (data?.status == "rejected" || data?.status == "completed") && <>
+                                                                                    <>
+
+                                                                                        <li className="nk-tb-action-hidden">
+                                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
+                                                                                                <em class="icon ni ni-user-alt" onClick={() => GoToUserDetail(data.client_id)}></em>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li className="nk-tb-action-hidden" >
+                                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                                                                <em class="icon ni ni-eye"></em>
+                                                                                            </a>
+                                                                                        </li>
+
+                                                                                    </>
+                                                                                </>
+
+                                                                            }
                                                                             <li>
                                                                                 <div className="drodown">
                                                                                     <a href="#" className="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
 
                                                                                     {
-                                                                                        data?.transcation?.payment_status == "pending" && <div className="dropdown-menu dropdown-menu-end">
+                                                                                        data?.status == "pending" &&
+                                                                                        <div className="dropdown-menu dropdown-menu-end">
                                                                                             <ul className="link-list-opt no-bdr">
-                                                                                                <li onClick={() => GoToUserDetail(data.client_id)} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
-                                                                                                <li onClick={() => { GoAllreqTxn(data.id) }} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                                                <li style={{ cursor: "pointer" }} onClick={() => GoToUserDetail(data.client_id)}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
+                                                                                                <li style={{ cursor: "pointer" }} onClick={() => { GoAllreqTxn(data.id) }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
 
                                                                                                 <li class="divider"></li>
                                                                                                 <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-check-circle-cut  "></em><span>Confrim</span></a></li>
@@ -623,11 +462,11 @@ function RequestMoney() {
                                                                                             </ul>
                                                                                         </div>
                                                                                     }{
-                                                                                        (data?.transcation?.payment_status == "failed" || data?.transcation?.payment_status == "success") &&
+                                                                                        (data?.status == "rejected" || data?.status == "completed") &&
                                                                                         <div className="dropdown-menu dropdown-menu-end">
                                                                                             <ul className="link-list-opt no-bdr">
-                                                                                                <li onClick={() => GoToUserDetail(data?.transcation?.client_id)} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
-                                                                                                <li onClick={() => { GoAllreqTxn(data.id) }} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                                                <li style={{ cursor: "pointer" }} onClick={() => GoToUserDetail(data.client_id)}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
+                                                                                                <li style={{ cursor: "pointer" }} onClick={() => { GoAllreqTxn(data.id) }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
                                                                                             </ul>
                                                                                         </div>
                                                                                     }

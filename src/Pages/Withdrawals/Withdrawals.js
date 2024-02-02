@@ -607,16 +607,52 @@ const Withdrawals = () => {
                                                                         </div>
                                                                         <div className="nk-tb-col nk-tb-col-tools">
                                                                             <ul className="nk-tb-actions gx-1">
-                                                                                <li className="nk-tb-action-hidden">
-                                                                                    <a onClick={() => GoToUserDetail(data?.transcation?.client_id)} className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
-                                                                                        <em class="icon ni ni-user-alt"></em>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li className="nk-tb-action-hidden">
-                                                                                    <a onClick={() => { GoWithdrwal(data) }} className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                                        <em class="icon ni ni-eye"></em>
-                                                                                    </a>
-                                                                                </li>
+
+
+
+
+                                                                                {
+                                                                                    data?.transcation?.payment_status == "pending" && <>
+
+                                                                                        <li className="nk-tb-action-hidden">
+                                                                                            <a onClick={() => GoToUserDetail(data?.transcation?.client_id)} className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
+                                                                                                <em class="icon ni ni-user-alt"></em>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li className="nk-tb-action-hidden" >
+                                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                                                                <em class="icon ni ni-check-circle-cut  "></em>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li className="nk-tb-action-hidden" >
+                                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                                                                <em class="icon ni ni-cross-c"></em>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                    </>
+                                                                                }
+
+
+
+                                                                                {
+                                                                                    (data?.transcation?.payment_status == "failed" || data?.transcation?.payment_status == "success") && <>
+
+                                                                                        <li className="nk-tb-action-hidden">
+                                                                                            <a onClick={() => GoToUserDetail(data?.transcation?.client_id)} className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
+                                                                                                <em class="icon ni ni-user-alt"></em>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li className="nk-tb-action-hidden" >
+                                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                                                                <em class="icon ni ni-eye"></em>
+                                                                                            </a>
+                                                                                        </li>
+
+                                                                                    </>
+                                                                                }
+
+
+
                                                                                 <li>
                                                                                     <div className="drodown">
                                                                                         <a href="#" className="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
@@ -627,7 +663,6 @@ const Withdrawals = () => {
                                                                                                     <li onClick={() => GoToUserDetail(data?.transcation?.client_id)} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
                                                                                                     <li onClick={() => { GoWithdrwal(data) }} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
 
-                                                                                                    {/* <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Activities</span></a></li> */}
                                                                                                     <li class="divider"></li>
                                                                                                     <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-check-circle-cut  "></em><span>Confrim</span></a></li>
                                                                                                     <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-cross-c"></em><span>Reject</span></a></li>
