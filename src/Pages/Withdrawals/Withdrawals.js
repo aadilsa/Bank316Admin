@@ -578,9 +578,12 @@ const Withdrawals = () => {
                                                                                 </div>
                                                                             </a>
                                                                         </div>
-                                                                        <div className="nk-tb-col tb-col-mb">
+                                                                        <div className="nk-tb-col tb-col-mb" tooltip="Transfer Summary" flow="left">
                                                                             <span className="tb-amount" onClick={() => { GoWithdrwal(data) }} style={{ cursor: "pointer" }}>{data?.transcation?.txn_id} <span className="dot dot-success d-md-none ms-1" /></span>
-                                                                            <span className=" tb-status  text-warning ">Withdraw</span>
+                                                                            <span className=" tb-status  text-warning ">
+                                                                            <em class="icon ni ni-bullet-fill"></em>Withdraw
+                                                                            </span>
+                                                                            
                                                                             {/* <span className="tb-amount">{data?.transcation?.txn_id} <span className="currency">USD</span></span> */}
                                                                         </div>
                                                                         <div className="nk-tb-col tb-col-md">
@@ -616,17 +619,17 @@ const Withdrawals = () => {
 
                                                                                         <li className="nk-tb-action-hidden">
                                                                                             <a onClick={() => GoToUserDetail(data?.transcation?.client_id)} className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
-                                                                                                <em class="icon ni ni-user-alt"></em>
+                                                                                            <em class="icon ni ni-cross-fill-c"></em>
                                                                                             </a>
                                                                                         </li>
                                                                                         <li className="nk-tb-action-hidden" >
                                                                                             <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                                                <em class="icon ni ni-check-circle-cut  "></em>
+                                                                                            <em class="icon ni ni-check-fill-c"></em>
                                                                                             </a>
                                                                                         </li>
                                                                                         <li className="nk-tb-action-hidden" >
                                                                                             <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                                                <em class="icon ni ni-cross-c"></em>
+                                                                                            <em class="icon ni ni-eye-fill"></em>
                                                                                             </a>
                                                                                         </li>
                                                                                     </>
