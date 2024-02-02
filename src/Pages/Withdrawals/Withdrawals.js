@@ -762,39 +762,77 @@ const Withdrawals = () => {
                         </div>
                     </div>
                 </div>
+
                 <div className="modal modal-blur fade" id="modal-report" tabIndex={-1} role="dialog" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title">Update Status</h5>
+                                <h5 className="modal-title">Deposit ID# <span>TNX43034523</span></h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref2} data-dismiss="modal" />
                             </div>
                             <form onSubmit={form.handleSubmit}>
                                 <div className="modal-body">
-                                    <div className="form-group mb-3 row">
+                                  
+                                   <div className="mb-3">
+                                      <p>The amount of 10.00 USDT (9.99 USD) to Deposit via Crypto Wallet.</p>
+                                   </div>
+                               
+                                   <div className="row mb-3">
+                                        <div className="col-md-6 otherLabel">
+                                            <label>Payment Amount</label>
+                                            <input type="text" className="form-control" placeholder='10'/>
+                                            <span className="labeName">USDT</span>
+                                            <small style={{fontSize:'72%', color:'#959595',}}>The payment amount that you received.</small>
+                                        </div>
+                                        <div className="col-md-6 otherLabel">
+                                            <label>Amount to Credit</label>
+                                            <input type="text" className="form-control" placeholder='9.99'/>
+                                            <span className="labeName">USD</span>
+                                            <small style={{fontSize:'72%', color:'#959595',}}>The amount that ajdust with balance.</small>
+                                        </div>
+                                    </div>
+
+                                    <div className="row mb-3">
+                                        <div className="col-md-6 otherLabel">
+                                            <label>Reference / Hash</label>
+                                            <input type="text" className="form-control" placeholder='Reference or Hash'/>
+                                            <small style={{fontSize:'72%', color:'#959595',}}>The reference will display to user.</small>
+                                        </div>
+                                        <div className="col-md-6 otherLabel">
+                                            <label>Received From</label>
+                                            <input type="text" className="form-control" placeholder='Receiving account name or id' />
+                                            <small style={{fontSize:'72%', color:'#959595',}}>Helps to identify the payment (Admin).</small>
+                                        </div>
+                                    </div>
+
+                                    <div className="row mb-3">
+                                        <div className="col-md-12 otherLabel">
+                                            <label>Note / Remarks</label>
+                                            <input type="text" className="form-control" placeholder='Enter remark or note'/>
+                                            <small style={{fontSize:'72%', color:'#959595',}}>The note or remarks help to reminder. Only administrator can read from transaction details.</small>
+                                        </div>
+                                    </div>
+
+                                    <p>Please confirm that you want to APPROVE this DEPOSIT request.</p>
+
+                                    <button type="submit" className="btn btn-primary ms-auto mr-2" > Confirm Withdraw
+                                    </button>
+
+                                    <a href='' className="cancelbtnwithdraw">Cancel</a>
+
+
+
+                                   {/* <div className="form-group mb-3 row">
                                         <label className="form-label col-3 col-form-label">Status</label>
                                         <div className="col">
-
-
-                                            {/* <select className="form-control mb-0" name="Title" style={{ height: 40 }}
-                                            onChange={(e) => handleSelect(e)}>
-                                            <option value="true">Complete</option>
-                                            <option value="false">Reject</option>
-                                        </select> */}
-
-
                                             <select className="form-control mb-0" name="role" {...form.getFieldProps("role")} style={{ height: 40 }}
                                             // onChange={(e) => handleChangeQueryBuilder(e)}
                                             >
                                                 <option value="">Select Status</option>
                                                 <option value="true">Complete</option>
                                                 <option value="false">Reject</option>
-
                                             </select>
                                             {form.errors.role && form.touched.role ? <p className='red' style={{ marginTop: 5 }}>{form.errors.role}</p> : null}
-
-                                            {/* {form.touched.role && form.errors.role ?
-                                            <div className="invalid-feedback" style={{ display: "block" }}>{form.errors.role}</div> : ''} */}
                                         </div>
                                     </div>
 
@@ -807,12 +845,14 @@ const Withdrawals = () => {
                                             {form.errors.ShortName && form.touched.ShortName ? <p className='red' style={{ marginTop: 5 }}>{form.errors.ShortName}</p> : null}
 
                                         </div>
-                                    </div>
+                                    </div>*/}
+
+
                                 </div>
 
-                                <div className="modal-footer">
-                                    <button type="submit" className="btn btn-primary ms-auto" > Update
-                                    </button>
+                                <div className="modal-footer" style={{justifyContent:'flex-start',}}>
+                                    <p style={{fontSize:'79%', color:'#343434',}}><em class="icon ni ni-info"></em> The deposit amount will adjust into user account once you approved.</p>
+                                    <p className="text-danger" style={{fontSize:'79%',}}><em class="icon ni ni-alert"></em> You can not undo this action once you you confirm and approved.</p>
                                 </div>
 
                             </form>

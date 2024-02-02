@@ -50998,6 +50998,32 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
 }
 
 
+.otherLabel {
+   position:relative;
+}
+
+.otherLabel .labeName { 
+  position: absolute;
+  top: 24px;
+  right: 15px;
+  background: #fff;
+  height: 34px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 500;
+}
+.cancelbtnwithdraw {
+  margin-left: 15px;
+  color: #000;
+  font-weight: 500;
+  padding: 10px;
+  display: inline-block;
+  top: 4px;
+  position: relative;
+}
 
 @media (min-width: 320px) and (max-width: 767px) {
   .cardInnerBorder canvas {
