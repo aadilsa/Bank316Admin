@@ -12,3 +12,14 @@ export const Getconversions = async (token, recentTab, sortedBy, orderBy, search
         console.log(err)
     }
 }
+
+export const GetTransfers = async (token, recentTab, sortedBy, orderBy, search, pageNumber) => {
+    try {
+        const res = await axios.get(`${Base_Url}all-transfers?status=${recentTab}&sortby=${sortedBy}&orderby=${orderBy}&search=${search}&page_number=${pageNumber}`, { headers: { "Authorization": `Bearer ${token}` } })
+        return res.data
+    }
+    catch (err) {
+        return err
+        console.log(err)
+    }
+}

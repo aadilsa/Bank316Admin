@@ -286,7 +286,7 @@ function RequestMoney() {
                                         <div className="nk-tb-col"><span className="sub-text">User {sortedBy == "first_name" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("first_name") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("first_name") }} />}</span></div>
                                         <div className="nk-tb-col tb-col-mb"><span className="sub-text">
                                             TXN ID {sortedBy == "txn_id" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("txn_id") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("txn_id") }} />}</span></div>
-                                        <div className="nk-tb-col tb-col-md"><span className="sub-text">Phone {sortedBy == 'phone' && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('phone') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('phone') }} />}</span></div>
+                                        <div className="nk-tb-col tb-col-md"><span className="sub-text">Description {sortedBy == 'phone' && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('phone') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('phone') }} />}</span></div>
                                         <div className="nk-tb-col tb-col-lg"><span className="sub-text">Amount {sortedBy == "amount" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("amount") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("amount") }} />}</span></div>
                                         <div className="nk-tb-col tb-col-lg"><span className="sub-text">Created At {sortedBy == 'created_at' && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} />}</span>
                                         </div>
@@ -375,11 +375,13 @@ function RequestMoney() {
                                                                     </div >
                                                                     <div className="nk-tb-col tb-col-mb">
                                                                         <span className="tb-amount" onClick={() => { GoAllreqTxn(data.id) }} style={{ cursor: "pointer" }}>{data.txn_id} <span className="dot dot-success d-md-none ms-1" /></span>
-                                                                        <span className=" tb-status  text-success ">Deposit</span>
+                                                                        <span className=" tb-status  text-success ">
+                                                                            <em class="icon ni ni-bullet-fill"></em>Deposit
+                                                                        </span>
                                                                         {/* <span className="tb-amount">{data?.transcation?.txn_id} <span className="currency">USD</span></span> */}
                                                                     </div>
                                                                     <div className="nk-tb-col tb-col-md">
-                                                                        <span> {data?.client?.phone}</span>
+                                                                        <span> {data?.description}</span>
                                                                     </div>
                                                                     <div className="nk-tb-col tb-col-lg">
                                                                         <span>{data?.currencyWalletDetail?.currencyDetail?.symbol} {data.amount}</span>
@@ -407,22 +409,55 @@ function RequestMoney() {
                                                                             {
                                                                                 data?.status == "pending" &&
                                                                                 <>
+                                                                                    <li className="nk-tb-action-hidden" >
+                                                                                        <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                                                            <em class="icon ni ni-cross-fill-c" data-bs-toggle="modal" data-bs-target="#modal-reject"></em>
+                                                                                        </a>
+                                                                                    </li>
+
+
+                                                                                    <li className="nk-tb-action-hidden" >
+                                                                                        <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                                                            <em class="icon ni ni-check-fill-c" data-bs-toggle="modal" data-bs-target="#modal-report"></em>
+                                                                                        </a>
+                                                                                    </li>
+
 
                                                                                     <li className="nk-tb-action-hidden">
                                                                                         <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
-                                                                                            <em class="icon ni ni-user-alt" onClick={() => GoToUserDetail(data.client_id)}></em>
+                                                                                            <em class="icon ni ni-eye-fill" onClick={() => { GoAllreqTxn(data.id) }}></em>
                                                                                         </a>
                                                                                     </li>
-                                                                                    <li className="nk-tb-action-hidden" >
-                                                                                        <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                                            <em class="icon ni ni-check-circle-cut  "></em>
-                                                                                        </a>
-                                                                                    </li>
-                                                                                    <li className="nk-tb-action-hidden" >
-                                                                                        <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                                            <em class="icon ni ni-cross-c"></em>
-                                                                                        </a>
-                                                                                    </li>
+
+
+
+
+
+
+
+
+
+                                                                                    {/* <li className="nk-tb-action-hidden">
+                                                                                            <a onClick={() => GoToUserDetail(data?.transcation?.client_id)} className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
+                                                                                                <em class="icon ni ni-cross-fill-c"></em>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li className="nk-tb-action-hidden" >
+                                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                                                                <em class="icon ni ni-check-fill-c"></em>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li className="nk-tb-action-hidden" >
+                                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                                                                <em class="icon ni ni-eye-fill"></em>
+                                                                                            </a>
+                                                                                        </li> */}
+
+
+
+
+
+
                                                                                 </>
                                                                             }
 
@@ -432,15 +467,14 @@ function RequestMoney() {
 
                                                                                         <li className="nk-tb-action-hidden">
                                                                                             <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
-                                                                                                <em class="icon ni ni-user-alt" onClick={() => GoToUserDetail(data.client_id)}></em>
+                                                                                                <em class="icon ni ni-user-alt-fill" onClick={() => GoToUserDetail(data.client_id)}></em>
                                                                                             </a>
                                                                                         </li>
                                                                                         <li className="nk-tb-action-hidden" >
                                                                                             <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                                                <em class="icon ni ni-eye"></em>
+                                                                                                <em class="icon ni ni-eye-fill" onClick={() => { GoAllreqTxn(data.id) }}></em>
                                                                                             </a>
                                                                                         </li>
-
                                                                                     </>
                                                                                 </>
 
@@ -458,7 +492,7 @@ function RequestMoney() {
 
                                                                                                 <li class="divider"></li>
                                                                                                 <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-check-circle-cut  "></em><span>Confrim</span></a></li>
-                                                                                                <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-cross-c"></em><span>Reject</span></a></li>
+                                                                                                <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-reject"><a ><em class="icon ni ni-cross-c"></em><span>Reject</span></a></li>
                                                                                             </ul>
                                                                                         </div>
                                                                                     }{
@@ -551,57 +585,99 @@ function RequestMoney() {
                     </div>
                 </div>
             </div >
+
+
+
             <div className="modal modal-blur fade" id="modal-report" tabIndex={-1} role="dialog" aria-hidden="true">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title">Update Status</h5>
+                            <h5 className="modal-title">Deposit ID# <span>TNX43034523</span></h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref2} data-dismiss="modal" />
                         </div>
                         <form onSubmit={form.handleSubmit}>
                             <div className="modal-body">
-                                <div className="form-group mb-3 row">
-                                    <label className="form-label col-3 col-form-label">Status</label>
-                                    <div className="col">
 
+                                <div className="mb-3">
+                                    <p>The amount of 10.00 USDT (9.99 USD) to Deposit via Crypto Wallet.</p>
+                                </div>
 
-                                        {/* <select className="form-control mb-0" name="Title" style={{ height: 40 }}
-                                            onChange={(e) => handleSelect(e)}>
-                                            <option value="true">Complete</option>
-                                            <option value="false">Reject</option>
-                                        </select> */}
-
-
-                                        <select className="form-control mb-0" name="role" {...form.getFieldProps("role")} style={{ height: 40 }}
-                                        // onChange={(e) => handleChangeQueryBuilder(e)}
-                                        >
-                                            <option value="">Select Status</option>
-                                            <option value="true">Complete</option>
-                                            <option value="false">Reject</option>
-
-                                        </select>
-                                        {form.errors.role && form.touched.role ? <p className='red' style={{ marginTop: 5 }}>{form.errors.role}</p> : null}
-
-                                        {/* {form.touched.role && form.errors.role ?
-                                            <div className="invalid-feedback" style={{ display: "block" }}>{form.errors.role}</div> : ''} */}
+                                <div className="row mb-3">
+                                    <div className="col-md-6 otherLabel">
+                                        <label>Payment Amount</label>
+                                        <input type="text" className="form-control" placeholder='10' />
+                                        <span className="labeName">USDT</span>
+                                        <small style={{ fontSize: '72%', color: '#959595', }}>The payment amount that you received.</small>
+                                    </div>
+                                    <div className="col-md-6 otherLabel">
+                                        <label>Amount to Credit</label>
+                                        <input type="text" className="form-control" placeholder='9.99' />
+                                        <span className="labeName">USD</span>
+                                        <small style={{ fontSize: '72%', color: '#959595', }}>The amount that ajdust with balance.</small>
                                     </div>
                                 </div>
 
-                                <div className="form-group mb-3 row">
-                                    <label className="form-label col-3 col-form-label">Message</label>
-                                    <div className="col">
-                                        <input type="text" className="form-control" aria-describedby="emailHelp" placeholder="Enter Message"
-                                            name="ShortName" {...form.getFieldProps("ShortName")}
-                                        />
-                                        {form.errors.ShortName && form.touched.ShortName ? <p className='red' style={{ marginTop: 5 }}>{form.errors.ShortName}</p> : null}
-
+                                <div className="row mb-3">
+                                    <div className="col-md-6 otherLabel">
+                                        <label>Reference / Hash</label>
+                                        <input type="text" className="form-control" placeholder='Reference or Hash' />
+                                        <small style={{ fontSize: '72%', color: '#959595', }}>The reference will display to user.</small>
+                                    </div>
+                                    <div className="col-md-6 otherLabel">
+                                        <label>Received From</label>
+                                        <input type="text" className="form-control" placeholder='Receiving account name or id' />
+                                        <small style={{ fontSize: '72%', color: '#959595', }}>Helps to identify the payment (Admin).</small>
                                     </div>
                                 </div>
+
+                                <div className="row mb-3">
+                                    <div className="col-md-12 otherLabel">
+                                        <label>Note / Remarks</label>
+                                        <input type="text" className="form-control" placeholder='Enter remark or note' />
+                                        <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small>
+                                    </div>
+                                </div>
+
+                                <p>Please confirm that you want to APPROVE this DEPOSIT request.</p>
+
+                                <button type="submit" className="btn btn-primary ms-auto mr-2" > Confirm Withdraw
+                                </button>
+
+                                <a href='' className="cancelbtnwithdraw">Cancel</a>
+
+
+
+                                {/* <div className="form-group mb-3 row">
+                                        <label className="form-label col-3 col-form-label">Status</label>
+                                        <div className="col">
+                                            <select className="form-control mb-0" name="role" {...form.getFieldProps("role")} style={{ height: 40 }}
+                                            // onChange={(e) => handleChangeQueryBuilder(e)}
+                                            >
+                                                <option value="">Select Status</option>
+                                                <option value="true">Complete</option>
+                                                <option value="false">Reject</option>
+                                            </select>
+                                            {form.errors.role && form.touched.role ? <p className='red' style={{ marginTop: 5 }}>{form.errors.role}</p> : null}
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group mb-3 row">
+                                        <label className="form-label col-3 col-form-label">Message</label>
+                                        <div className="col">
+                                            <input type="text" className="form-control" aria-describedby="emailHelp" placeholder="Enter Message"
+                                                name="ShortName" {...form.getFieldProps("ShortName")}
+                                            />
+                                            {form.errors.ShortName && form.touched.ShortName ? <p className='red' style={{ marginTop: 5 }}>{form.errors.ShortName}</p> : null}
+
+                                        </div>
+                                    </div>*/}
+
+
                             </div>
 
-                            <div className="modal-footer">
-                                <button type="submit" className="btn btn-primary ms-auto" > Update
-                                </button>
+                            <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
+                                <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> The deposit amount will adjust into user account once you approved.</p>
+                                <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> You can not undo this action once you you confirm and approved.</p>
                             </div>
 
                         </form>
@@ -609,6 +685,84 @@ function RequestMoney() {
                 </div>
             </div>
 
+
+
+            <div className="modal modal-blur fade" id="modal-reject" tabIndex={-1} role="dialog" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Cancellation of <span>TNX43034523</span></h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref2} data-dismiss="modal" />
+                        </div>
+                        <form onSubmit={form.handleSubmit}>
+                            <div className="modal-body">
+
+                                <div className="mb-3">
+                                    <p>Are you sure you want to cancel this deposit request?</p>
+                                </div>
+
+                                <div className="row mb-3">
+                                    <div className="col-md-12 otherLabel">
+                                        <label>Note for User</label>
+                                        <input type="text" className="form-control" placeholder='Enter remark or note' />
+                                        {/* <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small> */}
+                                    </div>
+                                </div>
+
+                                <div className="row mb-3">
+                                    <div className="col-md-12 otherLabel">
+                                        <label>Note / Remarks</label>
+                                        <input type="text" className="form-control" placeholder='Enter remark or note' />
+                                        <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small>
+                                    </div>
+                                </div>
+
+                                <p>Please confirm that you want to CANCEL this DEPOSIT request.</p>
+
+                                <button type="submit" className="btn btn-primary ms-auto mr-2" > Cancelled Deposite
+                                </button>
+
+                                <a className="cancelbtnwithdraw">Return</a>
+
+
+
+                                {/* <div className="form-group mb-3 row">
+                                        <label className="form-label col-3 col-form-label">Status</label>
+                                        <div className="col">
+                                            <select className="form-control mb-0" name="role" {...form.getFieldProps("role")} style={{ height: 40 }}
+                                            // onChange={(e) => handleChangeQueryBuilder(e)}
+                                            >
+                                                <option value="">Select Status</option>
+                                                <option value="true">Complete</option>
+                                                <option value="false">Reject</option>
+                                            </select>
+                                            {form.errors.role && form.touched.role ? <p className='red' style={{ marginTop: 5 }}>{form.errors.role}</p> : null}
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group mb-3 row">
+                                        <label className="form-label col-3 col-form-label">Message</label>
+                                        <div className="col">
+                                            <input type="text" className="form-control" aria-describedby="emailHelp" placeholder="Enter Message"
+                                                name="ShortName" {...form.getFieldProps("ShortName")}
+                                            />
+                                            {form.errors.ShortName && form.touched.ShortName ? <p className='red' style={{ marginTop: 5 }}>{form.errors.ShortName}</p> : null}
+
+                                        </div>
+                                    </div>*/}
+
+
+                            </div>
+
+                            <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
+                                <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> You can cancel the transaction if you've not received the payment yet.</p>
+                                <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> You can not undo this action once you confirm and cancelled.</p>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
         </Container >
 
 

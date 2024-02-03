@@ -17,7 +17,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import BaseUrl from '../../API/config'
 import { WithdrawalsApprove } from '../../API/Withdrawals/WithdrawalsAPI'
-
+import { GetTransfers } from '../../API/TransferAPi/TransferAPI'
 const AddSuccessToast = () => {
     toast.success('Status Change successfully.', { autoClose: 2000 });
 }
@@ -26,7 +26,8 @@ const addErrorToast = (massage) => {
         autoClose: 2000
     });
 }
-const Withdrawals = () => {
+
+const Transfers = () => {
     const [data, setdata] = useState([])
     const [count, setcount] = useState(0)
     const [id, setid] = useState()
@@ -102,7 +103,7 @@ const Withdrawals = () => {
                 ref2.current.click()
                 form.resetForm()
                 AddSuccessToast()
-                WithdrawalsTxnData()
+                TransfersData()
                 // setSelectedValue(true)
             }
             else {
@@ -118,9 +119,9 @@ const Withdrawals = () => {
     }, 3000);
 
 
-    const WithdrawalsTxnData = async () => {
+    const TransfersData = async () => {
         try {
-            const totaldata = await WithdrawalsTxn(token, recentTab, sortedBy, orderBy, search, pageNumber)
+            const totaldata = await GetTransfers(token, recentTab, sortedBy, orderBy, search, pageNumber)
             console.log(totaldata.data.rows, "daatattadsddddddd")
             if (totaldata.status == true) {
                 setTimeout(() => {
@@ -157,7 +158,7 @@ const Withdrawals = () => {
         }
     }
     useEffect(() => {
-        WithdrawalsTxnData()
+        TransfersData()
     }, [sortedBy, orderBy, search, pageNumber, recentTab])
 
 
@@ -201,9 +202,17 @@ const Withdrawals = () => {
         navigate("/admin/withdrawal", { state: data })
     }
 
-
+    const GoTransDetail = (id, client_id) => {
+        const Iddtl = {
+            id: id,
+            client_id: client_id
+        }
+        console.log(id, "idddd")
+        navigate(`/transaction`, { state: Iddtl })
+    }
 
     return (
+
         <>
             <Container>
                 <div className="nk-content ">
@@ -213,9 +222,9 @@ const Withdrawals = () => {
                                 <div className="nk-block-head nk-block-head-sm">
                                     <div className="nk-block-between">
                                         <div className="nk-block-head-content">
-                                            <h5>Withdrawals</h5>
+                                            <h5>Transfers</h5>
                                             <div className="nk-block-des text-soft">
-                                                <p>Total <span className='fw-bold'>({count})</span> transactions  </p>
+                                                <p>Total <span className='fw-bold'>({count})</span> Transfers  </p>
                                             </div>
                                         </div>
                                         <div className="nk-block-head-content">
@@ -301,7 +310,8 @@ const Withdrawals = () => {
                                             <div className="nk-tb-col"><span className="sub-text">User {sortedBy == "recipient_name" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("recipient_name") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("recipient_name") }} />}</span></div>
                                             <div className="nk-tb-col tb-col-mb"><span className="sub-text">
                                                 TXN ID {sortedBy == "txn_id" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("txn_id") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("txn_id") }} />}</span></div>
-                                            <div className="nk-tb-col tb-col-md"><span className="sub-text">Description  {sortedBy == 'title' && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('title') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('title') }} />}</span></div>
+                                            <div className="nk-tb-col tb-col-md"><span className="sub-text">
+                                                Description  {sortedBy == 'title' && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('title') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('title') }} />}</span></div>
                                             <div className="nk-tb-col tb-col-lg"><span className="sub-text">Amount {sortedBy == "base_amount" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("base_amount") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("base_amount") }} />}</span></div>
                                             <div className="nk-tb-col tb-col-lg"><span className="sub-text">Created At {sortedBy == 'created_at' && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} />}</span>
                                             </div>
@@ -376,29 +386,41 @@ const Withdrawals = () => {
                                                                             <a >
                                                                                 <div className="user-card">
                                                                                     <div className="user-avatar bg-primary">
-                                                                                        <span className="user-avatar bg-warning-dim"><e className="icon ni ni-arrow-up-right">
-                                                                                        </e></span>
+                                                                                        {
+                                                                                            data?.txn_type == "Credit" && <span className="user-avatar bg-success-dim"><e className="icon ni ni-arrow-down-left">
+                                                                                            </e></span>
+                                                                                        }
+
+                                                                                        {
+                                                                                            data?.txn_type == "Debit" && <span className="user-avatar bg-danger-dim"><e className="icon ni ni-arrow-up-right">
+                                                                                            </e></span>
+                                                                                        }
                                                                                     </div>
-                                                                                    <div className="user-info" style={{ cursor: "pointer", }} onClick={() => GoToUserDetail(data?.transcation?.client_id)}>
-                                                                                        <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.transcation?.recipient_name} <span className="dot dot-success d-md-none ms-1" /></span>
+                                                                                    <div className="user-info" style={{ cursor: "pointer", }} onClick={() => GoToUserDetail(data?.client_id)}>
+                                                                                        <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.client?.first_name}  {data?.client?.last_name}<span className="dot dot-success d-md-none ms-1" /></span>
                                                                                         <span>{data?.client?.email}</span>
                                                                                     </div>
                                                                                 </div>
                                                                             </a>
                                                                         </div>
-                                                                        <div className="nk-tb-col tb-col-mb" tooltip="Transfer Summary" flow="left">
-                                                                            <span className="tb-amount" onClick={() => { GoWithdrwal(data) }} style={{ cursor: "pointer" }}>{data?.transcation?.txn_id} <span className="dot dot-success d-md-none ms-1" /></span>
-                                                                            <span className=" tb-status  text-warning ">
-                                                                                <em class="icon ni ni-bullet-fill"></em>Withdraw
-                                                                            </span>
+                                                                        <div className="nk-tb-col tb-col-mb" tooltip="" flow="left">
+                                                                            <span className="tb-amount" style={{ cursor: "pointer" }} onClick={() => GoTransDetail(data.id, data.client_id)}>{data?.txn_id} <span className="dot dot-success d-md-none ms-1" /></span>
+                                                                            {
+                                                                                data.txn_type == "Debit" ? <span className=" tb-status  text-danger ">
+                                                                                    <em class="icon ni ni-bullet-fill"></em>{data.txn_type}
+                                                                                </span> : <span className=" tb-status  text-success ">
+                                                                                    <em class="icon ni ni-bullet-fill"></em>{data.txn_type}
+                                                                                </span>
+                                                                            }
+
 
                                                                             {/* <span className="tb-amount">{data?.transcation?.txn_id} <span className="currency">USD</span></span> */}
                                                                         </div>
                                                                         <div className="nk-tb-col tb-col-md">
-                                                                            <span> {data?.transcation?.title}</span>
+                                                                            <span> {data?.title}</span>
                                                                         </div>
                                                                         <div className="nk-tb-col tb-col-lg">
-                                                                            <span>{data?.walletDetails?.currencyDetails?.symbol} {data?.transcation?.base_amount}</span>
+                                                                            <span>{data?.amount} {data?.currency_name} </span>
 
                                                                         </div>
                                                                         <div className="nk-tb-col tb-col-lg">
@@ -407,13 +429,13 @@ const Withdrawals = () => {
                                                                         <div className="nk-tb-col tb-col-md">
                                                                             {/* <span className="tb-status text-success">Active</span> */}
                                                                             {
-                                                                                data?.transcation?.payment_status == "pending" && <span className="tb-status text-warning">Pending</span>
+                                                                                data?.payment_status == "pending" && <span className="tb-status text-warning">Pending</span>
                                                                             }
                                                                             {
-                                                                                data?.transcation?.payment_status == "success" && <span className="tb-status text-success">Completed</span>
+                                                                                data?.payment_status == "success" && <span className="tb-status text-success">Completed</span>
                                                                             }
                                                                             {
-                                                                                data?.transcation?.payment_status == "failed" && <span className="tb-status text-danger">Rejected</span>
+                                                                                data?.payment_status == "failed" && <span className="tb-status text-danger">Rejected</span>
                                                                             }
                                                                         </div>
                                                                         <div className="nk-tb-col nk-tb-col-tools">
@@ -423,11 +445,11 @@ const Withdrawals = () => {
 
 
                                                                                 {
-                                                                                    data?.transcation?.payment_status == "pending" && <>
+                                                                                    data?.payment_status == "pending" && <>
 
                                                                                         <li className="nk-tb-action-hidden">
-                                                                                            <a className="btn btn-trigger btn-icon" >
-                                                                                                <em class="icon ni ni-cross-fill-c" data-bs-toggle="modal" data-bs-target="#modal-reject" ></em>
+                                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
+                                                                                                <em class="icon ni ni-cross-fill-c" data-bs-toggle="modal" data-bs-target="#modal-reject"></em>
                                                                                             </a>
                                                                                         </li>
                                                                                         <li className="nk-tb-action-hidden" >
@@ -446,16 +468,16 @@ const Withdrawals = () => {
 
 
                                                                                 {
-                                                                                    (data?.transcation?.payment_status == "failed" || data?.transcation?.payment_status == "success") && <>
+                                                                                    (data?.payment_status == "failed" || data?.payment_status == "success") && <>
 
-                                                                                        <li className="nk-tb-action-hidden">
-                                                                                            <a onClick={() => GoToUserDetail(data?.transcation?.client_id)} className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
+                                                                                        <li className="nk-tb-action-hidden" onClick={() => GoToUserDetail(data?.client_id)}>
+                                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
                                                                                                 <em class="icon ni ni-user-alt-fill"></em>
                                                                                             </a>
                                                                                         </li>
-                                                                                        <li className="nk-tb-action-hidden" >
+                                                                                        <li className="nk-tb-action-hidden" onClick={() => GoTransDetail(data.id, data.client_id)} >
                                                                                             <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                                                <em class="icon ni ni-eye-fill" onClick={() => { GoWithdrwal(data) }}></em>
+                                                                                                <em class="icon ni ni-eye-fill" ></em>
                                                                                             </a>
                                                                                         </li>
 
@@ -469,10 +491,10 @@ const Withdrawals = () => {
                                                                                         <a href="#" className="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
 
                                                                                         {
-                                                                                            data?.transcation?.payment_status == "pending" && <div className="dropdown-menu dropdown-menu-end">
+                                                                                            data?.payment_status == "pending" && <div className="dropdown-menu dropdown-menu-end">
                                                                                                 <ul className="link-list-opt no-bdr">
-                                                                                                    <li onClick={() => GoToUserDetail(data?.transcation?.client_id)} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
-                                                                                                    <li onClick={() => { GoWithdrwal(data) }} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                                                    <li style={{ cursor: "pointer" }} onClick={() => GoToUserDetail(data?.client_id)}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
+                                                                                                    <li style={{ cursor: "pointer" }} onClick={() => GoTransDetail(data.id, data.client_id)}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
 
                                                                                                     <li class="divider"></li>
                                                                                                     <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-check-circle-cut  "></em><span>Confrim</span></a></li>
@@ -480,11 +502,11 @@ const Withdrawals = () => {
                                                                                                 </ul>
                                                                                             </div>
                                                                                         }{
-                                                                                            (data?.transcation?.payment_status == "failed" || data?.transcation?.payment_status == "success") &&
+                                                                                            (data?.payment_status == "failed" || data?.payment_status == "success") &&
                                                                                             <div className="dropdown-menu dropdown-menu-end">
                                                                                                 <ul className="link-list-opt no-bdr">
-                                                                                                    <li onClick={() => GoToUserDetail(data?.transcation?.client_id)} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
-                                                                                                    <li onClick={() => { GoWithdrwal(data) }} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                                                    <li style={{ cursor: "pointer" }} onClick={() => GoToUserDetail(data?.client_id)}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
+                                                                                                    <li style={{ cursor: "pointer" }} onClick={() => GoTransDetail(data.id, data.client_id)}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
                                                                                                 </ul>
                                                                                             </div>
                                                                                         }
@@ -575,14 +597,14 @@ const Withdrawals = () => {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title">Withdrawal ID# <span>TNX43034523</span></h5>
+                                <h5 className="modal-title">Transfer ID# <span>TNX43034523</span></h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref2} data-dismiss="modal" />
                             </div>
                             <form onSubmit={form.handleSubmit}>
                                 <div className="modal-body">
 
                                     <div className="mb-3">
-                                        <p>The amount of 10.00 USDT (9.99 USD) to Withdrawal via  Wallet.</p>
+                                        <p>The amount of 10.00 USDT (9.99 USD) to Deposit via Transfer Wallet.</p>
                                     </div>
 
                                     <div className="row mb-3">
@@ -621,12 +643,12 @@ const Withdrawals = () => {
                                         </div>
                                     </div>
 
-                                    <p>Please confirm that you want to APPROVE this Withdrawal request.</p>
+                                    <p>Please confirm that you want to APPROVE this Transfer request.</p>
 
-                                    <button type="submit" className="btn btn-primary ms-auto mr-2" > Confirm Withdrawal
+                                    <button type="submit" className="btn btn-primary ms-auto mr-2" > Confirm Transfer
                                     </button>
 
-                                    <a href='' className="cancelbtnwithdraw">Cancel</a>
+                                    <a className="cancelbtnwithdraw">Cancel</a>
 
 
 
@@ -659,7 +681,7 @@ const Withdrawals = () => {
                                 </div>
 
                                 <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
-                                    <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> The Withdrawal amount will adjust into user account once you approved.</p>
+                                    <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> The Transfer amount will adjust into user account once you approved.</p>
                                     <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> You can not undo this action once you you confirm and approved.</p>
                                 </div>
 
@@ -667,7 +689,6 @@ const Withdrawals = () => {
                         </div>
                     </div>
                 </div>
-
 
 
                 <div className="modal modal-blur fade" id="modal-reject" tabIndex={-1} role="dialog" aria-hidden="true">
@@ -681,7 +702,7 @@ const Withdrawals = () => {
                                 <div className="modal-body">
 
                                     <div className="mb-3">
-                                        <p>Are you sure you want to cancel this Withdrawal request?</p>
+                                        <p>Are you sure you want to cancel this Transfer request?</p>
                                     </div>
 
                                     <div className="row mb-3">
@@ -700,9 +721,9 @@ const Withdrawals = () => {
                                         </div>
                                     </div>
 
-                                    <p>Please confirm that you want to CANCEL this Withdrawal request.</p>
+                                    <p>Please confirm that you want to CANCEL this Transfer request.</p>
 
-                                    <button type="submit" className="btn btn-primary ms-auto mr-2" > Cancelled Withdrawal
+                                    <button type="submit" className="btn btn-primary ms-auto mr-2" > Cancelled Transfer
                                     </button>
 
                                     <a className="cancelbtnwithdraw">Return</a>
@@ -746,10 +767,9 @@ const Withdrawals = () => {
                         </div>
                     </div>
                 </div>
-            </Container >
+            </Container>
         </>
-
     )
 }
 
-export default Withdrawals
+export default Transfers

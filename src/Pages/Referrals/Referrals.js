@@ -430,10 +430,10 @@ const Referrals = () => {
                                                                     <div className="nk-tb-col">
                                                                         <a >
                                                                             <div className="user-card">
-                                                                                {/* <div className="user-avatar bg-primary">
-                                                                                    <span className="user-avatar bg-success-dim"><e className="icon ni ni-arrow-down-left">
+                                                                                <div className="user-avatar bg-primary">
+                                                                                    <span className="user-avatar bg-success-dim"><e className="icon ni ni-percent">
                                                                                     </e></span>
-                                                                                </div> */}
+                                                                                </div>
                                                                                 <div className="user-info" style={{ cursor: "pointer", }} >
                                                                                     <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.first_name}{data?.middle_name}{data?.last_name} <span className="dot dot-success d-md-none ms-1" /></span>
                                                                                     <span>{data?.email}</span>

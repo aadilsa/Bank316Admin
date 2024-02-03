@@ -361,13 +361,23 @@ const Sidebar = () => {
                                 </Link>
                             </li>
 
+                            <li className={tab == "/admin/transfers" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                <Link to={"/admin/transfers"} className={"nk-menu-link "}>
+                                    <span className="nk-menu-icon"><em className="icon ni ni-tranx" /></span>
+                                    <span className="nk-menu-text">Transfers</span>
+                                </Link>
+                            </li>
 
-                            {/* <li className={tab == "/admin/conversions" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                            <li className={tab == "/admin/conversions" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                 <Link to={"/admin/conversions"} className={"nk-menu-link "}>
-                                    <span className="nk-menu-icon"><em className="icon ni ni-wallet-out" /></span>
+                                    <span className="nk-menu-icon"><em className="icon ni ni-tranx" /></span>
                                     <span className="nk-menu-text">Conversions</span>
                                 </Link>
-                            </li> */}
+                            </li>
+
+
+
+
 
                             <li className={tab == "/admin/Referrals" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                 <Link to={"/admin/Referrals"} className={"nk-menu-link "}>
@@ -375,6 +385,25 @@ const Sidebar = () => {
                                     <span className="nk-menu-text">Referral</span>
                                 </Link>
                             </li>
+
+
+                            <li className={TransDrop == true ? "nk-menu-item has-sub active" : "nk-menu-item has-sub"} >
+                                <a className="nk-menu-link nk-menu-toggle" onClick={TransactionDropdown} style={{ cursor: "pointer" }}>
+                                    <span className="nk-menu-icon"><em className="icon ni ni-repeat"></em></span>
+                                    <span className="nk-menu-text"> Wallets</span>
+                                </a>
+                                <ul className="nk-menu-sub dropdown-contain" style={{ display: TransDrop ? 'block' : 'none', marginLeft: 10, paddingLeft: 2 }}>
+                                    <li className={tab == "/admin/allCurrency-transaction" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                        <Link to="/admin/allCurrency-transaction" className="nk-menu-link"><span className="nk-menu-text">Currency Wallet TXN</span></Link>
+                                    </li>
+                                    <li className={tab == "/admin/allCustom-transaction" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                        <Link to="/admin/allCustom-transaction" className="nk-menu-link"><span className="nk-menu-text">Custom Wallet TXN
+                                        </span></Link>
+                                    </li>
+                                </ul>
+                            </li>
+
+
                             {/* 
                             <li className={tab == "/users" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                 <Link to={"/users"} className={tab == `/users` ? "nk-menu-link active current-page" : "nk-menu-link "}>
@@ -494,21 +523,7 @@ const Sidebar = () => {
                                 </ul>
                             </li>
 
-                            <li className={TransDrop == true ? "nk-menu-item has-sub active" : "nk-menu-item has-sub"} >
-                                <a className="nk-menu-link nk-menu-toggle" onClick={TransactionDropdown} style={{ cursor: "pointer" }}>
-                                    <span className="nk-menu-icon"><em className="icon ni ni-repeat"></em></span>
-                                    <span className="nk-menu-text"> Wallets</span>
-                                </a>
-                                <ul className="nk-menu-sub dropdown-contain" style={{ display: TransDrop ? 'block' : 'none', marginLeft: 10, paddingLeft: 2 }}>
-                                    <li className={tab == "/admin/allCurrency-transaction" ? "nk-menu-item active current-page" : "nk-menu-item"}>
-                                        <Link to="/admin/allCurrency-transaction" className="nk-menu-link"><span className="nk-menu-text">Currency Wallet TXN</span></Link>
-                                    </li>
-                                    <li className={tab == "/admin/allCustom-transaction" ? "nk-menu-item active current-page" : "nk-menu-item"}>
-                                        <Link to="/admin/allCustom-transaction" className="nk-menu-link"><span className="nk-menu-text">Custom Wallet TXN
-                                        </span></Link>
-                                    </li>
-                                </ul>
-                            </li>
+
 
 
 

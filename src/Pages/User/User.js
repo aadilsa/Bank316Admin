@@ -510,8 +510,13 @@ const User = () => {
                                                                                 <div className="user-info" style={{ cursor: "pointer", }}
                                                                                     onClick={() => { Custmerdetails(data.id) }}
                                                                                 >
-                                                                                    <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.first_name} {data?.middle_name} {data?.last_name} <span className="dot dot-success d-md-none ms-1" /></span>
-                                                                                    <span>{data?.email}</span>
+                                                                                    {
+                                                                                        data?.first_name !== null ? <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.first_name}{data?.middle_name} {data?.last_name} <span className="dot dot-success d-md-none ms-1" /></span> : <span className="tb-lead" style={{ textTransform: "capitalize" }}>N/A<span className="dot dot-success d-md-none ms-1" /></span>
+                                                                                    }
+                                                                                    {
+                                                                                        data?.email !== null ? <span>{data?.email}</span> : <span>N/A</span>
+                                                                                    }
+
                                                                                 </div>
                                                                             </div>
                                                                         </a>
@@ -545,7 +550,7 @@ const User = () => {
 
                                                                     <div className="nk-tb-col nk-tb-col-tools">
                                                                         <ul className="nk-tb-actions gx-1">
-                                                                            <li className="nk-tb-action-hidden" onClick={() => { Custmerdetails(data.id) }}>
+                                                                            {/* <li className="nk-tb-action-hidden" onClick={() => { Custmerdetails(data.id) }}>
                                                                                 <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
                                                                                     <em class="icon ni ni-user-alt" ></em>
                                                                                 </a>
@@ -554,7 +559,7 @@ const User = () => {
                                                                                 <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
                                                                                     <em class="icon ni ni-eye" ></em>
                                                                                 </a>
-                                                                            </li>
+                                                                            </li> */}
                                                                             <li>
                                                                                 <div className="drodown">
                                                                                     <a href="#" className="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>

@@ -56,6 +56,7 @@ import FAQ from '../Pages/FAQ/FAQ';
 import CreateFAQ from "../Pages/FAQ/CreateFAQ";
 import UpdateFAQ from '../Pages/FAQ/UpdateFAQ';
 import Referrals from '../Pages/Referrals/Referrals';
+import Transfers from '../Pages/Transfers/Transfers';
 // import FAQ from '../Pages/faq';
 // import CreateFAQ from '../Pages/admin/faq/CreateFAQ';
 // import UpdateFAQ from '../Pages/admin/faq/UpdateFAQ';
@@ -102,6 +103,11 @@ const Router = () => {
 
                 <Route path="/admin/Referrals" element={<PrivateRoute><Referrals /></PrivateRoute>} />
                 <Route path="/admin/conversions" element={<PrivateRoute><Conversions /></PrivateRoute>} />
+                <Route path="/admin/transfers" element={<PrivateRoute><Transfers /></PrivateRoute>} />
+
+
+
+
 
                 <Route path="/change-password" element={<PrivateRoute><ChangePassword /></PrivateRoute>} />
                 <Route path="/bank-list" element={<PrivateRoute><BankList /></PrivateRoute>} />
