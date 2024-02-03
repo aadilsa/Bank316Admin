@@ -575,14 +575,14 @@ const Withdrawals = () => {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title">Withdrawal ID# <span>TNX43034523</span></h5>
+                                <h5 className="modal-title">Deposit ID# <span>TNX43034523</span></h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref2} data-dismiss="modal" />
-                            </div>
+                            </div >
                             <form onSubmit={form.handleSubmit}>
                                 <div className="modal-body">
 
                                     <div className="mb-3">
-                                        <p>The amount of 10.00 USDT (9.99 USD) to Withdrawal via  Wallet.</p>
+                                        <p>The amount of 10.00 USDT (9.99 USD) to Deposit via Crypto Wallet.</p>
                                     </div>
 
                                     <div className="row mb-3">
@@ -621,9 +621,9 @@ const Withdrawals = () => {
                                         </div>
                                     </div>
 
-                                    <p>Please confirm that you want to APPROVE this Withdrawal request.</p>
+                                    <p>Please confirm that you want to APPROVE this DEPOSIT request.</p>
 
-                                    <button type="submit" className="btn btn-primary ms-auto mr-2" > Confirm Withdrawal
+                                    <button type="submit" className="btn btn-primary ms-auto mr-2" > Confirm Withdraw
                                     </button>
 
                                     <a href='' className="cancelbtnwithdraw">Cancel</a>
@@ -659,93 +659,14 @@ const Withdrawals = () => {
                                 </div>
 
                                 <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
-                                    <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> The Withdrawal amount will adjust into user account once you approved.</p>
+                                    <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> The deposit amount will adjust into user account once you approved.</p>
                                     <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> You can not undo this action once you you confirm and approved.</p>
                                 </div>
 
                             </form>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div className="modal modal-blur fade" id="modal-reject" tabIndex={-1} role="dialog" aria-hidden="true">
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title">Cancellation of <span>TNX43034523</span></h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref2} data-dismiss="modal" />
-                            </div>
-                            <form onSubmit={form.handleSubmit}>
-                                <div className="modal-body">
-
-                                    <div className="mb-3">
-                                        <p>Are you sure you want to cancel this Withdrawal request?</p>
-                                    </div>
-
-                                    <div className="row mb-3">
-                                        <div className="col-md-12 otherLabel">
-                                            <label>Note for User</label>
-                                            <input type="text" className="form-control" placeholder='Enter remark or note' />
-                                            {/* <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small> */}
-                                        </div>
-                                    </div>
-
-                                    <div className="row mb-3">
-                                        <div className="col-md-12 otherLabel">
-                                            <label>Note / Remarks</label>
-                                            <input type="text" className="form-control" placeholder='Enter remark or note' />
-                                            <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small>
-                                        </div>
-                                    </div>
-
-                                    <p>Please confirm that you want to CANCEL this Withdrawal request.</p>
-
-                                    <button type="submit" className="btn btn-primary ms-auto mr-2" > Cancelled Withdrawal
-                                    </button>
-
-                                    <a className="cancelbtnwithdraw">Return</a>
-
-
-
-                                    {/* <div className="form-group mb-3 row">
-                                        <label className="form-label col-3 col-form-label">Status</label>
-                                        <div className="col">
-                                            <select className="form-control mb-0" name="role" {...form.getFieldProps("role")} style={{ height: 40 }}
-                                            // onChange={(e) => handleChangeQueryBuilder(e)}
-                                            >
-                                                <option value="">Select Status</option>
-                                                <option value="true">Complete</option>
-                                                <option value="false">Reject</option>
-                                            </select>
-                                            {form.errors.role && form.touched.role ? <p className='red' style={{ marginTop: 5 }}>{form.errors.role}</p> : null}
-                                        </div>
-                                    </div>
-
-                                    <div className="form-group mb-3 row">
-                                        <label className="form-label col-3 col-form-label">Message</label>
-                                        <div className="col">
-                                            <input type="text" className="form-control" aria-describedby="emailHelp" placeholder="Enter Message"
-                                                name="ShortName" {...form.getFieldProps("ShortName")}
-                                            />
-                                            {form.errors.ShortName && form.touched.ShortName ? <p className='red' style={{ marginTop: 5 }}>{form.errors.ShortName}</p> : null}
-
-                                        </div>
-                                    </div>*/}
-
-
-                                </div>
-
-                                <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
-                                    <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> You can cancel the transaction if you've not received the payment yet.</p>
-                                    <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> You can not undo this action once you confirm and cancelled.</p>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                        </div >
+                    </div >
+                </div >
             </Container >
         </>
 
