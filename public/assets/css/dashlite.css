@@ -51075,6 +51075,20 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
 .posRealative {
    position: relative;
 }
+.withdrawTable {background:transparent;}
+.withdrawTable .sub-text {
+  display: block;
+  font-size: 13px;
+  color: #8094ae;
+}
+.withdrawTable .lead-text {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #364a63;
+  display: block;
+}
+.bgWhiteModalwithdraw {background:#fff;}
+
 
 @media (min-width: 320px) and (max-width: 767px) {
   .cardInnerBorder canvas {
