@@ -375,9 +375,10 @@ const Withdrawals = () => {
                                                                         <div className="nk-tb-col">
                                                                             <a >
                                                                                 <div className="user-card">
-                                                                                    <div className="user-avatar bg-primary">
+                                                                                    <div className="user-avatar bg-primary posRealative">
                                                                                         <span className="user-avatar bg-warning-dim"><e className="icon ni ni-arrow-up-right">
                                                                                         </e></span>
+                                                                                        <em class="icon ni ni-wallet-fill walletIconNew"></em>
                                                                                     </div>
                                                                                     <div className="user-info" style={{ cursor: "pointer", }} onClick={() => GoToUserDetail(data?.transcation?.client_id)}>
                                                                                         <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.transcation?.recipient_name} <span className="dot dot-success d-md-none ms-1" /></span>
@@ -425,18 +426,19 @@ const Withdrawals = () => {
                                                                                 {
                                                                                     data?.transcation?.payment_status == "pending" && <>
 
-                                                                                        <li className="nk-tb-action-hidden">
-                                                                                            <a className="btn btn-trigger btn-icon" >
+                                                                                        <li className="nk-tb-action-hidden" tooltip="Cancel" flow="Top">
+                                                                                            <a className="btn btn-trigger btn-icon">
                                                                                                 <em class="icon ni ni-cross-fill-c" data-bs-toggle="modal" data-bs-target="#modal-reject" ></em>
                                                                                             </a>
+                                                                                           
                                                                                         </li>
-                                                                                        <li className="nk-tb-action-hidden" >
-                                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                                                        <li className="nk-tb-action-hidden" tooltip="Confirm" flow="Top">
+                                                                                            <a className="btn btn-trigger btn-icon">
                                                                                                 <em class="icon ni ni-check-fill-c" data-bs-toggle="modal" data-bs-target="#modal-report"></em>
                                                                                             </a>
                                                                                         </li>
-                                                                                        <li className="nk-tb-action-hidden" >
-                                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                                                        <li className="nk-tb-action-hidden" tooltip="View" flow="Top">
+                                                                                            <a className="btn btn-trigger btn-icon">
                                                                                                 <em class="icon ni ni-eye-fill" onClick={() => { GoWithdrwal(data) }}></em>
                                                                                             </a>
                                                                                         </li>
@@ -628,8 +630,6 @@ const Withdrawals = () => {
 
                                     <a href='' className="cancelbtnwithdraw">Cancel</a>
 
-
-
                                     {/* <div className="form-group mb-3 row">
                                         <label className="form-label col-3 col-form-label">Status</label>
                                         <div className="col">
@@ -654,8 +654,6 @@ const Withdrawals = () => {
 
                                         </div>
                                     </div>*/}
-
-
                                 </div>
 
                                 <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
