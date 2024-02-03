@@ -432,7 +432,7 @@ const Withdrawals = () => {
                                                                                 </div>
                                                                             </a>
                                                                         </div>
-                                                                        <div className="nk-tb-col tb-col-mb" tooltip="Transfer Summary" flow="left">
+                                                                        <div className="nk-tb-col tb-col-mb">
                                                                             <span className="tb-amount" onClick={() => { GoWithdrwal(data) }} style={{ cursor: "pointer" }}>{data?.transcation?.txn_id} <span className="dot dot-success d-md-none ms-1" /></span>
                                                                             <span className=" tb-status  text-warning ">
                                                                                 <em class="icon ni ni-bullet-fill"></em>Withdraw
@@ -471,7 +471,7 @@ const Withdrawals = () => {
                                                                                 {
                                                                                     data?.transcation?.payment_status == "pending" && <>
 
-                                                                                        <li className="nk-tb-action-hidden" tooltip="Cancel" flow="Top">
+                                                                                        <li className="nk-tb-action-hidden" tooltip="Reject" flow="Top">
                                                                                             <a className="btn btn-trigger btn-icon">
                                                                                                 <em class="icon ni ni-cross-fill-c" data-bs-toggle="modal" data-bs-target="#modal-reject" ></em>
                                                                                             </a>
@@ -482,7 +482,7 @@ const Withdrawals = () => {
                                                                                                 <em class="icon ni ni-check-fill-c" data-bs-toggle="modal" data-bs-target="#modal-report"></em>
                                                                                             </a>
                                                                                         </li>
-                                                                                        <li className="nk-tb-action-hidden" tooltip="View" flow="Top">
+                                                                                        <li className="nk-tb-action-hidden" tooltip="Details" flow="Top">
                                                                                             <a className="btn btn-trigger btn-icon">
                                                                                                 <em class="icon ni ni-eye-fill" onClick={() => { GoWithdrwal(data) }}></em>
                                                                                             </a>
@@ -495,12 +495,12 @@ const Withdrawals = () => {
                                                                                 {
                                                                                     (data?.transcation?.payment_status == "failed" || data?.transcation?.payment_status == "success") && <>
 
-                                                                                        <li className="nk-tb-action-hidden">
+                                                                                        <li className="nk-tb-action-hidden" tooltip="User detail" flow="Top">
                                                                                             <a onClick={() => GoToUserDetail(data?.transcation?.client_id)} className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
                                                                                                 <em class="icon ni ni-user-alt-fill"></em>
                                                                                             </a>
                                                                                         </li>
-                                                                                        <li className="nk-tb-action-hidden" >
+                                                                                        <li className="nk-tb-action-hidden" tooltip="TXN detail" flow="Top">
                                                                                             <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
                                                                                                 <em class="icon ni ni-eye-fill" onClick={() => { GoWithdrwal(data) }}></em>
                                                                                             </a>

@@ -409,21 +409,21 @@ function RequestMoney() {
                                                                             {
                                                                                 data?.status == "pending" &&
                                                                                 <>
-                                                                                    <li className="nk-tb-action-hidden" >
+                                                                                    <li className="nk-tb-action-hidden" tooltip="Reject" flow="Top">
                                                                                         <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
                                                                                             <em class="icon ni ni-cross-fill-c" data-bs-toggle="modal" data-bs-target="#modal-reject"></em>
                                                                                         </a>
                                                                                     </li>
 
 
-                                                                                    <li className="nk-tb-action-hidden" >
+                                                                                    <li className="nk-tb-action-hidden" tooltip="Confirm" flow="Top">
                                                                                         <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
                                                                                             <em class="icon ni ni-check-fill-c" data-bs-toggle="modal" data-bs-target="#modal-report"></em>
                                                                                         </a>
                                                                                     </li>
 
 
-                                                                                    <li className="nk-tb-action-hidden">
+                                                                                    <li className="nk-tb-action-hidden" tooltip="Details" flow="Top">
                                                                                         <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
                                                                                             <em class="icon ni ni-eye-fill" onClick={() => { GoAllreqTxn(data.id) }}></em>
                                                                                         </a>
@@ -465,12 +465,12 @@ function RequestMoney() {
                                                                                 (data?.status == "rejected" || data?.status == "completed") && <>
                                                                                     <>
 
-                                                                                        <li className="nk-tb-action-hidden">
+                                                                                        <li className="nk-tb-action-hidden" tooltip="User Detail" flow="Top">
                                                                                             <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
                                                                                                 <em class="icon ni ni-user-alt-fill" onClick={() => GoToUserDetail(data.client_id)}></em>
                                                                                             </a>
                                                                                         </li>
-                                                                                        <li className="nk-tb-action-hidden" >
+                                                                                        <li className="nk-tb-action-hidden" tooltip="TXN Detail" flow="Top">
                                                                                             <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
                                                                                                 <em class="icon ni ni-eye-fill" onClick={() => { GoAllreqTxn(data.id) }}></em>
                                                                                             </a>
