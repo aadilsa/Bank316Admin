@@ -17,7 +17,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import BaseUrl from '../../API/config'
 import { WithdrawalsApprove } from '../../API/Withdrawals/WithdrawalsAPI'
-
+import Swal from 'sweetalert2';
 const AddSuccessToast = () => {
     toast.success('Status Change successfully.', { autoClose: 2000 });
 }
@@ -46,6 +46,11 @@ const Withdrawals = () => {
     const [selectedValue, setSelectedValue] = useState(true)
     const [recentTab, setrecentTab] = useState("")
     const [reqmoneymsg, setreqmoneymsg] = useState("")
+
+    const [comment, setcomment] = useState("")
+    const [cancelreq, setcancelreq] = useState(null)
+    const [txn_id, settxn_id] = useState()
+
     const navigate = useNavigate()
     const ref2 = useRef()
 
@@ -69,6 +74,7 @@ const Withdrawals = () => {
         //     console.log(reqmoneymsg, "kuch bhi nhiiii")
         // }
         setid(data?.walletDetails?.request_id)
+        console.log(id, "dddddddddd")
     }
 
     console.log("PPPPPPPPP", reqmoneymsg)
@@ -200,6 +206,45 @@ const Withdrawals = () => {
         // navigate(`/transaction`, { state: statadata })
         navigate("/admin/withdrawal", { state: data })
     }
+
+
+
+
+    const approvedcancell = () => {
+        console.log("------------>>>>>>>>>>>>>>>>>")
+        Swal.fire({
+            title: 'Cancel Transaction??',
+            text: "You cannot revert back this action, so please confirm that you've not received the payment yet and want to cancel.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: "No",
+            confirmButtonText: 'Yes, Cancel'
+        }).then(async (result) => {
+            // Check if the user clicked "Yes"
+            if (result.value) {
+                const datas = {
+                    "is_request_money": cancelreq,
+                    "comment": comment
+                }
+                const response = await WithdrawalsApprove(token, id, datas)
+                if (response?.status) {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your Wallet icon has been deleted.',
+                        'success'
+                    )
+                    ref2.current.click()
+                    WithdrawalsTxnData()
+                } else {
+                    toast.error("something went wrong")
+                    ref2.current.click()
+                }
+            }
+        })
+    }
+
 
 
 
@@ -416,7 +461,7 @@ const Withdrawals = () => {
                                                                                 data?.transcation?.payment_status == "failed" && <span className="tb-status text-danger">Rejected</span>
                                                                             }
                                                                         </div>
-                                                                        <div className="nk-tb-col nk-tb-col-tools">
+                                                                        <div className="nk-tb-col nk-tb-col-tools" onClick={() => { reqmoneystatus(data) }}>
                                                                             <ul className="nk-tb-actions gx-1">
 
 
@@ -427,7 +472,7 @@ const Withdrawals = () => {
 
                                                                                         <li className="nk-tb-action-hidden">
                                                                                             <a className="btn btn-trigger btn-icon" >
-                                                                                                <em class="icon ni ni-cross-fill-c" data-bs-toggle="modal" data-bs-target="#modal-reject" ></em>
+                                                                                                <em class="icon ni ni-cross-fill-c" data-bs-toggle="modal" data-bs-target="#modal-reject" onClick={() => { setcancelreq(false); settxn_id(data?.transcation?.txn_id) }}></em>
                                                                                             </a>
                                                                                         </li>
                                                                                         <li className="nk-tb-action-hidden" >
@@ -476,7 +521,7 @@ const Withdrawals = () => {
 
                                                                                                     <li class="divider"></li>
                                                                                                     <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-check-circle-cut  "></em><span>Confrim</span></a></li>
-                                                                                                    <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-reject"><a ><em class="icon ni ni-cross-c"></em><span>Reject</span></a></li>
+                                                                                                    <li style={{ cursor: "pointer" }} onClick={() => { setcancelreq(false); settxn_id(data?.transcation?.txn_id) }} data-bs-toggle="modal" data-bs-target="#modal-reject"><a ><em class="icon ni ni-cross-c"></em><span>Reject</span></a></li>
                                                                                                 </ul>
                                                                                             </div>
                                                                                         }{
@@ -493,7 +538,7 @@ const Withdrawals = () => {
                                                                                 </li>
                                                                             </ul>
                                                                         </div>
-                                                                    </div>{/* .nk-tb-item */}
+                                                                    </div > {/* .nk-tb-item */}
 
                                                                 </>
                                                             )
@@ -662,11 +707,126 @@ const Withdrawals = () => {
                                     <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> The deposit amount will adjust into user account once you approved.</p>
                                     <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> You can not undo this action once you you confirm and approved.</p>
                                 </div>
-
                             </form>
                         </div >
                     </div >
                 </div >
+
+
+
+
+
+                <div className="modal modal-blur fade" id="modal-reject" tabIndex={-1} role="dialog" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">Cancellation of  <span>{txn_id}</span></h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref2} data-dismiss="modal" />
+                            </div>
+                            <form onSubmit={form.handleSubmit}>
+                                <div className="modal-body">
+
+                                    <div className="mb-3">
+                                        <p>Are you sure you want to cancel this deposit request?</p>
+                                    </div>
+
+                                    <div className="row mb-3">
+                                        <div className="col-md-12 otherLabel">
+                                            <label>Note for User</label>
+                                            <input type="text" className="form-control" placeholder='Enter remark or note' onChange={(e) => { setcomment(e.currentTarget.value) }} />
+                                            {/* <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small> */}
+                                        </div>
+                                    </div>
+
+                                    <div className="row mb-3">
+                                        <div className="col-md-12 otherLabel">
+                                            <label>Note / Remarks</label>
+                                            <input type="text" className="form-control" placeholder='Enter remark or note' />
+                                            <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small>
+                                        </div>
+                                    </div>
+
+                                    <p>Please confirm that you want to CANCEL this DEPOSIT request.</p>
+
+                                    <button type="submit" className="btn btn-primary ms-auto mr-2" onClick={() => approvedcancell()}> Cancelled Deposite
+                                    </button>
+
+                                    <a className="cancelbtnwithdraw" onClick={() => { ref2.current.click() }} style={{ cursor: "pointer" }}>Return</a>
+
+
+
+                                    {/* <div className="form-group mb-3 row">
+                                        <label className="form-label col-3 col-form-label">Status</label>
+                                        <div className="col">
+                                            <select className="form-control mb-0" name="role" {...form.getFieldProps("role")} style={{ height: 40 }}
+                                            // onChange={(e) => handleChangeQueryBuilder(e)}
+                                            >
+                                                <option value="">Select Status</option>
+                                                <option value="true">Complete</option>
+                                                <option value="false">Reject</option>
+                                            </select>
+                                            {form.errors.role && form.touched.role ? <p className='red' style={{ marginTop: 5 }}>{form.errors.role}</p> : null}
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group mb-3 row">
+                                        <label className="form-label col-3 col-form-label">Message</label>
+                                        <div className="col">
+                                            <input type="text" className="form-control" aria-describedby="emailHelp" placeholder="Enter Message"
+                                                name="ShortName" {...form.getFieldProps("ShortName")}
+                                            />
+                                            {form.errors.ShortName && form.touched.ShortName ? <p className='red' style={{ marginTop: 5 }}>{form.errors.ShortName}</p> : null}
+
+                                        </div>
+                                    </div>*/}
+
+
+                                </div>
+
+                                <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
+                                    <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> You can cancel the transaction if you've not received the payment yet.</p>
+                                    <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> You can not undo this action once you confirm and cancelled.</p>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+                {/* <div className="modal modal-blur fade" id="modal-danger" tabIndex={-1} role="dialog" aria-hidden="true" data-bs-backdrop="static" data-keyboard="false">
+                    <div className="modal-dialog modal-sm modal-dialog-centered" role="document">
+                        <div className="modal-content">
+                            <div className="modal-status " style={{ backgroundColor: '#1a48aa' }} />
+                            <div className="modal-body text-center py-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="icon mb-2 icon-lg" style={{ color: '#1a48aa' }} width={24} height={24} viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 9v2m0 4v.01" /><path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75" /></svg>
+                                <h3>Are you sure?</h3>
+                                <div className="text-muted">Do you really want to remove this Offer Data?</div>
+                            </div>
+                            <div className="modal-footer">
+                                <div className="w-100">
+                                    <div className="row">
+                                        <div className="col"><a className="btn w-100" data-bs-dismiss="modal" style={{ backgroundColor: '#1a48aa', color: 'white' }}>
+                                            Cancel
+                                        </a></div>
+                                        <div className="col"><button className="btn btn-danger w-100" data-bs-dismiss="modal"
+                                        // onClick={deleteWallet}
+                                        >
+                                            Delete
+                                        </button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> */}
             </Container >
         </>
 
