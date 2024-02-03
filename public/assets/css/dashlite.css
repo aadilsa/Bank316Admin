@@ -37892,7 +37892,7 @@ h6 .badge,
   align-items: center;
   color: #fff;
   background: #5aac4e;
-  font-size: 14px;
+  font-size: 24px;
   font-weight: 700;
   letter-spacing: 0.06em;
   flex-shrink: 0;
@@ -50760,6 +50760,44 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
 
 
 
+/* FLOW: Top */
+[tooltip][flow^="Top"]::before {
+  top: 0%;
+  border-bottom-width: 0;
+  border-top-color: #333;
+  bottom: calc(0em - -26px);
+  transform: translate(-0.5em, -12%);
+  left: 15px;
+}
+
+[tooltip][flow^="Top"]::after {
+    top: -70%;
+    bottom: calc(100% + 0px);
+    transform: translate(-0.5em, 0%);
+}
+
+/* KEYFRAMES */
+@keyframes tooltips-vert {
+  to {
+    opacity: .9;
+    transform: translate(0%, -12%);
+  }
+}
+
+@keyframes tooltips-horz {
+  to {
+    opacity: .9;
+    transform: translate(-12%, 0%);
+  }
+}
+
+[tooltip][flow^="Top"]:hover::before,
+[tooltip][flow^="Top"]:hover::after {
+  animation: tooltips-horz 300ms ease-out forwards;
+}
+
+
+
 .login-page-new .newLoginBox {
   width: 420px;
   background: #fff;
@@ -51002,6 +51040,7 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   position: relative;
 }
 
+
 .otherLabel .labeName {
   position: absolute;
   top: 24px;
@@ -51024,6 +51063,17 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   display: inline-block;
   top: 4px;
   position: relative;
+}
+.walletIconNew {
+    position: absolute;
+    color: #364a63 !important;
+    bottom: -2px;
+    right: -2px;
+    font-size: 16px;
+}
+
+.posRealative {
+   position: relative;
 }
 
 @media (min-width: 320px) and (max-width: 767px) {
