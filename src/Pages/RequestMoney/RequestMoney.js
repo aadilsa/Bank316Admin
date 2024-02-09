@@ -47,6 +47,8 @@ function RequestMoney() {
     const [reqmoneymsg, setreqmoneymsg] = useState("")
     const [comment, setcomment] = useState("")
     const [txnid, settxnid] = useState()
+
+
     const [singletxn, setsingletxn] = useState([])
 
     const [alldata, setalldata] = useState([])
@@ -313,7 +315,10 @@ function RequestMoney() {
             console.log(err)
         }
     }
-    // console.log(alldata, "alldata")
+    console.log(singletxn, "alldata")
+
+    var stillUtcs = moment.utc(singletxn?.transaction?.created_at).toDate();
+    var timeZones = moment(stillUtcs).local().format('YYYY-MM-DD HH:mm:ss A');
     return (
         <Container>
             <div className="nk-content ">
@@ -862,59 +867,65 @@ function RequestMoney() {
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title">Deposit ID# <span>{txnid}</span></h5>
+                            <h5 className="modal-title">Deposit ID# <span>{singletxn?.transaction?.txn_id}</span></h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref1} data-dismiss="modal" />
                         </div>
-                        <form onSubmit={form.handleSubmit}>
+                        <form >
                             <div className="modal-body">
                                 <ul class="nk-top-products mb-3">
                                     <li class="item pt-0">
-                                            <div class="user-avatar bg-primary mright-2">
-                                              <span class="user-avatar bg-success-dim">
-                                                 <e class="icon ni ni-arrow-down-left"></e></span>   
-                                                 <em class="icon ni ni-wallet-fill walletIconNew"></em>
-                                            </div>
-                                        <div class="info"><div class="title"><b>100.00 GBP</b></div>
-                                            <div class="price">Jan 23, 2024 05:34PM</div>
+                                        <div class="user-avatar bg-primary mright-2">
+                                            <span class="user-avatar bg-success-dim">
+                                                <e class="icon ni ni-arrow-down-left"></e></span>
+                                            <em class="icon ni ni-wallet-fill walletIconNew"></em>
                                         </div>
-                                        <div class="total badge rounded-pill bg-success">pending</div>
+                                        <div class="info"><div class="title"><b>  {singletxn?.transaction?.amount_before_txncharge} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</b></div>
+                                            <div class="price">{timeZones}</div>
+                                        </div>
+                                        {
+                                            singletxn?.transaction?.payment_status == "success" && <div class="total badge rounded-pill bg-success">success</div>
+                                        }
+                                        {
+                                            singletxn?.transaction?.payment_status == "pending" && <div class="total badge rounded-pill bg-warning">pending</div>
+                                        }
+
                                     </li>
                                 </ul>
 
                                 <div className="row tableUserModal">
                                     <div className="col-md-6">
-                                       <h6 className="mb-3">USER DETAILS</h6>
-                                       <ul>
-                                          <li className="mb-3">User Account <span className="d-block">John Doe <small>UID08124</small></span></li>
-                                          <li className="mb-3">Email <span className="d-block">johndoe@gmail.com</span></li>
-                                          <li className="mb-3">Phone Number <span className="d-block">+447311695686</span></li>
+                                        <h6 className="mb-3">USER DETAILS</h6>
+                                        <ul>
+                                            <li className="mb-3">User Account <span className="d-block">{singletxn?.sender?.first_name} {singletxn?.sender?.last_name} <small></small></span></li>
+                                            <li className="mb-3">Email <span className="d-block">{singletxn?.sender?.email}</span></li>
+                                            <li className="mb-3">Phone Number <span className="d-block">{singletxn?.sender?.phone}</span></li>
                                         </ul>
                                     </div>
                                     <div className="col-md-6">
-                                       <h6 className="mb-3">ACCOUNT DETAILS</h6>
-                                       <ul>
-                                          <li className="mb-3">Cash Balance <span className="d-block">2,459 GBP</span></li>
-                                          <li className="mb-3">Default Balance <span className="d-block">Great British Pounds</span></li>
-                                          <li className="mb-3">Country <span className="d-block">United Kingdom</span></li>
+                                        <h6 className="mb-3">ACCOUNT DETAILS</h6>
+                                        <ul>
+                                            <li className="mb-3">Cash Balance <span className="d-block">2,459 GBP</span></li>
+                                            <li className="mb-3">Default Wallet <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
+                                            <li className="mb-3">Country <span className="d-block">United Kingdom</span></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div className="row tableUserModal">
                                     <div className="col-md-12"><h6 className="mb-3">TRANSACTION DETAILS</h6></div>
                                     <div className="col-md-6">
-                                       <ul>
-                                          <li className="mb-3">Deposit Amount <span className="d-block">100.00 GBP</span></li>
-                                          <li className="mb-3">Currency<span className="d-block">Great British Pounds</span></li>
-                                          <li className="mb-3">Transaction Charge <span className="d-block">0.00 GBP</span></li>
-                                          <li className="mb-3">Adj Deposit Amount <span className="d-block">100.00 GBP</span></li>
+                                        <ul>
+                                            <li className="mb-3">Deposit Amount <span className="d-block">{singletxn?.transaction?.amount_before_txncharge} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
+                                            <li className="mb-3">Currency<span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
+                                            <li className="mb-3">Transaction Charge <span className="d-block">{singletxn?.transaction?.txn_charge_amount} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
+                                            <li className="mb-3">Adj Deposit Amount <span className="d-block"> {singletxn?.transaction?.amount} {singletxn?.receiver?.currencywallets[0]?.currency?.short_name}</span></li>
                                         </ul>
                                     </div>
                                     <div className="col-md-6">
-                                       <ul>
-                                          <li className="mb-3">Placed by <span className="d-block">UID08124</span></li>
-                                          <li className="mb-3">Placed On <span className="d-block">Jan 23, 2024 6:30 PM</span></li>
-                                          <li className="mb-3">Payment Method <span className="d-block">Manual Bank Transfer</span></li>
-                                          <li className="mb-3">Wallet Balance ofter Txn <span className="d-block">1,100 GBP</span></li>
+                                        <ul>
+                                            <li className="mb-3">Placed by <span className="d-block">UID08124</span></li>
+                                            <li className="mb-3">Placed On <span className="d-block">Jan 23, 2024 6:30 PM</span></li>
+                                            <li className="mb-3">Payment Method <span className="d-block">{singletxn?.transaction?.payment_method}</span></li>
+                                            <li className="mb-3">Wallet Balance after Txn <span className="d-block">{singletxn?.transaction?.other_closing_balance} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -922,17 +933,17 @@ function RequestMoney() {
                                 <div className="row tableUserModal">
                                     <div className="col-md-12"><h6 className="mb-3">ADDITIONAL DETAILS</h6></div>
                                     <div className="col-md-6">
-                                       <ul>
-                                          <li className="mb-3">Transaction type <span className="d-block">Deposit</span></li>
-                                          <li className="mb-3">Transaction Description <span className="d-block">Deposit Via Manual Bank Transfer </span></li>
-                                          <li className="mb-3">Payment Gateway <span className="d-block">Manual Bank Transfer</span></li>
+                                        <ul>
+                                            <li className="mb-3">Transaction type <span className="d-block">{singletxn?.transaction?.txn_type}</span></li>
+                                            <li className="mb-3">Transaction Description <span className="d-block">Deposit Via Manual Bank Transfer </span></li>
+                                            <li className="mb-3">Payment Gateway <span className="d-block">Manual Bank Transfer</span></li>
                                         </ul>
                                     </div>
                                     <div className="col-md-6">
-                                       <ul>
-                                          <li className="mb-3">Account Type <span className="d-block">Personal</span></li>
-                                          <li className="mb-3">Verification Status <span className="d-block">Verified</span></li>
-                                          <li className="mb-3">Transaction Currency <span className="d-block">Great British Pounds</span></li>
+                                        <ul>
+                                            <li className="mb-3">Account Type <span className="d-block">Personal</span></li>
+                                            <li className="mb-3">Verification Status <span className="d-block">Verified</span></li>
+                                            <li className="mb-3">Transaction Currency <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
                                         </ul>
                                     </div>
                                 </div>
