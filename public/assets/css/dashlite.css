@@ -50999,14 +50999,24 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
 
 .side-barNew .item a:hover {
   transition: 0.3s ease;
-  color: #fff;
+  color: #5aac4e;
 }
-
+.side-barNew .item .sub-menu a:hover {
+  transition: 0.3s ease;
+  color: #fff;
+  background: transparent;
+}
+.is-light .active>.nk-menu-link .nk-menu-icon {
+  color: #5aac4e;
+}
+.is-light .active>.nk-menu-link .nk-menu-icon .nk-menu-toggle:after {
+  color: #5aac4e;
+}
 .side-barNew:hover .nk-menu-toggle:after {
   color: #5aac4e;
 }
 
-.side-barNew .item a.active {
+.side-barNew .item a:hover {
   background: #ebeef2;
   transition: 0.3s ease;
   color: #5aac4e;
@@ -51097,6 +51107,22 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
 .bgWhiteModalwithdraw {
   background: #fff;
 }
+
+.tableUserModal {
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+.tableUserModal li { 
+    color: #000;
+    font-weight: 500;
+}
+.tableUserModal li span {
+    color: #707070;
+    font-weight: 200;
+}
+.mright-2 { margin-right:15px;} 
 
 
 @media (min-width: 320px) and (max-width: 767px) {
