@@ -319,7 +319,7 @@ const UserDetail = () => {
                                                         <div className="col-sm-6 col-md-4 col-lg-12">
                                                             <span className="sub-text fw-bold">Date Of Birth:</span>
                                                             {
-                                                                dob == null ? <span>N/A</span> : <span>{dob}</span>
+                                                                (dob == null || dob == "") ? <span>N/A</span> : <span>{dob}</span>
                                                             }
                                                         </div>
 

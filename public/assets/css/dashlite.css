@@ -37892,7 +37892,7 @@ h6 .badge,
   align-items: center;
   color: #fff;
   background: #5aac4e;
-  font-size: 24px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.06em;
   flex-shrink: 0;
@@ -50771,9 +50771,9 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
 }
 
 [tooltip][flow^="Top"]::after {
-    top: -70%;
-    bottom: calc(100% + 0px);
-    transform: translate(-0.5em, 0%);
+  top: -70%;
+  bottom: calc(100% + 0px);
+  transform: translate(-0.5em, 0%);
 }
 
 /* KEYFRAMES */
@@ -51064,30 +51064,39 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   top: 4px;
   position: relative;
 }
+
 .walletIconNew {
-    position: absolute;
-    color: #364a63 !important;
-    bottom: -2px;
-    right: -2px;
-    font-size: 16px;
+  position: absolute;
+  color: #364a63 !important;
+  bottom: -2px;
+  right: -2px;
+  font-size: 16px;
 }
 
 .posRealative {
-   position: relative;
+  position: relative;
 }
-.withdrawTable {background:transparent;}
+
+.withdrawTable {
+  background: transparent;
+}
+
 .withdrawTable .sub-text {
   display: block;
   font-size: 13px;
   color: #8094ae;
 }
+
 .withdrawTable .lead-text {
   font-size: 0.875rem;
   font-weight: 700;
   color: #364a63;
   display: block;
 }
-.bgWhiteModalwithdraw {background:#fff;}
+
+.bgWhiteModalwithdraw {
+  background: #fff;
+}
 
 
 @media (min-width: 320px) and (max-width: 767px) {

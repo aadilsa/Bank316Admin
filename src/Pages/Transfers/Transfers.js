@@ -270,15 +270,15 @@ const Transfers = () => {
                                     </div> */}
                                             <div className="card-tools">
                                                 <ul className="card-tools-nav">
-                                                    <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab(""); setTotalSize(0) }}><span >{recentTab == "" ? <b>History</b> : <span>History</span>}</span></a></li>
-                                                    <li className={recentTab == "Pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("Pending"); setTotalSize(0) }}><span>{recentTab == "Pending" ? <b>
+                                                    <li className={search == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch(""); setTotalSize(0) }}><span >{search == "" ? <b>History</b> : <span>History</span>}</span></a></li>
+                                                    <li className={search == "Pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("Pending"); setTotalSize(0) }}><span>{search == "Pending" ? <b>
                                                         Pending</b> : <span>
                                                         Pending</span>}</span></a></li>
                                                     {/* <li className={recentTab == "Oh - hold" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("Oh - hold")}><span>Oh - hold</span></a></li> */}
-                                                    <li className={recentTab == "Success" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("Success"); setTotalSize(0) }}><span> {recentTab == "Success" ? <b>
+                                                    <li className={search == "Success" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("Success"); setTotalSize(0) }}><span> {search == "Success" ? <b>
                                                         Confirmed</b> : <span>
                                                         Confirmed</span>}</span></a></li>
-                                                    <li className={recentTab == "Failed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("Failed"); setTotalSize(0) }}><span>{recentTab == "Failed" ? <b>Rejected</b> : <span>Rejected</span>}</span></a></li>
+                                                    <li className={search == "Failed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("Failed"); setTotalSize(0) }}><span>{search == "Failed" ? <b>Rejected</b> : <span>Rejected</span>}</span></a></li>
 
                                                     {/* <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("")}><span>All</span></a></li> */}
                                                 </ul>
@@ -406,10 +406,10 @@ const Transfers = () => {
                                                                         <div className="nk-tb-col tb-col-mb" tooltip="" flow="left">
                                                                             <span className="tb-amount" style={{ cursor: "pointer" }} onClick={() => GoTransDetail(data.id, data.client_id)}>{data?.txn_id} <span className="dot dot-success d-md-none ms-1" /></span>
                                                                             {
-                                                                                data.txn_type == "Debit" ? <span className=" tb-status  text-danger ">
-                                                                                    <em class="icon ni ni-bullet-fill"></em>{data.txn_type}
+                                                                                data?.txn_type == "Debit" ? <span className=" tb-status  text-danger ">
+                                                                                    <em class="icon ni ni-bullet-fill"></em>{data?.txn_type}
                                                                                 </span> : <span className=" tb-status  text-success ">
-                                                                                    <em class="icon ni ni-bullet-fill"></em>{data.txn_type}
+                                                                                    <em class="icon ni ni-bullet-fill"></em>{data?.txn_type}
                                                                                 </span>
                                                                             }
 

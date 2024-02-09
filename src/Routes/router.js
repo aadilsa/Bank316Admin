@@ -75,6 +75,8 @@ import BalanceDashboard from '../Pages/Dashboard/Balance_Dashboard';
 import UsersDashboard from '../Pages/Dashboard/UsersDashboard';
 import Withdrawals from '../Pages/Withdrawals/Withdrawals';
 import Withdrawal from '../Pages/Withdrawals/Withdrawal';
+import UserMangement from '../Pages/UserManagement/UserMangement';
+import VerificationCentre from '../Pages/UserManagement/VerificationCentre';
 // import PaymentLinkThree from '../Pages/pageForAPK/paymentLinkThree';
 // import PaymentLinkThree from '../Pages/pageForAPK/PaymentLinkThird';
 // import PaymentLinkThree from '../Pages/pageForAPK/PaymentLinkThree';
@@ -151,6 +153,9 @@ const Router = () => {
                 <Route path="/outside-transactions" element={<PrivateRoute><Outsidetxns /></PrivateRoute>} />
                 <Route path="/outside-transaction" element={<PrivateRoute><Outsidetxn /></PrivateRoute>} />
                 <Route path="/account-managers" element={<PrivateRoute><AccountManagers /></PrivateRoute>} />
+
+                <Route path="/admin/user-mangement" element={<PrivateRoute><UserMangement /></PrivateRoute>} />
+                <Route path="/admin/verification-Centre" element={<PrivateRoute><VerificationCentre /></PrivateRoute>} />
 
                 <Route path="/admin/faq" element={<PrivateRoute><FAQ /></PrivateRoute>} />
                 <Route path="/create-faq" element={<PrivateRoute><CreateFAQ /></PrivateRoute>} />

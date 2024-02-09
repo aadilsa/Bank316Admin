@@ -11,6 +11,9 @@ const Sidebar = () => {
     const [Recipients, setRecipients] = useState(false)
     const [rolesDrop, setrolesDrop] = useState(false)
     const [ManagementDrop, setManagementDrop] = useState(false)
+
+    const [UserManagement, setUserManagement] = useState(false)
+
     // const [togelltran, setTogellTran] = useState(false);
     const [onboardingSubmenu, setOnboardingSubmenu] = useState(false)
     // const handleSideClick = () => {
@@ -97,6 +100,9 @@ const Sidebar = () => {
         setrolesDrop(!rolesDrop);
     };
 
+    const UserManagementDropdown = () => {
+        setUserManagement(!UserManagement);
+    };
     // const toggleTransa = () => {
     //     setTogellTran(!togelltran);
     // };
@@ -192,6 +198,18 @@ const Sidebar = () => {
 
     }, [roletab])
 
+
+
+    useEffect(() => {
+        if (roletab == "/admin/user-mangement" || roletab == "/admin/verification-Centre") {
+            setUserManagement(true);
+        }
+        else {
+            setUserManagement(false);
+
+        }
+
+    }, [roletab])
 
     // useEffect(() => {
     //     if (tab == "/admin/allCurrency-transaction" || tab == "/admin/allCustom-transaction") {
@@ -337,12 +355,12 @@ const Sidebar = () => {
                                 </ul>
                             </li>
 
-                            <li className={tab == "/users" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                            {/* <li className={tab == "/users" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                 <Link to={"/users"} className={"nk-menu-link "}>
                                     <span className="nk-menu-icon"><em className="icon ni ni-users" /></span>
                                     <span className="nk-menu-text">Customers</span>
                                 </Link>
-                            </li>
+                            </li> */}
 
 
                             <li className={tab == "/admin/deposits" ? "nk-menu-item active current-page" : "nk-menu-item"}>
@@ -404,6 +422,47 @@ const Sidebar = () => {
                             </li>
 
 
+
+                            <li className="nk-menu-heading">
+                                <h6 className="overline-title text-primary-alt">USER MANAGEMENT</h6>
+                            </li>
+
+                            <li className={UserManagement == true ? "nk-menu-item has-sub active" : "nk-menu-item has-sub"} >
+                                <a className="nk-menu-link nk-menu-toggle" onClick={UserManagementDropdown} style={{ cursor: "pointer" }}>
+                                    <span className="nk-menu-icon"><em className="icon ni ni-users"></em></span>
+                                    <span className="nk-menu-text">User Management</span>
+                                </a>
+                                <ul className="nk-menu-sub dropdown-contain" style={{ display: UserManagement ? 'block' : 'none', marginLeft: 10, paddingLeft: 2 }}>
+                                    <li className={tab == "/admin/user-mangement" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                        <Link to="/admin/user-mangement" className="nk-menu-link"><span className="nk-menu-text">User Mangement </span></Link>
+                                    </li>
+                                    <li className={tab == "/admin/verification-Centre" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                        <Link to="/admin/verification-Centre" className="nk-menu-link"><span className="nk-menu-text">Active Users</span></Link>
+                                    </li>
+                                    <li className={tab == "/admin/verification-Centre" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                        <Link to="/admin/verification-Centre" className="nk-menu-link"><span className="nk-menu-text">Inactive Users </span></Link>
+                                    </li>
+                                    <li className={tab == "/admin/verification-Centre" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                        <Link to="/admin/verification-Centre" className="nk-menu-link"><span className="nk-menu-text">Suspendded Users </span></Link>
+                                    </li>
+                                    <li className={tab == "/admin/verification-Centre" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                        <Link to="/admin/verification-Centre" className="nk-menu-link"><span className="nk-menu-text">All Users</span></Link>
+                                    </li>
+                                    <li className={tab == "/admin/verification-Centre" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                        <Link to="/admin/verification-Centre" className="nk-menu-link"><span className="nk-menu-text">Administratiors</span></Link>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li className={tab == "/admin/verification-Centre" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                <Link to={"/admin/verification-Centre"} className="nk-menu-link ">
+                                    <span className="nk-menu-icon"><em className="icon ni ni-check-circle-cut"></em></span>
+                                    <span className="nk-menu-text">Verification Centre</span>
+                                </Link>
+                            </li>
+                            <li className="nk-menu-heading">
+                                <h6 className="overline-title text-primary-alt">MANAGEMENT</h6>
+                            </li>
                             {/* 
                             <li className={tab == "/users" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                 <Link to={"/users"} className={tab == `/users` ? "nk-menu-link active current-page" : "nk-menu-link "}>
@@ -508,7 +567,7 @@ const Sidebar = () => {
                             </li> */}
 
 
-                            <li className={rolesDrop == true ? "nk-menu-item has-sub active" : "nk-menu-item has-sub"} >
+                            {/* <li className={rolesDrop == true ? "nk-menu-item has-sub active" : "nk-menu-item has-sub"} >
                                 <a className="nk-menu-link nk-menu-toggle" onClick={RoleactionDropdown} style={{ cursor: "pointer" }}>
                                     <span className="nk-menu-icon"><em className="icon ni ni-tile-thumb-fill"></em></span>
                                     <span className="nk-menu-text">Manage User</span>
@@ -521,13 +580,13 @@ const Sidebar = () => {
                                         <Link to="/manage-employee" className="nk-menu-link"><span className="nk-menu-text">Users</span></Link>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> */}
 
 
 
 
 
-                            <li className={Recipients == true ? "nk-menu-item has-sub active" : "nk-menu-item has-sub"} >
+                            {/* <li className={Recipients == true ? "nk-menu-item has-sub active" : "nk-menu-item has-sub"} >
                                 <a className="nk-menu-link nk-menu-toggle" onClick={RecipientsDropdown} style={{ cursor: "pointer" }}>
                                     <span className="nk-menu-icon"><em className="icon ni ni-template"></em></span>
                                     <span className="nk-menu-text">All Recipients</span>
@@ -540,7 +599,7 @@ const Sidebar = () => {
                                         <Link to="/outside-recipients" className="nk-menu-link"><span className="nk-menu-text">Outeside Recipients</span></Link>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> */}
 
 
                             {/* 
@@ -565,13 +624,13 @@ const Sidebar = () => {
                                     <span className="nk-menu-text">All Transaction</span>
                                 </Link>
                             </li> */}
-
+                            {/* 
                             <li className={tab == "/wallet-icon" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                 <Link to={"/wallet-icon"} className="nk-menu-link ">
                                     <span className="nk-menu-icon"><em className="icon ni ni-dot-box-fill"></em></span>
                                     <span className="nk-menu-text">Wallet Icon</span>
                                 </Link>
-                            </li>
+                            </li> */}
 
                             {/* <li className={tab == "/admin/faq" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                 <Link to={"/admin/faq"} className="nk-menu-link ">
@@ -580,20 +639,20 @@ const Sidebar = () => {
                                 </Link>
                             </li> */}
 
-                            <li className={tab == "/account-managers" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                            {/* <li className={tab == "/account-managers" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                 <Link to={"/account-managers"} className="nk-menu-link ">
                                     <span className="nk-menu-icon"><em className="icon ni ni-dot-box-fill"></em></span>
                                     <span className="nk-menu-text">Account Managers</span>
                                 </Link>
-                            </li>
+                            </li> */}
 
 
-                            <li className={tab == "/setting" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                            {/* <li className={tab == "/setting" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                 <Link to={"/setting"} className="nk-menu-link ">
                                     <span className="nk-menu-icon"><em className="icon ni ni-opt-alt-fill"></em></span>
                                     <span className="nk-menu-text">Settings</span>
                                 </Link>
-                            </li>
+                            </li> */}
 
                         </ul>
                     </div>

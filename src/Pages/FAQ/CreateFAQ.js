@@ -9,6 +9,7 @@ const CreateFAQ = () => {
     const navigate = useNavigate()
     const token = localStorage.getItem("logintoken")
     const [button, setbutton] = useState(false)
+    const [faqType, setFaqType] = useState('');
 
     const AddSuccessToast = (msg) => {
         toast.success(msg, { autoClose: 2000 });
@@ -22,6 +23,7 @@ const CreateFAQ = () => {
 
 
     const [formData, setFormData] = useState({
+        type: faqType,
         question: '',
         answer: '',
         titles: [],
@@ -188,7 +190,24 @@ const CreateFAQ = () => {
                             </div>
 
                             <div>
-
+                                <div className="form-group">
+                                    <label htmlFor="exampleFormControlInput1">FAQ Type</label>
+                                    <div className="form-wrap w-250px">
+                                        <select
+                                            className="form-select js-select2"
+                                            data-search="off"
+                                            value={faqType}  // Set the selected value from the state
+                                            onChange={(e) => { setFaqType(e.target.value) }} // Handle the change event
+                                        >
+                                            <option value="Hotspots">Hotspots</option>
+                                            <option value="MarketPlace">MarketPlace</option>
+                                            <option value="Business">Business</option>
+                                            <option value="Invest">Invest</option>
+                                            <option value="Remit">Remit</option>
+                                            <option value="Account">Account</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Question</label>
                                     <input type="text" class="form-control" name="question" placeholder="Please Enter Question" value={formData.question} onChange={handleInputChange} />

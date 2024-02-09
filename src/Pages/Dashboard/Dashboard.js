@@ -923,12 +923,22 @@ const Dashboard = () => {
                                                                 return (
                                                                     <>
                                                                         <div className="nk-tb-item">
-
                                                                             <div className="nk-tb-col tb-col-sm">
                                                                                 <div className="user-card">
                                                                                     <div className={data?.txn_for == "transfer" ? "user-avatar user-avatar-sm bg-purple" : "user-avatar user-avatar-sm bg-purple"}>
                                                                                         {/* <span>{data.client.first_name.split(' ')[0].charAt(0)}{data.client.last_name.split(' ')[0].charAt(0)}</span> */}
-                                                                                        <div className={data?.is_complete == 0 && "nk-activity-media user-avatar bg-purple"}>{data?.client?.first_name.split(' ')[0].charAt(0).toUpperCase()}{data?.client?.last_name.split(' ')[0].charAt(0).toUpperCase()}</div>
+
+                                                                                        {
+                                                                                            data?.Transaction_type == "Transfer" && < div className={"nk-activity-media user-avatar bg-purple"}>{data?.client?.first_name.split(' ')[0].charAt(0).toUpperCase()}{data?.client?.last_name.split(' ')[0].charAt(0).toUpperCase()}</div>
+                                                                                        }
+
+                                                                                        {
+                                                                                            data?.Transaction_type == "Deposit" && < div className={"nk-activity-media user-avatar bg-blue "}>{data?.client?.first_name.split(' ')[0].charAt(0).toUpperCase()}{data?.client?.last_name.split(' ')[0].charAt(0).toUpperCase()}</div>
+                                                                                        }
+
+                                                                                        {/* {
+                                                                                            data?.Transaction_type == "Deposit" && < div className={"nk-activity-media user-avatar bg-blue "}>{data?.client?.first_name.split(' ')[0].charAt(0).toUpperCase()}{data?.client?.last_name.split(' ')[0].charAt(0).toUpperCase()}</div>
+                                                                                        } */}
                                                                                     </div>
                                                                                     <div className="user-name">
                                                                                         {
@@ -1013,7 +1023,7 @@ const Dashboard = () => {
                                                                                 }
 
                                                                             </div>
-                                                                        </div>
+                                                                        </div >
 
                                                                     </>
                                                                 )
@@ -1059,7 +1069,6 @@ const Dashboard = () => {
                                                         const remainingHours = hours % 24;
                                                         const remainingMinutes = minutes % 60;
                                                         const remainingSeconds = seconds % 60;
-
                                                         return (
                                                             <>
                                                                 <li className="nk-activity-item">
@@ -1273,7 +1282,6 @@ const Dashboard = () => {
                                                                     </li>
                                                                 </>
                                                             )
-
                                                         })
                                                     }
 

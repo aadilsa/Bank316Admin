@@ -21,11 +21,13 @@ const FAQ = () => {
     const [entries, SetEntries] = useState('10')
     const [example, setExample] = useState(false)
     const token = localStorage.getItem("logintoken")
+    const [faqType, setFaqType] = useState('Hotspots');
+
     const navigate = useNavigate()
 
     const GetCountry = async () => {
         try {
-            const totaldata = await GetFaqdata(token, search, pageNumber)
+            const totaldata = await GetFaqdata(token, faqType, pageNumber)
             setdata(totaldata.data.rows)
             settotal(totaldata.data.count)
             console.log(totaldata.data)
@@ -55,7 +57,7 @@ const FAQ = () => {
     }
     useEffect(() => {
         GetCountry()
-    }, [search, pageNumber])
+    }, [faqType, pageNumber])
 
 
 
@@ -175,11 +177,20 @@ const FAQ = () => {
                                                                                         <div className="toggle-expand-content" data-content="pageMenu">
                                                                                             <ul className="nk-block-tools g-3">
                                                                                                 <li>
-                                                                                                    <div className="form-control-wrap">
-                                                                                                        <div className="form-icon form-icon-right">
-                                                                                                            <em className="icon ni ni-search" />
-                                                                                                        </div>
-                                                                                                        <input type="text" className="form-control" id="default-04" placeholder="Search by name" onChange={(e) => { setsearch(e.target.value); setPagenumber(1) }} />
+                                                                                                    <div className="form-wrap w-150px">
+                                                                                                        <select
+                                                                                                            className="form-select js-select2"
+                                                                                                            data-search="off"
+                                                                                                            value={faqType}  // Set the selected value from the state
+                                                                                                            onChange={(e) => { setFaqType(e.target.value) }} // Handle the change event
+                                                                                                        >
+                                                                                                            <option value="Hotspots">Hotspots</option>
+                                                                                                            <option value="MarketPlace">MarketPlace</option>
+                                                                                                            <option value="Business">Business</option>
+                                                                                                            <option value="Invest">Invest</option>
+                                                                                                            <option value="Remit">Remit</option>
+                                                                                                            <option value="Account">Account</option>
+                                                                                                        </select>
                                                                                                     </div>
                                                                                                 </li>
 
@@ -203,6 +214,9 @@ const FAQ = () => {
                                                                                 </div>
                                                                             </div>
                                                                         </div>
+                                                                        {/* <div >
+                                                                            <h5><span>N/A</span></h5>
+                                                                        </div> */}
                                                                         <div className="nk-block">
                                                                             <div className="card">
                                                                                 <div id="faqs" className="accordion " >

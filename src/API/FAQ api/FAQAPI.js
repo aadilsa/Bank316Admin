@@ -13,9 +13,9 @@ export const AddFAQ = async (token, data) => {
 }
 
 
-export const GetFaqdata = async (token, search, pageNumber) => {
+export const GetFaqdata = async (token, faqType, pageNumber) => {
     try {
-        const res = await axios.get(`${Base_Url}faqs?search=${search}&page_number=${pageNumber}`, { headers: { "Authorization": `Bearer ${token}` } })
+        const res = await axios.get(`${Base_Url}faqs?type=${faqType}&page_number=${pageNumber}`, { headers: { "Authorization": `Bearer ${token}` } })
         return res.data
     }
     catch (err) {
