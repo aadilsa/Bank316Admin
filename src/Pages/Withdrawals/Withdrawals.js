@@ -413,7 +413,7 @@ const Withdrawals = () => {
                                                                   </li>
                                                                   <li className="nk-tb-action-hidden" tooltip="Details" flow="Top">
                                                                      <a className="btn btn-trigger btn-icon">
-                                                                        <em class="icon ni ni-eye-fill" onClick={() => { GoWithdrwal(data) }}></em>
+                                                                        <em class="icon ni ni-eye-fill" data-bs-toggle="modal" data-bs-target="#modal-txn"></em>
                                                                      </a>
                                                                   </li>
                                                                </>
@@ -427,7 +427,7 @@ const Withdrawals = () => {
                                                                   </li>
                                                                   <li className="nk-tb-action-hidden" tooltip="TXN detail" flow="Top">
                                                                      <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                        <em class="icon ni ni-eye-fill" onClick={() => { GoWithdrwal(data) }}></em>
+                                                                        <em class="icon ni ni-eye-fill" data-bs-toggle="modal" data-bs-target="#modal-txn"></em>
                                                                      </a>
                                                                   </li>
                                                                </>
@@ -439,7 +439,7 @@ const Withdrawals = () => {
                                                                      data?.transcation?.payment_status == "pending" && <div className="dropdown-menu dropdown-menu-end">
                                                                         <ul className="link-list-opt no-bdr">
                                                                            <li onClick={() => GoToUserDetail(data?.transcation?.client_id)} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
-                                                                           <li onClick={() => { GoWithdrwal(data) }} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                           <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-txn"><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
                                                                            <li class="divider"></li>
                                                                            <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-check-circle-cut  "></em><span>Confrim</span></a></li>
                                                                            <li style={{ cursor: "pointer" }} onClick={() => { settxn_id(data?.transcation?.txn_id) }} data-bs-toggle="modal" data-bs-target="#modal-reject"><a ><em class="icon ni ni-cross-c"></em><span>Reject</span></a></li>
@@ -450,7 +450,7 @@ const Withdrawals = () => {
                                                                      <div className="dropdown-menu dropdown-menu-end">
                                                                         <ul className="link-list-opt no-bdr">
                                                                            <li onClick={() => GoToUserDetail(data?.transcation?.client_id)} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
-                                                                           <li onClick={() => { GoWithdrwal(data) }} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                           <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-txn"><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
                                                                         </ul>
                                                                      </div>
                                                                   }
@@ -639,6 +639,71 @@ const Withdrawals = () => {
                   <div className="modal-content">
                      <div className="modal-header">
                         <h5 className="modal-title">Cancellation of  <span>{txn_id}</span></h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref2} data-dismiss="modal" />
+                     </div>
+                     <form >
+                        <div className="modal-body">
+                           <div className="mb-3">
+                              <p>Are you sure you want to cancel this deposit request?</p>
+                           </div>
+                           <div className="row mb-3">
+                              <div className="col-md-12 otherLabel">
+                                 <label>Note for User</label>
+                                 <input type="text" className="form-control" placeholder='Enter remark or note'
+                                 // onChange={(e) => { setcomment(e.currentTarget.value) }}
+                                 />
+                                 {/* <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small> */}
+                              </div>
+                           </div>
+                           <div className="row mb-3">
+                              <div className="col-md-12 otherLabel">
+                                 <label>Note / Remarks</label>
+                                 <input type="text" className="form-control" placeholder='Enter remark or note' />
+                                 <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small>
+                              </div>
+                           </div>
+                           <p>Please confirm that you want to CANCEL this DEPOSIT request.</p>
+                           <button type='button' className="btn btn-primary ms-auto mr-2" onClick={() => approvedcancell()}> Cancelled Deposite
+                           </button>
+                           <a className="cancelbtnwithdraw" onClick={() => { ref2.current.click() }} style={{ cursor: "pointer" }}>Return</a>
+                           {/* <div className="form-group mb-3 row">
+            <label className="form-label col-3 col-form-label">Status</label>
+            <div className="col">
+            <select className="form-control mb-0" name="role" {...form.getFieldProps("role")} style={{ height: 40 }}
+            // onChange={(e) => handleChangeQueryBuilder(e)}
+            >
+            <option value="">Select Status</option>
+            <option value="true">Complete</option>
+            <option value="false">Reject</option>
+            </select>
+            {form.errors.role && form.touched.role ? <p className='red' style={{ marginTop: 5 }}>{form.errors.role}</p> : null}
+            </div>
+            </div>
+            <div className="form-group mb-3 row">
+            <label className="form-label col-3 col-form-label">Message</label>
+            <div className="col">
+            <input type="text" className="form-control" aria-describedby="emailHelp" placeholder="Enter Message"
+            name="ShortName" {...form.getFieldProps("ShortName")}
+            />
+            {form.errors.ShortName && form.touched.ShortName ? <p className='red' style={{ marginTop: 5 }}>{form.errors.ShortName}</p> : null}
+            </div>
+            </div>*/}
+                        </div>
+                        <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
+                           <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> You can cancel the transaction if you've not received the payment yet.</p>
+                           <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> You can not undo this action once you confirm and cancelled.</p>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+
+
+            <div className="modal modal-blur fade" id="modal-txn" tabIndex={-1} role="dialog" aria-hidden="true">
+               <div className="modal-dialog" role="document">
+                  <div className="modal-content">
+                     <div className="modal-header">
+                        <h5 className="modal-title">txn of  <span>{txn_id}</span></h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref2} data-dismiss="modal" />
                      </div>
                      <form >

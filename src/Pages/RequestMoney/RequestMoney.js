@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Container from '../../component/container'
-import { RequestMoneyData } from '../../API/RequestMoneypi/ReqMoneyApi'
+import { RequestMoneyData, RequestMoneyTxnData } from '../../API/RequestMoneypi/ReqMoneyApi'
 import ReactPaginate from 'react-paginate'
 import Loader from '../Loader/Loader'
 import { ManualBankStatus } from '../../API/RequestMoneypi/ReqMoneyApi'
@@ -47,6 +47,7 @@ function RequestMoney() {
     const [reqmoneymsg, setreqmoneymsg] = useState("")
     const [comment, setcomment] = useState("")
     const [txnid, settxnid] = useState()
+    const [singletxn, setsingletxn] = useState([])
 
     const [alldata, setalldata] = useState([])
     const navigate = useNavigate()
@@ -204,6 +205,7 @@ function RequestMoney() {
             id: id,
             token: token
         }
+
         // navigate(`/transaction`, { state: statadata })
         navigate("/admin/deposits/transactions", { state: statadata })
     }
@@ -296,6 +298,21 @@ function RequestMoney() {
     // console.log(alldata?.sender?.currencywallets[0]?.currency.symbol, alldata?.transaction?.amount_before_txncharge, "llllllllllllllll")
     console.log(alldata, "??????????")
 
+
+
+
+    const ReqMoneyTxndata = async (id) => {
+        try {
+            const totaldata = await RequestMoneyTxnData(token, id)
+            console.log(totaldata?.data, "daatattadsddddddd")
+            if (totaldata?.status == true) {
+                setsingletxn(totaldata?.data)
+            }
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
     // console.log(alldata, "alldata")
     return (
         <Container>
@@ -504,9 +521,9 @@ function RequestMoney() {
                                                                                     </li>
 
 
-                                                                                    <li className="nk-tb-action-hidden" tooltip="Details" flow="Top">
+                                                                                    <li className="nk-tb-action-hidden" tooltip="Details" flow="Top" >
                                                                                         <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
-                                                                                            <em class="icon ni ni-eye-fill" data-bs-toggle="modal" data-bs-target="#modal-viewTxn"></em>
+                                                                                            <em class="icon ni ni-eye-fill" onClick={() => { ReqMoneyTxndata(data.id) }} data-bs-toggle="modal" data-bs-target="#modal-viewTxn"></em>
                                                                                         </a>
                                                                                     </li>
 
@@ -543,16 +560,16 @@ function RequestMoney() {
                                                                                                 <em class="icon ni ni-user-alt-fill" onClick={() => GoToUserDetail(data.client_id)}></em>
                                                                                             </a>
                                                                                         </li>
-                                                                                        <li className="nk-tb-action-hidden" tooltip="TXN Detail" flow="Top">
+                                                                                        <li className="nk-tb-action-hidden" tooltip="TXN Detail" flow="Top" >
                                                                                             <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                                                <em class="icon ni ni-eye-fill" data-bs-toggle="modal" data-bs-target="#modal-viewTxn"></em>
+                                                                                                <em class="icon ni ni-eye-fill" onClick={() => { ReqMoneyTxndata(data.id) }} data-bs-toggle="modal" data-bs-target="#modal-viewTxn"></em>
                                                                                             </a>
                                                                                         </li>
                                                                                     </>
                                                                                 </>
 
                                                                             }
-                                                                            <li>
+                                                                            <li >
                                                                                 <div className="drodown">
                                                                                     <a href="#" className="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
 
@@ -561,7 +578,7 @@ function RequestMoney() {
                                                                                         <div className="dropdown-menu dropdown-menu-end">
                                                                                             <ul className="link-list-opt no-bdr">
                                                                                                 <li style={{ cursor: "pointer" }} onClick={() => GoToUserDetail(data.client_id)}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
-                                                                                                <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-viewTxn" ><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                                                <li style={{ cursor: "pointer" }} onClick={() => { ReqMoneyTxndata(data.id) }} data-bs-toggle="modal" data-bs-target="#modal-viewTxn" ><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
 
                                                                                                 <li class="divider"></li>
                                                                                                 <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a onClick={() => { setalldata(data) }}><em class="icon ni ni-check-circle-cut  " ></em><span>Confrim</span></a></li>
@@ -573,7 +590,7 @@ function RequestMoney() {
                                                                                         <div className="dropdown-menu dropdown-menu-end">
                                                                                             <ul className="link-list-opt no-bdr">
                                                                                                 <li style={{ cursor: "pointer" }} onClick={() => GoToUserDetail(data.client_id)}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
-                                                                                                <li style={{ cursor: "pointer" }} onClick={() => { GoAllreqTxn(data.id) }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                                                <li style={{ cursor: "pointer" }} onClick={() => { ReqMoneyTxndata(data.id); }} data-bs-toggle="modal" data-bs-target="#modal-viewTxn"><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
                                                                                             </ul>
                                                                                         </div>
                                                                                     }
