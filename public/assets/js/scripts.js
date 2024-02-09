@@ -95,12 +95,12 @@
   // CurrentLink Detect @v1.0
   NioApp.CurrentLink = function () {
     var _link = '.nk-menu-link, .menu-link, .nav-link',
-      _currentURL = window.location.href,
+      _currentURL = window.location.Link,
       fileName = _currentURL.substring(0, _currentURL.indexOf("#") == -1 ? _currentURL.length : _currentURL.indexOf("#")),
       fileName = fileName.substring(0, fileName.indexOf("?") == -1 ? fileName.length : fileName.indexOf("?"));
     $(_link).each(function () {
       var self = $(this),
-        _self_link = self.attr('href');
+        _self_link = self.attr('Link');
       if (fileName.match(_self_link)) {
         self.closest("li").addClass('active current-page').parents().closest("li").addClass("active current-page");
         self.closest("li").children('.nk-menu-sub').css('display', 'block');
