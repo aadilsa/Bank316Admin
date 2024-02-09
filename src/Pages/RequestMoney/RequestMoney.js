@@ -850,25 +850,78 @@ function RequestMoney() {
                         </div>
                         <form onSubmit={form.handleSubmit}>
                             <div className="modal-body">
+                                <ul class="nk-top-products mb-3">
+                                    <li class="item pt-0">
+                                            <div class="user-avatar bg-primary mright-2">
+                                              <span class="user-avatar bg-success-dim">
+                                                 <e class="icon ni ni-arrow-down-left"></e></span>   
+                                                 <em class="icon ni ni-wallet-fill walletIconNew"></em>
+                                            </div>
+                                        <div class="info"><div class="title"><b>100.00 GBP</b></div>
+                                            <div class="price">Jan 23, 2024 05:34PM</div>
+                                        </div>
+                                        <div class="total badge rounded-pill bg-success">pending</div>
+                                    </li>
+                                </ul>
 
-                                <div className="mb-3">
-                                    <p>The amount of 10.00 USDT (9.99 USD) to Deposit via Crypto Wallet.</p>
+                                <div className="row tableUserModal">
+                                    <div className="col-md-6">
+                                       <h6 className="mb-3">USER DETAILS</h6>
+                                       <ul>
+                                          <li className="mb-3">User Account <span className="d-block">John Doe <small>UID08124</small></span></li>
+                                          <li className="mb-3">Email <span className="d-block">johndoe@gmail.com</span></li>
+                                          <li className="mb-3">Phone Number <span className="d-block">+447311695686</span></li>
+                                        </ul>
+                                    </div>
+                                    <div className="col-md-6">
+                                       <h6 className="mb-3">ACCOUNT DETAILS</h6>
+                                       <ul>
+                                          <li className="mb-3">Cash Balance <span className="d-block">2,459 GBP</span></li>
+                                          <li className="mb-3">Default Balance <span className="d-block">Great British Pounds</span></li>
+                                          <li className="mb-3">Country <span className="d-block">United Kingdom</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div className="row tableUserModal">
+                                    <div className="col-md-12"><h6 className="mb-3">TRANSACTION DETAILS</h6></div>
+                                    <div className="col-md-6">
+                                       <ul>
+                                          <li className="mb-3">Deposit Amount <span className="d-block">100.00 GBP</span></li>
+                                          <li className="mb-3">Currency<span className="d-block">Great British Pounds</span></li>
+                                          <li className="mb-3">Transaction Charge <span className="d-block">0.00 GBP</span></li>
+                                          <li className="mb-3">Adj Deposit Amount <span className="d-block">100.00 GBP</span></li>
+                                        </ul>
+                                    </div>
+                                    <div className="col-md-6">
+                                       <ul>
+                                          <li className="mb-3">Placed by <span className="d-block">UID08124</span></li>
+                                          <li className="mb-3">Placed On <span className="d-block">Jan 23, 2024 6:30 PM</span></li>
+                                          <li className="mb-3">Payment Method <span className="d-block">Manual Bank Transfer</span></li>
+                                          <li className="mb-3">Wallet Balance ofter Txn <span className="d-block">1,100 GBP</span></li>
+                                        </ul>
+                                    </div>
                                 </div>
 
-                                <div className="row mb-3">
-                                    <div className="col-md-6 otherLabel">
-                                        <label>Payment Amount</label>
-                                        <input type="text" className="form-control" placeholder='10' />
-                                        <span className="labeName">USDT</span>
-                                        <small style={{ fontSize: '72%', color: '#959595', }}>The payment amount that you received.</small>
+                                <div className="row tableUserModal">
+                                    <div className="col-md-12"><h6 className="mb-3">ADDITIONAL DETAILS</h6></div>
+                                    <div className="col-md-6">
+                                       <ul>
+                                          <li className="mb-3">Transaction type <span className="d-block">Deposit</span></li>
+                                          <li className="mb-3">Transaction Description <span className="d-block">Deposit Via Manual Bank Transfer </span></li>
+                                          <li className="mb-3">Payment Gateway <span className="d-block">Manual Bank Transfer</span></li>
+                                        </ul>
                                     </div>
-                                    <div className="col-md-6 otherLabel">
-                                        <label>Amount to Credit</label>
-                                        <input type="text" className="form-control" placeholder='9.99' />
-                                        <span className="labeName">USD</span>
-                                        <small style={{ fontSize: '72%', color: '#959595', }}>The amount that ajdust with balance.</small>
+                                    <div className="col-md-6">
+                                       <ul>
+                                          <li className="mb-3">Account Type <span className="d-block">Personal</span></li>
+                                          <li className="mb-3">Verification Status <span className="d-block">Verified</span></li>
+                                          <li className="mb-3">Transaction Currency <span className="d-block">Great British Pounds</span></li>
+                                        </ul>
                                     </div>
                                 </div>
+
+
+
 
                                 {/* <div className="row mb-3">
                                     <div className="col-md-6 otherLabel">
@@ -881,22 +934,13 @@ function RequestMoney() {
                                         <input type="text" className="form-control" placeholder='Receiving account name or id' />
                                         <small style={{ fontSize: '72%', color: '#959595', }}>Helps to identify the payment (Admin).</small>
                                     </div>
-                                </div> */}
+                                </div> 
 
-                                <div className="row mb-3">
-                                    <div className="col-md-12 otherLabel">
-                                        <label>Note / Remarks</label>
-                                        <input type="text" className="form-control" placeholder='Enter remark or note' />
-                                        <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small>
-                                    </div>
-                                </div>
-
-                                <p>Please confirm that you want to APPROVE this DEPOSIT request.</p>
-
+                               
                                 <button className="btn btn-primary ms-auto mr-2" onClick={() => { ApprovedWidthdrawal() }}> Confirm Withdraw
                                 </button>
 
-                                <a className="cancelbtnwithdraw" style={{ cursor: "pointer" }} onClick={() => { ref1.current.click() }}>Cancel</a>
+                                <a className="cancelbtnwithdraw" style={{ cursor: "pointer" }} onClick={() => { ref1.current.click() }}>Cancel</a>*/}
 
 
 
@@ -928,10 +972,10 @@ function RequestMoney() {
 
                             </div>
 
-                            <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
+                            {/* <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
                                 <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> The deposit amount will adjust into user account once you approved.</p>
                                 <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> You can not undo this action once you you confirm and approved.</p>
-                            </div>
+                            </div>*/}
 
                         </form>
                     </div>

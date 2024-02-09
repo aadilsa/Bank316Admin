@@ -494,7 +494,7 @@ const Sidebar = () => {
 
                             {/*<div className="nk-menu-item side-barNew">
                                 <div class="item">
-                                    <a class="nk-menu-link nk-menu-toggle sub-btn">
+                                    <a class="nk-menu-link nk-menu-toggle sub-btn active">
                                         <span className="nk-menu-icon"><em className="icon ni ni-dashboard-fill"></em></span>
                                         <span className="nk-menu-text">try explame</span></a>
                                       <div class="sub-menu">
@@ -503,7 +503,7 @@ const Sidebar = () => {
                                         <a href="#" class="sub-item">Sub Item 03</a>
                                     </div>
                                 </div>
-                        </div>*/}
+                              </div>*/}
 
 
 
