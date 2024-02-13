@@ -47,9 +47,13 @@ const Transfers = () => {
     const [selectedValue, setSelectedValue] = useState(true)
     const [recentTab, setrecentTab] = useState("")
     const [reqmoneymsg, setreqmoneymsg] = useState("")
+
+    const [singletxn, setsingletxn] = useState()
+
     const navigate = useNavigate()
     const ref2 = useRef()
 
+    const ref1 = useRef()
 
     const reqmoneystatus = (data) => {
         // console.log(data, "datatatatatatatatatatatatatatatatat")
@@ -211,6 +215,8 @@ const Transfers = () => {
         navigate(`/transaction`, { state: Iddtl })
     }
 
+
+    console.log(singletxn, "singletxn")
     return (
 
         <>
@@ -404,7 +410,7 @@ const Transfers = () => {
                                                                             </a>
                                                                         </div>
                                                                         <div className="nk-tb-col tb-col-mb" tooltip="" flow="left">
-                                                                            <span className="tb-amount" style={{ cursor: "pointer" }} onClick={() => GoTransDetail(data.id, data.client_id)}>{data?.txn_id} <span className="dot dot-success d-md-none ms-1" /></span>
+                                                                            <span className="tb-amount" >{data?.txn_id} <span className="dot dot-success d-md-none ms-1" /></span>
                                                                             {
                                                                                 data?.txn_type == "Debit" ? <span className=" tb-status  text-danger ">
                                                                                     <em class="icon ni ni-bullet-fill"></em>{data?.txn_type}
@@ -457,9 +463,9 @@ const Transfers = () => {
                                                                                                 <em class="icon ni ni-check-fill-c" data-bs-toggle="modal" data-bs-target="#modal-report"></em>
                                                                                             </a>
                                                                                         </li>
-                                                                                        <li className="nk-tb-action-hidden" >
+                                                                                        <li className="nk-tb-action-hidden" onClick={() => setsingletxn(data)}>
                                                                                             <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                                                <em class="icon ni ni-eye-fill" onClick={() => { GoWithdrwal(data) }}></em>
+                                                                                                <em class="icon ni ni-eye-fill" data-bs-toggle="modal" data-bs-target="#modal-txn"></em>
                                                                                             </a>
                                                                                         </li>
                                                                                     </>
@@ -475,7 +481,7 @@ const Transfers = () => {
                                                                                                 <em class="icon ni ni-user-alt-fill"></em>
                                                                                             </a>
                                                                                         </li>
-                                                                                        <li className="nk-tb-action-hidden" onClick={() => GoTransDetail(data.id, data.client_id)} >
+                                                                                        <li className="nk-tb-action-hidden" data-bs-toggle="modal" data-bs-target="#modal-txn" onClick={() => setsingletxn(data)}>
                                                                                             <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
                                                                                                 <em class="icon ni ni-eye-fill" ></em>
                                                                                             </a>
@@ -494,7 +500,7 @@ const Transfers = () => {
                                                                                             data?.payment_status == "pending" && <div className="dropdown-menu dropdown-menu-end">
                                                                                                 <ul className="link-list-opt no-bdr">
                                                                                                     <li style={{ cursor: "pointer" }} onClick={() => GoToUserDetail(data?.client_id)}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
-                                                                                                    <li style={{ cursor: "pointer" }} onClick={() => GoTransDetail(data.id, data.client_id)}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                                                    <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-txn"><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
 
                                                                                                     <li class="divider"></li>
                                                                                                     <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-check-circle-cut  "></em><span>Confrim</span></a></li>
@@ -506,7 +512,7 @@ const Transfers = () => {
                                                                                             <div className="dropdown-menu dropdown-menu-end">
                                                                                                 <ul className="link-list-opt no-bdr">
                                                                                                     <li style={{ cursor: "pointer" }} onClick={() => GoToUserDetail(data?.client_id)}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
-                                                                                                    <li style={{ cursor: "pointer" }} onClick={() => GoTransDetail(data.id, data.client_id)}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                                                    <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-txn"><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
                                                                                                 </ul>
                                                                                             </div>
                                                                                         }
@@ -648,7 +654,7 @@ const Transfers = () => {
                                     <button type="submit" className="btn btn-primary ms-auto mr-2" > Confirm Transfer
                                     </button>
 
-                                    <a className="cancelbtnwithdraw">Cancel</a>
+                                    <a className="cancelbtnwithdraw" data-bs-dismiss="modal" data-dismiss="modal" style={{ cursor: "pointer" }}>Cancel</a>
 
 
 
@@ -726,7 +732,7 @@ const Transfers = () => {
                                     <button type="submit" className="btn btn-primary ms-auto mr-2" > Cancelled Transfer
                                     </button>
 
-                                    <a className="cancelbtnwithdraw">Return</a>
+                                    <a className="cancelbtnwithdraw" data-bs-dismiss="modal" data-dismiss="modal" style={{ cursor: "pointer" }}>Return</a>
 
 
 
@@ -767,6 +773,149 @@ const Transfers = () => {
                         </div>
                     </div>
                 </div>
+
+
+
+                <div className="modal modal-blur fade" id="modal-txn" tabIndex={-1} role="dialog" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">Transfer ID# <span>{singletxn?.txn_id}</span></h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref1} data-dismiss="modal" />
+                            </div>
+                            <form >
+                                <div className="modal-body">
+                                    <ul class="nk-top-products mb-3">
+                                        <li class="item pt-0">
+                                            <div class="user-avatar bg-primary mright-2">
+                                                <span class="user-avatar bg-warning-dim">
+                                                    <e class="icon ni ni-arrow-up-right"></e></span>
+                                                <em class="icon ni ni-wallet-fill walletIconNew"></em>
+                                            </div>
+                                            <div class="info"><div class="title"><b>  {singletxn?.amount_before_txncharge} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</b></div>
+                                                {/* <div class="price">{timeZones}</div> */}
+                                            </div>
+                                            {
+                                                singletxn?.transcation?.payment_status == "success" && <div class="total badge rounded-pill bg-success">success</div>
+                                            }
+                                            {
+                                                singletxn?.transcation?.payment_status == "pending" && <div class="total badge rounded-pill bg-warning">pending</div>
+                                            }
+                                            {
+                                                singletxn?.transcation?.payment_status == "failed" && <div class="total badge rounded-pill bg-danger">failed</div>
+                                            }
+                                        </li>
+                                    </ul>
+
+                                    <div className="row tableUserModal">
+                                        <div className="col-md-6">
+                                            <h6 className="mb-3">USER DETAILS</h6>
+                                            <ul>
+                                                <li className="mb-3">User Account <span className="d-block">{singletxn?.sender?.first_name} {singletxn?.sender?.last_name} <small></small></span></li>
+                                                <li className="mb-3">Email <span className="d-block">{singletxn?.sender?.email}</span></li>
+                                                <li className="mb-3">Phone Number <span className="d-block">{singletxn?.sender?.phone}</span></li>
+                                            </ul>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <h6 className="mb-3">ACCOUNT DETAILS</h6>
+                                            <ul>
+                                                <li className="mb-3">Cash Balance <span className="d-block">2,459 GBP</span></li>
+                                                <li className="mb-3">Default Wallet <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
+                                                <li className="mb-3">Country <span className="d-block">United Kingdom</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div className="row tableUserModal">
+                                        <div className="col-md-12"><h6 className="mb-3">TRANSACTION DETAILS : SENDER</h6></div>
+                                        <div className="col-md-6">
+                                            <ul>
+                                                <li className="mb-3">Transfer  Amount   <span className="d-block">{singletxn?.transcation?.amount_before_txncharge} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
+                                                <li className="mb-3">Payout Currency<span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
+                                                <li className="mb-3">Transaction Charge <span className="d-block">{singletxn?.transcation?.txn_charge_amount} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
+                                                <li className="mb-3">Exchange Rate  <span className="d-block">{singletxn?.transcation?.txn_charge_amount} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
+                                                <li className="mb-3">Adj Transfer Amount <span className="d-block"> {singletxn?.transcation?.amount} {singletxn?.receiver?.currencywallets[0]?.currency?.short_name}</span></li>
+                                            </ul>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <ul>
+                                                <li className="mb-3">Placed by <span className="d-block">UID08124</span></li>
+                                                <li className="mb-3">Placed On <span className="d-block">Jan 23, 2024 6:30 PM</span></li>
+                                                <li className="mb-3">Conversion Charge Applied <span className="d-block">Jan 23, 2024 6:30 PM</span></li>
+                                                <li className="mb-3">Converted Amount <span className="d-block">{singletxn?.transcation?.payment_method}</span></li>
+                                                <li className="mb-3">Wallet Balance after Txn <span className="d-block">{singletxn?.transcation?.other_closing_balance} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+
+                                    <div className="row tableUserModal">
+                                        <div className="col-md-12"><h6 className="mb-3">RECIPIENT DETAILS</h6></div>
+                                        <div className="col-md-6">
+                                            <ul>
+                                                <li className="mb-3">Recipient Type   <span className="d-block">{singletxn?.transcation?.txn_type}</span></li>
+                                                <li className="mb-3">Account Name    <span className="d-block">Deposit Via Manual Bank Transfer </span></li>
+                                                <li className="mb-3">Account Number  <span className="d-block">Manual Bank Transfer</span></li>
+                                                <li className="mb-3">Account Sort Code   <span className="d-block">Manual Bank Transfer</span></li>
+
+                                                {/* <li className="mb-3">Payment Gateway <span className="d-block">Manual Bank Transfer</span></li> */}
+                                                {/* {
+                                       singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed By  <span className="d-block">Aadil Mansuri</span></li>
+                                    } */}
+
+                                            </ul>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <ul>
+                                                <li className="mb-3">Payment Currency  <span className="d-block">Personal</span></li>
+                                                <li className="mb-3">Payment Amount <span className="d-block">Verified</span></li>
+                                                <li className="mb-3">Funding Method  <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
+                                                {/* <li className="mb-3">Transaction Status <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li> */}
+                                                {/* {
+                                       singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed On  <span className="d-block">Jan 23 2024, 5:30 PM</span></li>
+
+                                    } */}
+
+                                            </ul>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div className="row tableUserModal">
+                                        <div className="col-md-12"><h6 className="mb-3">ADDITIONAL DETAILS</h6></div>
+                                        <div className="col-md-6">
+                                            <ul>
+                                                <li className="mb-3">Transaction type <span className="d-block">{singletxn?.transcation?.txn_type}</span></li>
+                                                <li className="mb-3">Transfer Limit   <span className="d-block">Deposit Via Manual Bank Transfer </span></li>
+                                                <li className="mb-3">Transaction Description<span className="d-block">Manual Bank Transfer</span></li>
+
+                                                <li className="mb-3">Payment Gateway <span className="d-block">Manual Bank Transfer</span></li>
+                                                {
+                                                    singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed By  <span className="d-block">Aadil Mansuri</span></li>
+                                                }
+
+                                            </ul>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <ul>
+                                                <li className="mb-3">Account Type <span className="d-block">Personal</span></li>
+                                                <li className="mb-3">Verification Status <span className="d-block">Verified</span></li>
+                                                <li className="mb-3">Default Currency Wallet <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
+                                                <li className="mb-3">Transaction Status <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
+                                                {
+                                                    singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed On  <span className="d-block">Jan 23 2024, 5:30 PM</span></li>
+
+                                                }
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </Container>
         </>
     )

@@ -48,8 +48,11 @@ const Conversions = () => {
     const [selectedValue, setSelectedValue] = useState(true)
     const [recentTab, setrecentTab] = useState("")
     const [reqmoneymsg, setreqmoneymsg] = useState("")
+    const [singletxn, setsingletxn] = useState([])
+
     const navigate = useNavigate()
     const ref2 = useRef()
+    const ref1 = useRef()
 
 
     const reqmoneystatus = (data) => {
@@ -306,7 +309,7 @@ const Conversions = () => {
                                         <div className="nk-tb-col tb-col-md"><span className="sub-text">Current Rate {sortedBy == "converted_currency_rate" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("converted_currency_rate") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("converted_currency_rate") }} />}</span></div>
                                         <div className="nk-tb-col tb-col-lg"><span className="sub-text">Created At {sortedBy == 'created_at' && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} />}</span>
                                         </div>
-                                        {/* <div className="nk-tb-col nk-tb-col-tools">
+                                        <div className="nk-tb-col nk-tb-col-tools">
                                             <ul className="nk-tb-actions gx-1 my-n1">
                                                 <li>
                                                     <div className="drodown">
@@ -315,7 +318,7 @@ const Conversions = () => {
                                                     </div>
                                                 </li>
                                             </ul>
-                                        </div> */}
+                                        </div>
                                     </div>{/* .nk-tb-item */}
 
                                     {
@@ -331,7 +334,7 @@ const Conversions = () => {
                                                 </div>
                                                 <div className="nk-tb-col tb-col-lg"></div>
                                                 <div className="nk-tb-col tb-col-md"></div>
-                                                {/* <div className="nk-tb-col nk-tb-col-tools tb-col-lg"></div> */}
+                                                <div className="nk-tb-col nk-tb-col-tools tb-col-lg"></div>
 
                                             </div>
                                             :
@@ -349,7 +352,7 @@ const Conversions = () => {
 
                                                         <div className="nk-tb-col tb-col-lg"></div>
                                                         <div className="nk-tb-col tb-col-md"></div>
-                                                        {/* <div className="nk-tb-col nk-tb-col-tools tb-col-lg"></div> */}
+                                                        <div className="nk-tb-col nk-tb-col-tools tb-col-lg"></div>
 
                                                     </div>
 
@@ -413,35 +416,34 @@ const Conversions = () => {
                                                                     <div className="nk-tb-col tb-col-lg">
                                                                         <span>{timeZones}</span>
                                                                     </div>
-                                                                    {/* 
+
                                                                     <div className="nk-tb-col nk-tb-col-tools">
-                                                                        <ul className="nk-tb-actions gx-1"> */}
-                                                                    {/* <li className="nk-tb-action-hidden">
+                                                                        <ul className="nk-tb-actions gx-1">
+                                                                            <li className="nk-tb-action-hidden">
                                                                                 <a onClick={() => GoToUserDetail(data?.transcation?.client_id)} className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
-                                                                                    <em class="icon ni ni-user-alt"></em>
+                                                                                    <em class="icon ni ni-user-alt-fill"></em>
                                                                                 </a>
                                                                             </li>
-                                                                            <li className="nk-tb-action-hidden">
-                                                                                <a onClick={() => { GoWithdrwal(data) }} className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                                    <em class="icon ni ni-eye"></em>
+                                                                            <li className="nk-tb-action-hidden" data-bs-toggle="modal" data-bs-target="#modal-txn">
+                                                                                <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                                                    <em class="icon ni ni-eye-fill" ></em>
                                                                                 </a>
-                                                                            </li> */}
-                                                                    {/* <li>
+                                                                            </li>
+                                                                            <li>
                                                                                 <div className="drodown">
                                                                                     <a href="#" className="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
+                                                                                    <div className="dropdown-menu dropdown-menu-end">
+                                                                                        <ul className="link-list-opt no-bdr">
+                                                                                            <li onClick={() => GoToUserDetail(data?.transcation?.client_id)} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
+                                                                                            <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-txn"><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
 
-                                                                                    {
-                                                                                        data?.transcation?.payment_status == "pending" && <div className="dropdown-menu dropdown-menu-end">
-                                                                                            <ul className="link-list-opt no-bdr">
-                                                                                                <li onClick={() => GoToUserDetail(data?.transcation?.client_id)} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
-                                                                                                <li onClick={() => { GoWithdrwal(data) }} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                                            {/* <li class="divider"></li>
+                                                                                            <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-check-circle-cut  "></em><span>Confrim</span></a></li>
+                                                                                            <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-cross-c"></em><span>Reject</span></a></li> */}
+                                                                                        </ul>
+                                                                                    </div>
 
-                                                                                                <li class="divider"></li>
-                                                                                                <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-check-circle-cut  "></em><span>Confrim</span></a></li>
-                                                                                                <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-cross-c"></em><span>Reject</span></a></li>
-                                                                                            </ul>
-                                                                                        </div>
-                                                                                    }{
+                                                                                    {/* {
                                                                                         (data?.transcation?.payment_status == "failed" || data?.transcation?.payment_status == "success") &&
                                                                                         <div className="dropdown-menu dropdown-menu-end">
                                                                                             <ul className="link-list-opt no-bdr">
@@ -449,12 +451,12 @@ const Conversions = () => {
                                                                                                 <li onClick={() => { GoWithdrwal(data) }} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
                                                                                             </ul>
                                                                                         </div>
-                                                                                    }
+                                                                                    } */}
 
                                                                                 </div>
-                                                                            </li> */}
-                                                                    {/* </ul>
-                                                                    </div> */}
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
                                                                 </div>{/* .nk-tb-item */}
 
                                                             </>
@@ -532,57 +534,120 @@ const Conversions = () => {
                     </div>
                 </div>
             </div>
-            {/* <div className="modal modal-blur fade" id="modal-report" tabIndex={-1} role="dialog" aria-hidden="true">
+
+
+
+            0
+            <div className="modal modal-blur fade" id="modal-txn" tabIndex={-1} role="dialog" aria-hidden="true">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title">Update Status</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref2} data-dismiss="modal" />
+                            <h5 className="modal-title">Conversion ID# <span>{singletxn?.transcation?.txn_id}</span></h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref1} data-dismiss="modal" />
                         </div>
-                        <form onSubmit={form.handleSubmit}>
+                        <form >
                             <div className="modal-body">
-                                <div className="form-group mb-3 row">
-                                    <label className="form-label col-3 col-form-label">Status</label>
-                                    <div className="col">
+                                <ul class="nk-top-products mb-3">
+                                    <li class="item pt-0">
+                                        <div class="user-avatar bg-primary mright-2">
+                                            <span class="user-avatar bg-warning-dim">
+                                                <e class="icon ni ni-arrow-up-right"></e></span>
+                                            <em class="icon ni ni-wallet-fill walletIconNew"></em>
+                                        </div>
+                                        <div class="info"><div class="title"><b>  {singletxn?.transaction?.amount_before_txncharge} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</b></div>
+                                            {/* <div class="price">{timeZones}</div> */}
+                                        </div>
+                                        {
+                                            singletxn?.transcation?.payment_status == "success" && <div class="total badge rounded-pill bg-success">success</div>
+                                        }
+                                        {
+                                            singletxn?.transcation?.payment_status == "pending" && <div class="total badge rounded-pill bg-warning">pending</div>
+                                        }
+                                        {
+                                            singletxn?.transcation?.payment_status == "failed" && <div class="total badge rounded-pill bg-danger">failed</div>
+                                        }
+                                    </li>
+                                </ul>
 
-
-                              
-
-
-                                        <select className="form-control mb-0" name="role" {...form.getFieldProps("role")} style={{ height: 40 }}
-                                   
-                                        >
-                                            <option value="">Select Status</option>
-                                            <option value="true">Complete</option>
-                                            <option value="false">Reject</option>
-
-                                        </select>
-                                        {form.errors.role && form.touched.role ? <p className='red' style={{ marginTop: 5 }}>{form.errors.role}</p> : null}
-
+                                <div className="row tableUserModal">
+                                    <div className="col-md-6">
+                                        <h6 className="mb-3">USER DETAILS</h6>
+                                        <ul>
+                                            <li className="mb-3">User Account <span className="d-block">{singletxn?.sender?.first_name} {singletxn?.sender?.last_name} <small></small></span></li>
+                                            <li className="mb-3">Email <span className="d-block">{singletxn?.sender?.email}</span></li>
+                                            <li className="mb-3">Mobile Number  <span className="d-block">{singletxn?.sender?.phone}</span></li>
+                                        </ul>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <h6 className="mb-3">ACCOUNT DETAILS</h6>
+                                        <ul>
+                                            <li className="mb-3">Cash Balance <span className="d-block">2,459 GBP</span></li>
+                                            <li className="mb-3">Default Wallet <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
+                                            <li className="mb-3">Country <span className="d-block">United Kingdom</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div className="row tableUserModal">
+                                    <div className="col-md-12"><h6 className="mb-3">TRANSACTION DETAILS</h6></div>
+                                    <div className="col-md-6">
+                                        <ul>
+                                            <li className="mb-3">From   <span className="d-block">{singletxn?.transcation?.amount_before_txncharge} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
+                                            <li className="mb-3">Transaction  Amount <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
+                                            <li className="mb-3">Conversion charge applied <span className="d-block">{singletxn?.transcation?.txn_charge_amount} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
+                                            <li className="mb-3">Total Amount Converted  <span className="d-block">{singletxn?.transcation?.txn_charge_amount} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
+                                            {/* <li className="mb-3">Adj Transfer Amount <span className="d-block"> {singletxn?.transcation?.amount} {singletxn?.receiver?.currencywallets[0]?.currency?.short_name}</span></li> */}
+                                        </ul>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <ul>
+                                            <li className="mb-3">To <span className="d-block">UID08124</span></li>
+                                            <li className="mb-3">EURO Balance <span className="d-block">Jan 23, 2024 6:30 PM</span></li>
+                                            <li className="mb-3">Exchange Rate <span className="d-block">Jan 23, 2024 6:30 PM</span></li>
+                                            <li className="mb-3">Converted Amount <span className="d-block">{singletxn?.transcation?.payment_method}</span></li>
+                                            {/* <li className="mb-3">Wallet Balance after Txn <span className="d-block">{singletxn?.transcation?.other_closing_balance} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li> */}
+                                        </ul>
                                     </div>
                                 </div>
 
-                                <div className="form-group mb-3 row">
-                                    <label className="form-label col-3 col-form-label">Message</label>
-                                    <div className="col">
-                                        <input type="text" className="form-control" aria-describedby="emailHelp" placeholder="Enter Message"
-                                            name="ShortName" {...form.getFieldProps("ShortName")}
-                                        />
-                                        {form.errors.ShortName && form.touched.ShortName ? <p className='red' style={{ marginTop: 5 }}>{form.errors.ShortName}</p> : null}
 
+                                <div className="row tableUserModal">
+                                    <div className="col-md-12"><h6 className="mb-3">ADDITIONAL  DETAILS</h6></div>
+                                    <div className="col-md-6">
+                                        <ul>
+                                            <li className="mb-3">Transaction type    <span className="d-block">{singletxn?.transcation?.txn_type}</span></li>
+                                            <li className="mb-3">Status    <span className="d-block">Deposit Via Manual Bank Transfer </span></li>
+                                            <li className="mb-3">Converted On   <span className="d-block">Manual Bank Transfer</span></li>
+                                            {/* <li className="mb-3">Account Sort Code   <span className="d-block">Manual Bank Transfer</span></li> */}
+
+                                            {/* <li className="mb-3">Payment Gateway <span className="d-block">Manual Bank Transfer</span></li> */}
+                                            {/* {
+                                       singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed By  <span className="d-block">Aadil Mansuri</span></li>
+                                    } */}
+
+                                        </ul>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <ul>
+                                            <li className="mb-3">Account Type   <span className="d-block">Personal</span></li>
+                                            <li className="mb-3">Verification Status <span className="d-block">Verified</span></li>
+                                            <li className="mb-3">Default Currency Wallet  <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
+                                            {/* <li className="mb-3">Transaction Status <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li> */}
+                                            {/* {
+                                       singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed On  <span className="d-block">Jan 23 2024, 5:30 PM</span></li>
+
+                                    } */}
+
+                                        </ul>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className="modal-footer">
-                                <button type="submit" className="btn btn-primary ms-auto" > Update
-                                </button>
-                            </div>
 
+
+                            </div>
                         </form>
                     </div>
                 </div>
-            </div> */}
+            </div>
         </Container >
     )
 }

@@ -1074,6 +1074,914 @@ const UserDetail = () => {
 
 
 
+
+
+            <div className="nk-content ">
+                <div className="container-fluid">
+                    <div className="nk-content-inner">
+                        <div className="nk-content-body">
+                            <div className="nk-block-head">
+                                <div className="nk-block-head-content">
+                                    <h3 className="nk-block-title page-title">Instructor/ <strong className="text-primary small">Abu Bin Ishtiyak</strong></h3>
+                                </div>
+                            </div>
+                            <div className="nk-block nk-block-lg">
+                                <div className="card card-stretch">
+                                    <ul className="nav nav-tabs nav-tabs-mb-icon nav-tabs-card">
+                                        <li className="nav-item">
+                                            <a className="nav-link active" data-bs-toggle="tab" href="#personal-info"><em className="icon ni ni-user-circle-fill" /><span>Personal
+                                                information</span></a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" data-bs-toggle="tab" href="#profile-overview"><em className="icon ni ni-eye-fill" /><span>Overview</span></a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" data-bs-toggle="tab" href="#profile-courses"><em className="icon ni ni-book-fill" /><span>Courses</span></a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" data-bs-toggle="tab" href="#profile-review"><em className="icon ni ni-thumbs-up" /><span>Review</span> </a>
+                                        </li>
+                                        <li className="nav-item nav-item-trigger">
+                                            <a href="#" className="btn btn-icon btn-trigger"><em className="icon ni ni-edit" /></a>
+                                        </li>
+                                    </ul>
+                                    <div className="card-inner">
+                                        <div className="tab-content">
+                                            <div className="tab-pane active" id="personal-info">
+                                                <div className="nk-block">
+                                                    <div className="profile-ud-list">
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Title</span>
+                                                                <span className="profile-ud-value">Mr.</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Full Name</span>
+                                                                <span className="profile-ud-value">Abu Bin
+                                                                    Ishtiyak</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Date of Birth</span>
+                                                                <span className="profile-ud-value">10 Aug, 1980</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Surname</span>
+                                                                <span className="profile-ud-value">IO</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Mobile Number</span>
+                                                                <span className="profile-ud-value">+811
+                                                                    758-756433</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Email Address</span>
+                                                                <span className="profile-ud-value">info@softnio.com</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>{/* .profile-ud-list */}
+                                                </div>{/* .nk-block */}
+                                                <div className="col-lg-4 col-xl-4 col-xxl-3">
+                                                    <div className="card">
+                                                        <div className="card-inner-group">
+                                                            <div className="card-inner">
+                                                                <div className="user-card user-card-s2">
+                                                                    <div className="user-avatar lg ">
+                                                                        {
+                                                                            // image == null ? <img src="./images/avatar/b-sm.jpg" alt="img" /> : <img src={image} alt="img" />
+                                                                            image == null ? <Image src="./images/avatar/b-sm.jpg" alt="img" width={80} height={80} style={{ objectFit: 'cover' }} /> : <Image src={image} alt="img" width={80} height={80} style={{ objectFit: 'cover' }} />
+                                                                        }
+                                                                    </div>
+                                                                    <div className="user-info">
+                                                                        {/* <div className="badge bg-light rounded-pill ucap">Platinam</div> */}
+                                                                        <h5 style={{ textTransform: "capitalize" }} >{name} {lastname}</h5>
+                                                                        <span className="sub-text">{email}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            {/* <div className="card-inner card-inner-sm"> */}
+                                                            {/* <ul className="btn-toolbar justify-center gx-1">
+                                                        <li><a className="btn btn-trigger btn-icon"><em className="icon ni ni-shield-off" /></a></li>
+                                                        <li><a className="btn btn-trigger btn-icon"><em className="icon ni ni-mail" /></a></li>
+                                                        <li><a className="btn btn-trigger btn-icon"><em className="icon ni ni-bookmark" /></a></li>
+                                                        <li><a className="btn btn-trigger btn-icon text-danger"><em className="icon ni ni-na" /></a></li>
+                                                    </ul> */}
+                                                            {/* </div> */}
+                                                            {/* <div className="card-inner">
+                                                    <div className="row text-center">
+                                                        <div className="col-4">
+                                                            <div className="profile-stats">
+                                                                <span className="amount">0</span>
+                                                                <span className="sub-text">Total transaction</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-4">
+                                                            <div className="profile-stats">
+                                                                <span className="amount">0</span>
+                                                                <span className="sub-text">Complete</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-4">
+                                                            <div className="profile-stats">
+                                                                <span className="amount">0</span>
+                                                                <span className="sub-text">Progress</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> */}
+                                                            <div className="card-inner">
+                                                                <h6 className="overline-title mb-2">Short Details</h6>
+                                                                <div className="row g-3">
+                                                                    <div className="col-sm-6 col-md-4 col-lg-12">
+                                                                        <span className="sub-text fw-bold" style={{ textTransform: "capitalize" }}>Customer Name:</span>
+                                                                        <span>{name}</span>
+                                                                    </div>
+                                                                    <div className="col-sm-6 col-md-4 col-lg-12">
+                                                                        <span className="sub-text fw-bold">Customer Email:</span>
+                                                                        {
+                                                                            email == null ? <span>N/A</span> : <span>{email}</span>
+                                                                        }
+                                                                    </div>
+
+                                                                    <div className="col-sm-6 col-md-4 col-lg-12">
+                                                                        <span className="sub-text fw-bold" style={{ textTransform: "capitalize" }}> Address:</span>
+                                                                        {
+                                                                            addresss?.street == null ? <span>N/A</span> : <span>{addresss?.house_number} {addresss?.apartment} {addresss?.street},{addresss?.city},{addresss?.state}</span>
+                                                                        }
+                                                                    </div>
+                                                                    {/* <div className="col-sm-6 col-md-4 col-lg-12">
+                                                            <span className="sub-text fw-bold">Language:</span>
+                                                            <span>English</span>
+                                                        </div> */}
+
+                                                                    {
+                                                                        Country == null ? <div className="col-sm-6 col-md-4 col-lg-12">
+                                                                            <span className="sub-text fw-bold">Country :</span>
+                                                                            <span >N/A</span>
+                                                                        </div> : <div className="col-sm-6 col-md-4 col-lg-12">
+                                                                            <span className="sub-text fw-bold">Country :</span>
+                                                                            <span style={{ textTransform: "capitalize" }}>{Country}</span>
+                                                                        </div>
+                                                                    }
+
+
+                                                                    <div className="col-sm-6 col-md-4 col-lg-12">
+                                                                        <span className="sub-text fw-bold">Date Of Birth:</span>
+                                                                        {
+                                                                            (dob == null || dob == "") ? <span>N/A</span> : <span>{dob}</span>
+                                                                        }
+                                                                    </div>
+
+                                                                    <div className="col-sm-6 col-md-4 col-lg-12">
+                                                                        <span className="sub-text fw-bold">Phone:</span>
+                                                                        {
+                                                                            phone == null ? <span>N/A</span> : <span>+{phoncode} {phone}</span>
+                                                                        }
+                                                                    </div>
+                                                                    <div className="col-sm-6 col-md-4 col-lg-12">
+                                                                        <span className="sub-text fw-bold">Email Verify Status:</span>
+                                                                        {
+                                                                            emailVarified == null ? <span className="badge badge-dim bg-warning"><span>Pending Verify </span></span> : <span className="badge badge-dim bg-success"><span>Success Verify</span></span>
+                                                                        }
+                                                                    </div>
+                                                                    <div className="col-sm-6 col-md-4 col-lg-12 fw-bold ">
+                                                                        <span>Document Image</span><br></br>
+                                                                        {
+                                                                            verification_doc_image == "null" ? <Image src="./images/imagesnot found.jpg" height={100} width={180} style={{ objectFit: 'cover' }} /> :
+                                                                                <Image src={verification_doc_image} height={100} width={180} style={{ objectFit: 'cover' }} />
+                                                                        }
+                                                                        <br></br><br></br>
+
+                                                                        <span>Verification Image </span><br></br>
+                                                                        {
+                                                                            verification_id == "null" ? <Image src="./images/imagesnot found.jpg" height={100} width={180} style={{ objectFit: 'cover' }} /> :
+                                                                                <Image src={verification_id} height={100} width={180} style={{ objectFit: 'cover' }} />
+                                                                        }
+                                                                        <br></br><br></br>
+                                                                        <span className="sub-text">Document Verify Status</span>
+                                                                        {
+                                                                            status == "approved" && <span className="badge badge-dim bg-success"><span>Approved</span></span>
+                                                                        }
+
+                                                                        {
+                                                                            status == "pending" && <span className="badge badge-dim bg-warning"><span>Pending</span></span>
+                                                                        }
+
+                                                                        {
+                                                                            status == "rejected" && <span className="badge badge-dim bg-danger"><span>Rejected</span></span>
+                                                                        }
+
+
+                                                                        {
+                                                                            status == "Not_applied" && <span className="badge badge-dim bg-danger"><span>Not Applied</span></span>
+                                                                        }
+                                                                        <br></br>
+                                                                        {
+                                                                            verification_doc_image == "null" || verification_id == "null" ?
+                                                                                <div className="form-group mb-3 row">
+                                                                                    <div className="col" onChange={(e) => { setToggle(e); documentVerifyedstatus(e) }} >
+                                                                                        <select className="form-control mb-0" disabled>
+                                                                                            <option value={false} ><span style={{ color: "red" }}> Not Applied</span></option>
+                                                                                            <option value={false}>Rejected</option>
+                                                                                            <option value={true} >Approved</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                // <Switch checkedChildren="Not applied" unCheckedChildren="Not applied" disabled
+                                                                                //     onChange={(e) => { setToggle(e); documentVerifyedstatus(e) }} style={{ backgroundColor: '#1a48aa' }} />
+                                                                                :
+                                                                                <span>
+                                                                                    {isverifieddoc == "rejected" &&
+                                                                                        <div className="form-group mb-3 row">
+                                                                                            <div className="col" onChange={(e) => { setToggle(e); documentVerifyedstatus(e) }}>
+                                                                                                <select className="form-control mb-0" >
+                                                                                                    <option value={false}>Rejected</option>
+                                                                                                    <option value={true} >Approved</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    }
+
+
+                                                                                    {isverifieddoc == "pending" &&
+                                                                                        <div className="form-group mb-3 row">
+                                                                                            <div className="col" onChange={(e) => { setToggle(e); documentVerifyedstatus(e) }}>
+                                                                                                <select className="form-control mb-0" >
+                                                                                                    <option>Select Status</option>
+                                                                                                    <option value={true} >Approved</option>
+                                                                                                    <option value={false}>Rejected</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    }
+                                                                                    {/* {
+
+                                                                            isverifieddoc == "rejected" &&
+                                                                            <Switch checkedChildren="Rejected" unCheckedChildren="Approved"
+                                                                                onChange={(e) => { setToggle(e); documentVerifyedstatus(e) }} style={{ backgroundColor: '#1a48aa' }} />
+
+                                                                        } */}
+                                                                                    {isverifieddoc == "approved" &&
+                                                                                        <div className="form-group mb-3 row">
+                                                                                            <div className="col" onChange={(e) => { setToggle(e); documentVerifyedstatus(e) }}>
+                                                                                                <select className="form-control mb-0" >
+                                                                                                    <option value={true}>Approved</option>
+                                                                                                    <option value={false}>Rejected</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    }
+                                                                                    {/* 
+                                                                        {
+                                                                            isverifieddoc == "approved" &&
+                                                                            <Switch checkedChildren="Rejected" unCheckedChildren="Approved" defaultChecked
+                                                                                onChange={(e) => { setToggle(e); documentVerifyedstatus(e) }} style={{ backgroundColor: '#1a48aa' }} />
+
+                                                                        } */}
+
+                                                                                    {/* 
+                                                                        {
+                                                                            isverifieddoc == "approved" &&
+                                                                            <Switch checkedChildren="Rejected" unCheckedChildren="Approved" defaultChecked
+                                                                                onChange={(e) => { setToggle(e); documentVerifyedstatus(e) }} style={{ backgroundColor: '#1a48aa' }} />
+
+                                                                        } */}
+                                                                                </span>
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>{/* .col */}
+                                                <div className="nk-block">
+                                                    <div className="nk-block-head nk-block-head-line">
+                                                        <h6 className="title overline-title text-base">Additional
+                                                            Information</h6>
+                                                    </div>{/* .nk-block-head */}
+                                                    <div className="profile-ud-list">
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Joining Date</span>
+                                                                <span className="profile-ud-value">08-16-2018
+                                                                    09:04PM</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Reg Method</span>
+                                                                <span className="profile-ud-value">Email</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Country</span>
+                                                                <span className="profile-ud-value">United State</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Nationality</span>
+                                                                <span className="profile-ud-value">United State</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>{/* .profile-ud-list */}
+                                                </div>{/* .nk-block */}
+                                                <div className="nk-divider divider md" />
+
+                                            </div>{/* tab pane */}
+
+
+
+
+
+                                            <div className="tab-pane active" id="personal-info">
+                                                <div className="nk-block">
+                                                    <div className="profile-ud-list">
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Title</span>
+                                                                <span className="profile-ud-value">Mr.</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Full Name</span>
+                                                                <span className="profile-ud-value">Abu Bin
+                                                                    Ishtiyak</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Date of Birth</span>
+                                                                <span className="profile-ud-value">10 Aug, 1980</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Surname</span>
+                                                                <span className="profile-ud-value">IO</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Mobile Number</span>
+                                                                <span className="profile-ud-value">+811
+                                                                    758-756433</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Email Address</span>
+                                                                <span className="profile-ud-value">info@softnio.com</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>{/* .profile-ud-list */}
+                                                </div>{/* .nk-block */}
+                                                <div className="nk-block">
+                                                    <div className="nk-block-head nk-block-head-line">
+                                                        <h6 className="title overline-title text-base">Additional
+                                                            Information</h6>
+                                                    </div>{/* .nk-block-head */}
+                                                    <div className="profile-ud-list">
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Joining Date</span>
+                                                                <span className="profile-ud-value">08-16-2018
+                                                                    09:04PM</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Reg Method</span>
+                                                                <span className="profile-ud-value">Email</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Country</span>
+                                                                <span className="profile-ud-value">United State</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="profile-ud-item">
+                                                            <div className="profile-ud wider">
+                                                                <span className="profile-ud-label">Nationality</span>
+                                                                <span className="profile-ud-value">United State</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>{/* .profile-ud-list */}
+                                                </div>{/* .nk-block */}
+                                                <div className="nk-divider divider md" />
+
+                                            </div>{/* tab pane */}
+
+
+
+                                            <div className="tab-pane" id="profile-overview">
+                                                <div className="nk-block-head nk-block-head-md">
+                                                    <div className="nk-block-between">
+                                                        <div className="nk-block-head-content">
+                                                            <h5 className="nk-block-title">Profile Overview</h5>
+                                                        </div>{/* .nk-block-head-content */}
+                                                        <div className="nk-block-head-content">
+                                                            <div className="toggle-wrap nk-block-tools-toggle">
+                                                                <a href="#" className="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em className="icon ni ni-more-v" /></a>
+                                                                <div className="toggle-expand-content" data-content="pageMenu">
+                                                                    <ul className="nk-block-tools g-3">
+                                                                        <li>
+                                                                            <div className="drodown">
+                                                                                <a href="#" className="dropdown-toggle btn btn-white btn-dim btn-outline-light" data-bs-toggle="dropdown"><em className="d-none d-sm-inline icon ni ni-calender-date" /><span><span className="d-none d-md-inline">Last</span>
+                                                                                    30 Days</span><em className="dd-indc icon ni ni-chevron-right" /></a>
+                                                                                <div className="dropdown-menu dropdown-menu-end">
+                                                                                    <ul className="link-list-opt no-bdr">
+                                                                                        <li><a href="#"><span>Last
+                                                                                            30
+                                                                                            Days</span></a>
+                                                                                        </li>
+                                                                                        <li><a href="#"><span>Last 6
+                                                                                            Months</span></a>
+                                                                                        </li>
+                                                                                        <li><a href="#"><span>Last 1
+                                                                                            Years</span></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>{/* .toggle-wrap */}
+                                                        </div>{/* .nk-block-head-content */}
+                                                    </div>
+                                                </div>{/* .nk-block-head */}
+                                                <div className="nk-block">
+                                                    <div className="row g-gs">
+                                                        <div className="col-xxl-8 col-lg-12">
+                                                            <div className="card card-full card-bordered border-light">
+                                                                <div className="nk-ecwg nk-ecwg5">
+                                                                    <div className="card-inner">
+                                                                        <div className="card-title-group align-start pb-3 g-2">
+                                                                            <div className="card-title">
+                                                                                <h6 className="title">Total Earning</h6>
+                                                                            </div>
+                                                                            <div className="card-tools">
+                                                                                <em className="card-hint icon ni ni-help" data-bs-toggle="tooltip" data-bs-placement="left" title="Revenu of this month" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="data-group">
+                                                                            <div className="data">
+                                                                                <div className="title">Monthly</div>
+                                                                                <div className="amount amount-sm">9.28K
+                                                                                </div>
+                                                                                <div className="change up"><em className="icon ni ni-arrow-long-up" />4.63%
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="data">
+                                                                                <div className="title">Weekly</div>
+                                                                                <div className="amount amount-sm">2.69K
+                                                                                </div>
+                                                                                <div className="change down"><em className="icon ni ni-arrow-long-down" />1.92%
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="data">
+                                                                                <div className="title">Daily (Avg)</div>
+                                                                                <div className="amount amount-sm">0.94K
+                                                                                </div>
+                                                                                <div className="change up"><em className="icon ni ni-arrow-long-up" />3.45%
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="nk-ecwg5-ck">
+                                                                            <canvas className="lms-line-chart-s4" id="storeVisitors" />
+                                                                        </div>
+                                                                        <div className="chart-label-group">
+                                                                            <div className="chart-label">01 Jul, 2020
+                                                                            </div>
+                                                                            <div className="chart-label">30 Jul, 2020
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>{/* .card */}
+                                                        </div>{/* .col */}
+                                                        <div className="col-xxl-4">
+                                                            <div className="row g-gs">
+                                                                <div className="col-xxl-12 col-md-6">
+                                                                    <div className="card card-full card-bordered border-light">
+                                                                        <div className="nk-ecwg nk-ecwg3">
+                                                                            <div className="card-inner pb-2">
+                                                                                <div className="card-title-group">
+                                                                                    <div className="card-title">
+                                                                                        <h6 className="title"><a href>Active
+                                                                                            Students</a></h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="data">
+                                                                                    <div className="data-group">
+                                                                                        <div className="amount">329
+                                                                                        </div>
+                                                                                        <div className="info text-end">
+                                                                                            <span className="change up text-danger"><em className="icon ni ni-arrow-long-up" />4.63%</span><br /><span>vs.
+                                                                                                last week</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>{/* .card-inner */}
+                                                                            <div className="nk-ck-wrap mt-auto overflow-hidden rounded-bottom">
+                                                                                <div className="nk-ecwg3-ck">
+                                                                                    <canvas className="lms-line-chart-s1" id="activeStudents" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>{/* .nk-ecwg */}
+                                                                    </div>{/* .card */}
+                                                                </div>{/* .col */}
+                                                                <div className="col-xxl-12 col-md-6">
+                                                                    <div className="card card-full card-bordered border-light">
+                                                                        <div className="nk-ecwg nk-ecwg3">
+                                                                            <div className="card-inner pb-2">
+                                                                                <div className="card-title-group">
+                                                                                    <div className="card-title">
+                                                                                        <h6 className="title"><a href>New
+                                                                                            Enrolment</a></h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="data">
+                                                                                    <div className="data-group">
+                                                                                        <div className="amount">194
+                                                                                        </div>
+                                                                                        <div className="info text-end">
+                                                                                            <span className="change up text-danger"><em className="icon ni ni-arrow-long-up" />4.63%</span><br /><span>vs.
+                                                                                                Yesterday</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>{/* .card-inner */}
+                                                                            <div className="nk-ck-wrap mt-auto overflow-hidden rounded-bottom">
+                                                                                <div className="nk-ecwg3-ck">
+                                                                                    <canvas className="lms-line-chart-s1" id="newStudents" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>{/* .nk-ecwg */}
+                                                                    </div>{/* .card */}
+                                                                </div>{/* .col */}
+                                                            </div>{/* .row */}
+                                                        </div>{/* .col */}
+                                                    </div>{/* .row */}
+                                                </div>{/* .nk-block */}
+                                            </div>{/*tab pane*/}
+                                            <div className="tab-pane" id="profile-courses">
+                                                <div className="nk-tb-list border border-light rounded overflow-hidden is-compact">
+                                                    <div className="nk-tb-item nk-tb-head">
+                                                        <div className="nk-tb-col">
+                                                            <span className="lead-text">#</span>
+                                                        </div>
+                                                        <div className="nk-tb-col">
+                                                            <span className="lead-text">Courses List</span>
+                                                        </div>
+                                                        <div className="nk-tb-col">
+                                                            <span className="lead-text d-none d-sm-inline">Status</span>
+                                                        </div>
+                                                        <div className="nk-tb-col nk-tb-col-tools">
+                                                            <span className="lead-text">&nbsp;</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="nk-tb-item">
+                                                        <div className="nk-tb-col"> 1 </div>
+                                                        <div className="nk-tb-col"> Learn Android Development with
+                                                            project </div>
+                                                        <div className="nk-tb-col">
+                                                            <span className="badge badge-dot badge-dot-xs bg-success">Active</span>
+                                                        </div>
+                                                        <div className="nk-tb-col nk-tb-col-tools">
+                                                            <ul className="nk-tb-actions gx-1">
+                                                                <li>
+                                                                    <a href="#" className="btn btn-sm btn-icon btn-trigger me-n1"><em className="icon ni ni-trash-alt text-danger" /></a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div className="nk-tb-item">
+                                                        <div className="nk-tb-col"> 2 </div>
+                                                        <div className="nk-tb-col"> Learn Android Development with
+                                                            project </div>
+                                                        <div className="nk-tb-col">
+                                                            <span className="badge badge-dot badge-dot-xs bg-warning">Pending</span>
+                                                        </div>
+                                                        <div className="nk-tb-col nk-tb-col-tools">
+                                                            <ul className="nk-tb-actions gx-1">
+                                                                <li>
+                                                                    <a href="#" className="btn btn-sm btn-icon btn-trigger me-n1"><em className="icon ni ni-trash-alt text-danger" /></a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div className="nk-tb-item">
+                                                        <div className="nk-tb-col"> 3 </div>
+                                                        <div className="nk-tb-col"> Learn Android Development with
+                                                            project </div>
+                                                        <div className="nk-tb-col">
+                                                            <span className="badge badge-dot badge-dot-xs bg-danger">Canceled</span>
+                                                        </div>
+                                                        <div className="nk-tb-col nk-tb-col-tools">
+                                                            <ul className="nk-tb-actions gx-1">
+                                                                <li>
+                                                                    <a href="#" className="btn btn-sm btn-icon btn-trigger me-n1"><em className="icon ni ni-trash-alt text-danger" /></a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>{/*tab pane*/}
+                                            <div className="tab-pane" id="profile-review">
+                                                <div className="nk-tb-list border border-light rounded overflow-hidden">
+                                                    <div className="nk-tb-item nk-tb-head">
+                                                        <div className="nk-tb-col nk-tb-col-check">
+                                                            <div className="custom-control custom-control-sm custom-checkbox notext">
+                                                                <input type="checkbox" className="custom-control-input" id="uid" />
+                                                                <label className="custom-control-label" htmlFor="uid" />
+                                                            </div>
+                                                        </div>
+                                                        <div className="nk-tb-col"><span className="lead-text">Student</span></div>
+                                                        <div className="nk-tb-col tb-col-sm"><span className="lead-text">Course name</span></div>
+                                                        <div className="nk-tb-col tb-col-md"><span className="lead-text">Rating</span></div>
+                                                        <div className="nk-tb-col tb-col-lg"><span className="lead-text">Review</span></div>
+                                                        <div className="nk-tb-col nk-tb-col-tools">
+                                                            <ul className="nk-tb-actions gx-1 my-n1">
+                                                                <li>
+                                                                    <div className="drodown">
+                                                                        <a href="#" className="dropdown-toggle btn btn-sm btn-icon btn-trigger me-n1" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
+                                                                        <div className="dropdown-menu dropdown-menu-end">
+                                                                            <ul className="link-list-opt no-bdr">
+                                                                                <li><a href="#"><em className="icon ni ni-mail" /><span>Send
+                                                                                    Email to All</span></a>
+                                                                                </li>
+                                                                                <li><a href="#"><em className="icon ni ni-na" /><span>Suspend
+                                                                                    Selected</span></a></li>
+                                                                                <li><a href="#"><em className="icon ni ni-trash" /><span>Delete
+                                                                                    All</span></a></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    {/* .nk-tb-item */}
+                                                    <div className="nk-tb-item">
+                                                        <div className="nk-tb-col nk-tb-col-check">
+                                                            <div className="custom-control custom-control-sm custom-checkbox notext">
+                                                                <input type="checkbox" className="custom-control-input" id="uid1" />
+                                                                <label className="custom-control-label" htmlFor="uid1" />
+                                                            </div>
+                                                        </div>
+                                                        <div className="nk-tb-col">
+                                                            <div className="user-card">
+                                                                <div className="user-avatar bg-primary">
+                                                                    <span>AB</span>
+                                                                </div>
+                                                                <div className="user-info">
+                                                                    <span className="tb-lead">Abu Bin Ishtiyak</span>
+                                                                    <span>info@softnio.com</span>
+                                                                    <ul className="d-flex d-md-none text-warning">
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="nk-tb-col tb-col-sm">
+                                                            <span>UI/UX Design with Adobe XD</span>
+                                                        </div>
+                                                        <div className="nk-tb-col tb-col-md">
+                                                            <ul className="d-flex text-warning">
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div className="nk-tb-col tb-col-lg">
+                                                            <span>The instructor was very knowledgable, worked at a
+                                                                good peace.</span>
+                                                        </div>
+                                                        <div className="nk-tb-col nk-tb-col-tools">
+                                                            <ul className="nk-tb-actions gx-1">
+                                                                <li>
+                                                                    <a href="#" className="btn btn-sm btn-icon btn-trigger me-n1"><em className="icon ni ni-trash-alt text-danger" /></a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    {/* .nk-tb-item */}
+                                                    <div className="nk-tb-item">
+                                                        <div className="nk-tb-col nk-tb-col-check">
+                                                            <div className="custom-control custom-control-sm custom-checkbox notext">
+                                                                <input type="checkbox" className="custom-control-input" id="uid7" />
+                                                                <label className="custom-control-label" htmlFor="uid7" />
+                                                            </div>
+                                                        </div>
+                                                        <div className="nk-tb-col">
+                                                            <div className="user-card">
+                                                                <div className="user-avatar bg-warning">
+                                                                    <span>VL</span>
+                                                                </div>
+                                                                <div className="user-info">
+                                                                    <span className="tb-lead">Victoria Lynch</span>
+                                                                    <span>victoria@example.com</span>
+                                                                    <ul className="d-flex d-md-none text-warning">
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="nk-tb-col tb-col-sm">
+                                                            <span>UI/UX Design with Adobe XD</span>
+                                                        </div>
+                                                        <div className="nk-tb-col tb-col-md">
+                                                            <ul className="d-flex text-warning">
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div className="nk-tb-col tb-col-lg">
+                                                            <span> I will highly recommend this type of
+                                                                instructor.</span>
+                                                        </div>
+                                                        <div className="nk-tb-col nk-tb-col-tools">
+                                                            <ul className="nk-tb-actions gx-1">
+                                                                <li>
+                                                                    <a href="#" className="btn btn-sm btn-icon btn-trigger me-n1"><em className="icon ni ni-trash-alt text-danger" /></a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    {/* .nk-tb-item */}
+                                                    <div className="nk-tb-item">
+                                                        <div className="nk-tb-col nk-tb-col-check">
+                                                            <div className="custom-control custom-control-sm custom-checkbox notext">
+                                                                <input type="checkbox" className="custom-control-input" id="uid8" />
+                                                                <label className="custom-control-label" htmlFor="uid8" />
+                                                            </div>
+                                                        </div>
+                                                        <div className="nk-tb-col">
+                                                            <div className="user-card">
+                                                                <div className="user-avatar bg-success">
+                                                                    <span>PN</span>
+                                                                </div>
+                                                                <div className="user-info">
+                                                                    <span className="tb-lead">Patrick Newman</span>
+                                                                    <span>patrick@example.com</span>
+                                                                    <ul className="d-flex d-md-none text-warning">
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="nk-tb-col tb-col-sm">
+                                                            <span>Learn Android Development with project</span>
+                                                        </div>
+                                                        <div className="nk-tb-col tb-col-md">
+                                                            <ul className="d-flex text-warning">
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div className="nk-tb-col tb-col-lg">
+                                                            <span>I look forward to taking more classes from
+                                                                here.</span>
+                                                        </div>
+                                                        <div className="nk-tb-col nk-tb-col-tools">
+                                                            <ul className="nk-tb-actions gx-1">
+                                                                <li>
+                                                                    <a href="#" className="btn btn-sm btn-icon btn-trigger me-n1"><em className="icon ni ni-trash-alt text-danger" /></a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    {/* .nk-tb-item */}
+                                                    <div className="nk-tb-item">
+                                                        <div className="nk-tb-col nk-tb-col-check">
+                                                            <div className="custom-control custom-control-sm custom-checkbox notext">
+                                                                <input type="checkbox" className="custom-control-input" id="uid9" />
+                                                                <label className="custom-control-label" htmlFor="uid9" />
+                                                            </div>
+                                                        </div>
+                                                        <div className="nk-tb-col">
+                                                            <div className="user-card">
+                                                                <div className="user-avatar">
+                                                                    <img src="./images/avatar/d-sm.jpg" alt />
+                                                                </div>
+                                                                <div className="user-info">
+                                                                    <span className="tb-lead">Jane Harris</span>
+                                                                    <span>harris@example.com</span>
+                                                                    <ul className="d-flex d-md-none text-warning">
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                        <li><em className="icon ni ni-star-fill" />
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="nk-tb-col tb-col-sm">
+                                                            <span>Learn Android Development with project</span>
+                                                        </div>
+                                                        <div className="nk-tb-col tb-col-md">
+                                                            <ul className="d-flex text-warning">
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                                <li><em className="icon ni ni-star-fill" /></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div className="nk-tb-col tb-col-lg">
+                                                            <span>This was my first time it far exceeded my
+                                                                expectations.</span>
+                                                        </div>
+                                                        <div className="nk-tb-col nk-tb-col-tools">
+                                                            <ul className="nk-tb-actions gx-1">
+                                                                <li>
+                                                                    <a href="#" className="btn btn-sm btn-icon btn-trigger me-n1"><em className="icon ni ni-trash-alt text-danger" /></a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+
+
+                                                    </div>
+                                                    {/* .nk-tb-item */}
+                                                </div>
+                                            </div>{/*tab pane*/}
+                                        </div>{/*tab content*/}
+                                    </div>{/*card inner*/}
+                                </div>{/*card*/}
+                            </div>{/*nk block lg*/}
+
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </Container>
     );
 }
