@@ -230,6 +230,315 @@ const UserDetail = () => {
                                 </div>
                             </div>{/* .nk-block-head */}
 
+
+       {/******************* NEW HTML CODE USER DETAIL  **********************/}
+
+       <div className="nk-block">
+          <div className="card">
+            <div className="card-aside-wrap newTabUser">
+                <div className="card-inner">
+                    <div className="nk-block nk-block-lg">
+                                <div className="card-stretch">
+                                    <ul className="nav nav-tabs nav-tabs-mb-icon nav-tabs-card">
+                                        <li className="nav-item">
+                                            <a className="nav-link active" data-bs-toggle="tab" href="#personal-info"><em class="icon ni ni-user-circle"></em><span>Personal</span></a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" data-bs-toggle="tab" href="#profile-overview"><em class="icon ni ni-repeat"></em><span>Transactions</span></a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" data-bs-toggle="tab" href="#profile-courses"><em class="icon ni ni-file-text"></em><span>Documents</span></a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" data-bs-toggle="tab" href="#profile-review"><em class="icon ni ni-bell"></em><span>Notifications</span></a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" data-bs-toggle="tab" href="#activities"><em class="icon ni ni-activity"></em><span>Activities</span></a>
+                                        </li>
+                                    </ul>
+
+                                    <div className="card-inner paddLeftZero">
+                                        <div className="tab-content">
+                                            <div className="tab-pane active" id="personal-info">
+                                              <div className="nk-block-between pb-5">
+                                                <div className="nk-block-head-content">
+                                                    <h4 className="nk-block-title">Personal Information</h4>
+                                                    <div className="nk-block-des">
+                                                        <p>Basic info, like your name and address, that you use on Nio Platform.</p>
+                                                    </div>
+                                                </div>
+                                             </div>
+                                             <div className="row">
+                                                 <div className="col-md-6">
+                                                    <div className="nk-block-head nk-block-head-line">
+                                                        <h6 className="title overline-title text-base">Basic
+                                                          Information</h6>
+                                                    </div>{/* .nk-block-head */}
+                                                    <div className="nk-block singUserDetail">
+                                                        <div className="profile-ud-list">
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">Username</span>
+                                                                    <span className="profile-ud-value">nirmal18</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">Email</span>
+                                                                    <span className="profile-ud-value">nk18@gmail.com</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">Full Name</span>
+                                                                    <span className="profile-ud-value">Nirmal Kumawat</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">Display Name</span>
+                                                                    <span className="profile-ud-value">Mr.Cool</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">Mobile Number</span>
+                                                                    <span className="profile-ud-value">+91 78954-26512</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">Date of birth</span>
+                                                                    <span className="profile-ud-value">+91 78954-26512</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">Gender</span>
+                                                                    <span className="profile-ud-value">+91 78954-26512</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">Telegram</span>
+                                                                    <span className="profile-ud-value">+91 78954-26512</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>{/* .profile-ud-list */}
+                                                    </div>{/* .nk-block */}
+                                                </div>
+                                                <div className="col-md-6">
+                                                <div className="nk-block-head nk-block-head-line">
+                                                        <h6 className="title overline-title text-base">RESIDENTIAL ADDRESS</h6>
+                                                    </div>{/* .nk-block-head */}
+                                                    <div className="nk-block singUserDetail">
+                                                        <div className="profile-ud-list">
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">Address</span>
+                                                                    <span className="profile-ud-value">Opposite Union Bank, New Nyanya Nasarwa State</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">City</span>
+                                                                    <span className="profile-ud-value">Abuja, FCT</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">State</span>
+                                                                    <span className="profile-ud-value">Abuja, FCT</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">Zip Code</span>
+                                                                    <span className="profile-ud-value">Abuja, FCT</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">Country</span>
+                                                                    <span className="profile-ud-value">Abuja, FCT</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">Nationality</span>
+                                                                    <span className="profile-ud-value">Abuja, FCT</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>{/* .profile-ud-list */}
+                                                    </div>{/* .nk-block */}
+                                                </div>
+
+                                                <div className="col-md-12 mt-3">
+                                                    <div className="nk-block-head nk-block-head-line">
+                                                        <h6 className="title overline-title text-base">ADDITIONAL ADDRESS</h6>
+                                                    </div>{/* .nk-block-head */}
+                                                    <div className="nk-block singUserDetail-1">
+                                                        <div className="profile-ud-list">
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">Join date</span>
+                                                                    <span className="profile-ud-value">14 Feb, 2024</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">Reg Method</span>
+                                                                    <span className="profile-ud-value">Abuja, FCT</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">Email Verified </span>
+                                                                    <span className="profile-ud-value">Abuja, FCT</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">Zip Code</span>
+                                                                    <span className="profile-ud-value">Abuja, FCT</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="profile-ud-item">
+                                                                <div className="profile-ud wider">
+                                                                    <span className="profile-ud-label">Country</span>
+                                                                    <span className="profile-ud-value">Abuja, FCT</span>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>{/* .profile-ud-list */}
+                                                    </div>{/* .nk-block */}
+                                                </div>
+                                            </div>
+                                        </div>{/* tab pane */}
+
+
+                                            <div className="tab-pane" id="profile-overview">
+                                                <h1>Transactions</h1>
+                                            </div>{/* tab pane */}
+
+
+
+                                            <div className="tab-pane" id="profile-courses">
+                                                   <h1>Profile Course</h1>
+                                            </div>{/*tab pane*/}
+
+                                            <div className="tab-pane" id="profile-review">
+                                                   <h1>Profile review</h1>
+                                            </div>{/*tab pane*/}
+                                            
+                                            <div className="tab-pane" id="activities">
+                                                   <h1>Activities</h1>
+                                            </div>{/*tab pane*/}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+
+
+                <div className="card-aside card-aside-right user-aside toggle-slide toggle-slide-right toggle-break-lg" data-toggle-body="true" data-content="userAside" data-toggle-screen="lg" data-toggle-overlay="true">
+                <div class="card-inner-group" data-simplebar>
+                    <div class="card-inner">
+                        <div class="user-card user-card-s2">
+                            <div class="user-avatar lg bg-primary">
+                            <span>AB</span>
+                            </div>
+                            <div class="user-info">
+                            <div class="badge bg-outline-light rounded-pill ucap">Investor</div>
+                            <h5>Abu Bin Ishtiyak</h5>
+                            <span class="sub-text">info@softnio.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-inner card-inner-sm">
+                        <ul class="btn-toolbar justify-center gx-1">
+                            <li><a href="#" class="btn btn-trigger btn-icon"><em class="icon ni ni-mail"></em></a></li>
+                            <li><a href="#" class="btn btn-trigger btn-icon"><em class="icon ni ni-users-fill"></em></a></li>
+                            <li><a href="#" class="btn btn-trigger btn-icon"><em class="icon ni ni-shield-star"></em></a></li>
+                            <li><a href="#" class="btn btn-trigger btn-icon"><em class="icon ni ni-shield-off"></em></a></li>
+                            <li><a href="#" class="btn btn-trigger btn-icon text-danger"><em class="icon ni ni-na"></em></a></li>
+                        </ul>
+                    </div>
+                    <div class="card-inner">
+                        <div class="overline-title-alt mb-2">MAIN ACCOUNT</div>
+                        <div class="profile-balance">
+                            <div class="profile-balance-group gx-4">
+                            <div class="profile-balance-sub">
+                                <div class="profile-balance-amount">
+                                    <div class="number">2,500.00 <small class="currency currency-usd">USD</small></div>
+                                </div>
+                                <div class="profile-balance-subtitle">Invested Amount</div>
+                            </div>
+                            <div class="profile-balance-sub">
+                                <div class="profile-balance-amount">
+                                    <div class="number">50.00</div>
+                                </div>
+                                <div class="profile-balance-subtitle">Locked Amount</div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-inner">
+                        <div class="overline-title-alt mb-2">INVESTED ACCOUNT</div>
+                        <div class="profile-balance">
+                            <div class="profile-balance-group gx-4">
+                            <div class="profile-balance-sub">
+                                <div class="profile-balance-amount">
+                                    <div class="number">2,500.00 <small class="currency currency-usd">USD</small></div>
+                                </div>
+                                <div class="profile-balance-subtitle">Invested Wallet</div>
+                            </div>
+                            <div class="profile-balance-sub">
+                                <div class="profile-balance-amount">
+                                    <div class="number">50.00</div>
+                                </div>
+                                <div class="profile-balance-subtitle">Active Invesment</div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-inner">
+                        <h6 class="overline-title-alt mb-2">Additional</h6>
+                        <div class="row g-3">
+                            <div class="col-6">
+                            <span class="sub-text">User ID:</span>
+                            <span>UD003054</span>
+                            </div>
+                            <div class="col-6">
+                            <span class="sub-text">Last Login:</span>
+                            <span>15 Feb, 2019 01:02 PM</span>
+                            </div>
+                            <div class="col-6">
+                            <span class="sub-text">Email Status:</span>
+                            <span class="lead-text text-success">Approved</span>
+                            </div>
+                            <div class="col-6">
+                            <span class="sub-text">Register At:</span>
+                            <span>Nov 24, 2019</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                </div>
+
+
+
+
+             </div>
+          </div>
+        </div>
+
+       {/******************* END NEW HTML CODE USER DETAIL  **********************/}
+
+
+
                             <div className="nk-block">
                                 <div className="row g-gs">
                                     <div className="col-lg-4 col-xl-4 col-xxl-3">
@@ -1638,6 +1947,7 @@ const UserDetail = () => {
                                                     </div>{/* .row */}
                                                 </div>{/* .nk-block */}
                                             </div>{/*tab pane*/}
+
                                             <div className="tab-pane" id="profile-courses">
                                                 <div className="nk-tb-list border border-light rounded overflow-hidden is-compact">
                                                     <div className="nk-tb-item nk-tb-head">
@@ -1701,6 +2011,7 @@ const UserDetail = () => {
                                                     </div>
                                                 </div>
                                             </div>{/*tab pane*/}
+
                                             <div className="tab-pane" id="profile-review">
                                                 <div className="nk-tb-list border border-light rounded overflow-hidden">
                                                     <div className="nk-tb-item nk-tb-head">

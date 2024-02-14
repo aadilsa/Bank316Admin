@@ -51123,6 +51123,43 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
     font-weight: 200;
 }
 .mright-2 { margin-right:15px;} 
+.paddLeftZero { padding-left:0px;}
+.newTabUser .nav-tabs .nav-link {
+    font-size: 13px;
+}
+.singUserDetail .profile-ud-item {
+    width: 100%;
+    padding: 0 3.25rem;
+}
+.singUserDetail .wider .profile-ud-label {
+    width: 130px;
+}
+.singUserDetail .wider .profile-ud-value {
+  text-align: right;
+  font-weight: 500;
+  width: 100%;
+  font-size: 13px;
+}
+
+.singUserDetail-1 .profile-ud-item {
+    width: 50%;
+    padding: 0 3.25rem;
+}
+.singUserDetail-1 .wider .profile-ud-label {
+    width: 130px;
+}
+.singUserDetail-1 .wider .profile-ud-value {
+  text-align: right;
+  font-weight: 500;
+  width: 50%;
+  font-size: 13px;
+}
+.tableUserModal h6 {
+  color:#006c00;
+}
+.greebTxnWithdraw {
+  color:#5aac4e;
+}
 
 
 @media (min-width: 320px) and (max-width: 767px) {
