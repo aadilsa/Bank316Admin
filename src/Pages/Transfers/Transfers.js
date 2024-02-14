@@ -18,6 +18,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import BaseUrl from '../../API/config'
 import { WithdrawalsApprove } from '../../API/Withdrawals/WithdrawalsAPI'
 import { GetTransfers } from '../../API/TransferAPi/TransferAPI'
+import Swal from 'sweetalert2';
 const AddSuccessToast = () => {
     toast.success('Status Change successfully.', { autoClose: 2000 });
 }
@@ -49,11 +50,13 @@ const Transfers = () => {
     const [reqmoneymsg, setreqmoneymsg] = useState("")
 
     const [singletxn, setsingletxn] = useState()
+    const [comment, setcomment] = useState()
 
     const navigate = useNavigate()
     const ref2 = useRef()
 
     const ref1 = useRef()
+    const ref3 = useRef()
 
     const reqmoneystatus = (data) => {
         // console.log(data, "datatatatatatatatatatatatatatatatat")
@@ -101,7 +104,7 @@ const Transfers = () => {
             })
             console.log(datas, "..............")
             // console.log(datas, "datatatat??????????")
-            const ManualBank = await WithdrawalsApprove(token, id, datas)
+            const ManualBank = await WithdrawalsApprove(token, singletxn.request_id, datas)
             console.log(ManualBank, "ManualBank")
             if (ManualBank.status == true) {
                 ref2.current.click()
@@ -216,7 +219,83 @@ const Transfers = () => {
     }
 
 
+    const SuccessApproved = () => {
+        Swal.fire({
+            title: 'Procced Withdraw?',
+            text: "Please confirm that you want to procced the request and send the payment.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: "No",
+            confirmButtonText: 'Yes, Cancel'
+        }).then(async (result) => {
+            // Check if the user clicked "Yes"
+            if (result.value) {
+                // const datas = {
+                //    "is_request_money": cancelreq,
+                //    "comment": comment
+                // }
+                const datas = JSON.stringify({
+                    "is_request_money": true,
+                    "comment": comment
+                })
+                const response = await WithdrawalsApprove(token, singletxn.request_id, datas)
+                if (response?.status) {
+                    ref3.current.click()
+                    Swal.fire(
+                        'Approved!',
+                        ' Transaction has been successfully Approved.',
+                        'success'
+                    )
+
+                    TransfersData()
+                } else {
+                    ref3.current.click()
+                    toast.error("something went wrong")
+
+                }
+            }
+        })
+    }
+
     console.log(singletxn, "singletxn")
+
+
+    const approvedcancell = () => {
+        console.log("------------>>>>>>>>>>>>>>>>>")
+        Swal.fire({
+            title: 'Cancel Transaction??',
+            text: "You cannot revert back this action, so please confirm that you've not received the payment yet and want to cancel.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: "No",
+            confirmButtonText: 'Yes, Cancel'
+        }).then(async (result) => {
+            if (result.value) {
+
+                const datas = JSON.stringify({
+                    "is_request_money": false,
+                    "comment": comment
+                })
+                const response = await WithdrawalsApprove(token, singletxn.request_id, datas)
+                if (response?.status) {
+                    Swal.fire(
+                        'Reject!',
+                        ' Transaction has been successfully Rejected.',
+                        'success'
+                    )
+                    ref2.current.click()
+                    TransfersData()
+                } else {
+                    toast.error("something went wrong")
+                    ref2.current.click()
+                }
+            }
+        })
+    }
     return (
 
         <>
@@ -444,7 +523,7 @@ const Transfers = () => {
                                                                                 data?.payment_status == "failed" && <span className="tb-status text-danger">Rejected</span>
                                                                             }
                                                                         </div>
-                                                                        <div className="nk-tb-col nk-tb-col-tools">
+                                                                        <div className="nk-tb-col nk-tb-col-tools" onClick={() => { setsingletxn(data) }}>
                                                                             <ul className="nk-tb-actions gx-1">
 
 
@@ -603,62 +682,61 @@ const Transfers = () => {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title">Transfer ID# <span>TNX43034523</span></h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref2} data-dismiss="modal" />
+                                <h5 className="modal-title">Transfer ID# <span>{singletxn?.txn_id}</span></h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref3} data-dismiss="modal" />
                             </div>
-                            <form onSubmit={form.handleSubmit}>
-                                <div className="modal-body">
+                            <div className="modal-body">
 
-                                    <div className="mb-3">
-                                        <p>The amount of 10.00 USDT (9.99 USD) to Deposit via Transfer Wallet.</p>
+                                <div className="mb-3">
+                                    <p>The amount of ({singletxn?.amount_before_txncharge} {singletxn?.currency_name}) ({singletxn?.amount} {singletxn?.currency_name})  to Deposit via Transfer Wallet.</p>
+                                </div>
+
+                                <div className="row mb-3">
+                                    <div className="col-md-6 otherLabel">
+                                        <label>Payment Amount</label>
+                                        <input type="text" className="form-control" placeholder={singletxn?.amount_before_txncharge} />
+                                        <span className="labeName">{singletxn?.currency_name}</span>
+                                        <small style={{ fontSize: '72%', color: '#959595', }}>The payment amount that you received.</small>
                                     </div>
-
-                                    <div className="row mb-3">
-                                        <div className="col-md-6 otherLabel">
-                                            <label>Payment Amount</label>
-                                            <input type="text" className="form-control" placeholder='10' />
-                                            <span className="labeName">USDT</span>
-                                            <small style={{ fontSize: '72%', color: '#959595', }}>The payment amount that you received.</small>
-                                        </div>
-                                        <div className="col-md-6 otherLabel">
-                                            <label>Amount to Credit</label>
-                                            <input type="text" className="form-control" placeholder='9.99' />
-                                            <span className="labeName">USD</span>
-                                            <small style={{ fontSize: '72%', color: '#959595', }}>The amount that ajdust with balance.</small>
-                                        </div>
+                                    <div className="col-md-6 otherLabel">
+                                        <label>Amount to Credit</label>
+                                        <input type="text" className="form-control" placeholder={singletxn?.amount} />
+                                        <span className="labeName">{singletxn?.currency_name}</span>
+                                        <small style={{ fontSize: '72%', color: '#959595', }}>The amount that ajdust with balance.</small>
                                     </div>
+                                </div>
 
-                                    {/* <div className="row mb-3"> */}
-                                    {/* <div className="col-md-6 otherLabel">
+                                {/* <div className="row mb-3"> */}
+                                {/* <div className="col-md-6 otherLabel">
                                             <label>Reference / Hash</label>
                                             <input type="text" className="form-control" placeholder='Reference or Hash' />
                                             <small style={{ fontSize: '72%', color: '#959595', }}>The reference will display to user.</small>
                                         </div> */}
-                                    {/* <div className="col-md-6 otherLabel">
+                                {/* <div className="col-md-6 otherLabel">
                                             <label>Received From</label>
                                             <input type="text" className="form-control" placeholder='Receiving account name or id' />
                                             <small style={{ fontSize: '72%', color: '#959595', }}>Helps to identify the payment (Admin).</small>
                                         </div> */}
-                                    {/* </div> */}
+                                {/* </div> */}
 
-                                    <div className="row mb-3">
-                                        <div className="col-md-12 otherLabel">
-                                            <label>Note / Remarks</label>
-                                            <input type="text" className="form-control" placeholder='Enter remark or note' />
-                                            <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small>
-                                        </div>
+                                <div className="row mb-3">
+                                    <div className="col-md-12 otherLabel">
+                                        <label>Note / Remarks</label>
+                                        <input type="text" className="form-control" placeholder='Enter remark or note' />
+                                        <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small>
                                     </div>
+                                </div>
 
-                                    <p>Please confirm that you want to APPROVE this Transfer request.</p>
+                                <p>Please confirm that you want to APPROVE this Transfer request.</p>
 
-                                    <button type="submit" className="btn btn-primary ms-auto mr-2" > Confirm Transfer
-                                    </button>
+                                <button type="submit" className="btn btn-primary ms-auto mr-2" onClick={() => { SuccessApproved() }}> Confirm Transfer
+                                </button>
 
-                                    <a className="cancelbtnwithdraw" data-bs-dismiss="modal" data-dismiss="modal" style={{ cursor: "pointer" }}>Cancel</a>
+                                <a className="cancelbtnwithdraw" data-bs-dismiss="modal" data-dismiss="modal" style={{ cursor: "pointer" }}>Cancel</a>
 
 
 
-                                    {/* <div className="form-group mb-3 row">
+                                {/* <div className="form-group mb-3 row">
                                         <label className="form-label col-3 col-form-label">Status</label>
                                         <div className="col">
                                             <select className="form-control mb-0" name="role" {...form.getFieldProps("role")} style={{ height: 40 }}
@@ -684,14 +762,13 @@ const Transfers = () => {
                                     </div>*/}
 
 
-                                </div>
+                            </div>
 
-                                <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
-                                    <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> The Transfer amount will adjust into user account once you approved.</p>
-                                    <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> You can not undo this action once you you confirm and approved.</p>
-                                </div>
+                            <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
+                                <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> The Transfer amount will adjust into user account once you approved.</p>
+                                <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> You can not undo this action once you you confirm and approved.</p>
+                            </div>
 
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -701,42 +778,41 @@ const Transfers = () => {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title">Cancellation of <span>TNX43034523</span></h5>
+                                <h5 className="modal-title">Cancellation of <span>{singletxn?.txn_id}</span></h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref2} data-dismiss="modal" />
                             </div>
-                            <form onSubmit={form.handleSubmit}>
-                                <div className="modal-body">
+                            <div className="modal-body">
 
-                                    <div className="mb-3">
-                                        <p>Are you sure you want to cancel this Transfer request?</p>
+                                <div className="mb-3">
+                                    <p>Are you sure you want to cancel this Transfer request?</p>
+                                </div>
+
+                                <div className="row mb-3">
+                                    <div className="col-md-12 otherLabel">
+                                        <label>Note for User</label>
+                                        <input type="text" className="form-control" placeholder='Enter remark or note' />
+                                        {/* <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small> */}
                                     </div>
+                                </div>
 
-                                    <div className="row mb-3">
-                                        <div className="col-md-12 otherLabel">
-                                            <label>Note for User</label>
-                                            <input type="text" className="form-control" placeholder='Enter remark or note' />
-                                            {/* <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small> */}
-                                        </div>
+                                <div className="row mb-3">
+                                    <div className="col-md-12 otherLabel">
+                                        <label>Note / Remarks</label>
+                                        <input type="text" className="form-control" placeholder='Enter remark or note' />
+                                        <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small>
                                     </div>
+                                </div>
 
-                                    <div className="row mb-3">
-                                        <div className="col-md-12 otherLabel">
-                                            <label>Note / Remarks</label>
-                                            <input type="text" className="form-control" placeholder='Enter remark or note' />
-                                            <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small>
-                                        </div>
-                                    </div>
+                                <p>Please confirm that you want to CANCEL this Transfer request.</p>
 
-                                    <p>Please confirm that you want to CANCEL this Transfer request.</p>
+                                <button type="submit" className="btn btn-primary ms-auto mr-2" onClick={() => { approvedcancell() }}> Cancelled Transfer
+                                </button>
 
-                                    <button type="submit" className="btn btn-primary ms-auto mr-2" > Cancelled Transfer
-                                    </button>
-
-                                    <a className="cancelbtnwithdraw" data-bs-dismiss="modal" data-dismiss="modal" style={{ cursor: "pointer" }}>Return</a>
+                                <a className="cancelbtnwithdraw" data-bs-dismiss="modal" data-dismiss="modal" style={{ cursor: "pointer" }}>Return</a>
 
 
 
-                                    {/* <div className="form-group mb-3 row">
+                                {/* <div className="form-group mb-3 row">
                                         <label className="form-label col-3 col-form-label">Status</label>
                                         <div className="col">
                                             <select className="form-control mb-0" name="role" {...form.getFieldProps("role")} style={{ height: 40 }}
@@ -762,14 +838,13 @@ const Transfers = () => {
                                     </div>*/}
 
 
-                                </div>
+                            </div>
 
-                                <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
-                                    <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> You can cancel the transaction if you've not received the payment yet.</p>
-                                    <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> You can not undo this action once you confirm and cancelled.</p>
-                                </div>
+                            <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
+                                <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> You can cancel the transaction if you've not received the payment yet.</p>
+                                <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> You can not undo this action once you confirm and cancelled.</p>
+                            </div>
 
-                            </form>
                         </div>
                     </div>
                 </div>

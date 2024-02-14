@@ -53,6 +53,7 @@ const Withdrawals = () => {
    const navigate = useNavigate()
    const ref2 = useRef()
    const ref3 = useRef()
+
    const reqmoneystatus = (data) => {
       setid(data?.request_id)
       console.log(id, "dddddddddd")

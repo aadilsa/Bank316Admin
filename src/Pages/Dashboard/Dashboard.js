@@ -958,9 +958,9 @@ const Dashboard = () => {
                                                                                 <span className="tb-lead text-primary"><a ><span style={{ cursor: "pointer" }}
                                                                                 // onClick={() => GoTransDetail(data.id, data.client_id)}
                                                                                 >{data?.txn_id}</span>
-                                                                                    <CopyToClipboard text={data?.txn_id} style={{ height: '25px', width: '25px', padding: 2 }}>
+                                                                                    {/* <CopyToClipboard text={data?.txn_id} style={{ height: '25px', width: '25px', padding: 2 }}>
                                                                                         <span className='btn btn-primary btn-sm ms-1' onClick={() => copiedInfo()}><e className="fa fa-copy fa fa-solid text-white" style={{ fontSize: '17px' }}></e></span>
-                                                                                    </CopyToClipboard>
+                                                                                    </CopyToClipboard> */}
                                                                                     <br></br>
                                                                                     {
                                                                                         data?.txn_type == "Credit" ? <span className="badge badge-dot  bg-success">CREDIT</span> :
