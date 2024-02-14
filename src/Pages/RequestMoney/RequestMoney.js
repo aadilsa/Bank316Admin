@@ -676,8 +676,6 @@ function RequestMoney() {
                                     </div>
                                 </div>{/* .card */}
                             </div>
-
-
                         </div>
                     </div>
                 </div>

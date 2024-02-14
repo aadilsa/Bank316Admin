@@ -628,18 +628,18 @@ const Transfers = () => {
                                         </div>
                                     </div>
 
-                                    <div className="row mb-3">
-                                        <div className="col-md-6 otherLabel">
+                                    {/* <div className="row mb-3"> */}
+                                    {/* <div className="col-md-6 otherLabel">
                                             <label>Reference / Hash</label>
                                             <input type="text" className="form-control" placeholder='Reference or Hash' />
                                             <small style={{ fontSize: '72%', color: '#959595', }}>The reference will display to user.</small>
-                                        </div>
-                                        <div className="col-md-6 otherLabel">
+                                        </div> */}
+                                    {/* <div className="col-md-6 otherLabel">
                                             <label>Received From</label>
                                             <input type="text" className="form-control" placeholder='Receiving account name or id' />
                                             <small style={{ fontSize: '72%', color: '#959595', }}>Helps to identify the payment (Admin).</small>
-                                        </div>
-                                    </div>
+                                        </div> */}
+                                    {/* </div> */}
 
                                     <div className="row mb-3">
                                         <div className="col-md-12 otherLabel">

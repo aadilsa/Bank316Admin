@@ -52,7 +52,7 @@ const Withdrawals = () => {
    const [singletxn, setsingletxn] = useState()
    const navigate = useNavigate()
    const ref2 = useRef()
-   const ref1 = useRef()
+   const ref3 = useRef()
    const reqmoneystatus = (data) => {
       setid(data?.request_id)
       console.log(id, "dddddddddd")
@@ -188,16 +188,18 @@ const Withdrawals = () => {
             })
             const response = await WithdrawalsApprove(token, id, datas)
             if (response?.status) {
+               ref3.current.click()
                Swal.fire(
                   'Approved!',
                   ' Transaction has been successfully Approved.',
                   'success'
                )
-               ref1.current.click()
+
                WithdrawalsTxnData()
             } else {
+               ref3.current.click()
                toast.error("something went wrong")
-               ref1.current.click()
+
             }
          }
       })
@@ -529,128 +531,128 @@ const Withdrawals = () => {
                   <div className="modal-content bgWhiteModalwithdraw">
                      <div className="modal-header">
                         <h5 className="modal-title">Withdraw ID#  <span>{modaldata?.transcation?.txn_id}</span></h5>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref1} data-dismiss="modal" />
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref3} data-dismiss="modal" />
                      </div >
-                     <form >
-                        <div className="modal-body bgWhiteModalwithdraw">
-                           <div className="mb-3">
-                              <p>User <b>{modaldata?.transcation?.recipient_name}</b> request to withdraw <b>{modaldata?.walletDetails?.currencyDetails?.symbol} {modaldata?.transcation?.base_amount}</b> via <b>PayPal.</b> Please check out the details and send payment to user account below.</p>
-                           </div>
-                           <div className="row mb-3">
-                              <div className="col-md-12">
-                                 <table class="table table-plain table-borderless table-sm mb-0 withdrawTable">
-                                    <tbody>
-                                       <tr>
-                                          <td><span class="sub-text">Withdraw Amount</span></td>
-                                          <td>
-                                             <span class="lead-text">{modaldata?.walletDetails?.currencyDetails?.symbol} {modaldata?.transcation?.base_amount}</span>
-                                          </td>
-                                       </tr>
-                                       <tr>
-                                          <td><span class="sub-text">Withdraw Method</span></td>
-                                          <td><span class="lead-text">PayPal</span></td>
-                                       </tr>
-                                       {
-                                          modaldata?.transcation?.recipients_outside316?.bank_name != null &&
-                                          <>
-                                             <tr>
-                                                <td><span class="sub-text">Bank Name</span></td>
-                                                <td><span class="lead-text">{modaldata?.transcation?.recipients_outside316?.bank_name}</span></td>
-                                             </tr>
-                                          </>
-                                       }
 
-                                       <tr>
-                                          <td><span class="sub-text">Payment Information</span></td>
-                                          <td>
-                                             <div class="label lead-text"></div>
-                                             <div class="lead-text">{modaldata?.client?.email}</div>
-                                             {
-                                                modaldata?.transcation?.recipients_outside316?.account_number != null &&
-                                                <>
-
-                                                   <div class="label lead-text">Account No</div>
-                                                   <div class="data mb-1">{modaldata?.transcation?.recipients_outside316?.account_number}</div>
-                                                </>
-                                             }
-
-
-
-                                             {
-                                                modaldata?.transcation?.recipients_outside316?.sort_code != null &&
-                                                <>
-
-                                                   <div class="label lead-text">Sort Code</div>
-                                                   <div class="data mb-1">{modaldata?.transcation?.recipients_outside316?.sort_code}</div>
-                                                </>
-                                             }
-
-
-                                             {
-                                                modaldata?.transcation?.recipients_outside316?.ifsc_code != null &&
-                                                <>
-
-                                                   <div class="label lead-text">IFSC Code</div>
-                                                   <div class="data mb-1">{modaldata?.transcation?.recipients_outside316?.ifsc_code}</div>
-                                                </>
-                                             }
-
-
-
-
-                                             {
-                                                modaldata?.transcation?.recipients_outside316?.swift_code != null &&
-                                                <>
-
-                                                   <div class="label lead-text">IFSC Code</div>
-                                                   <div class="data mb-1">{modaldata?.transcation?.recipients_outside316?.swift_code}</div>
-                                                </>
-                                             }
-
-
-                                             {
-                                                modaldata?.transcation?.recipients_outside316?.payee_id != null &&
-                                                <>
-
-                                                   <div class="label lead-text">Payee ID</div>
-                                                   <div class="data mb-1">{modaldata?.transcation?.recipients_outside316?.payee_id}</div>
-                                                </>
-                                             }
-
-                                             {
-                                                modaldata?.transcation?.recipients_outside316?.upi_id != null &&
-                                                <>
-
-                                                   <div class="label lead-text">UPI ID</div>
-                                                   <div class="data mb-1">{modaldata?.transcation?.recipients_outside316?.upi_id}</div>
-                                                </>
-                                             }
-
-                                             <div class="label lead-text">Account Currency</div>
-                                             <div class="data mb-1">( {modaldata?.transcation?.recipients_outside316?.other_currency_symbol} ) {modaldata?.transcation?.recipients_outside316?.other_currency}</div>
-                                          </td>
-                                       </tr>
-                                       <tr>
-                                          <td><span class="sub-text">Amount to Debit</span></td>
-                                          <td>
-                                             <span class="lead-text">{modaldata?.transcation?.recipients_outside316?.other_currency_symbol} {modaldata?.transcation?.transfer_amount}</span>
-                                          </td>
-                                       </tr>
-                                    </tbody>
-                                 </table>
-                              </div>
-                           </div>
-
-                           <p>Please confirm that you want to PROCCED this <b>WITHDRAW</b> request.</p>
-                           <button type='button' className="btn btn-primary ms-auto mr-2" onClick={() => { SuccessApproved() }}> Confirm Withdraw
-                           </button>
-                           <a className="cancelbtnwithdraw" onClick={() => { ref1.current.click() }} style={{ cursor: "pointer" }} data-dismiss="modal" data-bs-dismiss="modal">Cancel</a>
+                     <div className="modal-body bgWhiteModalwithdraw">
+                        <div className="mb-3">
+                           <p>User <b>{modaldata?.transcation?.recipient_name}</b> request to withdraw <b>{modaldata?.walletDetails?.currencyDetails?.symbol} {modaldata?.transcation?.base_amount}</b> via <b>PayPal.</b> Please check out the details and send payment to user account below.</p>
                         </div>
-                        <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
-                           <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> You able to complete the withdraw after confirm the withdraw request.</p>
-                           <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> User unable to cancel the withdraw request once you have confirmed.</p>
+                        <div className="row mb-3">
+                           <div className="col-md-12">
+                              <table class="table table-plain table-borderless table-sm mb-0 withdrawTable">
+                                 <tbody>
+                                    <tr>
+                                       <td><span class="sub-text">Withdraw Amount</span></td>
+                                       <td>
+                                          <span class="lead-text">{modaldata?.walletDetails?.currencyDetails?.symbol} {modaldata?.transcation?.base_amount}</span>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td><span class="sub-text">Withdraw Method</span></td>
+                                       <td><span class="lead-text">PayPal</span></td>
+                                    </tr>
+                                    {
+                                       modaldata?.transcation?.recipients_outside316?.bank_name != null &&
+                                       <>
+                                          <tr>
+                                             <td><span class="sub-text">Bank Name</span></td>
+                                             <td><span class="lead-text">{modaldata?.transcation?.recipients_outside316?.bank_name}</span></td>
+                                          </tr>
+                                       </>
+                                    }
+
+                                    <tr>
+                                       <td><span class="sub-text">Payment Information</span></td>
+                                       <td>
+                                          <div class="label lead-text"></div>
+                                          <div class="lead-text">{modaldata?.client?.email}</div>
+                                          {
+                                             modaldata?.transcation?.recipients_outside316?.account_number != null &&
+                                             <>
+
+                                                <div class="label lead-text">Account No</div>
+                                                <div class="data mb-1">{modaldata?.transcation?.recipients_outside316?.account_number}</div>
+                                             </>
+                                          }
+
+
+
+                                          {
+                                             modaldata?.transcation?.recipients_outside316?.sort_code != null &&
+                                             <>
+
+                                                <div class="label lead-text">Sort Code</div>
+                                                <div class="data mb-1">{modaldata?.transcation?.recipients_outside316?.sort_code}</div>
+                                             </>
+                                          }
+
+
+                                          {
+                                             modaldata?.transcation?.recipients_outside316?.ifsc_code != null &&
+                                             <>
+
+                                                <div class="label lead-text">IFSC Code</div>
+                                                <div class="data mb-1">{modaldata?.transcation?.recipients_outside316?.ifsc_code}</div>
+                                             </>
+                                          }
+
+
+
+
+                                          {
+                                             modaldata?.transcation?.recipients_outside316?.swift_code != null &&
+                                             <>
+
+                                                <div class="label lead-text">IFSC Code</div>
+                                                <div class="data mb-1">{modaldata?.transcation?.recipients_outside316?.swift_code}</div>
+                                             </>
+                                          }
+
+
+                                          {
+                                             modaldata?.transcation?.recipients_outside316?.payee_id != null &&
+                                             <>
+
+                                                <div class="label lead-text">Payee ID</div>
+                                                <div class="data mb-1">{modaldata?.transcation?.recipients_outside316?.payee_id}</div>
+                                             </>
+                                          }
+
+                                          {
+                                             modaldata?.transcation?.recipients_outside316?.upi_id != null &&
+                                             <>
+
+                                                <div class="label lead-text">UPI ID</div>
+                                                <div class="data mb-1">{modaldata?.transcation?.recipients_outside316?.upi_id}</div>
+                                             </>
+                                          }
+
+                                          <div class="label lead-text">Account Currency</div>
+                                          <div class="data mb-1">( {modaldata?.transcation?.recipients_outside316?.other_currency_symbol} ) {modaldata?.transcation?.recipients_outside316?.other_currency}</div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td><span class="sub-text">Amount to Debit</span></td>
+                                       <td>
+                                          <span class="lead-text">{modaldata?.transcation?.recipients_outside316?.other_currency_symbol} {modaldata?.transcation?.transfer_amount}</span>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
                         </div>
-                     </form>
+
+                        <p>Please confirm that you want to PROCCED this <b>WITHDRAW</b> request.</p>
+                        <button type='button' className="btn btn-primary ms-auto mr-2" onClick={() => { SuccessApproved() }}> Confirm Withdraw
+                        </button>
+                        <a className="cancelbtnwithdraw" onClick={() => { ref3.current.click() }} style={{ cursor: "pointer" }} >Cancel</a>
+                     </div>
+                     <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
+                        <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> You able to complete the withdraw after confirm the withdraw request.</p>
+                        <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> User unable to cancel the withdraw request once you have confirmed.</p>
+                     </div>
+
                   </div >
                </div >
             </div >
@@ -725,7 +727,7 @@ const Withdrawals = () => {
                   <div className="modal-content">
                      <div className="modal-header">
                         <h5 className="modal-title">Withdrawal ID# <span>{modaldata?.transcation?.txn_id}</span></h5>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref1} data-dismiss="modal" />
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" data-dismiss="modal" />
                      </div>
                      <form >
                         <div className="modal-body">
