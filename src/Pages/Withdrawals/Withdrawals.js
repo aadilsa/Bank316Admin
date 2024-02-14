@@ -727,7 +727,8 @@ const Withdrawals = () => {
                <div className="modal-dialog" role="document">
                   <div className="modal-content">
                      <div className="modal-header">
-                        <h5 className="modal-title">Withdrawal ID# <span>{modaldata?.transcation?.txn_id}</span></h5>
+                        <h5 className="modal-title">Withdrawal ID 
+                        <span className="greebTxnWithdraw"> #{modaldata?.transcation?.txn_id}</span></h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" data-dismiss="modal" />
                      </div>
                      <form >
