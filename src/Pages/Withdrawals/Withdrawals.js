@@ -221,10 +221,16 @@ const Withdrawals = () => {
    //    }
    // }
 
-   console.log(singletxn, "singlelelelelel")
+   console.log(singletxn, "???????????????")
 
-   var singlestillUtcs = moment.utc(singletxn?.transcation?.created_at).toDate();
+   var singlestillUtcs = moment.utc(modaldata?.transcation?.created_at).toDate();
    var singletimeZones = moment(singlestillUtcs).local().format('MMM D, YYYY hh:mm A');
+
+   console.log(modaldata?.transcation?.created_at, "singletxn?.transcation?.created_at")
+
+
+   var completed_on = moment.utc(modaldata?.transcation?.completed_on).toDate();
+   var singlecompleted_on = moment(completed_on).local().format('MMM D, YYYY hh:mm A');
    return (
       <>
          <Container>
@@ -727,8 +733,8 @@ const Withdrawals = () => {
                <div className="modal-dialog" role="document">
                   <div className="modal-content">
                      <div className="modal-header">
-                        <h5 className="modal-title">Withdrawal ID 
-                        <span className="greebTxnWithdraw"> #{modaldata?.transcation?.txn_id}</span></h5>
+                        <h5 className="modal-title">Withdrawal ID
+                           <span className="greebTxnWithdraw"> #{modaldata?.transcation?.txn_id}</span></h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" data-dismiss="modal" />
                      </div>
                      <form >
@@ -800,7 +806,7 @@ const Withdrawals = () => {
                               <div className="col-md-12"><h6 className="mb-3">RECIPIENT ACCOUNT  DETAILS</h6></div>
                               <div className="col-md-6">
                                  <ul>
-                                    <li className="mb-3">Account Name  <span className="d-block">{singletxn?.transcation?.recipients_outside316?.account_holder_name}</span></li>
+                                    <li className="mb-3">Account holder Name  <span className="d-block">{modaldata?.transcation?.recipients_outside316?.account_holder_name}</span></li>
                                     {
                                        modaldata?.transcation?.recipients_outside316?.account_number !== null && <li className="mb-3">Account Number   <span className="d-block">{modaldata?.transcation?.recipients_outside316?.account_number} </span></li>
 
@@ -870,7 +876,7 @@ const Withdrawals = () => {
 
                                     <li className="mb-3">Payment Gateway <span className="d-block">Manual Bank Transfer</span></li>
                                     {
-                                       modaldata?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed By  <span className="d-block">Aadil Mansuri</span></li>
+                                       modaldata?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed By  <span className="d-block">{modaldata?.transcation?.completed_by}</span></li>
                                     }
 
                                  </ul>
@@ -882,7 +888,7 @@ const Withdrawals = () => {
                                     <li className="mb-3">Default Currency Wallet <span className="d-block">{modaldata?.transcation?.other_currency}</span></li>
                                     <li className="mb-3">Transaction Status <span className="d-block">{modaldata?.transcation?.payment_status}</span></li>
                                     {
-                                       modaldata?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed On  <span className="d-block">Jan 23 2024, 5:30 PM</span></li>
+                                       modaldata?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed On  <span className="d-block">{singlecompleted_on}</span></li>
                                     }
 
                                  </ul>

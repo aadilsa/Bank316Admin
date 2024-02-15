@@ -22,6 +22,7 @@ import { WithdrawalsApprove } from '../../API/Withdrawals/WithdrawalsAPI'
 const AddSuccessToast = () => {
     toast.success('Status Change successfully.', { autoClose: 2000 });
 }
+
 const addErrorToast = (massage) => {
     toast.error(massage, {
         autoClose: 2000
@@ -537,7 +538,7 @@ const Conversions = () => {
 
 
 
-            0
+
             <div className="modal modal-blur fade" id="modal-txn" tabIndex={-1} role="dialog" aria-hidden="true">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">

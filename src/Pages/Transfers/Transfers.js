@@ -296,8 +296,11 @@ const Transfers = () => {
             }
         })
     }
-    return (
 
+
+    var stillUtcs = moment.utc(singletxn?.created_at).toDate();
+    var singletimeZones = moment(stillUtcs).local().format('MMM D, YYYY hh:mm A');
+    return (
         <>
             <Container>
                 <div className="nk-content ">
@@ -465,7 +468,7 @@ const Transfers = () => {
                                                                             <div className="custom-control custom-control-sm custom-checkbox notext">
                                                                                 <input type="checkbox" className="custom-control-input" id="uid1" />
                                                                                 <label className="custom-control-label" htmlFor="uid1" />
-                                                                            </div>
+                                                                              </div>   
                                                                         </div> */}
                                                                         <div className="nk-tb-col">
                                                                             <a >
@@ -867,8 +870,8 @@ const Transfers = () => {
                                                     <e class="icon ni ni-arrow-up-right"></e></span>
                                                 <em class="icon ni ni-wallet-fill walletIconNew"></em>
                                             </div>
-                                            <div class="info"><div class="title"><b>  {singletxn?.amount_before_txncharge} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</b></div>
-                                                {/* <div class="price">{timeZones}</div> */}
+                                            <div class="info"><div class="title"><b>  {singletxn?.amount_before_txncharge} {singletxn?.base_currency}</b></div>
+                                                <div class="price">{singletimeZones}</div>
                                             </div>
                                             {
                                                 singletxn?.transcation?.payment_status == "success" && <div class="total badge rounded-pill bg-success">success</div>
@@ -886,15 +889,15 @@ const Transfers = () => {
                                         <div className="col-md-6">
                                             <h6 className="mb-3">USER DETAILS</h6>
                                             <ul>
-                                                <li className="mb-3">User Account <span className="d-block">{singletxn?.sender?.first_name} {singletxn?.sender?.last_name} <small></small></span></li>
-                                                <li className="mb-3">Email <span className="d-block">{singletxn?.sender?.email}</span></li>
-                                                <li className="mb-3">Phone Number <span className="d-block">{singletxn?.sender?.phone}</span></li>
+                                                <li className="mb-3">User Account <span className="d-block">{singletxn?.client?.first_name} {singletxn?.client?.last_name} <small></small></span></li>
+                                                <li className="mb-3">Email <span className="d-block">{singletxn?.client?.email}</span></li>
+                                                <li className="mb-3">Phone Number <span className="d-block">{singletxn?.client?.phone}</span></li>
                                             </ul>
                                         </div>
                                         <div className="col-md-6">
                                             <h6 className="mb-3">ACCOUNT DETAILS</h6>
                                             <ul>
-                                                <li className="mb-3">Cash Balance <span className="d-block">2,459 GBP</span></li>
+                                                <li className="mb-3">Cash Balance <span className="d-block">{singletxn?.cash_balance} {singletxn?.base_currency}</span></li>
                                                 <li className="mb-3">Default Wallet <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
                                                 <li className="mb-3">Country <span className="d-block">United Kingdom</span></li>
                                             </ul>
@@ -904,11 +907,11 @@ const Transfers = () => {
                                         <div className="col-md-12"><h6 className="mb-3">TRANSACTION DETAILS : SENDER</h6></div>
                                         <div className="col-md-6">
                                             <ul>
-                                                <li className="mb-3">Transfer  Amount   <span className="d-block">{singletxn?.transcation?.amount_before_txncharge} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
+                                                <li className="mb-3">Transfer  Amount   <span className="d-block">{singletxn?.amount_before_txncharge} {singletxn?.base_currency}</span></li>
                                                 <li className="mb-3">Payout Currency<span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
-                                                <li className="mb-3">Transaction Charge <span className="d-block">{singletxn?.transcation?.txn_charge_amount} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
+                                                <li className="mb-3">Transaction Charge <span className="d-block">{singletxn?.txn_charge_amount} {singletxn?.base_currency}</span></li>
                                                 <li className="mb-3">Exchange Rate  <span className="d-block">{singletxn?.transcation?.txn_charge_amount} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
-                                                <li className="mb-3">Adj Transfer Amount <span className="d-block"> {singletxn?.transcation?.amount} {singletxn?.receiver?.currencywallets[0]?.currency?.short_name}</span></li>
+                                                <li className="mb-3">Adj Transfer Amount <span className="d-block"> {singletxn?.base_amount} {singletxn?.base_currency}</span></li>
                                             </ul>
                                         </div>
                                         <div className="col-md-6">

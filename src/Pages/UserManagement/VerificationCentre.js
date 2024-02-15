@@ -366,7 +366,6 @@ const VerificationCentre = () => {
                                                 <div className="nk-tb-col"></div>
                                                 <div className="nk-tb-col tb-col-mb"></div>
                                                 <div className="nk-tb-col tb-col-md">
-
                                                 </div>
                                                 <div className="nk-tb-col tb-col-lg">  {<Loader />}</div>
                                                 <div className="nk-tb-col tb-col-lg">

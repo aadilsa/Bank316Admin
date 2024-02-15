@@ -320,8 +320,13 @@ function RequestMoney() {
     }
     console.log(alldata, "alldata")
 
-    var stillUtcs = moment.utc(singletxn?.transaction?.created_at).toDate();
-    var timeZones = moment(stillUtcs).local().format('YYYY-MM-DD HH:mm:ss A');
+    // var stillUtcs = moment.utc(singletxn?.transaction?.created_at).toDate();
+    // var timeZones = moment(stillUtcs).local().format('YYYY-MM-DD HH:mm:ss A');
+
+    var singlestillUtcs = moment.utc(singletxn?.transaction?.created_at).toDate();
+    var singletimeZones = moment(singlestillUtcs).local().format('MMM D, YYYY hh:mm A');
+    console.log(singletxn, "singletxn?.transaction?.created_at")
+    console.log(singletimeZones, "singletimeZones")
     return (
         <Container>
             <div className="nk-content ">
@@ -884,7 +889,7 @@ function RequestMoney() {
                                                 <em class="icon ni ni-wallet-fill walletIconNew"></em>
                                             </div>
                                             <div class="info"><div class="title"><b>  {singletxn?.transaction?.amount_before_txncharge} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</b></div>
-                                                <div class="price">{timeZones}</div>
+                                                <div class="price">{singletimeZones}</div>
                                             </div>
                                             {
                                                 singletxn?.transaction?.payment_status == "success" && <div class="total badge rounded-pill bg-success">success</div>
@@ -944,7 +949,7 @@ function RequestMoney() {
                                                 <li className="mb-3">Transaction Description <span className="d-block">Deposit Via Manual Bank Transfer </span></li>
                                                 <li className="mb-3">Payment Gateway <span className="d-block">Manual Bank Transfer</span></li>
                                                 {
-                                                    singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed By  <span className="d-block">Aadil Mansuri</span></li>
+                                                    singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed By  <span className="d-block">{singletxn?.transcation?.completed_by}</span></li>
                                                 }
 
                                             </ul>
