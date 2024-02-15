@@ -201,7 +201,7 @@ const Sidebar = () => {
 
 
     useEffect(() => {
-        if (roletab == "/admin/user-mangement" || roletab == "/admin/verification-Centre") {
+        if (roletab == "/admin/user-mangement") {
             setUserManagement(true);
         }
         else {
