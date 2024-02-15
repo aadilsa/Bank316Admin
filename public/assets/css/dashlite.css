@@ -20738,12 +20738,12 @@ div.dataTables_wrapper div.dataTables_length select {
   right: 0;
   bottom: 0;
   height: 3px;
-  background: #854fff;
+  background: #5aac4e;
   opacity: 0;
 }
 
 .nav-tabs .nav-link.active {
-  color: #854fff;
+  color: #5aac4e;
   border: none;
   background-color: transparent;
 }
@@ -51124,26 +51124,38 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
 }
 .mright-2 { margin-right:15px;} 
 .paddLeftZero { padding-left:0px;}
+
+.paddRightZero { padding-right:0px;}
+
 .newTabUser .nav-tabs .nav-link {
-    font-size: 13px;
+  font-size: 12px;
+  padding-top: 0px;
+  font-weight: 500;
 }
 .singUserDetail .profile-ud-item {
     width: 100%;
     padding: 0 3.25rem;
 }
 .singUserDetail .wider .profile-ud-label {
-    width: 130px;
+  width: 120px;
+  font-size: 12px;
 }
 .singUserDetail .wider .profile-ud-value {
   text-align: right;
   font-weight: 500;
   width: 100%;
-  font-size: 13px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .singUserDetail-1 .profile-ud-item {
     width: 50%;
-    padding: 0 3.25rem;
+    padding: 0px;
+}
+.singUserDetail-1 .profile-ud-list {
+  margin: 0px;
 }
 .singUserDetail-1 .wider .profile-ud-label {
     width: 130px;
@@ -51152,7 +51164,7 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   text-align: right;
   font-weight: 500;
   width: 50%;
-  font-size: 13px;
+  font-size: 12px;
 }
 .tableUserModal h6 {
   color:#006c00;
@@ -51161,6 +51173,84 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   color:#5aac4e;
 }
 
+.headingUserNewD {
+  font-size: 18px;
+  font-weight: 500;
+  color: #000;
+}
+.headingUserNewD span {
+   color:#5AAC4E;
+}
+.detaiverifyUserNew {
+  display: flex;
+  gap: 30px;
+  font-size: 12px;
+  font-weight: 400;
+}
+.detaiverifyUserNew span{
+  font-weight: 500;
+}
+.newTabUser {  margin-right: 0px; margin-left: 0px; }
+.moreNavTabsScroll {
+  display: flex;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+}
+.moreNavTabsScroll .newTabUser .nav-link:after {
+  bottom: 5px;
+}
+#style-10::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 5px;
+	background-color: #ededed;
+}
+
+#style-10::-webkit-scrollbar
+{
+	height: 3px;
+	background-color: #ededed;
+}
+
+#style-10::-webkit-scrollbar-thumb
+{
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #41423C;
+}
+.boxGeyColor {
+      background: #F5F6FA;
+    padding: 20px;
+    border-radius: 10px;
+}
+.profile-ud.wider {
+  padding: 7px 0px;
+  font-size: 12px;
+}
+.overline-title {
+  font-weight: 500;
+  letter-spacing: normal;
+}
+.lightBgBoxUser {
+  background:#F5F6FA;
+  padding:10px;
+  border-radius:10px;
+  margin-bottom: 20px;
+}
+.addedWithDeleteNote {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.addedWithDeleteNote span {
+   color:#5aac4e;
+}
+.addedWithDeleteNote a {
+    color:#e85347!important;
+}
 
 @media (min-width: 320px) and (max-width: 767px) {
   .cardInnerBorder canvas {
