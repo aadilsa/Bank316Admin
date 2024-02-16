@@ -231,7 +231,7 @@ return (
                                        <a className="nav-link" data-bs-toggle="tab" href="#trading"><em class="icon ni ni-repeat"></em><span>Trading</span></a>
                                     </li>
                                     <li className="nav-item">
-                                       <a className="nav-link" data-bs-toggle="tab" href="#profile-courses"><em class="icon ni ni-file-text"></em><span>Documents</span></a>
+                                       <a className="nav-link" data-bs-toggle="tab" href="#documents"><em class="icon ni ni-file-text"></em><span>Documents</span></a>
                                     </li>
                                     <li className="nav-item">
                                        <a className="nav-link" data-bs-toggle="tab" href="#referrals"><em class="icon ni ni-file-text"></em><span>Referrals</span></a>
@@ -445,8 +445,6 @@ return (
                                                             </ul>
                                                         </div>
                                                     </div>
-
-
                                                 </div>
                                             </div>
 
@@ -461,24 +459,397 @@ return (
                                                         <span>| By Vianney CM </span></p>
                                                     <a href=""> Delete Not</a>    
                                                 </div>
-
-
                                             </div>
-
-
-
-
                                           </div>
                                        </div>
                                        {/* tab pane */}
+
+
+                                       
+                                       <div className="tab-pane" id="walletbalance">
+                                          <div className="nk-block-between pb-2">
+                                                <div className="nk-block-head-content">
+                                                    <h5 className="nk-block-title mb-0">Wallets and Balances </h5>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-12">
+                                                <div className="walletBoxUser">
+                                                    <ul>
+                                                        <li className="imgfirst">
+                                                              <img src="https://vehicle99.com:3006/uploads/currencies/india.png" alt="img" class="thumb" height="27"/>
+                                                            <div className="wallePrice">
+                                                                <h3>1500.395 GBP</h3>
+                                                                <p>Cash Balance</p>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div className="wallePrice">
+                                                                <h3>69.395 GBP</h3>
+                                                                <p>Bonuses</p>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div className="wallePrice">
+                                                                <h3>10,000.395 GBP</h3>
+                                                                <p><em class="icon ni ni-tranx-fill"></em> Money in</p>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div className="wallePrice">
+                                                                <h3>69.395 GBP</h3>
+                                                                <p><em class="icon ni ni-tranx-fill"></em>Money out</p>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                          <div className="col-md-12 mt-4">
+                                                <div className="boxGeyColor">
+                                                <div className="nk-block-head nk-block-head-line">
+                                                   <h6 className="title overline-title text-base">Currency Balances
+                                                   </h6>
+                                                </div>
+                                                {/* .nk-block-head */}
+                                                  <div className="curencyBalanceList">
+                                                    <ul className="listWalletBalance"> 
+                                                        <li><img src="https://vehicle99.com:3006/uploads/currencies/india.png" alt="img" class="thumb" height="27"/></li>
+                                                        <li className="firstHeadingWallet">1500.395</li>
+                                                        <li>GBP</li>
+                                                        <li className="widthCurrency">Great British Pounds</li>
+                                                        <li>
+                                                            <div class="dropdown">
+                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <em class="icon ni ni-more-h"></em></a>
+                                                                <div class="dropdown-menu dropdown-menu-end">
+                                                                    <ul class="link-list-opt no-bdr mt-0">
+                                                                        <li><a href="#"><span>View Transactions</span></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <ul className="listWalletBalance"> 
+                                                        <li><img src="https://vehicle99.com:3006/uploads/currencies/india.png" alt="img" class="thumb" height="27"/></li>
+                                                        <li className="firstHeadingWallet">1500.395</li>
+                                                        <li>EURO</li>
+                                                        <li className="widthCurrency">European Euro</li>
+                                                        <li>
+                                                            <div class="dropdown">
+                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <em class="icon ni ni-more-h"></em></a>
+                                                                <div class="dropdown-menu dropdown-menu-end">
+                                                                    <ul class="link-list-opt no-bdr mt-0">
+                                                                        <li><a href="#"><span>View Transactions</span></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+
+                                                  </div>
+                                                {/* .nk-block */}
+                                             </div>
+                                        </div>
+                                        <div className="col-md-12 mt-4">
+                                                <div className="boxGeyColor">
+                                                <div className="nk-block-head nk-block-head-line">
+                                                   <h6 className="title overline-title text-base">Custom Balances
+                                                   </h6>
+                                                </div>
+                                                {/* .nk-block-head */}
+                                                  <div className="curencyBalanceList">
+                                                    <ul className="listWalletBalance"> 
+                                                        <li><img src="https://vehicle99.com:3006/uploads/currencies/india.png" alt="img" class="thumb" height="27"/></li>
+                                                        <li className="firstHeadingWallet">1500.395 </li>
+                                                        <li>GBP</li>
+                                                        <li className="widthCurrency">Rainy Day</li>
+                                                        <li>
+                                                            <div class="dropdown">
+                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <em class="icon ni ni-more-h"></em></a>
+                                                                <div class="dropdown-menu dropdown-menu-end">
+                                                                    <ul class="link-list-opt no-bdr mt-0">
+                                                                        <li><a href="#"><span>View Transactions</span></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <ul className="listWalletBalance"> 
+                                                        <li><img src="https://vehicle99.com:3006/uploads/currencies/india.png" alt="img" class="thumb" height="27"/></li>
+                                                        <li className="firstHeadingWallet">600.523</li>
+                                                        <li>EURO</li>
+                                                        <li className="widthCurrency">Holiday</li>
+                                                        <li>
+                                                            <div class="dropdown">
+                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <em class="icon ni ni-more-h"></em></a>
+                                                                <div class="dropdown-menu dropdown-menu-end">
+                                                                    <ul class="link-list-opt no-bdr mt-0">
+                                                                        <li><a href="#"><span>View Transactions</span></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+
+                                                  </div>
+                                                {/* .nk-block */}
+                                             </div>
+                                        </div>
+
+                                       </div>
+                                       {/* tab pane */}
+
+
                                        <div className="tab-pane" id="profile-overview">
                                           <h1>Transactions</h1>
                                        </div>
                                        {/* tab pane */}
-                                       <div className="tab-pane" id="profile-courses">
-                                          <h1>Profile Course</h1>
+
+
+                                       <div className="tab-pane" id="trading">
+                                          <div className="nk-block-between pb-2">
+                                                <div className="nk-block-head-content">
+                                                    <h5 className="nk-block-title mb-0">316 Trade Profile</h5>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-12">
+                                                <div className="walletBoxUser">
+                                                    <ul>
+                                                        <li className="imgfirst">
+                                                              <img src="https://vehicle99.com:3006/uploads/currencies/india.png" alt="img" class="thumb" height="27"/>
+                                                            <div className="wallePrice">
+                                                                <h3>1500.395 GBP</h3>
+                                                                <p>Cash Balance</p>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div className="wallePrice">
+                                                                <h3>69.395 GBP</h3>
+                                                                <p>Bonuses</p>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div className="wallePrice">
+                                                                <h3>10,000.395 GBP</h3>
+                                                                <p><em class="icon ni ni-tranx-fill"></em> Money in</p>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div className="wallePrice">
+                                                                <h3>69.395 GBP</h3>
+                                                                <p><em class="icon ni ni-tranx-fill"></em>Money out</p>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                          <div className="col-md-12 mt-4">
+                                                <div className="boxGeyColor">
+                                                <div className="nk-block-head nk-block-head-line">
+                                                   <h6 className="title overline-title text-base">Currency Balances
+                                                   </h6>
+                                                </div>
+                                                {/* .nk-block-head */}
+                                                  <div className="curencyBalanceList">
+                                                    <ul className="listWalletBalance"> 
+                                                        <li><img src="https://vehicle99.com:3006/uploads/currencies/india.png" alt="img" class="thumb" height="27"/></li>
+                                                        <li className="firstHeadingWallet">1500.395</li>
+                                                        <li>GBP</li>
+                                                        <li className="widthCurrency">Great British Pounds</li>
+                                                        <li>
+                                                            <div class="dropdown">
+                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <em class="icon ni ni-more-h"></em></a>
+                                                                <div class="dropdown-menu dropdown-menu-end">
+                                                                    <ul class="link-list-opt no-bdr mt-0">
+                                                                        <li><a href="#"><span>View Transactions</span></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <ul className="listWalletBalance"> 
+                                                        <li><img src="https://vehicle99.com:3006/uploads/currencies/india.png" alt="img" class="thumb" height="27"/></li>
+                                                        <li className="firstHeadingWallet">1500.395</li>
+                                                        <li>EURO</li>
+                                                        <li className="widthCurrency">European Euro</li>
+                                                        <li>
+                                                            <div class="dropdown">
+                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <em class="icon ni ni-more-h"></em></a>
+                                                                <div class="dropdown-menu dropdown-menu-end">
+                                                                    <ul class="link-list-opt no-bdr mt-0">
+                                                                        <li><a href="#"><span>View Transactions</span></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+
+                                                  </div>
+                                                {/* .nk-block */}
+                                             </div>
+                                        </div>
+                                        <div className="col-md-12 mt-4">
+                                                <div className="boxGeyColor">
+                                                <div className="nk-block-head nk-block-head-line">
+                                                   <h6 className="title overline-title text-base">Custom Balances
+                                                   </h6>
+                                                </div>
+                                                {/* .nk-block-head */}
+                                                  <div className="curencyBalanceList">
+                                                    <ul className="listWalletBalance"> 
+                                                        <li><img src="https://vehicle99.com:3006/uploads/currencies/india.png" alt="img" class="thumb" height="27"/></li>
+                                                        <li className="firstHeadingWallet">1500.395 </li>
+                                                        <li>GBP</li>
+                                                        <li className="widthCurrency">Rainy Day</li>
+                                                        <li>
+                                                            <div class="dropdown">
+                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <em class="icon ni ni-more-h"></em></a>
+                                                                <div class="dropdown-menu dropdown-menu-end">
+                                                                    <ul class="link-list-opt no-bdr mt-0">
+                                                                        <li><a href="#"><span>View Transactions</span></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <ul className="listWalletBalance"> 
+                                                        <li><img src="https://vehicle99.com:3006/uploads/currencies/india.png" alt="img" class="thumb" height="27"/></li>
+                                                        <li className="firstHeadingWallet">600.523</li>
+                                                        <li>EURO</li>
+                                                        <li className="widthCurrency">Holiday</li>
+                                                        <li>
+                                                            <div class="dropdown">
+                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <em class="icon ni ni-more-h"></em></a>
+                                                                <div class="dropdown-menu dropdown-menu-end">
+                                                                    <ul class="link-list-opt no-bdr mt-0">
+                                                                        <li><a href="#"><span>View Transactions</span></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+
+                                                  </div>
+                                                {/* .nk-block */}
+                                             </div>
+                                        </div>
+                                       </div>
+                                       {/* tab pne */}
+
+                                       <div className="tab-pane" id="documents">
+                                         <div className="nk-block-between pb-2">
+                                             <div className="nk-block-head-content">
+                                                <h5 className="nk-block-title mb-0">Personal Information</h5>
+                                                <div className="nk-block-des">
+                                                   <p>Basic info, like your name and address, that you use on Nio Platform.</p>
+                                                </div>
+                                             </div>
+                                             <div className="btnApprovReject">
+                                                <a href="" className="approvedBtnUser">
+                                                   <em class="icon ni ni-check"></em> Approved
+                                                </a>
+                                                <a href="" className="rejectBtnUser">
+                                                <em class="icon ni ni-cross"></em> Reject
+                                                </a>
+                                             </div>
+                                          </div>
+                                            <div className="col-md-12 mt-3">
+                                                {/* .nk-block-head */}
+                                                <div className="nk-block singUserDetail-1">
+                                                  <div className="boxGeyColor">
+                                                  <div className="nk-block-head nk-block-head-line">
+                                                     <h6 className="title overline-title text-base">Submission Details 
+                                                   </h6>
+                                                  </div>
+                                                    <div className="profile-ud-list">
+                                                      <div className="profile-ud-item">
+                                                         <div className="profile-ud wider">
+                                                            <span className="profile-ud-label">Submitted By</span>
+                                                            <span className="profile-ud-value">Vianney Che Mfombong</span>
+                                                         </div>
+                                                      </div>
+                                                      <div className="profile-ud-item">
+                                                         <div className="profile-ud wider">
+                                                            <span className="profile-ud-label">Document type</span>
+                                                            <span className="profile-ud-value">Drivers License</span>
+                                                         </div>
+                                                      </div>
+                                                      <div className="profile-ud-item">
+                                                         <div className="profile-ud wider">
+                                                            <span className="profile-ud-label">Country </span>
+                                                            <span className="profile-ud-value">United Kingdom</span>
+                                                         </div>
+                                                      </div>
+                                                      <div className="profile-ud-item">
+                                                         <div className="profile-ud wider">
+                                                            <span className="profile-ud-label">Submission Date</span>
+                                                            <span className="profile-ud-value">Apr 13, 2024 5:30 PM</span>
+                                                         </div>
+                                                      </div>
+                                                      <div className="profile-ud-item">
+                                                         <div className="profile-ud wider">
+                                                            <span className="profile-ud-label">Checked at </span>
+                                                            <span className="profile-ud-value">Not yet checked</span>
+                                                         </div>
+                                                      </div>
+                                                      <div className="profile-ud-item">
+                                                         <div className="profile-ud wider">
+                                                            <span className="profile-ud-label">Approval Date </span>
+                                                            <span className="profile-ud-value">Not yet checked</span>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   {/* .profile-ud-list */}
+                                                </div></div>
+                                                {/* .nk-block */}
+                                             </div>
+
+                                             <div className="col-md-12 mt-5">
+                                                <div className="nk-block-head nk-block-head-line">
+                                                     <h6 className="title overline-title text-base">Uploaded Documents
+                                                   </h6>
+                                                </div>
+                                             </div>
+
+                                        <div className="uploadImageRow mt-3 row g-gs">
+                                            <div className="col-6  col-md-4 mt-1">
+                                                <div className="previewimageUpload">
+                                                    <img src="../images/imagesnot found.jpg"/>
+                                                     <p>Passport <span><a href=''><em class="icon ni ni-download"></em></a></span></p>
+                                                </div>
+                                            </div>
+                                            <div className="col-6  col-md-4 mt-1">
+                                                <div className="previewimageUpload">
+                                                    <img src="../images/imagesnot found.jpg"/>
+                                                     <p>Proof / Self <span><a href=''><em class="icon ni ni-download"></em></a></span></p>
+                                                </div>
+                                            </div>
+                                            <div className="col-6  col-md-4 mt-1">
+                                                <div className="previewimageUpload">
+                                                    <img src="../images/imagesnot found.jpg"/>
+                                                     <p>Bank Statement <span><a href=''><em class="icon ni ni-download"></em></a></span></p>
+                                                </div>
+                                            </div>
+                                            <div className="col-6 col-md-4 mt-1">
+                                                <div className="previewimageUpload">
+                                                    <img src="../images/imagesnot found.jpg"/>
+                                                     <p>Bank Statement <span><a href=''><em class="icon ni ni-download"></em></a></span></p>
+                                                </div>
+                                            </div>
+                                        </div>
                                        </div>
                                        {/*tab pane*/}
+
+
+
                                        <div className="tab-pane" id="profile-review">
                                           <h1>Profile review</h1>
                                        </div>
@@ -492,6 +863,7 @@ return (
                               </div>
                            </div>
                         </div>
+
                         <div className="col-md-4 card-aside card-aside-right user-aside toggle-slide toggle-slide-right toggle-break-lg" data-toggle-body="true" data-content="userAside" data-toggle-screen="lg" data-toggle-overlay="true">
                            <div class="card-inner-group" data-simplebar>
                               <div class="card-inner">
