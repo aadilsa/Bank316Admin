@@ -823,14 +823,14 @@ function RequestMoney() {
 
 
             <div className="modal modal-blur fade" id="modal-viewTxn" tabIndex={-1} role="dialog" aria-hidden="true">
-                <div className="modal-dialog" role="document">
+                <div className="modal-dialog modal-lg" role="document">
 
 
                     {
                         (singletxn?.transaction?.txn_type == "Credit" && singletxn?.transaction?.txn_for == "add" && singletxn?.transaction?.identifier == "CurrencyTransaction") &&
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title">Deposit ID# <span>{singletxn?.transaction?.txn_id}</span></h5>
+                                <h5 className="modal-title">Deposit ID #<span>{singletxn?.transaction?.txn_id}</span></h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref1} data-dismiss="modal" />
                             </div>
                             <form >
