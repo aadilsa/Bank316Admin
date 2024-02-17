@@ -9,7 +9,7 @@ const CreateFAQ = () => {
     const navigate = useNavigate()
     const token = localStorage.getItem("logintoken")
     const [button, setbutton] = useState(false)
-    const [faqType, setFaqType] = useState('');
+    const [faqType, setFaqType] = useState('Hotspots');
 
     const AddSuccessToast = (msg) => {
         toast.success(msg, { autoClose: 2000 });
@@ -162,7 +162,14 @@ const CreateFAQ = () => {
         });
     };
 
-    console.log(button, "///////////////")
+
+
+    const handleSelectChange = (e) => {
+        setFaqType(e.target.value);
+    };
+
+
+    console.log(faqType, "///////////////")
     return (
         <Container>
             <div className="nk-content ">
@@ -195,9 +202,9 @@ const CreateFAQ = () => {
                                     <div className="form-wrap w-250px">
                                         <select
                                             className="form-select js-select2"
-                                            data-search="off"
-                                            value={faqType}  // Set the selected value from the state
-                                            onChange={(e) => { setFaqType(e.target.value) }} // Handle the change event
+                                            // data-search="off"
+                                            value={faqType}
+                                            onChange={(e) => { setFaqType(e.target.value) }}
                                         >
                                             <option value="Hotspots">Hotspots</option>
                                             <option value="MarketPlace">MarketPlace</option>

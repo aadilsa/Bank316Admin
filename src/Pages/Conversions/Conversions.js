@@ -540,7 +540,7 @@ const Conversions = () => {
 
 
             <div className="modal modal-blur fade" id="modal-txn" tabIndex={-1} role="dialog" aria-hidden="true">
-                <div className="modal-dialog" role="document">
+                <div className="modal-dialog modal-lg" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title">Conversion ID# <span>{singletxn?.transcation?.txn_id}</span></h5>
