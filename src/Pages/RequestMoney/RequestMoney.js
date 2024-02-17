@@ -105,7 +105,7 @@ function RequestMoney() {
             const ManualBank = await ManualBankStatus(reqmoneymsg, id, datas, token)
             console.log(ManualBank, "ManualBank")
             if (ManualBank.status == true) {
-                ref2.current.click()
+                ref1.current.click()
                 form.resetForm()
                 AddSuccessToast()
                 GetRequestMoneyData()
@@ -717,20 +717,6 @@ function RequestMoney() {
                                     <small style={{ fontSize: '72%', color: '#959595', }}>The amount that ajdust with balance.</small>
                                 </div>
                             </div>
-
-                            {/* <div className="row mb-3">
-                                    <div className="col-md-6 otherLabel">
-                                        <label>Reference / Hash</label>
-                                        <input type="text" className="form-control" placeholder='Reference or Hash' />
-                                        <small style={{ fontSize: '72%', color: '#959595', }}>The reference will display to user.</small>
-                                    </div>
-                                    <div className="col-md-6 otherLabel">
-                                        <label>Received From</label>
-                                        <input type="text" className="form-control" placeholder='Receiving account name or id' />
-                                        <small style={{ fontSize: '72%', color: '#959595', }}>Helps to identify the payment (Admin).</small>
-                                    </div>
-                                </div> */}
-
                             <div className="row mb-3">
                                 <div className="col-md-12 otherLabel">
                                     <label>Note / Remarks</label>
@@ -745,43 +731,11 @@ function RequestMoney() {
                             </button>
 
                             <a className="cancelbtnwithdraw" style={{ cursor: "pointer" }} data-bs-dismiss="modal" data-dismiss="modal">Cancel</a>
-
-
-
-                            {/* <div className="form-group mb-3 row">
-                                        <label className="form-label col-3 col-form-label">Status</label>
-                                        <div className="col">
-                                            <select className="form-control mb-0" name="role" {...form.getFieldProps("role")} style={{ height: 40 }}
-                                            // onChange={(e) => handleChangeQueryBuilder(e)}
-                                            >
-                                                <option value="">Select Status</option>
-                                                <option value="true">Complete</option>
-                                                <option value="false">Reject</option>
-                                            </select>
-                                            {form.errors.role && form.touched.role ? <p className='red' style={{ marginTop: 5 }}>{form.errors.role}</p> : null}
-                                        </div>
-                                    </div>
-
-                                    <div className="form-group mb-3 row">
-                                        <label className="form-label col-3 col-form-label">Message</label>
-                                        <div className="col">
-                                            <input type="text" className="form-control" aria-describedby="emailHelp" placeholder="Enter Message"
-                                                name="ShortName" {...form.getFieldProps("ShortName")}
-                                            />
-                                            {form.errors.ShortName && form.touched.ShortName ? <p className='red' style={{ marginTop: 5 }}>{form.errors.ShortName}</p> : null}
-
-                                        </div>
-                                    </div>*/}
-
-
                         </div>
-
                         <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
                             <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> The deposit amount will adjust into user account once you approved.</p>
                             <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> You can not undo this action once you you confirm and approved.</p>
                         </div>
-
-
                     </div>
                 </div>
             </div>
