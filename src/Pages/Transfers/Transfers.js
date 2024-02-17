@@ -300,6 +300,9 @@ const Transfers = () => {
 
     var stillUtcs = moment.utc(singletxn?.created_at).toDate();
     var singletimeZones = moment(stillUtcs).local().format('MMM D, YYYY hh:mm A');
+
+    var completedstillUtcs = moment.utc(singletxn?.completed_on).toDate();
+    var completedsingletimeZones = moment(completedstillUtcs).local().format('MMM D, YYYY hh:mm A');
     return (
         <>
             <Container>
@@ -856,141 +859,303 @@ const Transfers = () => {
 
                 <div className="modal modal-blur fade" id="modal-txn" tabIndex={-1} role="dialog" aria-hidden="true">
                     <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title">Transfer ID# <span>{singletxn?.txn_id}</span></h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref1} data-dismiss="modal" />
-                            </div>
-                            <form >
-                                <div className="modal-body">
-                                    <ul class="nk-top-products mb-3">
-                                        <li class="item pt-0">
-                                            <div class="user-avatar bg-primary mright-2">
-                                                <span class="user-avatar bg-warning-dim">
-                                                    <e class="icon ni ni-arrow-up-right"></e></span>
-                                                <em class="icon ni ni-wallet-fill walletIconNew"></em>
-                                            </div>
-                                            <div class="info"><div class="title"><b>  {singletxn?.amount_before_txncharge} {singletxn?.base_currency}</b></div>
-                                                <div class="price">{singletimeZones}</div>
-                                            </div>
-                                            {
-                                                singletxn?.transcation?.payment_status == "success" && <div class="total badge rounded-pill bg-success">success</div>
-                                            }
-                                            {
-                                                singletxn?.transcation?.payment_status == "pending" && <div class="total badge rounded-pill bg-warning">pending</div>
-                                            }
-                                            {
-                                                singletxn?.transcation?.payment_status == "failed" && <div class="total badge rounded-pill bg-danger">failed</div>
-                                            }
-                                        </li>
-                                    </ul>
 
-                                    <div className="row tableUserModal">
-                                        <div className="col-md-6">
-                                            <h6 className="mb-3">USER DETAILS</h6>
-                                            <ul>
-                                                <li className="mb-3">User Account <span className="d-block">{singletxn?.client?.first_name} {singletxn?.client?.last_name} <small></small></span></li>
-                                                <li className="mb-3">Email <span className="d-block">{singletxn?.client?.email}</span></li>
-                                                <li className="mb-3">Phone Number <span className="d-block">{singletxn?.client?.phone}</span></li>
-                                            </ul>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <h6 className="mb-3">ACCOUNT DETAILS</h6>
-                                            <ul>
-                                                <li className="mb-3">Cash Balance <span className="d-block">{singletxn?.cash_balance} {singletxn?.base_currency}</span></li>
-                                                <li className="mb-3">Default Wallet <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
-                                                <li className="mb-3">Country <span className="d-block">United Kingdom</span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="row tableUserModal">
-                                        <div className="col-md-12"><h6 className="mb-3">TRANSACTION DETAILS : SENDER</h6></div>
-                                        <div className="col-md-6">
-                                            <ul>
-                                                <li className="mb-3">Transfer  Amount   <span className="d-block">{singletxn?.amount_before_txncharge} {singletxn?.base_currency}</span></li>
-                                                <li className="mb-3">Payout Currency<span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
-                                                <li className="mb-3">Transaction Charge <span className="d-block">{singletxn?.txn_charge_amount} {singletxn?.base_currency}</span></li>
-                                                <li className="mb-3">Exchange Rate  <span className="d-block">{singletxn?.transcation?.txn_charge_amount} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
-                                                <li className="mb-3">Adj Transfer Amount <span className="d-block"> {singletxn?.base_amount} {singletxn?.base_currency}</span></li>
-                                            </ul>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <ul>
-                                                <li className="mb-3">Placed by <span className="d-block">UID08124</span></li>
-                                                <li className="mb-3">Placed On <span className="d-block">Jan 23, 2024 6:30 PM</span></li>
-                                                <li className="mb-3">Conversion Charge Applied <span className="d-block">Jan 23, 2024 6:30 PM</span></li>
-                                                <li className="mb-3">Converted Amount <span className="d-block">{singletxn?.transcation?.payment_method}</span></li>
-                                                <li className="mb-3">Wallet Balance after Txn <span className="d-block">{singletxn?.transcation?.other_closing_balance} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                        {
 
-
-                                    <div className="row tableUserModal">
-                                        <div className="col-md-12"><h6 className="mb-3">RECIPIENT DETAILS</h6></div>
-                                        <div className="col-md-6">
-                                            <ul>
-                                                <li className="mb-3">Recipient Type   <span className="d-block">{singletxn?.transcation?.txn_type}</span></li>
-                                                <li className="mb-3">Account Name    <span className="d-block">Deposit Via Manual Bank Transfer </span></li>
-                                                <li className="mb-3">Account Number  <span className="d-block">Manual Bank Transfer</span></li>
-                                                <li className="mb-3">Account Sort Code   <span className="d-block">Manual Bank Transfer</span></li>
-
-                                                {/* <li className="mb-3">Payment Gateway <span className="d-block">Manual Bank Transfer</span></li> */}
-                                                {/* {
-                                       singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed By  <span className="d-block">Aadil Mansuri</span></li>
-                                    } */}
-
-                                            </ul>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <ul>
-                                                <li className="mb-3">Payment Currency  <span className="d-block">Personal</span></li>
-                                                <li className="mb-3">Payment Amount <span className="d-block">Verified</span></li>
-                                                <li className="mb-3">Funding Method  <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
-                                                {/* <li className="mb-3">Transaction Status <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li> */}
-                                                {/* {
-                                       singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed On  <span className="d-block">Jan 23 2024, 5:30 PM</span></li>
-
-                                    } */}
-
-                                            </ul>
-                                        </div>
-                                    </div>
-
-
-
-                                    <div className="row tableUserModal">
-                                        <div className="col-md-12"><h6 className="mb-3">ADDITIONAL DETAILS</h6></div>
-                                        <div className="col-md-6">
-                                            <ul>
-                                                <li className="mb-3">Transaction type <span className="d-block">{singletxn?.transcation?.txn_type}</span></li>
-                                                <li className="mb-3">Transfer Limit   <span className="d-block">Deposit Via Manual Bank Transfer </span></li>
-                                                <li className="mb-3">Transaction Description<span className="d-block">Manual Bank Transfer</span></li>
-
-                                                <li className="mb-3">Payment Gateway <span className="d-block">Manual Bank Transfer</span></li>
-                                                {
-                                                    singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed By  <span className="d-block">Aadil Mansuri</span></li>
-                                                }
-
-                                            </ul>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <ul>
-                                                <li className="mb-3">Account Type <span className="d-block">Personal</span></li>
-                                                <li className="mb-3">Verification Status <span className="d-block">Verified</span></li>
-                                                <li className="mb-3">Default Currency Wallet <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
-                                                <li className="mb-3">Transaction Status <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
-                                                {
-                                                    singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed On  <span className="d-block">Jan 23 2024, 5:30 PM</span></li>
-
-                                                }
-
-                                            </ul>
-                                        </div>
-                                    </div>
+                            (singletxn?.identifier == "CurrencyTransaction" && singletxn?.txn_type == "Debit" && singletxn?.txn_for == "transfer") && <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title">Transfer ID# <span>{singletxn?.txn_id}</span></h5>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref1} data-dismiss="modal" />
                                 </div>
-                            </form>
-                        </div>
+                                <form >
+                                    <div className="modal-body">
+                                        <ul class="nk-top-products mb-3">
+                                            <li class="item pt-0">
+                                                <div class="user-avatar bg-primary mright-2">
+                                                    <span class="user-avatar bg-warning-dim">
+                                                        <e class="icon ni ni-arrow-up-right"></e></span>
+                                                    <em class="icon ni ni-wallet-fill walletIconNew"></em>
+                                                </div>
+                                                <div class="info"><div class="title"><b>  {singletxn?.amount_before_txncharge} {singletxn?.base_currency}</b></div>
+                                                    <div class="price">{singletimeZones}</div>
+                                                </div>
+                                                {
+                                                    singletxn?.payment_status == "success" && <div class="total badge rounded-pill bg-success">success</div>
+                                                }
+                                                {
+                                                    singletxn?.payment_status == "pending" && <div class="total badge rounded-pill bg-warning">pending</div>
+                                                }
+                                                {
+                                                    singletxn?.payment_status == "failed" && <div class="total badge rounded-pill bg-danger">failed</div>
+                                                }
+                                            </li>
+                                        </ul>
+
+                                        <div className="row tableUserModal">
+                                            <div className="col-md-6">
+                                                <h6 className="mb-3">USER DETAILS</h6>
+                                                <ul>
+                                                    <li className="mb-3">User Account <span className="d-block">{singletxn?.client?.first_name} {singletxn?.client?.last_name} <small></small></span></li>
+                                                    <li className="mb-3">Email <span className="d-block">{singletxn?.client?.email}</span></li>
+                                                    <li className="mb-3">Phone Number <span className="d-block">{singletxn?.client?.phone}</span></li>
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <h6 className="mb-3">ACCOUNT DETAILS</h6>
+                                                <ul>
+                                                    <li className="mb-3">Cash Balance <span className="d-block">{singletxn?.cash_balance} {singletxn?.base_currency}</span></li>
+                                                    <li className="mb-3">Default Wallet <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
+                                                    <li className="mb-3">Country <span className="d-block">United Kingdom</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div className="row tableUserModal">
+                                            <div className="col-md-12"><h6 className="mb-3">TRANSACTION DETAILS : SENDER</h6></div>
+                                            <div className="col-md-6">
+                                                <ul>
+                                                    <li className="mb-3">Transfer  Amount   <span className="d-block">{singletxn?.amount_before_txncharge} {singletxn?.base_currency}</span></li>
+                                                    <li className="mb-3">Payout Currency<span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
+                                                    <li className="mb-3">Transaction Charge <span className="d-block">{singletxn?.txn_charge_amount} {singletxn?.base_currency}</span></li>
+                                                    <li className="mb-3">Exchange Rate  <span className="d-block">pending</span></li>
+                                                    {/* <li className="mb-3">Adj Transfer Amount <span className="d-block"> {singletxn?.base_amount} {singletxn?.base_currency}</span></li> */}
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <ul>
+                                                    <li className="mb-3">Placed by <span className="d-block">pending</span></li>
+                                                    <li className="mb-3">Placed On <span className="d-block">pending</span></li>
+                                                    <li className="mb-3">Conversion Charge Applied <span className="d-block">pending</span></li>
+                                                    <li className="mb-3">Converted Amount <span className="d-block">pending</span></li>
+                                                    {/* <li className="mb-3">Wallet Balance after Txn <span className="d-block">{singletxn?.transcation?.other_closing_balance} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li> */}
+                                                </ul>
+                                            </div>
+                                        </div>
+
+
+                                        <div className="row tableUserModal">
+                                            <div className="col-md-12"><h6 className="mb-3">RECIPIENT DETAILS</h6></div>
+                                            <div className="col-md-6">
+                                                <ul>
+                                                    <li className="mb-3">Recipient Type   <span className="d-block">Internal Wallet Transfer</span></li>
+                                                    <li className="mb-3">Account Holder Name   <span className="d-block">{singletxn?.receiver?.first_name} {singletxn?.receiver?.last_name}</span></li>
+                                                    <li className="mb-3">Recipient Email  <span className="d-block">{singletxn?.receiver?.email}</span></li>
+                                                    <li className="mb-3">Phone Number  <span className="d-block">{singletxn?.receiver?.phone}</span></li>
+                                                    {/* <li className="mb-3">Account Sort Code   <span className="d-block">Manual Bank Transfer</span></li> */}
+
+                                                    {/* <li className="mb-3">Payment Gateway <span className="d-block">Manual Bank Transfer</span></li> */}
+                                                    {/* {
+           singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed By  <span className="d-block">Aadil Mansuri</span></li>
+        } */}
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <ul>
+                                                    <li className="mb-3">Transfer Method <span className="d-block">{singletxn?.payment_method == "wallet" ? <span>Quick Transfer</span> : ""}</span></li>
+                                                    <li className="mb-3">Payment Currency <span className="d-block"> {singletxn?.receiver?.currencywallets[0]?.currency?.title}</span></li>
+                                                    <li className="mb-3">Payment Amount <span className="d-block">{singletxn?.amount} {singletxn?.receiver?.currencywallets[0]?.currency?.short_name}</span></li>
+                                                    <li className="mb-3">Funding Method  <span className="d-block">{singletxn?.payment_method}</span></li>
+
+                                                    {/* {
+                                                        singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed On  <span className="d-block">Jan 23 2024, 5:30 PM</span></li>
+
+                                                    } */}
+
+                                                </ul>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div className="row tableUserModal">
+                                            <div className="col-md-12"><h6 className="mb-3">ADDITIONAL DETAILS </h6></div>
+                                            <div className="col-md-6">
+                                                <ul>
+                                                    <li className="mb-3">Transaction type <span className="d-block">{singletxn?.txn_type}</span></li>
+                                                    <li className="mb-3">Transfer Limit   <span className="d-block">Deposit Via Manual Bank Transfer </span></li>
+                                                    <li className="mb-3">Transaction Description<span className="d-block">{singletxn?.title}</span></li>
+                                                    <li className="mb-3">Payment Gateway <span className="d-block">{singletxn?.payment_method}</span></li>
+                                                    {
+                                                        singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed By  <span className="d-block">{singletxn?.completed_by}</span></li>
+                                                    }
+
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <ul>
+                                                    <li className="mb-3">Account Type <span className="d-block">Personal</span></li>
+                                                    <li className="mb-3">Verification Status <span className="d-block">Verified</span></li>
+                                                    <li className="mb-3">Default Currency Wallet <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
+                                                    <li className="mb-3">Transaction Status <span className="d-block">{singletxn?.payment_status}</span></li>
+                                                    {
+                                                        singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed On  <span className="d-block">{completedsingletimeZones}</span></li>
+
+                                                    }
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        }
+
+                        {
+
+                            (singletxn?.identifier == "InternationalTransaction" && singletxn?.txn_type == "Debit" && singletxn?.txn_for == "transfer") && <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title">Transfer ID# <span>{singletxn?.txn_id}</span></h5>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref1} data-dismiss="modal" />
+                                </div>
+                                <form >
+                                    <div className="modal-body">
+                                        <ul class="nk-top-products mb-3">
+                                            <li class="item pt-0">
+                                                <div class="user-avatar bg-primary mright-2">
+                                                    <span class="user-avatar bg-warning-dim">
+                                                        <e class="icon ni ni-arrow-up-right"></e></span>
+                                                    <em class="icon ni ni-wallet-fill walletIconNew"></em>
+                                                </div>
+                                                <div class="info"><div class="title"><b>  {singletxn?.amount_before_txncharge} {singletxn?.base_currency}</b></div>
+                                                    <div class="price">{singletimeZones}</div>
+                                                </div>
+                                                {
+                                                    singletxn?.payment_status == "success" && <div class="total badge rounded-pill bg-success">success</div>
+                                                }
+                                                {
+                                                    singletxn?.payment_status == "pending" && <div class="total badge rounded-pill bg-warning">pending</div>
+                                                }
+                                                {
+                                                    singletxn?.payment_status == "failed" && <div class="total badge rounded-pill bg-danger">failed</div>
+                                                }
+                                            </li>
+                                        </ul>
+
+                                        <div className="row tableUserModal">
+                                            <div className="col-md-6">
+                                                <h6 className="mb-3">USER DETAILS</h6>
+                                                <ul>
+                                                    <li className="mb-3">User Account <span className="d-block">{singletxn?.client?.first_name} {singletxn?.client?.last_name} <small></small></span></li>
+                                                    <li className="mb-3">Email <span className="d-block">{singletxn?.client?.email}</span></li>
+                                                    <li className="mb-3">Phone Number <span className="d-block">{singletxn?.client?.phone}</span></li>
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <h6 className="mb-3">ACCOUNT DETAILS</h6>
+                                                <ul>
+                                                    <li className="mb-3">Cash Balance <span className="d-block">{singletxn?.cash_balance} {singletxn?.base_currency}</span></li>
+                                                    <li className="mb-3">Default Wallet <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
+                                                    <li className="mb-3">Country <span className="d-block">United Kingdom</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div className="row tableUserModal">
+                                            <div className="col-md-12"><h6 className="mb-3">TRANSACTION DETAILS : SENDER</h6></div>
+                                            <div className="col-md-6">
+                                                <ul>
+                                                    <li className="mb-3">Transfer  Amount   <span className="d-block">{singletxn?.amount_before_txncharge} {singletxn?.sender?.currencywallets[0]?.currency?.short_name}</span></li>
+                                                    <li className="mb-3">Payout Currency<span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
+                                                    <li className="mb-3">Transaction Charge <span className="d-block">{singletxn?.txn_charge_amount}  {singletxn?.sender?.currencywallets[0]?.currency?.short_name}</span></li>
+                                                    <li className="mb-3">Exchange Rate  <span className="d-block">Pending </span></li>
+                                                    {/* <li className="mb-3">Adj Transfer Amount <span className="d-block"> {singletxn?.base_amount} {singletxn?.base_currency}</span></li> */}
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <ul>
+                                                    <li className="mb-3">Placed by <span className="d-block">pending</span></li>
+                                                    <li className="mb-3">Placed On <span className="d-block">pending</span></li>
+                                                    <li className="mb-3">Conversion Charge Applied <span className="d-block">pending</span></li>
+                                                    <li className="mb-3">Converted Amount <span className="d-block">pending</span></li>
+                                                    {/* <li className="mb-3">Wallet Balance after Txn <span className="d-block">{singletxn?.transcation?.other_closing_balance} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li> */}
+                                                </ul>
+                                            </div>
+                                        </div>
+
+
+                                        <div className="row tableUserModal">
+                                            <div className="col-md-12"><h6 className="mb-3">RECIPIENT DETAILS</h6></div>
+                                            <div className="col-md-6">
+                                                <ul>
+                                                    <li className="mb-3">Recipient Type   <span className="d-block"> External - Non Wallet Transfer</span></li>
+                                                    <li className="mb-3">Account Holder Name   <span className="d-block">{singletxn?.receiver?.account_holder_name} {singletxn?.receiver?.last_name}</span></li>
+                                                    {/* <li className="mb-3">Recipient Email  <span className="d-block">{singletxn?.receiver?.email}</span></li>
+                                                    <li className="mb-3">Phone Number  <span className="d-block">{singletxn?.receiver?.phone}</span></li> */}
+                                                    {
+                                                        singletxn?.receiver?.account_number !== null && <li className="mb-3">Account Number  <span className="d-block"> {singletxn?.receiver?.account_number}</span></li>
+                                                    }
+                                                    {
+                                                        singletxn?.receiver?.sort_code !== null && <li className="mb-3">sort_code  <span className="d-block"> {singletxn?.receiver?.sort_code}</span></li>
+                                                    }
+                                                    {
+                                                        singletxn?.receiver?.swift_code !== null && <li className="mb-3">swift_code  <span className="d-block"> {singletxn?.receiver?.swift_code}</span></li>
+                                                    }
+                                                    {
+                                                        singletxn?.receiver?.upi_id !== null && <li className="mb-3">upi_id  <span className="d-block"> {singletxn?.receiver?.upi_id}</span></li>
+                                                    }
+
+                                                    {
+                                                        singletxn?.receiver?.payee_id !== null && <li className="mb-3">payee_id<span className="d-block"> {singletxn?.receiver?.payee_id}</span></li>
+                                                    }
+                                                    {
+                                                        singletxn?.receiver?.iban_number !== null && <li className="mb-3">iban_number<span className="d-block"> {singletxn?.receiver?.iban_number}</span></li>
+                                                    }
+                                                    {/* <li className="mb-3">Payment Gateway <span className="d-block">Manual Bank Transfer</span></li> */}
+                                                    {/* {
+           singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed By  <span className="d-block">Aadil Mansuri</span></li>
+        } */}
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <ul>
+                                                    <li className="mb-3">Transfer Method <span className="d-block">{singletxn?.payment_method == "wallet" ? <span>Regular Bank Transfer</span> : ""}</span></li>
+                                                    <li className="mb-3">Account Type  <span className="d-block">pending</span></li>
+                                                    <li className="mb-3">ACH and Wire routing number  <span className="d-block">pending</span></li>
+                                                    <li className="mb-3">Payment Amount  <span className="d-block">{singletxn?.amount} {singletxn?.receiver?.other_currency}</span></li>
+                                                    {/* <li className="mb-3">Payment Currency <span className="d-block"> {singletxn?.receiver?.currencywallets[0]?.currency?.title}</span></li>
+                                                    <li className="mb-3">Payment Amount <span className="d-block">{singletxn?.amount} {singletxn?.receiver?.currencywallets[0]?.currency?.short_name}</span></li> */}
+                                                    <li className="mb-3">Funding Method  <span className="d-block">Bank</span></li>
+
+                                                    {/* {
+                                                        singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed On  <span className="d-block">Jan 23 2024, 5:30 PM</span></li>
+                                                    } */}
+
+                                                </ul>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div className="row tableUserModal">
+                                            <div className="col-md-12"><h6 className="mb-3">ADDITIONAL DETAILS </h6></div>
+                                            <div className="col-md-6">
+                                                <ul>
+                                                    <li className="mb-3">Transaction type <span className="d-block">{singletxn?.txn_type}</span></li>
+                                                    <li className="mb-3">Transfer Limit   <span className="d-block">pending </span></li>
+                                                    <li className="mb-3">Transaction Description<span className="d-block">{singletxn?.title}</span></li>
+                                                    <li className="mb-3">Payment Gateway <span className="d-block">{singletxn?.payment_method}</span></li>
+                                                    {
+                                                        singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed By  <span className="d-block">{singletxn?.completed_by}</span></li>
+                                                    }
+
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <ul>
+                                                    <li className="mb-3">Account Type <span className="d-block">pending</span></li>
+                                                    <li className="mb-3">Verification Status <span className="d-block">Verified</span></li>
+                                                    <li className="mb-3">Default Currency Wallet <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
+                                                    <li className="mb-3">Transaction Status <span className="d-block">{singletxn?.payment_status}</span></li>
+                                                    {
+                                                        singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed On  <span className="d-block">{completedsingletimeZones}</span></li>
+                                                    }
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        }
+
                     </div>
                 </div>
 

@@ -33,7 +33,7 @@ import { AddEmploye } from '../Pages/Role/AddEmploye';
 import ManageRoles from '../Pages/Role/ManageRoles';
 // import { ManageUser } from '../Pages/Role/ManageEmploye';
 import { ManageEmploye } from '../Pages/Role/ManageEmploye';
-import CurrencyBank from '../Pages/CurrencyBank/CurrencyBank';
+
 
 import { AddEmployee } from '../API/Employees/Employees';
 // import { AllCurrencyTransaction } from '../API/AllTransactionApi.js/AllTranasaction';
@@ -41,7 +41,6 @@ import PaymentCharge from '../Pages/PaymentCharge/PaymentCharge';
 import RequestMoney from '../Pages/RequestMoney/RequestMoney';
 import AddRole from '../Pages/Role/AddRole';
 import EditRole from '../Pages/Role/EditRole';
-import { AddCurrencyBank } from '../Pages/CurrencyBank/AddCurrencyBank';
 import EditEmployee from '../Pages/Role/EditEmployee';
 import { SingleCustomTran } from '../Pages/User/SingleCustomTran';
 import { Insiderecipients } from '../Pages/Recipients/Insiderecipients';
@@ -49,6 +48,7 @@ import { OutsideRecipient } from "../Pages/Recipients/OutsideRecipient"
 import { AllOutsideRecipiens } from '../Pages/Allrecipients/AllOutsideRecipiens'
 import { AllInsideRecipients } from '../Pages/Allrecipients/AllInsideRecipients';
 import { Outsidetxns } from '../Pages/Allrecipients/Outsidetxns';
+import FundingAccounts from '../Pages/FundingAccounts/FundingAccounts';
 import Outsidetxn from '../Pages/Allrecipients/Outsidetxn';
 import AccountManagers from '../Pages/AccountManagers/AccountManagers';
 import Conversions from '../Pages/Conversions/Conversions';
@@ -108,9 +108,6 @@ const Router = () => {
                 <Route path="/admin/transfers" element={<PrivateRoute><Transfers /></PrivateRoute>} />
 
 
-
-
-
                 <Route path="/change-password" element={<PrivateRoute><ChangePassword /></PrivateRoute>} />
                 <Route path="/bank-list" element={<PrivateRoute><BankList /></PrivateRoute>} />
                 <Route path="/currency-transaction" element={<PrivateRoute><Transaction /></PrivateRoute>} />
@@ -131,11 +128,12 @@ const Router = () => {
                 <Route path="/manage-roles" element={<PrivateRoute><ManageRoles /></PrivateRoute>} />
                 <Route path="/add-role" element={<PrivateRoute><AddRole /></PrivateRoute>} />
                 <Route path="/add-employee" element={<PrivateRoute><AddEmploye /></PrivateRoute>} />
-                <Route path="/admin/currency-bank" element={<PrivateRoute><CurrencyBank /></PrivateRoute>} />
+                <Route path="/admin/funding-accounts" element={<PrivateRoute><FundingAccounts /></PrivateRoute>} />
                 <Route path="/admin/allCustom-transaction" element={<PrivateRoute><AllCustom /></PrivateRoute>} />
                 <Route path="/admin/allCurrency-transaction" element={<PrivateRoute><AllCurrency /></PrivateRoute>} />
                 <Route path="/admin/charges" element={<PrivateRoute><PaymentCharge /></PrivateRoute>} />
                 <Route path="/edit-role" element={<PrivateRoute><EditRole /></PrivateRoute>} />
+
                 <Route path="/edit-employee" element={<PrivateRoute><EditEmployee /></PrivateRoute>} />
 
 

@@ -150,7 +150,7 @@ const Sidebar = () => {
 
 
     useEffect(() => {
-        if (tab == "/admin/currencies" || tab == "/admin/currency-bank" || tab == "/admin/charges" || tab == "/admin/faq") {
+        if (tab == "/admin/currencies" || tab == "/admin/funding-accounts" || tab == "/admin/charges" || tab == "/admin/faq") {
             setManagementDrop(true);
         }
         else {
@@ -484,8 +484,8 @@ const Sidebar = () => {
                                 </Link>
                             </li>
 
-                            <li className={tab == "/admin/currency-bank" ? "nk-menu-item active current-page" : "nk-menu-item"}>
-                                <Link to={"/admin/currency-bank"} className={"nk-menu-link "}>
+                            <li className={tab == "/admin/funding-accounts" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                <Link to={"/admin/funding-accounts"} className={"nk-menu-link "}>
                                     <span className="nk-menu-icon"><em className="icon ni ni-money" /></span>
                                     <span className="nk-menu-text"> Bank Account</span>
                                 </Link>
@@ -517,8 +517,8 @@ const Sidebar = () => {
                                     <li className={tab == "/admin/currencies" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                         <Link to="/admin/currencies" className="nk-menu-link"><span className="nk-menu-text">Currencies </span></Link>
                                     </li>
-                                    <li className={tab == "/admin/currency-bank" ? "nk-menu-item active current-page" : "nk-menu-item"}>
-                                        <Link to="/admin/currency-bank" className="nk-menu-link"><span className="nk-menu-text">Funding Accounts </span></Link>
+                                    <li className={tab == "/admin/funding-accounts" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                        <Link to="/admin/funding-accounts" className="nk-menu-link"><span className="nk-menu-text">Funding Accounts </span></Link>
                                     </li>
                                     <li className={tab == "/admin/charges" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                         <Link to="/admin/charges" className="nk-menu-link"><span className="nk-menu-text">Charges </span></Link>

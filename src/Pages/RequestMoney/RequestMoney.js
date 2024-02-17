@@ -951,7 +951,6 @@ function RequestMoney() {
                                                 {
                                                     singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed By  <span className="d-block">{singletxn?.transcation?.completed_by}</span></li>
                                                 }
-
                                             </ul>
                                         </div>
                                         <div className="col-md-6">
