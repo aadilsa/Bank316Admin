@@ -59,7 +59,6 @@ export const ManualBankStatus = async (reqmoneymsg, id, data, token) => {
 }
 
 
-
 export const RequestMoneyTxnData = async (token, id) => {
     try {
         const res = await axios.get(`${Base_Url}request-money/client/detail/${id}`, { headers: { "Authorization": `Bearer ${token}` } })

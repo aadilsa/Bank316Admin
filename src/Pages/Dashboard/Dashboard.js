@@ -396,11 +396,6 @@ const Dashboard = () => {
         ], dataPointWidth: 10,
     };
 
-
-
-
-
-
     console.log(RecentTxn, "LLLLLLLLLLLLLLL")
     // Now use the options object to create your chart
 
@@ -424,11 +419,7 @@ const Dashboard = () => {
                                 <div className="nk-block-between">
                                     <div className="nk-block-head-content">
                                         <h3 className="nk-block-title page-title">Main Dashboard</h3>
-                                    </div>{/* .nk-block-head-content */}
-
-
-
-
+                                    </div>
                                     {loader == false && <div className="nk-block-head-content">
                                         <div className="toggle-wrap nk-block-tools-toggle">
                                             <a href="#" className="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em className="icon ni ni-more-v" /></a>
@@ -579,7 +570,6 @@ const Dashboard = () => {
                                                                 <span className="sub-title">This Week</span>
                                                             </div> 
                                                         </div>
-                                                        
                                                     </div>*/}
 
 
@@ -667,7 +657,6 @@ const Dashboard = () => {
                                                             </div>*/}
                                                                     {/* <img src="images/grapphc.png" /> */}
                                                                     <CanvasJSChart options={options} />
-
                                                                 </div>
                                                             </div>
 
@@ -683,11 +672,7 @@ const Dashboard = () => {
                                                                 <span className="sub-title">This Week</span>
                                                             </div> 
                                                         </div>
-                                                        
                                                     </div>*/}
-
-
-
                                                         </div>
                                                     </div>
                                                 </div>{/* .col */}
@@ -745,11 +730,7 @@ const Dashboard = () => {
                                                                 <span className="sub-title">This Week</span>
                                                             </div> 
                                                         </div>
-                                                        
                                                     </div>*/}
-
-
-
                                                         </div>
                                                     </div>
                                                 </div>{/* .col */}
@@ -845,11 +826,7 @@ const Dashboard = () => {
 
                                         </div>
                                     </div>
-
                                 </div> */}
-
-
-
                                         <div className="col-xxl-8">
                                             <div className="card card-full">
                                                 <div className="card-inner">
@@ -875,7 +852,6 @@ const Dashboard = () => {
                                                             {/* <div className="nk-tb-col tb-col-md"><span>Date</span></div> */}
                                                             <div className="nk-tb-col"><span>Amount</span></div>
                                                             <div className="nk-tb-col tb-col-lg"><span>Description </span></div>
-
                                                             <div className="nk-tb-col"><span className="d-none d-sm-inline">Status</span></div>
                                                             <div className="nk-tb-col"><span>&nbsp;</span></div>
                                                         </div>
@@ -910,8 +886,6 @@ const Dashboard = () => {
 
                                                                 </div>
                                                                 <div className="nk-tb-col nk-tb-col-action">
-
-
                                                                 </div>
                                                             </div>
                                                         }

@@ -1,22 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Container from '../../component/container'
 import { RequestMoneyTxnData } from '../../API/RequestMoneypi/ReqMoneyApi'
-import { useLocation, } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
-import useSelection from 'antd/es/table/hooks/useSelection'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Image } from 'antd'
 import moment from 'moment'
 const ReqMoneyTxn = () => {
     const location = useLocation();
     const [data, setdata] = useState()
-
     const navigate = useNavigate();
-    // console.log(location, "locatatatatataatatatatatiiiiooonnnonn")
-
-
     const sender = data?.sender
     const Recipient = data?.receiver
-
 
     const ReqMoneyTxndata = async () => {
         try {
@@ -35,12 +28,9 @@ const ReqMoneyTxn = () => {
         ReqMoneyTxndata()
     }, [])
 
-
-
     const Back = () => {
         navigate(-1)
     }
-
 
     console.log(data?.sender?.currencywallets[0]?.currency.symbol, "data")
     var stillUtcs = moment.utc(data?.txndata?.created_at).toDate();
@@ -115,8 +105,6 @@ const ReqMoneyTxn = () => {
                                                                             <div className="profile-ud wider">
                                                                                 <span className="profile-ud-label">Transaction Id</span>
                                                                                 <span className="profile-ud-value">{data?.transaction?.txn_id}</span>
-
-
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -127,7 +115,6 @@ const ReqMoneyTxn = () => {
                                                                         <h6 className="title overline-title text-base">Order Details</h6>
                                                                     </div>
                                                                     <div className="profile-ud-list">
-
                                                                         <div className="profile-ud-item">
                                                                             <div className="profile-ud wider">
                                                                                 <span className="profile-ud-label">Payment Status</span>
@@ -136,9 +123,6 @@ const ReqMoneyTxn = () => {
                                                                                 {data?.transaction?.payment_status == "pending" && <span className="profile-ud-value"><span className="tb-status badge rounded-pill bg-warning">Pending</span></span>}
                                                                             </div>
                                                                         </div>
-
-
-
                                                                         <div className="profile-ud-item">
                                                                             <div className="profile-ud wider">
                                                                                 <span className="profile-ud-label">
@@ -146,8 +130,6 @@ const ReqMoneyTxn = () => {
                                                                                 <span className="profile-ud-value"> {data?.sender?.currencywallets[0]?.currency.symbol} {data?.transaction?.amount_before_txncharge}</span>
                                                                             </div>
                                                                         </div>
-
-
                                                                         <div className="profile-ud-item">
                                                                             <div className="profile-ud wider">
                                                                                 <span className="profile-ud-label">
@@ -155,47 +137,24 @@ const ReqMoneyTxn = () => {
                                                                                 <span className="profile-ud-value"> {data?.receiver?.currencywallets[0]?.currency?.symbol} {data?.transaction?.amount}</span>
                                                                             </div>
                                                                         </div>
-
                                                                         <div className="profile-ud-item">
                                                                             <div className="profile-ud wider">
                                                                                 <span className="profile-ud-label">TXN Charge %</span>
                                                                                 <span className="profile-ud-value"> {data?.transaction?.txn_charge_percent}%</span>
                                                                             </div>
                                                                         </div>
-
                                                                         <div className="profile-ud-item">
                                                                             <div className="profile-ud wider">
                                                                                 <span className="profile-ud-label">TXN Charge Amt </span>
                                                                                 <span className="profile-ud-value"> {data?.receiver?.currencywallets[0]?.currency?.symbol} {data?.transaction?.txn_charge_amount}</span>
                                                                             </div>
                                                                         </div>
-
-                                                                        {/* <div className="profile-ud-item">
-                                                                            <div className="profile-ud wider">
-                                                                                <span className="profile-ud-label">Closing Balance</span>
-                                                                                <span className="profile-ud-value">
-                                                                                    {data?.receiver?.currencywallets[0]?.currency?.symbol} {data?.transaction?.closing_balance}</span>
-                                                                            </div>
-                                                                        </div> */}
-
-                                                                        {/* 
-                                                                        <div className="profile-ud-item">
-                                                                            <div className="profile-ud wider">
-                                                                                <span className="profile-ud-label">Current Balance</span>
-                                                                                <span className="profile-ud-value">
-                                                                                    {data?.receiver?.currencywallets[0]?.currency?.symbol} {data?.reciever_wallet_current_balance}</span>
-                                                                            </div>
-                                                                        </div> */}
-
                                                                         <div className="profile-ud-item">
                                                                             <div className="profile-ud wider">
                                                                                 <span className="profile-ud-label">Payment Method</span>
                                                                                 <span className="profile-ud-value" style={{ textTransform: "capitalize" }}>{data?.transaction?.payment_method}</span>
                                                                             </div>
                                                                         </div>
-
-
-
                                                                         <div className="profile-ud-item">
                                                                             <div className="profile-ud wider">
                                                                                 <span className="profile-ud-label">Debit From</span>
@@ -203,24 +162,19 @@ const ReqMoneyTxn = () => {
                                                                                     {data?.transaction?.payment_method}</span>
                                                                             </div>
                                                                         </div>
-
                                                                         <div className="profile-ud-item">
                                                                             <div className="profile-ud wider">
                                                                                 <span className="profile-ud-label">Received To</span>
                                                                                 <span className="profile-ud-value" style={{ textTransform: "capitalize" }}>( {data?.sender?.currencywallets[0]?.currency?.short_name} ) Wallet</span>
                                                                             </div>
                                                                         </div>
-
                                                                     </div>
-
-
                                                                 </div>
                                                                 <hr style={{ color: 'black' }}></hr>
                                                                 <div className="nk-block">
                                                                     <div className="nk-block-head nk-block-head-line">
                                                                         <h6 className="title overline-title text-base">Additional Details</h6>
                                                                     </div>
-
                                                                     <div className="profile-ud-list">
                                                                         <div className="profile-ud-item">
                                                                             <div className="profile-ud wider">
@@ -229,28 +183,14 @@ const ReqMoneyTxn = () => {
                                                                                 }</span>
                                                                             </div>
                                                                         </div>
-
                                                                         <div className="profile-ud-item">
                                                                             <div className="profile-ud wider">
                                                                                 <span className="profile-ud-label">Currency Symbol</span>
                                                                                 <span className="profile-ud-value">{data?.receiver?.currencywallets[0]?.currency?.symbol}</span>
                                                                             </div>
                                                                         </div>
-                                                                        {/* <div className="profile-ud-item">
-                                                                                <div className="profile-ud wider">
-                                                                                    <span className="profile-ud-label">Currency Icon</span>
-                                                                                    <span className="profile-ud-value"><Image src={data?.currency_icon} height={50} width={70} /></span>
-                                                                                </div>
-                                                                            </div> */}
                                                                     </div>
                                                                     <div className="profile-ud-list">
-                                                                        {/* <div className="profile-ud-item">
-                                                                                <div className="profile-ud wider">
-                                                                                    <span className="profile-ud-label">Currency</span>
-                                                                                    <span className="profile-ud-value">{data?.currency}</span>
-
-                                                                                </div>
-                                                                            </div> */}
                                                                         <div className="profile-ud-item">
                                                                             <div className="profile-ud wider">
                                                                                 <span className="profile-ud-label">Transaction Time</span>
@@ -263,43 +203,26 @@ const ReqMoneyTxn = () => {
                                                                                 <span className="profile-ud-value" style={{ textTransform: "capitalize" }}>{data?.transaction?.title}</span>
                                                                             </div>
                                                                         </div>
-
-                                                                        {/* <div className="profile-ud-item">
-                                                                                <div className="profile-ud wider">
-                                                                                    <span className="profile-ud-label">Received To</span>
-                                                                                    <span className="profile-ud-value">( {data?.receiver?.currencywallets[0]?.currency?.short_name} ) Wallet</span>
-                                                                                </div>
-                                                                            </div> */}
-
-
-
                                                                         <div className="profile-ud-item">
                                                                             <div className="profile-ud wider">
                                                                                 <span className="profile-ud-label">Customer Image</span>
                                                                                 <span className="profile-ud-value"><Image src={sender?.avatar} height={50} width={70} /> </span>
                                                                             </div>
                                                                         </div>
-
                                                                         <div className="profile-ud-item">
                                                                             <div className="profile-ud wider">
                                                                                 <span className="profile-ud-label">Currency Icon</span>
                                                                                 <span className="profile-ud-value"><Image src={data?.receiver?.currencywallets[0]?.currency?.icon} height={40} width={70} /></span>
                                                                             </div>
                                                                         </div>
-
-
-
-
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             }
@@ -316,7 +239,6 @@ const ReqMoneyTxn = () => {
                                                             <h4 className="card-title title">Sender</h4>
                                                             <p className="sub-text">Details of the sender.</p>
                                                         </div>
-
                                                     </div>
                                                     <div className="pricing-body">
                                                         <ul className="pricing-features">
@@ -326,8 +248,6 @@ const ReqMoneyTxn = () => {
                                                             <li><span className="w-50">Mobile Number</span> - <span className="ms-auto">{sender?.phone}</span></li>
                                                             <li><span className="w-50">Transaction Type</span> - <span className="ms-auto tb-status badge rounded-pill bg-danger"><div className="tb-status badge rounded-pill bg-danger">Debit</div></span></li>
                                                             <li><span className="w-50">Debit Amount</span> - <span className="ms-auto">{data?.sender?.currencywallets[0]?.currency.symbol} {data?.transaction?.amount_before_txncharge} </span></li>
-                                                            {/* <li><span className="w-50">Currency</span> - <span className="ms-auto">{data?.currency}</span></li> */}
-                                                            {/* <li><span className="w-50">Currency</span> - <span className="ms-auto" style={{ textTransform: "capitalize" }}>{sender?.currencywallets[0]?.currency?.title} </span></li> */}
                                                         </ul>
                                                     </div>
                                                 </div>

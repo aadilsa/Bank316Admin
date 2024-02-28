@@ -28,15 +28,8 @@ import AllCurrency from '../Pages/AllTransaction/AllCurrency';
 import ReqMoneyTxn from '../Pages/RequestMoney/ReqMoneyTxn';
 import { AllCustom } from '../Pages/AllTransaction/AllCustom';
 import { AddEmploye } from '../Pages/Role/AddEmploye';
-// import { AddUser } from '../Pages/Role/AddEmploye';
-// import { AllTransaction } from '../Pages/AllTransaction/AllCurrencyTransaction';
 import ManageRoles from '../Pages/Role/ManageRoles';
-// import { ManageUser } from '../Pages/Role/ManageEmploye';
 import { ManageEmploye } from '../Pages/Role/ManageEmploye';
-
-
-import { AddEmployee } from '../API/Employees/Employees';
-// import { AllCurrencyTransaction } from '../API/AllTransactionApi.js/AllTranasaction';
 import PaymentCharge from '../Pages/PaymentCharge/PaymentCharge';
 import RequestMoney from '../Pages/RequestMoney/RequestMoney';
 import AddRole from '../Pages/Role/AddRole';
@@ -57,29 +50,14 @@ import CreateFAQ from "../Pages/FAQ/CreateFAQ";
 import UpdateFAQ from '../Pages/FAQ/UpdateFAQ';
 import Referrals from '../Pages/Referrals/Referrals';
 import Transfers from '../Pages/Transfers/Transfers';
-// import FAQ from '../Pages/faq';
-// import CreateFAQ from '../Pages/admin/faq/CreateFAQ';
-// import UpdateFAQ from '../Pages/admin/faq/UpdateFAQ';
-
-// import { outesideRecipientData } from '../API/RecipientsAPi/Recipients';
-// import { OutsideRecipient } from '../Pages/Recipients/OutsideRecipient';
-// import { AllOutesideRecipients, Allinsiderecipients } from '../Pages/Allrecipients/AllOutesideRecipients';
-// import { Insiderecipients, OutsideRecipient } from '../Pages/Recipients/Insiderecipients';
-import PaymentLinkUI from '../Pages/pageForAPK/PaymentLinkFirst';
-import PaymentLinkTwo from '../Pages/pageForAPK/PaymentLinkSeco';
-// import PaymentLinkThree from '../Pages/pageForAPK/paymentLinkThree';
 import PaymentLinkThird from '../Pages/pageForAPK/PaymentLinkThird';
 import PaymentLinkFirst from '../Pages/pageForAPK/PaymentLinkFirst';
 import PaymentLinkSeco from '../Pages/pageForAPK/PaymentLinkSeco';
 import BalanceDashboard from '../Pages/Dashboard/Balance_Dashboard';
 import UsersDashboard from '../Pages/Dashboard/UsersDashboard';
 import Withdrawals from '../Pages/Withdrawals/Withdrawals';
-import Withdrawal from '../Pages/Withdrawals/Withdrawal';
 import UserMangement from '../Pages/UserManagement/UserMangement';
 import VerificationCentre from '../Pages/UserManagement/VerificationCentre';
-// import PaymentLinkThree from '../Pages/pageForAPK/paymentLinkThree';
-// import PaymentLinkThree from '../Pages/pageForAPK/PaymentLinkThird';
-// import PaymentLinkThree from '../Pages/pageForAPK/PaymentLinkThree';
 const Router = () => {
     return (
         <BrowserRouter>
@@ -90,24 +68,15 @@ const Router = () => {
                 <Route path="/role" element={<PrivateRoute><Role /></PrivateRoute>} />
                 <Route path="/user-details" element={<PrivateRoute><UserDetail /></PrivateRoute>} />
                 <Route path="/country" element={<PrivateRoute><Country /></PrivateRoute>} />
-
-
                 <Route path="/admin/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
                 <Route path="/admin/balance-dashboard" element={<PrivateRoute><BalanceDashboard /></PrivateRoute>} />
                 <Route path="/admin/users-dashboard" element={<PrivateRoute><UsersDashboard /></PrivateRoute>} />
-
                 <Route path="/admin/deposits" element={<PrivateRoute><RequestMoney /></PrivateRoute>} />
-                {/* <Route path="/admin/deposits" element={<PrivateRoute><RequestMoney /></PrivateRoute>} /> */}
                 <Route path="/admin/deposits/transactions" element={<PrivateRoute><ReqMoneyTxn /></PrivateRoute>} />
-
                 <Route path="/admin/withdrawals" element={<PrivateRoute><Withdrawals /></PrivateRoute>} />
-                <Route path="/admin/withdrawal" element={<PrivateRoute><Withdrawal /></PrivateRoute>} />
-
                 <Route path="/admin/Referrals" element={<PrivateRoute><Referrals /></PrivateRoute>} />
                 <Route path="/admin/conversions" element={<PrivateRoute><Conversions /></PrivateRoute>} />
                 <Route path="/admin/transfers" element={<PrivateRoute><Transfers /></PrivateRoute>} />
-
-
                 <Route path="/change-password" element={<PrivateRoute><ChangePassword /></PrivateRoute>} />
                 <Route path="/bank-list" element={<PrivateRoute><BankList /></PrivateRoute>} />
                 <Route path="/currency-transaction" element={<PrivateRoute><Transaction /></PrivateRoute>} />
@@ -133,39 +102,23 @@ const Router = () => {
                 <Route path="/admin/allCurrency-transaction" element={<PrivateRoute><AllCurrency /></PrivateRoute>} />
                 <Route path="/admin/charges" element={<PrivateRoute><PaymentCharge /></PrivateRoute>} />
                 <Route path="/edit-role" element={<PrivateRoute><EditRole /></PrivateRoute>} />
-
                 <Route path="/edit-employee" element={<PrivateRoute><EditEmployee /></PrivateRoute>} />
-
-
-
-
-
-
                 <Route path="/single-custom-transaction" element={<PrivateRoute><SingleCustomTran /></PrivateRoute>} />
-
                 <Route path="/customer/inside-recipients" element={<PrivateRoute><Insiderecipients /></PrivateRoute>} />
                 <Route path="/customer/outside-recipients" element={<PrivateRoute><OutsideRecipient /></PrivateRoute>} />
-
                 <Route path="/outside-recipients" element={<PrivateRoute><AllOutsideRecipiens /></PrivateRoute>} />
                 <Route path="/inside-recipients" element={<PrivateRoute><AllInsideRecipients /></PrivateRoute>} />
                 <Route path="/outside-transactions" element={<PrivateRoute><Outsidetxns /></PrivateRoute>} />
                 <Route path="/outside-transaction" element={<PrivateRoute><Outsidetxn /></PrivateRoute>} />
                 <Route path="/account-managers" element={<PrivateRoute><AccountManagers /></PrivateRoute>} />
-
                 <Route path="/admin/user-mangement" element={<PrivateRoute><UserMangement /></PrivateRoute>} />
                 <Route path="/admin/verification-Centre" element={<PrivateRoute><VerificationCentre /></PrivateRoute>} />
-
                 <Route path="/admin/faq" element={<PrivateRoute><FAQ /></PrivateRoute>} />
                 <Route path="/create-faq" element={<PrivateRoute><CreateFAQ /></PrivateRoute>} />
                 <Route path="/edit-faq" element={<PrivateRoute><UpdateFAQ /></PrivateRoute>} />
-
                 <Route path="/payment-link/request" element={<PaymentLinkFirst />} />
                 <Route path="/payment-link/options" element={<PaymentLinkSeco />} />
                 <Route path="/payment-link/ok" element={<PaymentLinkThird />} />
-
-
-                {/* <Route path="/PayLinkFirst" element={<Pay>} /> */}
-
                 <Route path="*" element={<PrivateRoute><PageNotFound /></PrivateRoute>} />
             </Routes>
         </BrowserRouter>
@@ -175,13 +128,10 @@ export default Router;
 
 
 const PrivateRoute = ({ children }) => {
-
-
     const auther = localStorage.getItem("logintoken") !== null && localStorage.getItem("logintoken") !== undefined && localStorage.getItem("logintoken") !== "" ? true : false
     return auther === true ? (
         children
     ) : (
         <Navigate to="/" replace />
     );
-
 }

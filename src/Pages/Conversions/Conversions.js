@@ -49,7 +49,7 @@ const Conversions = () => {
     const [selectedValue, setSelectedValue] = useState(true)
     const [recentTab, setrecentTab] = useState("")
     const [reqmoneymsg, setreqmoneymsg] = useState("")
-    const [singletxn, setsingletxn] = useState([])
+    const [singletxn, setsingletxn] = useState()
 
     const navigate = useNavigate()
     const ref2 = useRef()
@@ -77,7 +77,7 @@ const Conversions = () => {
         setid(data?.walletDetails?.request_id)
     }
 
-    console.log("PPPPPPPPP", reqmoneymsg)
+    console.log("singletxn", singletxn)
 
     const signUpSchemas = yup.object({
         ShortName: yup.string().required("Please Enter Massage"),
@@ -207,6 +207,9 @@ const Conversions = () => {
         navigate("/admin/withdrawal", { state: data })
     }
 
+    var singleStillUtcs = moment.utc(singletxn?.created_at).toDate();
+    var singleTimeZones = moment(singleStillUtcs).local().format('MMM D, YYYY hh:mm A');
+
     return (
         <Container>
             <div className="nk-content ">
@@ -216,7 +219,7 @@ const Conversions = () => {
                             <div className="nk-block-head nk-block-head-sm">
                                 <div className="nk-block-between">
                                     <div className="nk-block-head-content">
-                                        <h5>Conversions</h5>
+                                        <h5>Currency Conversions</h5>
                                         <div className="nk-block-des text-soft">
                                             <p>Total <span className='fw-bold'>({count})</span> transactions  </p>
                                         </div>
@@ -301,14 +304,14 @@ const Conversions = () => {
                                             <label className="custom-control-label" htmlFor="uid" />
                                         </div>
                                     </div> */}
-                                        <div className="nk-tb-col"><span className="sub-text">User {sortedBy == "recipient_name" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("recipient_name") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("recipient_name") }} />}</span></div>
+                                        <div className="nk-tb-col"><span className="sub-text">Currency {sortedBy == "base_currency" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("base_currency") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("base_currency") }} />}</span></div>
                                         <div className="nk-tb-col tb-col-mb"><span className="sub-text">
-                                            TXN ID {sortedBy == "txn_id" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("txn_id") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("txn_id") }} />}</span></div>
-                                        <div className="nk-tb-col tb-col-md"><span className="sub-text">From {sortedBy == 'base_amount' && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('base_amount') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('base_amount') }} />}</span></div>
-                                        <div className="nk-tb-col tb-col-lg"><span className="sub-text">TO {sortedBy == "converted_amount" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("converted_amount") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("converted_amount") }} />}</span></div>
+                                            Amount {sortedBy == "base_amount" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("base_amount") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("base_amount") }} />}</span></div>
+                                        <div className="nk-tb-col tb-col-md"><span className="sub-text">Exchange Rate {sortedBy == 'converted_currency_rate' && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('converted_currency_rate') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('converted_currency_rate') }} />}</span></div>
+                                        <div className="nk-tb-col tb-col-lg"><span className="sub-text">User {sortedBy == "coversion_user_name" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("coversion_user_name") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("coversion_user_name") }} />}</span></div>
 
-                                        <div className="nk-tb-col tb-col-md"><span className="sub-text">Current Rate {sortedBy == "converted_currency_rate" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("converted_currency_rate") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("converted_currency_rate") }} />}</span></div>
-                                        <div className="nk-tb-col tb-col-lg"><span className="sub-text">Created At {sortedBy == 'created_at' && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} />}</span>
+                                        <div className="nk-tb-col tb-col-md"><span className="sub-text">Date {sortedBy == "created_at" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("created_at") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("created_at") }} />}</span></div>
+                                        <div className="nk-tb-col tb-col-lg"><span className="sub-text">Charge {sortedBy == 'created_at' && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} />}</span>
                                         </div>
                                         <div className="nk-tb-col nk-tb-col-tools">
                                             <ul className="nk-tb-actions gx-1 my-n1">
@@ -366,7 +369,13 @@ const Conversions = () => {
                                                     data.length > 0 && data.map((data) => {
                                                         // console.log(data, "setreqmoneymsgsetreqmoneymsgsetreqmoneymsg")
                                                         var stillUtcs = moment.utc(data?.created_at).toDate();
-                                                        var timeZones = moment(stillUtcs).local().format('YYYY-MM-DD HH:mm:ss A');
+                                                        var timeZones = moment(stillUtcs).local().format('MMM D, YYYY hh:mm A');
+
+                                                        let base_currency_rate = data.base_currency_rate;
+                                                        let formattedRate = base_currency_rate.toFixed(2);
+
+                                                        let converted_currency_rate = data.converted_currency_rate;
+                                                        let converted_currencyrate = converted_currency_rate.toFixed(2);
                                                         return (
 
                                                             <>
@@ -387,8 +396,8 @@ const Conversions = () => {
                                                                                 <div className="user-info" style={{ cursor: "pointer", }}
                                                                                 //  onClick={() => GoToUserDetail(data?.transcation?.client_id)}
                                                                                 >
-                                                                                    <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.transcation?.recipient_name}yogesh Gurjar <span className="dot dot-success d-md-none ms-1" /></span>
-                                                                                    <span>{data?.client?.email}yogesh@gmail.com</span>
+                                                                                    <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.base_currency} / {data?.converted_currency}<span className="dot dot-success d-md-none ms-1" /></span>
+                                                                                    {/* <span>{data?.client?.email}yogesh@gmail.com</span> */}
                                                                                 </div>
                                                                             </div>
                                                                         </a>
@@ -396,29 +405,29 @@ const Conversions = () => {
                                                                     <div className="nk-tb-col tb-col-mb">
                                                                         <span className="tb-amount"
                                                                             // onClick={() => { GoWithdrwal(data) }} 
-                                                                            style={{ cursor: "pointer" }}>{data?.transcation?.txn_id}298564449038112<span className="dot dot-success d-md-none ms-1" /></span>
+                                                                            style={{ cursor: "pointer" }}>{data?.base_amount}<span className="dot dot-success d-md-none ms-1" /></span>
                                                                         {/* <span className=" tb-status  text-success "></span> */}
-                                                                        <span className=" tb-status  text-success ">
+                                                                        {/* <span className=" tb-status  text-success ">
                                                                             <em class="icon ni ni-bullet-fill"></em>{data.txn_type}
-                                                                        </span>
+                                                                        </span> */}
                                                                         {/* <span className="tb-amount">{data?.transcation?.txn_id} <span className="currency">USD</span></span> */}
                                                                     </div>
                                                                     <div className="nk-tb-col tb-col-md">
-                                                                        <span> {data?.base_amount} {data?.base_currency}</span>
+                                                                        <span className="tb-amount"> {formattedRate} {data?.base_currency} = {converted_currencyrate} {data?.converted_currency}</span>
                                                                     </div>
                                                                     <div className="nk-tb-col tb-col-lg">
-                                                                        <span>{data?.converted_amount} {data?.converted_currency}</span>
+                                                                        <span className="tb-amount" >{data?.coversion_user_name} </span>
 
                                                                     </div>
                                                                     <div className="nk-tb-col tb-col-md">
-                                                                        <span>{data.converted_currency_rate}</span>
+                                                                        <span className="tb-amount">{timeZones}</span>
 
                                                                     </div>
                                                                     <div className="nk-tb-col tb-col-lg">
-                                                                        <span>{timeZones}</span>
+                                                                        <span className="tb-amount">0 GBP</span>
                                                                     </div>
 
-                                                                    <div className="nk-tb-col nk-tb-col-tools">
+                                                                    <div className="nk-tb-col nk-tb-col-tools" onClick={() => { setsingletxn(data) }}>
                                                                         <ul className="nk-tb-actions gx-1">
                                                                             <li className="nk-tb-action-hidden">
                                                                                 <a onClick={() => GoToUserDetail(data?.transcation?.client_id)} className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
@@ -432,7 +441,7 @@ const Conversions = () => {
                                                                             </li>
                                                                             <li>
                                                                                 <div className="drodown">
-                                                                                    <a href="#" className="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
+                                                                                    <a className="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
                                                                                     <div className="dropdown-menu dropdown-menu-end">
                                                                                         <ul className="link-list-opt no-bdr">
                                                                                             <li onClick={() => GoToUserDetail(data?.transcation?.client_id)} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
@@ -543,7 +552,8 @@ const Conversions = () => {
                 <div className="modal-dialog modal-lg" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title">Conversion ID# <span>{singletxn?.transcation?.txn_id}</span></h5>
+                            <h5 className="modal-title">Conversion ID# <span>{singletxn?.transcation?.txn_id}
+                                233881527238181</span></h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref1} data-dismiss="modal" />
                         </div>
                         <form >
@@ -552,11 +562,11 @@ const Conversions = () => {
                                     <li class="item pt-0">
                                         <div class="user-avatar bg-primary mright-2">
                                             <span class="user-avatar bg-warning-dim">
-                                                <e class="icon ni ni-arrow-up-right"></e></span>
+                                                <e class="icon ni ni-tranx" style={{ fontSize: '24px' }}></e></span>
                                             <em class="icon ni ni-wallet-fill walletIconNew"></em>
                                         </div>
-                                        <div class="info"><div class="title"><b>  {singletxn?.transaction?.amount_before_txncharge} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</b></div>
-                                            {/* <div class="price">{timeZones}</div> */}
+                                        <div class="info"><div class="title"><b>  {singletxn?.base_amount} {singletxn?.base_currency}</b></div>
+                                            <div class="price">{singleTimeZones}</div>
                                         </div>
                                         {
                                             singletxn?.transcation?.payment_status == "success" && <div class="total badge rounded-pill bg-success">success</div>
@@ -574,9 +584,9 @@ const Conversions = () => {
                                     <div className="col-md-6">
                                         <h6 className="mb-3">USER DETAILS</h6>
                                         <ul>
-                                            <li className="mb-3">User Account <span className="d-block">{singletxn?.sender?.first_name} {singletxn?.sender?.last_name} <small></small></span></li>
-                                            <li className="mb-3">Email <span className="d-block">{singletxn?.sender?.email}</span></li>
-                                            <li className="mb-3">Mobile Number  <span className="d-block">{singletxn?.sender?.phone}</span></li>
+                                            <li className="mb-3">User <span className="d-block">{singletxn?.coversion_user_name}  <small></small></span></li>
+                                            <li className="mb-3">Email <span className="d-block">Pending</span></li>
+                                            <li className="mb-3">Mobile Number  <span className="d-block">Pending</span></li>
                                         </ul>
                                     </div>
                                     <div className="col-md-6">
@@ -592,19 +602,19 @@ const Conversions = () => {
                                     <div className="col-md-12"><h6 className="mb-3">TRANSACTION DETAILS</h6></div>
                                     <div className="col-md-6">
                                         <ul>
-                                            <li className="mb-3">From   <span className="d-block">{singletxn?.transcation?.amount_before_txncharge} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
-                                            <li className="mb-3">Transaction  Amount <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
-                                            <li className="mb-3">Conversion charge applied <span className="d-block">{singletxn?.transcation?.txn_charge_amount} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
-                                            <li className="mb-3">Total Amount Converted  <span className="d-block">{singletxn?.transcation?.txn_charge_amount} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li>
+                                            <li className="mb-3">From   <span className="d-block">{singletxn?.base_currency} Balance</span></li>
+                                            <li className="mb-3">Transaction  Amount <span className="d-block">{singletxn?.base_amount} {singletxn?.base_currency}</span></li>
+                                            <li className="mb-3">Conversion charge applied <span className="d-block">0 {singletxn?.base_currency}</span></li>
+                                            <li className="mb-3">Total Amount Converted  <span className="d-block">{singletxn?.base_amount} {singletxn?.base_currency}</span></li>
                                             {/* <li className="mb-3">Adj Transfer Amount <span className="d-block"> {singletxn?.transcation?.amount} {singletxn?.receiver?.currencywallets[0]?.currency?.short_name}</span></li> */}
                                         </ul>
                                     </div>
                                     <div className="col-md-6">
                                         <ul>
-                                            <li className="mb-3">To <span className="d-block">UID08124</span></li>
+                                            <li className="mb-3">To <span className="d-block">{singletxn?.converted_currency} Balance</span></li>
                                             <li className="mb-3">EURO Balance <span className="d-block">Jan 23, 2024 6:30 PM</span></li>
-                                            <li className="mb-3">Exchange Rate <span className="d-block">Jan 23, 2024 6:30 PM</span></li>
-                                            <li className="mb-3">Converted Amount <span className="d-block">{singletxn?.transcation?.payment_method}</span></li>
+                                            <li className="mb-3">Exchange Rate <span className="d-block"> {singletxn.base_currency_rate} {singletxn?.base_currency} =  {singletxn.converted_currency_rate}  {singletxn?.converted_currency}</span></li>
+                                            <li className="mb-3">Converted Amount <span className="d-block">{singletxn?.converted_amount} {singletxn?.converted_currency}</span></li>
                                             {/* <li className="mb-3">Wallet Balance after Txn <span className="d-block">{singletxn?.transcation?.other_closing_balance} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li> */}
                                         </ul>
                                     </div>
@@ -615,8 +625,8 @@ const Conversions = () => {
                                     <div className="col-md-12"><h6 className="mb-3">ADDITIONAL  DETAILS</h6></div>
                                     <div className="col-md-6">
                                         <ul>
-                                            <li className="mb-3">Transaction type    <span className="d-block">{singletxn?.transcation?.txn_type}</span></li>
-                                            <li className="mb-3">Status    <span className="d-block">Deposit Via Manual Bank Transfer </span></li>
+                                            <li className="mb-3">Transaction type    <span className="d-block">Currency conversion</span></li>
+                                            <li className="mb-3">Status    <span className="d-block">complete</span></li>
                                             <li className="mb-3">Converted On   <span className="d-block">Manual Bank Transfer</span></li>
                                             {/* <li className="mb-3">Account Sort Code   <span className="d-block">Manual Bank Transfer</span></li> */}
 
@@ -631,7 +641,7 @@ const Conversions = () => {
                                         <ul>
                                             <li className="mb-3">Account Type   <span className="d-block">Personal</span></li>
                                             <li className="mb-3">Verification Status <span className="d-block">Verified</span></li>
-                                            <li className="mb-3">Default Currency Wallet  <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li>
+                                            <li className="mb-3">Default Currency Wallet  <span className="d-block">{singletxn?.base_currency}</span></li>
                                             {/* <li className="mb-3">Transaction Status <span className="d-block">{singletxn?.sender?.currencywallets[0]?.currency.title}</span></li> */}
                                             {/* {
                                        singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed On  <span className="d-block">Jan 23 2024, 5:30 PM</span></li>

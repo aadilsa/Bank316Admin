@@ -8,13 +8,10 @@ import { useRef } from 'react';
 import { useFormik } from 'formik';
 import * as yup from "yup"
 import { useNavigate } from 'react-router-dom';
-import { Switch } from 'antd';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import 'react-toastify/dist/ReactToastify.css';
-// import CopyToClipboard from 'react-copy-to-clipboard'
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import BaseUrl from '../../API/config'
 
 const AddSuccessToast = () => {
@@ -25,6 +22,7 @@ const addErrorToast = (massage) => {
         autoClose: 2000
     });
 }
+
 function RequestMoney() {
     const [data, setdata] = useState([])
     const [count, setcount] = useState(0)
@@ -36,9 +34,6 @@ function RequestMoney() {
     const [entries, SetEntries] = useState('10')
     const [example, setExample] = useState(false)
     const [scroll, setscroll] = useState(false)
-    const [Toggle, setToggle] = useState()
-    const [loading, setloading] = useState(false)
-    const [country_flag, setcountry_flag] = useState()
     const [sortedBy, setSortedBy] = useState("id")
     const [orderBy, setOrderBy] = useState('desc')
     const token = localStorage.getItem("logintoken")
@@ -47,17 +42,13 @@ function RequestMoney() {
     const [reqmoneymsg, setreqmoneymsg] = useState("")
     const [comment, setcomment] = useState("")
     const [txnid, settxnid] = useState()
-
-
     const [singletxn, setsingletxn] = useState([])
-
     const [alldata, setalldata] = useState([])
     const navigate = useNavigate()
     const ref2 = useRef()
     const ref1 = useRef()
 
     const reqmoneystatus = (data) => {
-        // console.log(data, "datatatatatatatatatatatatatatatatat")
         if (data.req_unique_id != null) {
             setreqmoneymsg("Reqmoney")
         }
@@ -67,8 +58,6 @@ function RequestMoney() {
         else if
             ((data.request_identity == "Local Send" || data.request_identity == "International Send") && data.request_type == "Manual Bank") {
             setreqmoneymsg("ManualBank")
-            // console.log(reqmoneymsg)
-            // alert("aadil")
         }
         else {
             setreqmoneymsg("")
@@ -76,9 +65,6 @@ function RequestMoney() {
         }
         setid(data.id)
     }
-
-    console.log("PPPPPPPPP", reqmoneymsg)
-
     const signUpSchemas = yup.object({
         ShortName: yup.string().required("Please Enter Massage"),
         role: yup.string().required('Please select Role'),
@@ -91,17 +77,14 @@ function RequestMoney() {
         initialValues: {
             ShortName: "",
             role: "",
-
         },
         validationSchema: signUpSchemas,
         onSubmit: async (values, { resetForm }) => {
-            // console.log(values.role, "is_request_money")
             const datas = JSON.stringify({
                 "is_request_money": JSON.parse(values.role),
                 "comment": values.ShortName
             })
             console.log(reqmoneymsg, "reqmoneymsg")
-            // console.log(datas, "datatatat??????????")
             const ManualBank = await ManualBankStatus(reqmoneymsg, id, datas, token)
             console.log(ManualBank, "ManualBank")
             if (ManualBank.status == true) {
@@ -109,20 +92,17 @@ function RequestMoney() {
                 form.resetForm()
                 AddSuccessToast()
                 GetRequestMoneyData()
-                // setSelectedValue(true)
             }
             else {
                 addErrorToast(ManualBank.message)
                 form.resetForm()
                 ref2.current.click()
-                // setSelectedValue(true)
             }
         }
     })
     setTimeout(() => {
         setscroll(true)
     }, 3000);
-
 
     const GetRequestMoneyData = async () => {
         try {
@@ -133,14 +113,12 @@ function RequestMoney() {
                     setExample(true)
                     setdata(totaldata?.data.rows)
                     setcount(totaldata?.data.count)
-                    // console.log(totaldata?.data.count, 'totaldata')
                     const Count = totaldata?.data.count
                     setTotalSize(Count / entries)
                     setloader(false)
                 }, 2000);
                 setloader(true)
             }
-
             else if (totaldata?.response?.data?.message == "jwt expired") {
                 localStorage.removeItem('logintoken')
                 navigate("/")
@@ -151,8 +129,6 @@ function RequestMoney() {
                 }, 2000);
                 setloader(true)
             }
-
-
         }
         catch (err) {
             console.log(err)
@@ -165,7 +141,6 @@ function RequestMoney() {
     useEffect(() => {
         GetRequestMoneyData()
     }, [sortedBy, orderBy, search, pageNumber, recentTab])
-
 
     const sortChange = (col) => {
         if (col === sortedBy) {
@@ -183,13 +158,10 @@ function RequestMoney() {
         setPagenumber(CurrentPage)
     };
 
-
-
     const handleSelect = (e) => {
         const selectedOption = e.target.value;
         setSelectedValue(selectedOption);
     };
-
 
     const GoToUserDetail = (id) => {
         console.log(id, "iddddddddddddddddd")
@@ -199,25 +171,15 @@ function RequestMoney() {
         toast.success(" Successful copy ", { autoClose: 1000 })
     }
 
-
-
-
     const GoAllreqTxn = (id) => {
         const statadata = {
             id: id,
             token: token
         }
-
-        // navigate(`/transaction`, { state: statadata })
         navigate("/admin/deposits/transactions", { state: statadata })
     }
 
-
-
-
-
     const approvedcancell = () => {
-        console.log("------------>>>>>>>>>>>>>>>>>")
         Swal.fire({
             title: 'Cancel Transaction??',
             text: "You cannot revert back this action, so please confirm that you've not received the payment yet and want to cancel.",
@@ -228,12 +190,7 @@ function RequestMoney() {
             cancelButtonText: "No",
             confirmButtonText: 'Yes, Cancel'
         }).then(async (result) => {
-            // Check if the user clicked "Yes"
             if (result.value) {
-                // const datas = {
-
-                // }
-
                 const datas = JSON.stringify({
                     "is_request_money": false,
                     "comment": comment
@@ -241,15 +198,12 @@ function RequestMoney() {
                 const response = await ManualBankStatus(reqmoneymsg, id, datas, token)
                 if (response?.status) {
                     Swal.fire(
-                        'Deleted!',
-                        'Your Wallet icon has been deleted.',
-                        'success'
+                        'Transaction Cancelled',
+                        'Transaction has been marked as cancelled .',
                     )
                     ref2.current.click()
                     GetRequestMoneyData()
                 } else {
-
-
                     toast.error("something went wrong")
                     ref2.current.click()
                 }
@@ -258,12 +212,10 @@ function RequestMoney() {
     }
 
 
-
-
     const ApprovedWidthdrawal = () => {
         Swal.fire({
             title: 'Complete Transaction?',
-            text: "Please confirm that you want to procced the request and complete the transaction.",
+            text: "Transaction has been marked as Complete ",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#1ee0ac',
@@ -271,12 +223,7 @@ function RequestMoney() {
             cancelButtonText: "Cancel",
             confirmButtonText: 'Yes Procced'
         }).then(async (result) => {
-            // Check if the user clicked "Yes"
             if (result.value) {
-                // const datas = {
-
-                // }
-
                 const datas = JSON.stringify({
                     "is_request_money": true,
                     "comment": "comment"
@@ -288,7 +235,6 @@ function RequestMoney() {
                         'Your Deposit Request has been Approved.',
                         'success'
                     )
-
                     GetRequestMoneyData()
                     ref1.current.click()
                 } else {
@@ -298,13 +244,6 @@ function RequestMoney() {
             }
         })
     }
-
-
-    // console.log(alldata?.sender?.currencywallets[0]?.currency.symbol, alldata?.transaction?.amount_before_txncharge, "llllllllllllllll")
-    console.log(alldata, "??????????")
-
-
-
 
     const ReqMoneyTxndata = async (id) => {
         try {
@@ -318,11 +257,6 @@ function RequestMoney() {
             console.log(err)
         }
     }
-    console.log(alldata, "alldata")
-
-    // var stillUtcs = moment.utc(singletxn?.transaction?.created_at).toDate();
-    // var timeZones = moment(stillUtcs).local().format('YYYY-MM-DD HH:mm:ss A');
-
     var singlestillUtcs = moment.utc(singletxn?.transaction?.created_at).toDate();
     var singletimeZones = moment(singlestillUtcs).local().format('MMM D, YYYY hh:mm A');
     console.log(singletxn, "singletxn?.transaction?.created_at")
@@ -338,7 +272,6 @@ function RequestMoney() {
                                     <div className="nk-block-head-content">
                                         <h5>Deposits</h5>
                                         <div className="nk-block-des text-soft">
-
                                             <p>Total <span className='fw-bold'>({count})</span> transactions.</p>
                                         </div>
                                     </div>
@@ -356,20 +289,6 @@ function RequestMoney() {
                                                         </div>
                                                     </li>
                                                     <li><a className="btn btn-white btn-outline-primary" href={BaseUrl + `clients/all/admin/deposits/export`}><em className="icon ni ni-download-cloud" /><span>Export</span></a></li>
-                                                    <li className="nk-block-tools-opt">
-                                                        <div className="drodown">
-                                                            {/* <a className="dropdown-toggle btn btn-icon btn-primary"
-                                                            // data-bs-toggle="dropdown" 
-                                                            ><em className="icon ni ni-plus" /></a> */}
-                                                            {/* <div className="dropdown-menu dropdown-menu-end">
-                                                                <ul className="link-list-opt no-bdr">
-                                                                    <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report" ><a ><span>Add Currency</span></a></li>
-                                                                    <li><a ><span>Add Team</span></a></li>
-                                                                    <li><a ><span>Import customer</span></a></li>
-                                                                </ul>
-                                                            </div> */}
-                                                        </div>
-                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -379,45 +298,31 @@ function RequestMoney() {
                             <div className="card card-full">
                                 <div className="card-inner" style={{ borderBottom: "1px solid #ddd" }}>
                                     <div className="card-title-group">
-                                        {/* <div className="card-title">
-                                        <h6 className="title"><span className="me-2"> Recent Transactions </span> <a href="#" className="link d-none d-sm-inline">See
-                                            History</a></h6>
-                                    </div> */}
                                         <div className="card-tools">
                                             <ul className="card-tools-nav">
                                                 <li className={search == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch(""); setTotalSize(0) }}><span >{search == "" ? <b>History</b> : <span>History</span>}</span></a></li>
-                                                <li className={search == "pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("pending"); setTotalSize(0) }}><span>{search == "pending" ? <b>Pending</b> : <span>Pending</span>}</span></a></li>
-                                                {/* <li className={recentTab == "Oh - hold" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("Oh - hold")}><span>Oh - hold</span></a></li> */}
-                                                <li className={search == "completed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("completed"); setTotalSize(0) }}><span> {search == "completed" ? <b>Processed</b> : <span>Processed</span>}</span></a></li>
+                                                <li className={search == "pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("pending"); setTotalSize(0) }}><span>{search == "pending" ? <b>Pending</b> : <span>Pending</span>}</span></a></li>                                                <li className={search == "completed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("completed"); setTotalSize(0) }}><span> {search == "completed" ? <b>Processed</b> : <span>Processed</span>}</span></a></li>
                                                 <li className={search == "rejected" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("rejected"); setTotalSize(0) }}><span>{search == "rejected" ? <b>Rejected</b> : <span>Rejected</span>}</span></a></li>
-
-                                                {/* <li className={recentTab == "approved by receiver" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("approved by receiver"); setTotalSize(0) }}><span> {recentTab == "approved by receiver" ? <b>Approved by receiver</b> : <span>Approved by receiver</span>}</span></a></li> */}
-                                                {/* <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("")}><span>All</span></a></li> */}
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
                             <div className="nk-block">
                                 <div className="nk-tb-list is-separate mb-3">
-
                                     <div className="nk-tb-item nk-tb-head">
                                         <div className="nk-tb-col"><span className="sub-text">User {sortedBy == "first_name" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("first_name") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("first_name") }} />}</span></div>
                                         <div className="nk-tb-col tb-col-mb"><span className="sub-text">
                                             TXN ID {sortedBy == "txn_id" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("txn_id") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("txn_id") }} />}</span></div>
                                         <div className="nk-tb-col tb-col-md"><span className="sub-text">Description {sortedBy == 'phone' && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('phone') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('phone') }} />}</span></div>
                                         <div className="nk-tb-col tb-col-lg"><span className="sub-text">Amount {sortedBy == "amount" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("amount") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("amount") }} />}</span></div>
-                                        <div className="nk-tb-col tb-col-lg"><span className="sub-text">Created At {sortedBy == 'created_at' && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} />}</span>
-                                        </div>
+                                        <div className="nk-tb-col tb-col-lg"><span className="sub-text">Created At {sortedBy == 'created_at' && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} />}</span></div>
                                         <div className="nk-tb-col tb-col-md"><span className="sub-text">Status {sortedBy == "status" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("status") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("status") }} />}</span></div>
                                         <div className="nk-tb-col nk-tb-col-tools">
                                             <ul className="nk-tb-actions gx-1 my-n1">
                                                 <li>
                                                     <div className="drodown">
                                                         <a className="sub-text" >Action</a>
-
                                                     </div>
                                                 </li>
                                             </ul>
@@ -430,11 +335,8 @@ function RequestMoney() {
                                                 <div className="nk-tb-col "></div>
                                                 <div className="nk-tb-col tb-col-mb"></div>
                                                 <div className="nk-tb-col tb-col-md"></div>
-                                                <div className="nk-tb-col tb-col-lg">
-                                                    <Loader />
-                                                </div>
-                                                <div className="nk-tb-col tb-col-lg">
-                                                </div>
+                                                <div className="nk-tb-col tb-col-lg"> <Loader /> </div>
+                                                <div className="nk-tb-col tb-col-lg"></div>
                                                 <div className="nk-tb-col tb-col-md">    </div>
                                                 <div className="nk-tb-col nk-tb-col-tools tb-col-lg"></div>
                                             </div>
@@ -445,31 +347,22 @@ function RequestMoney() {
                                                     <div className="nk-tb-item">
                                                         <div className="nk-tb-col"></div>
                                                         <div className="nk-tb-col tb-col-mb"></div>
-                                                        <div className="nk-tb-col tb-col-md">
-
-                                                        </div>
+                                                        <div className="nk-tb-col tb-col-md"></div>
                                                         <div className="nk-tb-col tb-col-lg">
                                                             {scroll == true ? <h6>No Request Money Data Available</h6> : <Loader />}</div>
-
                                                         <div className="nk-tb-col tb-col-lg"></div>
                                                         <div className="nk-tb-col tb-col-md"></div>
                                                         <div className="nk-tb-col nk-tb-col-tools tb-col-lg"></div>
-
                                                     </div>
                                                 }
-
 
                                                 {
                                                     data.length > 0 && data.map((data) => {
                                                         var stillUtcs = moment.utc(data.created_at).toDate();
                                                         var timeZones = moment(stillUtcs).local().format('YYYY-MM-DD HH:mm:ss A');
-                                                        // console.log(data, "setreqmoneymsgsetreqmoneymsgsetreqmoneymsg")
                                                         return (
-
-
                                                             <>
                                                                 <div className="nk-tb-item" key={data.id}>
-
                                                                     <div className="nk-tb-col">
                                                                         <a >
                                                                             <div className="user-card">
@@ -488,21 +381,17 @@ function RequestMoney() {
                                                                         <span className="tb-amount" style={{ cursor: "pointer" }}>{data.txn_id} <span className="dot dot-success d-md-none ms-1" /></span>
                                                                         <span className=" tb-status  text-success ">
                                                                             <em class="icon ni ni-bullet-fill"></em>Deposit
-                                                                        </span>
-                                                                        {/* <span className="tb-amount">{data?.transcation?.txn_id} <span className="currency">USD</span></span> */}
-                                                                    </div>
+                                                                        </span>                                                                    </div>
                                                                     <div className="nk-tb-col tb-col-md">
                                                                         <span> {data?.description}</span>
                                                                     </div>
                                                                     <div className="nk-tb-col tb-col-lg">
                                                                         <span>{data?.currencyWalletDetail?.currencyDetail?.symbol} {data.amount}</span>
-
                                                                     </div>
                                                                     <div className="nk-tb-col tb-col-lg">
                                                                         <span>{timeZones}</span>
                                                                     </div>
                                                                     <div className="nk-tb-col tb-col-md">
-                                                                        {/* <span className="tb-status text-success">Active</span> */}
                                                                         {
                                                                             data?.status == "pending" && <span className="tb-status text-warning">Pending</span>
                                                                         }
@@ -513,10 +402,8 @@ function RequestMoney() {
                                                                             data?.status == "rejected" && <span className="tb-status text-danger">Rejected</span>
                                                                         }
                                                                     </div>
-
                                                                     <div className="nk-tb-col nk-tb-col-tools">
                                                                         <ul className="nk-tb-actions gx-1">
-
                                                                             {
                                                                                 data?.status == "pending" &&
                                                                                 <>
@@ -525,74 +412,43 @@ function RequestMoney() {
                                                                                             <em class="icon ni ni-cross-fill-c" data-bs-toggle="modal" data-bs-target="#modal-reject"></em>
                                                                                         </a>
                                                                                     </li>
-
-
                                                                                     <li className="nk-tb-action-hidden" tooltip="Confirm" flow="Top" onClick={() => { setid(data.id); settxnid(data.txn_id); setalldata(data) }}>
                                                                                         <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
                                                                                             <em class="icon ni ni-check-fill-c" data-bs-toggle="modal" data-bs-target="#modal-report"></em>
                                                                                         </a>
                                                                                     </li>
-
-
                                                                                     <li className="nk-tb-action-hidden" tooltip="Details" flow="Top" >
                                                                                         <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
                                                                                             <em class="icon ni ni-eye-fill" onClick={() => { ReqMoneyTxndata(data.id) }} data-bs-toggle="modal" data-bs-target="#modal-viewTxn"></em>
                                                                                         </a>
                                                                                     </li>
-
-                                                                                    {/* <li className="nk-tb-action-hidden">
-                                                                                            <a onClick={() => GoToUserDetail(data?.transcation?.client_id)} className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
-                                                                                                <em class="icon ni ni-cross-fill-c"></em>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        <li className="nk-tb-action-hidden" >
-                                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                                                <em class="icon ni ni-check-fill-c"></em>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        <li className="nk-tb-action-hidden" >
-                                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                                                <em class="icon ni ni-eye-fill"></em>
-                                                                                            </a>
-                                                                                        </li> */}
-
-
-
-
-
-
                                                                                 </>
                                                                             }
 
                                                                             {
-                                                                                (data?.status == "rejected" || data?.status == "completed") && <>
-                                                                                    <>
-
-                                                                                        <li className="nk-tb-action-hidden" tooltip="User Detail" flow="Top">
-                                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
-                                                                                                <em class="icon ni ni-user-alt-fill" onClick={() => GoToUserDetail(data.client_id)}></em>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        <li className="nk-tb-action-hidden" tooltip="TXN Detail" flow="Top" >
-                                                                                            <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                                                <em class="icon ni ni-eye-fill" onClick={() => { ReqMoneyTxndata(data.id) }} data-bs-toggle="modal" data-bs-target="#modal-viewTxn"></em>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                    </>
+                                                                                (data?.status == "rejected" || data?.status == "completed") &&
+                                                                                <>
+                                                                                    <li className="nk-tb-action-hidden" tooltip="User Detail" flow="Top">
+                                                                                        <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
+                                                                                            <em class="icon ni ni-user-alt-fill" onClick={() => GoToUserDetail(data.client_id)}></em>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <li className="nk-tb-action-hidden" tooltip="TXN Detail" flow="Top" >
+                                                                                        <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                                                            <em class="icon ni ni-eye-fill" onClick={() => { ReqMoneyTxndata(data.id) }} data-bs-toggle="modal" data-bs-target="#modal-viewTxn"></em>
+                                                                                        </a>
+                                                                                    </li>
                                                                                 </>
-
                                                                             }
                                                                             <li >
                                                                                 <div className="drodown">
-                                                                                    <a href="#" className="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
-
+                                                                                    <a className="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
                                                                                     {
                                                                                         data?.status == "pending" &&
                                                                                         <div className="dropdown-menu dropdown-menu-end">
                                                                                             <ul className="link-list-opt no-bdr">
                                                                                                 <li style={{ cursor: "pointer" }} onClick={() => GoToUserDetail(data.client_id)}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
                                                                                                 <li style={{ cursor: "pointer" }} onClick={() => { ReqMoneyTxndata(data.id) }} data-bs-toggle="modal" data-bs-target="#modal-viewTxn" ><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
-
                                                                                                 <li class="divider"></li>
                                                                                                 <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a onClick={() => { setalldata(data) }}><em class="icon ni ni-check-circle-cut  " ></em><span>Confrim</span></a></li>
                                                                                                 <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-reject" onClick={() => approvedcancell()}><a ><em class="icon ni ni-cross-c" ></em><span>Reject</span></a></li>
@@ -607,20 +463,17 @@ function RequestMoney() {
                                                                                             </ul>
                                                                                         </div>
                                                                                     }
-
                                                                                 </div>
                                                                             </li>
                                                                         </ul>
                                                                     </div>
-                                                                </div>{/* .nk-tb-item */}
-
+                                                                </div>
                                                             </>
                                                         )
                                                     })
                                                 }
                                             </>
                                     }
-
                                 </div>
                                 <div className="card">
                                     <div className="card-inner">
@@ -628,7 +481,6 @@ function RequestMoney() {
                                             <div className="g">
                                                 {example == true &&
                                                     <ReactPaginate
-
                                                         previousLabel={"Previous"}
                                                         nextLabel={'Next'}
                                                         forcePage={pageNumber - 1}
@@ -650,45 +502,14 @@ function RequestMoney() {
                                                     />
                                                 }
                                             </div>
-                                            {/* <div className="g">
-                                                <div className="pagination-goto d-flex justify-content-center justify-content-md-start gx-3">
-                                                    <div>Page</div>
-                                                    <div>
-                                                        <select className="form-select js-select2" data-search="on" data-dropdown="xs center">
-                                                            <option value="page-1">1</option>
-                                                            <option value="page-2">2</option>
-                                                            <option value="page-4">4</option>
-                                                            <option value="page-5">5</option>
-                                                            <option value="page-6">6</option>
-                                                            <option value="page-7">7</option>
-                                                            <option value="page-8">8</option>
-                                                            <option value="page-9">9</option>
-                                                            <option value="page-10">10</option>
-                                                            <option value="page-11">11</option>
-                                                            <option value="page-12">12</option>
-                                                            <option value="page-13">13</option>
-                                                            <option value="page-14">14</option>
-                                                            <option value="page-15">15</option>
-                                                            <option value="page-16">16</option>
-                                                            <option value="page-17">17</option>
-                                                            <option value="page-18">18</option>
-                                                            <option value="page-19">19</option>
-                                                            <option value="page-20">20</option>
-                                                        </select>
-                                                    </div>
-                                                    <div>OF 102</div>
-                                                </div>
-                                            </div> */}
                                         </div>
                                     </div>
-                                </div>{/* .card */}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div >
-
-
 
             <div className="modal modal-blur fade" id="modal-report" tabIndex={-1} role="dialog" aria-hidden="true">
                 <div className="modal-dialog" role="document">
@@ -698,11 +519,9 @@ function RequestMoney() {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref1} data-dismiss="modal" />
                         </div>
                         <div className="modal-body">
-
                             <div className="mb-3">
                                 <p>The amount of {alldata.amount} {alldata?.currencyWalletDetail?.currencyDetail?.short_name} to Deposit via {alldata.request_type}.</p>
                             </div>
-
                             <div className="row mb-3">
                                 <div className="col-md-6 otherLabel">
                                     <label>Payment Amount</label>
@@ -724,12 +543,9 @@ function RequestMoney() {
                                     <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small>
                                 </div>
                             </div>
-
                             <p>Please confirm that you want to APPROVE this DEPOSIT request.</p>
-
                             <button className="btn btn-primary ms-auto mr-2" onClick={() => { ApprovedWidthdrawal() }}> Confirm Withdraw
                             </button>
-
                             <a className="cancelbtnwithdraw" style={{ cursor: "pointer" }} data-bs-dismiss="modal" data-dismiss="modal">Cancel</a>
                         </div>
                         <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
@@ -740,8 +556,6 @@ function RequestMoney() {
                 </div>
             </div>
 
-
-
             <div className="modal modal-blur fade" id="modal-reject" tabIndex={-1} role="dialog" aria-hidden="true">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
@@ -749,78 +563,30 @@ function RequestMoney() {
                             <h5 className="modal-title">Cancellation of <span>{txnid}</span></h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref2} data-dismiss="modal" />
                         </div>
-                        <form onSubmit={form.handleSubmit}>
-                            <div className="modal-body">
 
-                                <div className="mb-3">
-                                    <p>Are you sure you want to cancel this deposit request?</p>
-                                </div>
-
-                                <div className="row mb-3">
-                                    <div className="col-md-12 otherLabel">
-                                        <label>Note for User</label>
-                                        <input type="text" className="form-control" placeholder='Enter remark or note' onChange={(e) => { setcomment(e.target.value) }} />
-                                        {/* <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small> */}
-                                    </div>
-                                </div>
-                                {/* 
-                                <div className="row mb-3">
-                                    <div className="col-md-12 otherLabel">
-                                        <label>Note / Remarks</label>
-                                        <input type="text" className="form-control" placeholder='Enter remark or note' />
-                                        <small style={{ fontSize: '72%', color: '#959595', }}>The note or remarks help to reminder. Only administrator can read from transaction details.</small>
-                                    </div>
-                                </div> */}
-
-                                <p>Please confirm that you want to CANCEL this DEPOSIT request.</p>
-
-                                <button type="submit" className="btn btn-primary ms-auto mr-2" onClick={() => approvedcancell()}> Cancelled Deposite
-                                </button>
-
-                                <a className="cancelbtnwithdraw" style={{ cursor: "pointer" }} onClick={() => { ref2.current.click() }}>Return</a>
-
-
-
-                                {/* <div className="form-group mb-3 row">
-                                        <label className="form-label col-3 col-form-label">Status</label>
-                                        <div className="col">
-                                            <select className="form-control mb-0" name="role" {...form.getFieldProps("role")} style={{ height: 40 }}
-                                            // onChange={(e) => handleChangeQueryBuilder(e)}
-                                            >
-                                                <option value="">Select Status</option>
-                                                <option value="true">Complete</option>
-                                                <option value="false">Reject</option>
-                                            </select>
-                                            {form.errors.role && form.touched.role ? <p className='red' style={{ marginTop: 5 }}>{form.errors.role}</p> : null}
-                                        </div>
-                                    </div>
-
-                                    <div className="form-group mb-3 row">
-                                        <label className="form-label col-3 col-form-label">Message</label>
-                                        <div className="col">
-                                            <input type="text" className="form-control" aria-describedby="emailHelp" placeholder="Enter Message"
-                                                name="ShortName" {...form.getFieldProps("ShortName")}
-                                            />
-                                            {form.errors.ShortName && form.touched.ShortName ? <p className='red' style={{ marginTop: 5 }}>{form.errors.ShortName}</p> : null}
-
-                                        </div>
-                                    </div>*/}
-
-
+                        <div className="modal-body">
+                            <div className="mb-3">
+                                <p>Are you sure you want to cancel this deposit request?</p>
                             </div>
-
-                            <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
-                                <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> You can cancel the transaction if you've not received the payment yet.</p>
-                                <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> You can not undo this action once you confirm and cancelled.</p>
+                            <div className="row mb-3">
+                                <div className="col-md-12 otherLabel">
+                                    <label>Note for User</label>
+                                    <input type="text" className="form-control" placeholder='Enter remark or note' onChange={(e) => { setcomment(e.target.value) }} />
+                                </div>
                             </div>
+                            <p>Please confirm that you want to CANCEL this DEPOSIT request.</p>
+                            <button type="submit" className="btn btn-primary ms-auto mr-2" onClick={() => approvedcancell()}> Cancelled Deposite
+                            </button>
+                            <a className="cancelbtnwithdraw" style={{ cursor: "pointer" }} onClick={() => { ref2.current.click() }}>Return</a>
+                        </div>
+                        <div className="modal-footer" style={{ justifyContent: 'flex-start', }}>
+                            <p style={{ fontSize: '79%', color: '#343434', }}><em class="icon ni ni-info"></em> You can cancel the transaction if you've not received the payment yet.</p>
+                            <p className="text-danger" style={{ fontSize: '79%', }}><em class="icon ni ni-alert"></em> You can not undo this action once you confirm and cancelled.</p>
+                        </div>
 
-                        </form>
                     </div>
                 </div>
             </div>
-
-
-
 
             <div className="modal modal-blur fade" id="modal-viewTxn" tabIndex={-1} role="dialog" aria-hidden="true">
                 <div className="modal-dialog modal-lg" role="document">
@@ -1112,11 +878,7 @@ function RequestMoney() {
                     } */}
                 </div>
             </div>
-
         </Container >
-
-
     )
 }
-
 export default RequestMoney

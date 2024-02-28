@@ -10,6 +10,8 @@ import Loader from '../Loader/Loader';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRef } from 'react';
+import Swal from 'sweetalert2';
+
 const StatusToast = (e) => {
    toast.success(e, { autoClose: 1000 });
 }
@@ -181,6 +183,89 @@ const UserDetail = () => {
    const adjustedDateTime = new Date(data?.email_verified_at);
    const options = { year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' };
    const formattedDateTime = adjustedDateTime.toLocaleString('en-US', options).replace(',', '').replace(/(\d+:\d+)(:\d+)( [AP]M)/, '$1$3');
+
+
+
+   const SuccessApproved = () => {
+      Swal.fire({
+         title: 'Approve Submission',
+         text: "Please review all the documents before take any action.",
+         icon: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         cancelButtonText: "No",
+         confirmButtonText: 'Yes, Approve'
+      }).then(async (result) => {
+         // Check if the user clicked "Yes"
+         if (result.value) {
+            // const datas = {
+            //    "is_request_money": cancelreq,
+            //    "comment": comment
+            // }
+            const data = {
+               "is_doc_verified": true
+            }
+
+            const responce = await VerifyDocStatus(token, location.state, data)
+            // const response = await WithdrawalsApprove(token, id, datas)
+            if (responce?.status) {
+               // ref3.current.click()
+               Swal.fire(
+                  'Approve Submission',
+
+
+
+                  "The documents has been updated and requested for submit."
+
+               )
+               UserDatabyId()
+            } else {
+               // ref3.current.click()
+               toast.error("something went wrong")
+
+            }
+         }
+      })
+   }
+
+   const approvedcancell = () => {
+      console.log("------------>>>>>>>>>>>>>>>>>")
+      Swal.fire({
+         title: 'Reject Submission??',
+         text: "Please review all the documents before take any action. You can request for resubmission if provided documents are not valid",
+         icon: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         cancelButtonText: "No",
+         confirmButtonText: 'Yes, Reject'
+      }).then(async (result) => {
+         if (result.value) {
+
+            const data = {
+               "is_doc_verified": false
+            }
+
+            const responce = await VerifyDocStatus(token, location.state, data)
+            if (responce?.status) {
+               // ref3.current.click()
+               Swal.fire(
+                  'Approved!',
+                  ' Documents has been successfully Approved.',
+                  'success'
+               )
+               UserDatabyId()
+            } else {
+               // ref3.current.click()
+               toast.error("something went wrong")
+
+            }
+         }
+      })
+   }
+
+   console.log(status, "status")
    return (
       <Container>
          <div className="nk-content ">
@@ -193,10 +278,22 @@ const UserDetail = () => {
                               {/*<h3 className="nk-block-title page-title">Customer Details</h3>*/}
                               <h5 className="headingUserNewD">User / <span>{name}{data?.middle_name} {lastname}</span></h5>
                               <ul className="detaiverifyUserNew">
-                                 <li>User ID : <span>UID08124</span></li>
+                                 <li>User ID : <span>{data?.placed_on == null ? <span>N/A </span> : <span>{data?.placed_on}</span>}</span></li>
                                  <li>Email : {
                                     emailVarified == null ? <span className="badge badge-dim bg-warning"><span>Pending Verify </span></span> : <span className="badge badge-dim bg-success"><span>Success Verify</span></span>
                                  }</li>
+                                 <li>Document  :   {
+                                    status == "approved" && <span className="badge badge-dim bg-success"><span>Approved</span></span>
+                                 }
+                                    {
+                                       status == "pending" && <span className="badge badge-dim bg-warning"><span>Pending</span></span>
+                                    }
+                                    {
+                                       status == "rejected" && <span className="badge badge-dim bg-danger"><span>Rejected</span></span>
+                                    }
+                                    {
+                                       status == "Not_applied" && <span className="badge badge-dim bg-danger"><span>Not Applied</span></span>
+                                    }</li>
                                  <li>Account Status : <span>Active</span></li>
                               </ul>
                               <div className="nk-block-des text-soft">
@@ -254,9 +351,7 @@ const UserDetail = () => {
                                                 <div className="nk-block-between pb-2">
                                                    <div className="nk-block-head-content">
                                                       <h5 className="nk-block-title mb-0">Personal Information</h5>
-                                                      <div className="nk-block-des">
-                                                         <p>Basic info, like your name and address, that you use on Nio Platform.</p>
-                                                      </div>
+
                                                    </div>
                                                 </div>
                                                 <div className="row">
@@ -267,7 +362,6 @@ const UserDetail = () => {
                                                                Information
                                                             </h6>
                                                          </div>
-                                                         {/* .nk-block-head */}
                                                          <div className="nk-block singUserDetail">
                                                             <div className="profile-ud-list">
                                                                <div className="profile-ud-item">
@@ -306,18 +400,9 @@ const UserDetail = () => {
                                                                      <span className="profile-ud-value">{dob}</span>
                                                                   </div>
                                                                </div>
-                                                               {/* 
-                                                      <div className="profile-ud-item">
-                                                         <div className="profile-ud wider">
-                                                            <span className="profile-ud-label">Telegram</span>
-                                                            <span className="profile-ud-value">pending</span>
-                                                         </div>
-                                                      </div>
-                                                      */}
+
                                                             </div>
-                                                            {/* .profile-ud-list */}
                                                          </div>
-                                                         {/* .nk-block */}
                                                       </div>
                                                    </div>
                                                    <div className="col-md-6">
@@ -325,7 +410,6 @@ const UserDetail = () => {
                                                          <div className="nk-block-head nk-block-head-line">
                                                             <h6 className="title overline-title text-base">RESIDENTIAL ADDRESS</h6>
                                                          </div>
-                                                         {/* .nk-block-head */}
                                                          <div className="nk-block singUserDetail">
                                                             <div className="profile-ud-list">
                                                                <div className="profile-ud-item">
@@ -349,25 +433,23 @@ const UserDetail = () => {
                                                                <div className="profile-ud-item">
                                                                   <div className="profile-ud wider">
                                                                      <span className="profile-ud-label">Zip Code</span>
-                                                                     <span className="profile-ud-value">pending</span>
+                                                                     <span className="profile-ud-value">N/A</span>
                                                                   </div>
                                                                </div>
                                                                <div className="profile-ud-item">
                                                                   <div className="profile-ud wider">
                                                                      <span className="profile-ud-label">Country</span>
-                                                                     <span className="profile-ud-value">{data?.addresses[0]?.country}</span>
+                                                                     <span className="profile-ud-value">{data?.addresses[0]?.country == null ? <span>N/A</span> : <span>{data?.addresses[0]?.country}</span>}</span>
                                                                   </div>
                                                                </div>
                                                                <div className="profile-ud-item">
                                                                   <div className="profile-ud wider">
                                                                      <span className="profile-ud-label">Nationality</span>
-                                                                     <span className="profile-ud-value">pending</span>
+                                                                     <span className="profile-ud-value">N/A</span>
                                                                   </div>
                                                                </div>
                                                             </div>
-                                                            {/* .profile-ud-list */}
                                                          </div>
-                                                         {/* .nk-block */}
                                                       </div>
                                                    </div>
 
@@ -382,14 +464,13 @@ const UserDetail = () => {
                                                       </div>
                                                    </div>
                                                    <div className="col-md-12 mt-3">
-                                                      {/* .nk-block-head */}
                                                       <div className="nk-block singUserDetail-1">
                                                          <div className="boxGeyColor">
                                                             <div className="profile-ud-list">
                                                                <div className="profile-ud-item">
                                                                   <div className="profile-ud wider">
                                                                      <span className="profile-ud-label">Registration Date</span>
-                                                                     <span className="profile-ud-value">14 Feb, 2024</span>
+                                                                     <span className="profile-ud-value">N/A</span>
                                                                   </div>
                                                                </div>
 
@@ -407,7 +488,7 @@ const UserDetail = () => {
                                                                <div className="profile-ud-item">
                                                                   <div className="profile-ud wider">
                                                                      <span className="profile-ud-label">Email Verified at</span>
-                                                                     <span className="profile-ud-value">Apr 13, 2024 5:30 PM</span>
+                                                                     <span className="profile-ud-value">N/A</span>
                                                                   </div>
                                                                </div>
                                                                <div className="profile-ud-item">
@@ -419,7 +500,7 @@ const UserDetail = () => {
                                                                <div className="profile-ud-item">
                                                                   <div className="profile-ud wider">
                                                                      <span className="profile-ud-label">ID Submitted on </span>
-                                                                     <span className="profile-ud-value">pending</span>
+                                                                     <span className="profile-ud-value">N/A</span>
                                                                   </div>
                                                                </div>
 
@@ -427,13 +508,13 @@ const UserDetail = () => {
                                                                <div className="profile-ud-item">
                                                                   <div className="profile-ud wider">
                                                                      <span className="profile-ud-label">Transaction limit</span>
-                                                                     <span className="profile-ud-value">pending</span>
+                                                                     <span className="profile-ud-value">N/A</span>
                                                                   </div>
                                                                </div>
                                                                <div className="profile-ud-item">
                                                                   <div className="profile-ud wider">
                                                                      <span className="profile-ud-label">Verified By </span>
-                                                                     <span className="profile-ud-value">pending</span>
+                                                                     <span className="profile-ud-value">N/A</span>
                                                                   </div>
                                                                </div>
 
@@ -448,23 +529,21 @@ const UserDetail = () => {
                                                                <div className="profile-ud-item">
                                                                   <div className="profile-ud wider">
                                                                      <span className="profile-ud-label">Email unusual activity </span>
-                                                                     <span className="profile-ud-value">pending</span>
+                                                                     <span className="profile-ud-value">N/A</span>
                                                                   </div>
                                                                </div>
 
                                                                <div className="profile-ud-item">
                                                                   <div className="profile-ud wider">
                                                                      <span className="profile-ud-label">Save activity logs</span>
-                                                                     <span className="profile-ud-value">pending</span>
+                                                                     <span className="profile-ud-value">N/A</span>
                                                                   </div>
                                                                </div>
 
                                                             </div>
 
 
-                                                            {/* .profile-ud-list */}
                                                          </div></div>
-                                                      {/* .nk-block */}
                                                    </div>
 
 
@@ -513,7 +592,7 @@ const UserDetail = () => {
                                                       <h5 className="nk-block-title mb-0">Wallets and Balances </h5>
                                                    </div>
                                                 </div>
-                                                <div className="col-md-12">
+                                                {/* <div className="col-md-12">
                                                    <div className="walletBoxUser">
                                                       <ul>
                                                          <li className="imgfirst">
@@ -543,7 +622,7 @@ const UserDetail = () => {
                                                          </li>
                                                       </ul>
                                                    </div>
-                                                </div>
+                                                </div> */}
 
                                                 <div className="col-md-12 mt-4">
                                                    <div className="boxGeyColor">
@@ -585,11 +664,17 @@ const UserDetail = () => {
                                                          {
                                                             totalwallet.length > 0 && totalwallet.map((data) => {
                                                                // console.log(data, "currency wallet")
+                                                               let balanceStringdata = data?.balance;
+                                                               let balance = parseFloat(balanceStringdata);
+                                                               if (!isNaN(balance)) {
+                                                                  // Format the balance to have two digits after the decimal point
+                                                                  balanceStringdata = balance.toFixed(2);
+                                                               }
                                                                return (
                                                                   <>
                                                                      <ul className="listWalletBalance">
                                                                         <li><img src={data?.currency?.icon} alt="img" class="thumb" height="27" /></li>
-                                                                        <li className="firstHeadingWallet">{data?.balance} </li>
+                                                                        <li className="firstHeadingWallet">{balanceStringdata} </li>
                                                                         <li>{data?.currency?.short_name}</li>
                                                                         <li className="widthCurrency">{data?.currency?.title}</li>
                                                                         <li>
@@ -662,11 +747,17 @@ const UserDetail = () => {
                                                          {
                                                             custom_wallets.length > 0 && custom_wallets.map((data) => {
                                                                // console.log(data, "custom wallet")
+                                                               let balanceString = data?.balance;
+                                                               let balance = parseFloat(balanceString);
+                                                               if (!isNaN(balance)) {
+                                                                  // Format the balance to have two digits after the decimal point
+                                                                  balanceString = balance.toFixed(2);
+                                                               }
                                                                return (
                                                                   <>
                                                                      <ul className="listWalletBalance">
                                                                         <li><img src={data?.currency?.icon} alt="img" class="thumb" height="27" /></li>
-                                                                        <li className="firstHeadingWallet">{data?.balance} </li>
+                                                                        <li className="firstHeadingWallet">{balanceString} </li>
                                                                         <li>{data?.currency?.short_name}</li>
                                                                         <li className="widthCurrency">{data?.currency?.title}</li>
                                                                         <li>
@@ -696,7 +787,7 @@ const UserDetail = () => {
 
 
                                              <div className="tab-pane" id="profile-overview">
-                                                <h1>Transactions</h1>
+                                                {/* <h1>Transactions</h1> */}
                                              </div>
                                              {/* tab pane */}
 
@@ -704,10 +795,10 @@ const UserDetail = () => {
                                              <div className="tab-pane" id="trading">
                                                 <div className="nk-block-between pb-2">
                                                    <div className="nk-block-head-content">
-                                                      <h5 className="nk-block-title mb-0">316 Trade Profile</h5>
+                                                      {/* <h5 className="nk-block-title mb-0">316 Trade Profile</h5> */}
                                                    </div>
                                                 </div>
-                                                <div className="col-md-12">
+                                                {/* <div className="col-md-12">
                                                    <div className="walletBoxUser">
                                                       <ul>
                                                          <li className="imgfirst">
@@ -737,15 +828,15 @@ const UserDetail = () => {
                                                          </li>
                                                       </ul>
                                                    </div>
-                                                </div>
+                                                </div> */}
 
-                                                <div className="col-md-12 mt-4">
+                                                {/* <div className="col-md-12 mt-4">
                                                    <div className="boxGeyColor">
                                                       <div className="nk-block-head nk-block-head-line">
                                                          <h6 className="title overline-title text-base">Currency Balances
                                                          </h6>
                                                       </div>
-                                                      {/* .nk-block-head */}
+                                               
                                                       <div className="curencyBalanceList">
                                                          <ul className="listWalletBalance">
                                                             <li><img src="https://vehicle99.com:3006/uploads/currencies/india.png" alt="img" class="thumb" height="27" /></li>
@@ -783,16 +874,14 @@ const UserDetail = () => {
                                                          </ul>
 
                                                       </div>
-                                                      {/* .nk-block */}
                                                    </div>
-                                                </div>
-                                                <div className="col-md-12 mt-4">
+                                                </div> */}
+                                                {/* <div className="col-md-12 mt-4">
                                                    <div className="boxGeyColor">
                                                       <div className="nk-block-head nk-block-head-line">
                                                          <h6 className="title overline-title text-base">Custom Balances
                                                          </h6>
                                                       </div>
-                                                      {/* .nk-block-head */}
                                                       <div className="curencyBalanceList">
                                                          <ul className="listWalletBalance">
                                                             <li><img src="https://vehicle99.com:3006/uploads/currencies/india.png" alt="img" class="thumb" height="27" /></li>
@@ -830,9 +919,8 @@ const UserDetail = () => {
                                                          </ul>
 
                                                       </div>
-                                                      {/* .nk-block */}
                                                    </div>
-                                                </div>
+                                                </div> */}
                                              </div>
                                              {/* tab pne */}
 
@@ -844,14 +932,68 @@ const UserDetail = () => {
                                                          <p>Basic info, like your name and address, that you use on Nio Platform.</p>
                                                       </div>
                                                    </div>
-                                                   <div className="btnApprovReject">
-                                                      <a href="" className="approvedBtnUser">
+
+
+                                                   {
+                                                      status == "Not_applied" && <div className="btnApprovReject">
+                                                         <button className="approvedBtnUser" disabled style={{ cursor: "pointer" }} >
+                                                            <em class="icon ni ni-check"></em> Approve
+                                                         </button>
+                                                         <button className="rejectBtnUser" disabled style={{ cursor: "pointer" }} >
+                                                            <em class="icon ni ni-cross"></em> Reject
+                                                         </button>
+                                                      </div>
+                                                   }
+
+
+                                                   {
+                                                      status == "pending" && <div className="btnApprovReject">
+                                                         <a className="approvedBtnUser" onClick={() => { SuccessApproved() }} style={{ cursor: "pointer" }}>
+                                                            <em class="icon ni ni-check"></em> Approve
+                                                         </a>
+                                                         <a className="rejectBtnUser" onClick={() => { approvedcancell() }} style={{ cursor: "pointer" }}>
+                                                            <em class="icon ni ni-cross"></em> Reject
+                                                         </a>
+                                                      </div>
+                                                   }
+
+                                                   {
+                                                      status == "approved" && <div className="btnApprovReject">
+                                                         {/* <a className="approvedBtnUser" onClick={() => { SuccessApproved() }} style={{ cursor: "pointer" }}>
+                                                            <em class="icon ni ni-check"></em> Approved
+                                                         </a> */}
+                                                         <a className="rejectBtnUser" onClick={() => { approvedcancell() }} style={{ cursor: "pointer" }}>
+                                                            <em class="icon ni ni-cross"></em> Reject
+                                                         </a>
+                                                      </div>
+                                                   }
+
+                                                   {
+                                                      status == "rejected" && <div className="btnApprovReject">
+                                                         <a className="approvedBtnUser" onClick={() => { SuccessApproved() }} style={{ cursor: "pointer" }}>
+                                                            <em class="icon ni ni-check"></em> Approve
+                                                         </a>
+                                                         {/* <a className="rejectBtnUser" onClick={() => { approvedcancell() }} style={{ cursor: "pointer" }}>
+                                                            <em class="icon ni ni-cross"></em> Reject
+                                                         </a> */}
+                                                      </div>
+                                                   }
+                                                   {/* {
+                                                status == "Not_applied" && <span className="badge badge-dim bg-danger"><span>Not Applied</span></span>
+                                             } */}
+
+
+
+                                                   {/* <div className="btnApprovReject">
+                                                      <a className="approvedBtnUser" onClick={() => { SuccessApproved() }} style={{ cursor: "pointer" }}>
                                                          <em class="icon ni ni-check"></em> Approved
                                                       </a>
-                                                      <a href="" className="rejectBtnUser">
+                                                      <a className="rejectBtnUser" onClick={() => { approvedcancell() }} style={{ cursor: "pointer" }}>
                                                          <em class="icon ni ni-cross"></em> Reject
                                                       </a>
-                                                   </div>
+                                                   </div> */}
+
+
                                                 </div>
                                                 <div className="col-md-12 mt-3">
                                                    {/* .nk-block-head */}
@@ -871,31 +1013,31 @@ const UserDetail = () => {
                                                             <div className="profile-ud-item">
                                                                <div className="profile-ud wider">
                                                                   <span className="profile-ud-label">Document type</span>
-                                                                  <span className="profile-ud-value">Drivers License</span>
+                                                                  <span className="profile-ud-value">N/A</span>
                                                                </div>
                                                             </div>
                                                             <div className="profile-ud-item">
                                                                <div className="profile-ud wider">
                                                                   <span className="profile-ud-label">Country </span>
-                                                                  <span className="profile-ud-value">United Kingdom</span>
+                                                                  <span className="profile-ud-value">{data?.addresses[0]?.country == null ? <span>N/A</span> : <span>{data?.addresses[0]?.country}</span>}</span>
                                                                </div>
                                                             </div>
                                                             <div className="profile-ud-item">
                                                                <div className="profile-ud wider">
                                                                   <span className="profile-ud-label">Submission Date</span>
-                                                                  <span className="profile-ud-value">Apr 13, 2024 5:30 PM</span>
+                                                                  <span className="profile-ud-value">N/A</span>
                                                                </div>
                                                             </div>
                                                             <div className="profile-ud-item">
                                                                <div className="profile-ud wider">
                                                                   <span className="profile-ud-label">Checked at </span>
-                                                                  <span className="profile-ud-value">Not yet checked</span>
+                                                                  <span className="profile-ud-value">N/A</span>
                                                                </div>
                                                             </div>
                                                             <div className="profile-ud-item">
                                                                <div className="profile-ud wider">
                                                                   <span className="profile-ud-label">Approval Date </span>
-                                                                  <span className="profile-ud-value">Not yet checked</span>
+                                                                  <span className="profile-ud-value">N/A</span>
                                                                </div>
                                                             </div>
                                                          </div>
@@ -914,28 +1056,37 @@ const UserDetail = () => {
                                                 <div className="uploadImageRow mt-3 row g-gs">
                                                    <div className="col-6  col-md-4 mt-1">
                                                       <div className="previewimageUpload">
-                                                         <img src="../images/imagesnot found.jpg" />
+
+                                                         {
+                                                            verification_doc_image == "null" ? <Image src="./images/imagesnot found.jpg" height={130} width={180} style={{ objectFit: 'cover' }} /> :
+                                                               <Image src={verification_doc_image} height={130} width={180} style={{ objectFit: 'cover' }} />
+                                                         }
+
+                                                         {/* <img src="../images/imagesnot found.jpg" /> */}
                                                          <p>Passport <span><a href=''><em class="icon ni ni-download"></em></a></span></p>
                                                       </div>
                                                    </div>
                                                    <div className="col-6  col-md-4 mt-1">
                                                       <div className="previewimageUpload">
-                                                         <img src="../images/imagesnot found.jpg" />
+                                                         {
+                                                            verification_id == "null" ? <Image src="./images/imagesnot found.jpg" height={130} width={180} style={{ objectFit: 'cover' }} /> :
+                                                               <Image src={verification_id} height={130} width={180} style={{ objectFit: 'cover' }} />
+                                                         }
                                                          <p>Proof / Self <span><a href=''><em class="icon ni ni-download"></em></a></span></p>
                                                       </div>
                                                    </div>
-                                                   <div className="col-6  col-md-4 mt-1">
+                                                   {/* <div className="col-6  col-md-4 mt-1">
                                                       <div className="previewimageUpload">
                                                          <img src="../images/imagesnot found.jpg" />
                                                          <p>Bank Statement <span><a href=''><em class="icon ni ni-download"></em></a></span></p>
                                                       </div>
-                                                   </div>
-                                                   <div className="col-6 col-md-4 mt-1">
+                                                   </div> */}
+                                                   {/* <div className="col-6 col-md-4 mt-1">
                                                       <div className="previewimageUpload">
                                                          <img src="../images/imagesnot found.jpg" />
                                                          <p>Bank Statement <span><a href=''><em class="icon ni ni-download"></em></a></span></p>
                                                       </div>
-                                                   </div>
+                                                   </div> */}
                                                 </div>
                                              </div>
                                              {/*tab pane*/}
@@ -943,11 +1094,11 @@ const UserDetail = () => {
 
 
                                              <div className="tab-pane" id="profile-review">
-                                                <h1>Profile review</h1>
+                                                {/* <h1>Profile review</h1> */}
                                              </div>
                                              {/*tab pane*/}
                                              <div className="tab-pane" id="activities">
-                                                <h1>Activities</h1>
+                                                {/* <h1>Activities</h1> */}
                                              </div>
                                              {/*tab pane*/}
                                           </div>
@@ -985,13 +1136,13 @@ const UserDetail = () => {
                                           <div class="profile-balance-group gx-4">
                                              <div class="profile-balance-sub">
                                                 <div class="profile-balance-amount">
-                                                   <div class="number">2,500.00 <small class="currency currency-usd">USD</small></div>
+                                                   <div class="number">0 <small class="currency currency-usd"></small></div>
                                                 </div>
                                                 <div class="profile-balance-subtitle">Invested Amount</div>
                                              </div>
                                              <div class="profile-balance-sub">
                                                 <div class="profile-balance-amount">
-                                                   <div class="number">50.00</div>
+                                                   <div class="number">0</div>
                                                 </div>
                                                 <div class="profile-balance-subtitle">Locked Amount</div>
                                              </div>
@@ -1004,13 +1155,13 @@ const UserDetail = () => {
                                           <div class="profile-balance-group gx-4">
                                              <div class="profile-balance-sub">
                                                 <div class="profile-balance-amount">
-                                                   <div class="number">2,500.00 <small class="currency currency-usd">USD</small></div>
+                                                   <div class="number">0 <small class="currency currency-usd"></small></div>
                                                 </div>
                                                 <div class="profile-balance-subtitle">Invested Wallet</div>
                                              </div>
                                              <div class="profile-balance-sub">
                                                 <div class="profile-balance-amount">
-                                                   <div class="number">50.00</div>
+                                                   <div class="number">0</div>
                                                 </div>
                                                 <div class="profile-balance-subtitle">Active Invesment</div>
                                              </div>
@@ -1022,11 +1173,11 @@ const UserDetail = () => {
                                        <div class="row g-3">
                                           <div class="col-6">
                                              <span class="sub-text">User ID:</span>
-                                             <span>UD003054</span>
+                                             <span>N/A</span>
                                           </div>
                                           <div class="col-6">
                                              <span class="sub-text">Last Login:</span>
-                                             <span>15 Feb, 2019 01:02 PM</span>
+                                             <span>N/A</span>
                                           </div>
                                           <div class="col-6">
                                              <span class="sub-text">Email Status:</span>
@@ -1036,7 +1187,7 @@ const UserDetail = () => {
                                           </div>
                                           <div class="col-6">
                                              <span class="sub-text">Register At:</span>
-                                             <span>Nov 24, 2019</span>
+                                             <span>N/A</span>
                                           </div>
                                        </div>
                                     </div>
@@ -1049,644 +1200,7 @@ const UserDetail = () => {
 
 
 
-                     <div className="nk-block">
-                        <div className="row g-gs">
-                           <div className="col-lg-4 col-xl-4 col-xxl-3">
-                              <div className="card">
-                                 <div className="card-inner-group">
-                                    <div className="card-inner">
-                                       <div className="user-card user-card-s2">
-                                          <div className="user-avatar lg ">
-                                             {
-                                                // image == null ? <img src="./images/avatar/b-sm.jpg" alt="img" /> : <img src={image} alt="img" />
-                                                image == null ? <Image src="./images/avatar/b-sm.jpg" alt="img" width={80} height={80} style={{ objectFit: 'cover' }} /> : <Image src={image} alt="img" width={80} height={80} style={{ objectFit: 'cover' }} />
-                                             }
-                                          </div>
-                                          <div className="user-info">
-                                             {/* 
-                                       <div className="badge bg-light rounded-pill ucap">Platinam</div>
-                                       */}
-                                             <h5 style={{ textTransform: "capitalize" }} >{name} {lastname}</h5>
-                                             <span className="sub-text">{email}</span>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    {/* 
-                              <div className="card-inner card-inner-sm">
-                                 */}
-                                    {/* 
-                                 <ul className="btn-toolbar justify-center gx-1">
-                                    <li><a className="btn btn-trigger btn-icon"><em className="icon ni ni-shield-off" /></a></li>
-                                    <li><a className="btn btn-trigger btn-icon"><em className="icon ni ni-mail" /></a></li>
-                                    <li><a className="btn btn-trigger btn-icon"><em className="icon ni ni-bookmark" /></a></li>
-                                    <li><a className="btn btn-trigger btn-icon text-danger"><em className="icon ni ni-na" /></a></li>
-                                 </ul>
-                                 */}
-                                    {/* 
-                              </div>
-                              */}
-                                    {/* 
-                              <div className="card-inner">
-                                 <div className="row text-center">
-                                    <div className="col-4">
-                                       <div className="profile-stats">
-                                          <span className="amount">0</span>
-                                          <span className="sub-text">Total transaction</span>
-                                       </div>
-                                    </div>
-                                    <div className="col-4">
-                                       <div className="profile-stats">
-                                          <span className="amount">0</span>
-                                          <span className="sub-text">Complete</span>
-                                       </div>
-                                    </div>
-                                    <div className="col-4">
-                                       <div className="profile-stats">
-                                          <span className="amount">0</span>
-                                          <span className="sub-text">Progress</span>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                              */}
-                                    <div className="card-inner">
-                                       <h6 className="overline-title mb-2">Short Details</h6>
-                                       <div className="row g-3">
-                                          <div className="col-sm-6 col-md-4 col-lg-12">
-                                             <span className="sub-text fw-bold" style={{ textTransform: "capitalize" }}>Customer Name:</span>
-                                             <span>{name}</span>
-                                          </div>
-                                          <div className="col-sm-6 col-md-4 col-lg-12">
-                                             <span className="sub-text fw-bold">Customer Email:</span>
-                                             {
-                                                email == null ? <span>N/A</span> : <span>{email}</span>
-                                             }
-                                          </div>
-                                          <div className="col-sm-6 col-md-4 col-lg-12">
-                                             <span className="sub-text fw-bold" style={{ textTransform: "capitalize" }}> Address:</span>
-                                             {
-                                                addresss?.street == null ? <span>N/A</span> : <span>{addresss?.house_number} {addresss?.apartment} {addresss?.street},{addresss?.city},{addresss?.state}</span>
-                                             }
-                                          </div>
-                                          {/* 
-                                    <div className="col-sm-6 col-md-4 col-lg-12">
-                                       <span className="sub-text fw-bold">Language:</span>
-                                       <span>English</span>
-                                    </div>
-                                    */}
-                                          {
-                                             Country == null ?
-                                                <div className="col-sm-6 col-md-4 col-lg-12">
-                                                   <span className="sub-text fw-bold">Country :</span>
-                                                   <span >N/A</span>
-                                                </div>
-                                                :
-                                                <div className="col-sm-6 col-md-4 col-lg-12">
-                                                   <span className="sub-text fw-bold">Country :</span>
-                                                   <span style={{ textTransform: "capitalize" }}>{Country}</span>
-                                                </div>
-                                          }
-                                          <div className="col-sm-6 col-md-4 col-lg-12">
-                                             <span className="sub-text fw-bold">Date Of Birth:</span>
-                                             {
-                                                (dob == null || dob == "") ? <span>N/A</span> : <span>{dob}</span>
-                                             }
-                                          </div>
-                                          <div className="col-sm-6 col-md-4 col-lg-12">
-                                             <span className="sub-text fw-bold">Phone:</span>
-                                             {
-                                                phone == null ? <span>N/A</span> : <span>+{phoncode} {phone}</span>
-                                             }
-                                          </div>
-                                          <div className="col-sm-6 col-md-4 col-lg-12">
-                                             <span className="sub-text fw-bold">Email Verify Status:</span>
-                                             {
-                                                emailVarified == null ? <span className="badge badge-dim bg-warning"><span>Pending Verify </span></span> : <span className="badge badge-dim bg-success"><span>Success Verify</span></span>
-                                             }
-                                          </div>
-                                          <div className="col-sm-6 col-md-4 col-lg-12 fw-bold ">
-                                             <span>Document Image</span><br></br>
-                                             {
-                                                verification_doc_image == "null" ? <Image src="./images/imagesnot found.jpg" height={100} width={180} style={{ objectFit: 'cover' }} /> :
-                                                   <Image src={verification_doc_image} height={100} width={180} style={{ objectFit: 'cover' }} />
-                                             }
-                                             <br></br><br></br>
-                                             <span>Verification Image </span><br></br>
-                                             {
-                                                verification_id == "null" ? <Image src="./images/imagesnot found.jpg" height={100} width={180} style={{ objectFit: 'cover' }} /> :
-                                                   <Image src={verification_id} height={100} width={180} style={{ objectFit: 'cover' }} />
-                                             }
-                                             <br></br><br></br>
-                                             <span className="sub-text">Document Verify Status</span>
-                                             {
-                                                status == "approved" && <span className="badge badge-dim bg-success"><span>Approved</span></span>
-                                             }
-                                             {
-                                                status == "pending" && <span className="badge badge-dim bg-warning"><span>Pending</span></span>
-                                             }
-                                             {
-                                                status == "rejected" && <span className="badge badge-dim bg-danger"><span>Rejected</span></span>
-                                             }
-                                             {
-                                                status == "Not_applied" && <span className="badge badge-dim bg-danger"><span>Not Applied</span></span>
-                                             }
-                                             <br></br>
-                                             {
-                                                verification_doc_image == "null" || verification_id == "null" ?
-                                                   <div className="form-group mb-3 row">
-                                                      <div className="col" onChange={(e) => { setToggle(e); documentVerifyedstatus(e) }} >
-                                                         <select className="form-control mb-0" disabled>
-                                                            <option value={false} ><span style={{ color: "red" }}> Not Applied</span></option>
-                                                            <option value={false}>Rejected</option>
-                                                            <option value={true} >Approved</option>
-                                                         </select>
-                                                      </div>
-                                                   </div>
-                                                   // <Switch checkedChildren="Not applied" unCheckedChildren="Not applied" disabled
-                                                   //     onChange={(e) => { setToggle(e); documentVerifyedstatus(e) }} style={{ backgroundColor: '#1a48aa' }} />
-                                                   :
-                                                   <span>
-                                                      {isverifieddoc == "rejected" &&
-                                                         <div className="form-group mb-3 row">
-                                                            <div className="col" onChange={(e) => { setToggle(e); documentVerifyedstatus(e) }}>
-                                                               <select className="form-control mb-0" >
-                                                                  <option value={false}>Rejected</option>
-                                                                  <option value={true} >Approved</option>
-                                                               </select>
-                                                            </div>
-                                                         </div>
-                                                      }
-                                                      {isverifieddoc == "pending" &&
-                                                         <div className="form-group mb-3 row">
-                                                            <div className="col" onChange={(e) => { setToggle(e); documentVerifyedstatus(e) }}>
-                                                               <select className="form-control mb-0" >
-                                                                  <option>Select Status</option>
-                                                                  <option value={true} >Approved</option>
-                                                                  <option value={false}>Rejected</option>
-                                                               </select>
-                                                            </div>
-                                                         </div>
-                                                      }
-                                                      {/* {
-                                          isverifieddoc == "rejected" &&
-                                          <Switch checkedChildren="Rejected" unCheckedChildren="Approved"
-                                             onChange={(e) =>
-                                          { setToggle(e); documentVerifyedstatus(e) }} style={{ backgroundColor: '#1a48aa' }} />
-                                          } */}
-                                                      {isverifieddoc == "approved" &&
-                                                         <div className="form-group mb-3 row">
-                                                            <div className="col" onChange={(e) => { setToggle(e); documentVerifyedstatus(e) }}>
-                                                               <select className="form-control mb-0" >
-                                                                  <option value={true}>Approved</option>
-                                                                  <option value={false}>Rejected</option>
-                                                               </select>
-                                                            </div>
-                                                         </div>
-                                                      }
-                                                      {/* 
-                                          {
-                                          isverifieddoc == "approved" &&
-                                          <Switch checkedChildren="Rejected" unCheckedChildren="Approved" defaultChecked
-                                             onChange={(e) =>
-                                          { setToggle(e); documentVerifyedstatus(e) }} style={{ backgroundColor: '#1a48aa' }} />
-                                          } */}
-                                                      {/* 
-                                          {
-                                          isverifieddoc == "approved" &&
-                                          <Switch checkedChildren="Rejected" unCheckedChildren="Approved" defaultChecked
-                                             onChange={(e) =>
-                                          { setToggle(e); documentVerifyedstatus(e) }} style={{ backgroundColor: '#1a48aa' }} />
-                                          } */}
-                                                   </span>
-                                             }
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           {/* .col */}
-                           <div className="col-lg-8 col-xl-8 col-xxl-9">
-                              <div className="card">
-                                 <div className="card-inner">
-                                    <div className="nk-block">
-                                       <div className="overline-title-alt mb-2 mt-2">Cash Balance</div>
-                                       <div className="profile-balance">
-                                          <div className="profile-balance-group gx-4">
-                                             <div className="profile-balance-sub">
-                                                <div className="profile-balance-amount">
-                                                   <div className="number">{currecyicon} {amount == "NAN" ? 0 : amount} <small className="currency currency-usd"></small></div>
-                                                </div>
-                                                <div className="profile-balance-subtitle">Wallet Balance</div>
-                                             </div>
-                                             <div className="profile-balance-sub">
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div className="nk-block">
-                                       <h6 className="lead-text mb-3">Currency Wallets</h6>
-                                       <div className="nk-tb-list nk-tb-ulist is-compact card">
-                                          <div className="nk-tb-item nk-tb-head">
-                                             <div className="nk-tb-col ">
-                                                <span className="sub-text fw-bold ">Icon</span>
-                                             </div>
-                                             <div className="nk-tb-col">
-                                                <span className="sub-text fw-bold">Name</span>
-                                             </div>
-                                             <div className="nk-tb-col ">
-                                                <span className="sub-text fw-bold">Currency Type</span>
-                                             </div>
-                                             <div className="nk-tb-col tb-col-xxl">
-                                                <span className="sub-text fw-bold">Total Price</span>
-                                             </div>
-                                             <div className="nk-tb-col">
-                                                <span className="sub-text fw-bold">Balance</span>
-                                             </div>
-                                             <div className="nk-tb-col">
-                                                <span className="sub-text fw-bold">Transaction</span>
-                                             </div>
-                                          </div>
-                                          {totalwallet.length == 0 &&
-                                             <div className="nk-tb-item">
-                                                <div className="nk-tb-col">
-                                                </div>
-                                                <div className="nk-tb-col">
-                                                </div>
-                                                <div className="nk-tb-col ">
-                                                   <span className="tb-product">
-                                                      {
-                                                         scroll == false ?
-                                                            <Loader />
-                                                            :
-                                                            <h6>No Currency Wallets Available</h6>
-                                                      }
-                                                   </span>
-                                                </div>
-                                                <div className="nk-tb-col">
-                                                </div>
-                                                <div className="nk-tb-col">
-                                                </div>
-                                             </div>
-                                          }
-                                          {
-                                             totalwallet.length > 0 && totalwallet.map((data) => {
-                                                return (
-                                                   <>
-                                                      <div className="nk-tb-item " >
-                                                         <div className="nk-tb-col" data-bs-toggle="modal" data-bs-target="#modal-reportUpdate" style={{ cursor: "pointer" }} onClick={() => { CurrencyCustomWallet(data.id); setmodalloader(true) }}>
-                                                            <span className="tb-product">
-                                                               {
-                                                                  data.currency.icon == null ? <img src="./images/product/c.png" alt="img" className="thumb" /> : <img src={data.currency.icon} alt="img" className="thumb" height={27} />
-                                                               }
-                                                            </span>
-                                                         </div>
-                                                         <div className="nk-tb-col" data-bs-toggle="modal" data-bs-target="#modal-reportUpdate" style={{ cursor: "pointer" }} onClick={() => { CurrencyCustomWallet(data.id); setmodalloader(true) }}>
-                                                            {
-                                                               data.currency.short_name == null ? <a><span className="fw-bold">N/A</span></a> : <a><span className="fw-bold" style={{ textTransform: "capitalize" }}>{data.currency.short_name}</span></a>
-                                                            }
-                                                         </div>
-                                                         <div className="nk-tb-col" data-bs-toggle="modal" data-bs-target="#modal-reportUpdate" style={{ cursor: "pointer" }} onClick={() => { CurrencyCustomWallet(data.id); setmodalloader(true) }}>
-                                                            {
-                                                               data.currency.title == null ? <span className="title">N/A</span> : <span className="title" style={{ textTransform: "capitalize" }}>{data.currency.title}</span>
-                                                            }
-                                                         </div>
-                                                         <div className="nk-tb-col" >
-                                                            {
-                                                               data.balance == null ? <span className="sub-text" >0</span> : <span className="sub-text" style={{ display: "flex", justifyContent: "center" }}> {data.currency.symbol} {Number(data.balance.toFixed(2))}</span>
-                                                            }
-                                                         </div>
-                                                         <div className="nk-tb-col" onClick={() => { currencytransaction(data.wuid) }}>
-                                                            <div className="tb-odr-btns d-none d-sm-inline">
-                                                               <a className="btn btn-dim btn-sm btn-primary" >View TXN</a>
-                                                            </div>
-                                                            <a className="btn btn-pd-auto d-sm-none" style={{ display: "flex", justifyContent: "center" }}><em className="icon ni ni-eye"></em></a>
-                                                         </div>
-                                                      </div>
-                                                   </>
-                                                )
-                                             })
-                                          }
-                                       </div>
-                                       {/* .nk-tb-list */}
-                                    </div>
-                                    <div className="nk-block">
-                                       <h6 className="lead-text mb-3">Custom Wallets</h6>
-                                       <div className="nk-tb-list nk-tb-ulist is-compact card">
-                                          <div className="nk-tb-item nk-tb-head">
-                                             <div className="nk-tb-col ">
-                                                <span className="sub-text fw-bold">Icon</span>
-                                             </div>
-                                             <div className="nk-tb-col">
-                                                <span className="sub-text fw-bold">Name</span>
-                                             </div>
-                                             <div className="nk-tb-col ">
-                                                <span className="sub-text fw-bold">Currency Type</span>
-                                             </div>
-                                             <div className="nk-tb-col tb-col-xxl">
-                                                <span className="sub-text fw-bold">Total Price</span>
-                                             </div>
-                                             <div className="nk-tb-col">
-                                                <span className="sub-text fw-bold">Balance</span>
-                                             </div>
-                                             <div className="nk-tb-col">
-                                                <span className="sub-text fw-bold">Transaction</span>
-                                             </div>
-                                          </div>
-                                          {custom_wallets.length == 0 &&
-                                             <div className="nk-tb-item">
-                                                <div className="nk-tb-col">
-                                                </div>
-                                                <div className="nk-tb-col ">
-                                                </div>
-                                                <div className="nk-tb-col">
-                                                   <span className="tb-product">
-                                                      {
-                                                         scroll == false ?
-                                                            <Loader />
-                                                            :
-                                                            <h6>No Custom Wallets Available</h6>
-                                                      }
-                                                   </span>
-                                                </div>
-                                                <div className="nk-tb-col">
-                                                </div>
-                                                <div className="nk-tb-col">
-                                                </div>
-                                             </div>
-                                          }
-                                          {
-                                             custom_wallets.length > 0 && custom_wallets.map((data) => {
-                                                // console.log(data, "custom wallet")
-                                                return (
-                                                   <>
-                                                      <div className="nk-tb-item">
-                                                         <div className="nk-tb-col">
-                                                            <span className="tb-product">
-                                                               {
-                                                                  data.currency.icon == null ? <img src="./images/product/c.png" alt="img" className="thumb" /> : <img src={data.currency.icon} alt="img" className="thumb" height={27} />
-                                                               }
-                                                            </span>
-                                                         </div>
-                                                         <div className="nk-tb-col">
-                                                            {
-                                                               data.name == null ? <a><span className="fw-bold">N/A</span></a> : <a><span className="fw-bold" style={{ textTransform: "capitalize" }}>{data.name}</span></a>
-                                                            }
-                                                         </div>
-                                                         <div className="nk-tb-col">
-                                                            {
-                                                               data.currency.title == null ? <span className="title">N/A</span> : <span className="title" style={{ textTransform: "capitalize" }}>{data.currency.title}</span>
-                                                            }
-                                                         </div>
-                                                         <div className="nk-tb-col" >
-                                                            {
-                                                               data.balance == null ? <span className="sub-text">{data.currency.symbol} 0</span> : <span className="sub-text"> {data.currency.symbol} {data.balance}</span>
-                                                            }
-                                                         </div>
-                                                         <div className="nk-tb-col" onClick={() => { customtransaction(data.wuid) }}>
-                                                            <div className="tb-odr-btns d-none d-sm-inline">
-                                                               <a className="btn btn-dim btn-sm btn-primary" >View TXN</a>
-                                                            </div>
-                                                            <a className="btn btn-pd-auto d-sm-none" style={{ display: "flex", justifyContent: "center" }}><em className="icon ni ni-eye"></em></a>
-                                                         </div>
-                                                      </div>
-                                                   </>
-                                                )
-                                             })
-                                          }
-                                       </div>
-                                       {/* .nk-tb-list */}
-                                    </div>
-                                    <div className="nk-block">
-                                       <h6 className="lead-text mb-3">Cards</h6>
-                                       <div className="nk-tb-list nk-tb-ulist is-compact card">
-                                          <div className="nk-tb-item nk-tb-head">
-                                             <div className="nk-tb-col">
-                                                <span className="sub-text fw-bold">Card number</span>
-                                             </div>
-                                             <div className="nk-tb-col ">
-                                                <span className="sub-text fw-bold">Expiry Month</span>
-                                             </div>
-                                             <div className="nk-tb-col ">
-                                                <span className="sub-text fw-bold">Expiry Year</span>
-                                             </div>
-                                             <div className="nk-tb-col">
-                                                <span className="sub-text fw-bold">CVC</span>
-                                             </div>
-                                          </div>
-                                          {card.length == 0 &&
-                                             <div className="nk-tb-item">
-                                                <div className="nk-tb-col">
-                                                </div>
-                                                <div className="nk-tb-col ">
-                                                   <span className="tb-product">
-                                                      {
-                                                         scroll == false ?
-                                                            <Loader />
-                                                            :
-                                                            <h6>No Card Available</h6>
-                                                      }
-                                                      {/* 
-                                    <Loader />
-                                    <br></br> */}
-                                                   </span>
-                                                </div>
-                                                <div className="nk-tb-col">
-                                                </div>
-                                                <div className="nk-tb-col">
-                                                </div>
-                                             </div>
-                                          }
-                                          {
-                                             card.length > 0 && card.map((data) => {
-                                                // console.log(data, "custom wallet")
-                                                return (
-                                                   <>
-                                                      <div className="nk-tb-item">
-                                                         <div className="nk-tb-col">
-                                                            {
-                                                               data.card_number == null ? <a><span className="fw-bold">N/A</span></a> : <a><span className="fw-bold">{data.card_number}</span></a>
-                                                            }
-                                                         </div>
-                                                         <div className="nk-tb-col">
-                                                            {
-                                                               data.expiry_month == null ? <span className="title">N/A</span> : <span className="title">{data.expiry_month}</span>
-                                                            }
-                                                         </div>
-                                                         <div className="nk-tb-col" >
-                                                            {
-                                                               data.expiry_year == null ? <span className="sub-text"> N/A</span> : <span className="sub-text"> {data.expiry_year} </span>
-                                                            }
-                                                         </div>
-                                                         <div className="nk-tb-col" >
-                                                            {
-                                                               data.cvc == null ? <span className="sub-text">N/A</span> : <span className="sub-text"> {data.cvc} </span>
-                                                            }
-                                                         </div>
-                                                      </div>
-                                                   </>
-                                                )
-                                             })
-                                          }
-                                       </div>
-                                       {/* .nk-tb-list */}
-                                    </div>
-                                    <div className="nk-block">
-                                       <h6 className="lead-text mb-3"> Referal By</h6>
-                                       <div className="nk-tb-list nk-tb-ulist is-compact card">
-                                          <div className="nk-tb-item nk-tb-head">
-                                             <div className="nk-tb-col">
-                                                <span className="sub-text fw-bold">Name</span>
-                                             </div>
-                                             <div className="nk-tb-col ">
-                                                <span className="sub-text fw-bold">Email</span>
-                                             </div>
-                                             <div className="nk-tb-col ">
-                                                <span className="sub-text fw-bold">Phone Num</span>
-                                             </div>
-                                             <div className="nk-tb-col tb-col-xxl">
-                                                <span className="sub-text fw-bold">DOB</span>
-                                             </div>
-                                             <div className="nk-tb-col">
-                                                <span className="sub-text fw-bold">Country</span>
-                                             </div>
-                                          </div>
-                                          {refreldata == null &&
-                                             <div className="nk-tb-item">
-                                                <div className="nk-tb-col">
-                                                </div>
-                                                <div className="nk-tb-col">
-                                                </div>
-                                                <div className="nk-tb-col ">
-                                                   <span className="tb-product">
-                                                      {
-                                                         scroll == false ?
-                                                            <Loader />
-                                                            :
-                                                            <h6>No Data Available</h6>
-                                                      }
-                                                      {/* 
-                                    <Loader />
-                                    <br></br> */}
-                                                   </span>
-                                                </div>
-                                                <div className="nk-tb-col">
-                                                </div>
-                                                <div className="nk-tb-col">
-                                                </div>
-                                             </div>
-                                          }
-                                          {
-                                             refreldata != null &&
-                                             <>
-                                                <div className="nk-tb-item">
-                                                   <div className="nk-tb-col">
-                                                      {
-                                                         refreldata.first_name == null ? <a><span className="fw-bold">N/A</span></a> : <a><span className="fw-bold" style={{ textTransform: "capitalize" }}>{refreldata.first_name}{refreldata.last_name}</span></a>
-                                                      }
-                                                   </div>
-                                                   <div className="nk-tb-col">
-                                                      {
-                                                         refreldata.email == null ? <a><span className="sub-text">N/A</span></a> : <a><span className="sub-text" style={{ textTransform: "capitalize" }}>{refreldata.email}</span></a>
-                                                      }
-                                                   </div>
-                                                   <div className="nk-tb-col">
-                                                      {
-                                                         refreldata.phone_code == null ? <span className="title">N/A</span> : <span className="title">+{refreldata.phone_code} {refreldata.phone}</span>
-                                                      }
-                                                   </div>
-                                                   <div className="nk-tb-col" >
-                                                      {
-                                                         refreldata.citizenship_country == null ? <span className="sub-text" >0</span> : <span className="sub-text" style={{ display: "flex", justifyContent: "center" }}> {refreldata.citizenship_country} </span>
-                                                      }
-                                                   </div>
-                                                </div>
-                                             </>
-                                          }
-                                       </div>
-                                       {/* .nk-tb-list */}
-                                    </div>
-                                    <div className="nk-block">
-                                       <h6 className="lead-text mb-3">My Referal</h6>
-                                       <div className="nk-tb-list nk-tb-ulist is-compact card">
-                                          <div className="nk-tb-item nk-tb-head">
-                                             <div className="nk-tb-col">
-                                                <span className="sub-text fw-bold">Name</span>
-                                             </div>
-                                             <div className="nk-tb-col ">
-                                                <span className="sub-text fw-bold">Email</span>
-                                             </div>
-                                             <div className="nk-tb-col tb-col-lg">
-                                                <span className="sub-text fw-bold">Phone Num</span>
-                                             </div>
-                                          </div>
-                                          {refral.length == 0 &&
-                                             <div className="nk-tb-item">
-                                                <div className="nk-tb-col">
-                                                </div>
-                                                <div className="nk-tb-col ">
-                                                   <span className="tb-product">
-                                                      {
-                                                         scroll == false ?
-                                                            <Loader />
-                                                            :
-                                                            <h6>No Card Available</h6>
-                                                      }
-                                                      {/* 
-                                    <Loader />
-                                    <br></br> */}
-                                                   </span>
-                                                </div>
-                                                <div className="nk-tb-col">
-                                                </div>
-                                                <div className="nk-tb-col">
-                                                </div>
-                                             </div>
-                                          }
-                                          {
-                                             refral.length > 0 && refral.map((data) => {
-                                                // console.log(data, "custom wallet")
-                                                return (
-                                                   <>
-                                                      <div className="nk-tb-item">
-                                                         <div className="nk-tb-col">
-                                                            {
-                                                               data.first_name == null ? <a><span className="fw-bold">N/A</span></a> : <a><span className="fw-bold">{data.first_name}{data.last_name}</span></a>
-                                                            }
-                                                         </div>
-                                                         <div className="nk-tb-col">
-                                                            {
-                                                               data.email == null ? <span className="title">N/A</span> : <span className="title">{data.email}</span>
-                                                            }
-                                                         </div>
-                                                         <div className="nk-tb-col tb-col-lg" >
-                                                            {
-                                                               data.phone_code == null ? <span className="sub-text"> N/A</span> : <span className="sub-text"> +{data.phone_code} {data.phone}</span>
-                                                            }
-                                                         </div>
-                                                         {/* 
-                              <div className="nk-tb-col" >
-                                 {
-                                 data.cvc == null ? <span className="sub-text">N/A</span> : <span className="sub-text"> {data.cvc} </span>
-                                 }
-                              </div>
-                              */}
-                                                      </div>
-                                                   </>
-                                                )
-                                             })
-                                          }
-                                       </div>
-                                       {/* .nk-tb-list */}
-                                    </div>
-                                 </div>
-                              </div>
-                              {/* .card */}
-                           </div>
-                           {/* .col */}
-                        </div>
-                        {/* .row */}
-                     </div>
+
                      {/* .nk-block */}
                   </div>
                </div>

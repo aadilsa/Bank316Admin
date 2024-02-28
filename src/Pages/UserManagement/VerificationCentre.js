@@ -304,12 +304,12 @@ const VerificationCentre = () => {
                                     </div> */}
                                         <div className="card-tools">
                                             <ul className="card-tools-nav">
-                                                <li className={recentTab == "" ? "All" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab(""); setTotalSize(0) }}><span >{recentTab == "" ? <b>All</b> : <span>All</span>}</span></a></li>
-                                                <li className={recentTab == "pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("pending"); setTotalSize(0) }}><span>{recentTab == "pending" ? <b>In progress</b> : <span>In progress</span>}</span></a></li>
+                                                <li className={search == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch(""); setTotalSize(0) }}><span >{search == "" ? <b>All</b> : <span>All</span>}</span></a></li>
+                                                <li className={search == "pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("pending"); setTotalSize(0) }}><span>{search == "pending" ? <b>In progress</b> : <span>In progress</span>}</span></a></li>
                                                 {/* <li className={recentTab == "Oh - hold" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("Oh - hold")}><span>Oh - hold</span></a></li> */}
-                                                <li className={recentTab == "completed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("completed"); setTotalSize(0) }}><span> {recentTab == "completed" ? <b>Approved </b> : <span>Approved </span>}</span></a></li>
-                                                <li className={recentTab == "rejected" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("rejected"); setTotalSize(0) }}><span>{recentTab == "rejected" ? <b>Rejected </b> : <span>Rejected </span>}</span></a></li>
-
+                                                <li className={search == "approved" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("approved"); setTotalSize(0) }}><span> {search == "approved" ? <b>Approved </b> : <span>Approved </span>}</span></a></li>
+                                                <li className={search == "rejected" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("rejected"); setTotalSize(0) }}><span>{search == "rejected" ? <b>Rejected </b> : <span>Rejected </span>}</span></a></li>
+                                                <li className={search == "Not_applied" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("Not_applied"); setTotalSize(0) }}><span>{search == "Not_applied" ? <b>Not Applied </b> : <span>Not Applied </span>}</span></a></li>
                                                 {/* <li className={recentTab == "approved by receiver" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("approved by receiver"); setTotalSize(0) }}><span> {recentTab == "approved by receiver" ? <b>Approved by receiver</b> : <span>Approved by receiver</span>}</span></a></li> */}
                                                 {/* <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("")}><span>All</span></a></li> */}
                                             </ul>
@@ -354,7 +354,6 @@ const VerificationCentre = () => {
                                                 <li>
                                                     <div className="drodown">
                                                         <a className="sub-text" >Action</a>
-
                                                     </div>
                                                 </li>
                                             </ul>
