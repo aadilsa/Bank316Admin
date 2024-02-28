@@ -276,7 +276,7 @@ const UserDetail = () => {
                         <div className="nk-block-between g-3">
                            <div className="nk-block-head-content">
                               {/*<h3 className="nk-block-title page-title">Customer Details</h3>*/}
-                              <h5 className="headingUserNewD">User / <span>{name}{data?.middle_name} {lastname}</span></h5>
+                              <h5 className="headingUserNewD">User / <span>{name}{data?.middle_name} {lastname}</span> <span><a href="" className="pendingEmail">Email: Pending</a></span></h5>
                               <ul className="detaiverifyUserNew">
                                  <li>User ID : <span>{data?.placed_on == null ? <span>N/A </span> : <span>{data?.placed_on}</span>}</span></li>
                                  <li>Email : {
@@ -1058,8 +1058,8 @@ const UserDetail = () => {
                                                       <div className="previewimageUpload">
 
                                                          {
-                                                            verification_doc_image == "null" ? <Image src="./images/imagesnot found.jpg" height={130} width={180} style={{ objectFit: 'cover' }} /> :
-                                                               <Image src={verification_doc_image} height={130} width={180} style={{ objectFit: 'cover' }} />
+                                                            verification_doc_image == "null" ? <Image src="./images/imagesnot found.jpg" style={{ objectFit: 'cover', height:'180px' }} /> :
+                                                               <Image src={verification_doc_image}  style={{ objectFit: 'cover', height:'180px', marginBottom:'0px' }} />
                                                          }
 
                                                          {/* <img src="../images/imagesnot found.jpg" /> */}
@@ -1069,8 +1069,8 @@ const UserDetail = () => {
                                                    <div className="col-6  col-md-4 mt-1">
                                                       <div className="previewimageUpload">
                                                          {
-                                                            verification_id == "null" ? <Image src="./images/imagesnot found.jpg" height={130} width={180} style={{ objectFit: 'cover' }} /> :
-                                                               <Image src={verification_id} height={130} width={180} style={{ objectFit: 'cover' }} />
+                                                            verification_id == "null" ? <Image src="./images/imagesnot found.jpg" style={{ objectFit: 'cover',height:'180px' }} /> :
+                                                               <Image src={verification_id} style={{ objectFit: 'cover', height:'180px', marginBottom:'0px' }} />
                                                          }
                                                          <p>Proof / Self <span><a href=''><em class="icon ni ni-download"></em></a></span></p>
                                                       </div>
