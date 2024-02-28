@@ -8,8 +8,10 @@ import { date } from 'yup';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setHeaderState } from "../Services/store"
+import { Getnotifications, readalldata, readonedata } from '../API/HeaderApi/Header';
 const Header = () => {
-  const [data, setdata] = useState()
+  const [data, setdata] = useState([])
+  const [count, setcount] = useState()
   const [user_type, setuser_type] = useState(null)
 
 
@@ -94,6 +96,62 @@ const Header = () => {
       }
     }
   };
+
+
+  const NotificationData = async () => {
+    try {
+      const resp = await Getnotifications(token)
+      console.log(resp, "respppp")
+      if (resp?.status) {
+        setdata(resp?.data?.rows)
+        setcount(resp?.data?.unreadCount)
+      }
+      else {
+        console.log("errrrr")
+      }
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    NotificationData()
+  }, [])
+
+  console.log(data, "aoododo")
+
+
+  const readAll = async () => {
+    try {
+      const resp = await readalldata(token)
+      if (resp?.success) {
+        NotificationData()
+      }
+      else {
+        console.log("errrrr")
+      }
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+
+
+  const readOne = async (id) => {
+    try {
+      const resp = await readonedata(id)
+      if (resp?.status) {
+        NotificationData()
+      }
+      else {
+        console.log("errrrr")
+      }
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
 
 
   return (
@@ -184,11 +242,6 @@ const Header = () => {
                       <img src="./images/d8.png" alt="" /><span>GitHub</span></a>
                     </div>
                   </div>
-
-
-
-
-
                 </div>
               </li>
 
@@ -369,79 +422,39 @@ const Header = () => {
               </li>
               <li className="dropdown notification-dropdown">
                 <a href="#" className="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
-                  <div className="icon-status icon-status-info"><em className="icon ni ni-bell" />
-                  </div>
+                  {/* <div className="icon-status icon-status-info"><em className="icon ni ni-bell" /> */}
+                  <div class=""><span className="countbadge">0{count}</span><em class="icon ni ni-bell"></em></div>
+
                 </a>
                 <div className="dropdown-menu dropdown-menu-xl dropdown-menu-end">
                   <div className="dropdown-head">
                     <span className="sub-title nk-dropdown-title">Notifications</span>
-                    <a href="#">Mark All as Read</a>
+                    <a style={{ cursor: "pointer", color: "green" }} onClick={() => { readAll() }}>Mark All as Read</a>
                   </div>
                   <div className="dropdown-body">
                     <div className="nk-notification">
-                      <div className="nk-notification-item dropdown-inner">
-                        <div className="nk-notification-icon">
-                          <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right" />
-                        </div>
-                        <div className="nk-notification-content">
-                          <div className="nk-notification-text">You have requested to
-                            <span>Widthdrawl</span>
-                          </div>
-                          <div className="nk-notification-time">2 hrs ago</div>
-                        </div>
-                      </div>
-                      <div className="nk-notification-item dropdown-inner">
-                        <div className="nk-notification-icon">
-                          <em className="icon icon-circle bg-success-dim ni ni-curve-down-left" />
-                        </div>
-                        <div className="nk-notification-content">
-                          <div className="nk-notification-text">Your <span>Deposit
-                            Order</span> is placed</div>
-                          <div className="nk-notification-time">2 hrs ago</div>
-                        </div>
-                      </div>
-                      <div className="nk-notification-item dropdown-inner">
-                        <div className="nk-notification-icon">
-                          <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right" />
-                        </div>
-                        <div className="nk-notification-content">
-                          <div className="nk-notification-text">You have requested to
-                            <span>Widthdrawl</span>
-                          </div>
-                          <div className="nk-notification-time">2 hrs ago</div>
-                        </div>
-                      </div>
-                      <div className="nk-notification-item dropdown-inner">
-                        <div className="nk-notification-icon">
-                          <em className="icon icon-circle bg-success-dim ni ni-curve-down-left" />
-                        </div>
-                        <div className="nk-notification-content">
-                          <div className="nk-notification-text">Your <span>Deposit
-                            Order</span> is placed</div>
-                          <div className="nk-notification-time">2 hrs ago</div>
-                        </div>
-                      </div>
-                      <div className="nk-notification-item dropdown-inner">
-                        <div className="nk-notification-icon">
-                          <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right" />
-                        </div>
-                        <div className="nk-notification-content">
-                          <div className="nk-notification-text">You have requested to
-                            <span>Widthdrawl</span>
-                          </div>
-                          <div className="nk-notification-time">2 hrs ago</div>
-                        </div>
-                      </div>
-                      <div className="nk-notification-item dropdown-inner">
-                        <div className="nk-notification-icon">
-                          <em className="icon icon-circle bg-success-dim ni ni-curve-down-left" />
-                        </div>
-                        <div className="nk-notification-content">
-                          <div className="nk-notification-text">Your <span>Deposit
-                            Order</span> is placed</div>
-                          <div className="nk-notification-time">2 hrs ago</div>
-                        </div>
-                      </div>
+                      {
+                        data.map((data) => {
+                          return (
+                            <>
+                              <div className="nk-notification-item dropdown-inner">
+                                <div className="nk-notification-icon">
+                                  <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right" />
+                                </div>
+                                <div className="nk-notification-content">
+                                  <div className="nk-notification-text">
+                                    <span onClick={() => { readOne(data.id) }}>{data?.body}</span>
+                                  </div>
+                                  <div className="nk-notification-time">2 hrs ago</div>
+                                </div>
+                              </div>
+                            </>
+                          )
+                        })
+                      }
+
+
+
                     </div>{/* .nk-notification */}
                   </div>{/* .nk-dropdown-body */}
                   <div className="dropdown-foot center">

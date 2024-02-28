@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Container from '../../component/container';
 import { Switch } from 'antd';
 // import { getUserById } from '../../API/UserApi/UserApi';
-import { getUserById, docVerify, VerifyDocStatus, getcurrencycustom } from '../../API/UserApi/UserdatabyidAPI';
+import { getUserById, docVerify, VerifyDocStatus, getcurrencycustom, Verifyemail } from '../../API/UserApi/UserdatabyidAPI';
 import { Image } from 'antd';
 // import { docVerify } from '../../API/UserApi/UserApi';
 import Loader from '../Loader/Loader';
@@ -198,7 +198,9 @@ const UserDetail = () => {
                UserDatabyId()
             } else {
                // ref3.current.click()
-               toast.error("something went wrong")
+               toast.error("something went wrong", {
+                  autoClose: 700
+               })
 
             }
          }
@@ -234,43 +236,45 @@ const UserDetail = () => {
                UserDatabyId()
             } else {
                // ref3.current.click()
-               toast.error("something went wrong")
-
+               toast.error("something went wrong", {
+                  autoClose: 700
+               })
             }
          }
       })
    }
 
-   // const emailVarified = () => {
-   //    Swal.fire({
-   //       title: 'email verify Submission',
-   //       text: "Please review all the documents before take any action.",
-   //       icon: 'warning',
-   //       showCancelButton: true,
-   //       confirmButtonColor: '#3085d6',
-   //       cancelButtonColor: '#d33',
-   //       cancelButtonText: "No",
-   //       confirmButtonText: 'Yes, Approve'
-   //    }).then(async (result) => {
-   //       if (result.value) {
-   //          const data = {
-   //             "is_email_verified": true
-   //          }
+   const emailVarify = () => {
+      Swal.fire({
+         title: 'email verify Submission',
+         text: "Please review all the documents before take any action.",
+         icon: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         cancelButtonText: "No",
+         confirmButtonText: 'Yes, Approve'
+      }).then(async (result) => {
+         if (result.value) {
+            const data = {
+               "is_email_verified": true
+            }
+            const responce = await Verifyemail(token, location.state, data)
+            if (responce?.status) {
+               Swal.fire(
+                  'Approve Submission',
+                  "The documents has been updated."
+               )
+               UserDatabyId()
+            } else {
+               toast.error("something went wrong", {
+                  autoClose: 700
+               })
 
-   //          const responce = await VerifyDocStatus(token, location.state, data)
-   //          if (responce?.status) {
-   //             Swal.fire(
-   //                'Approve Submission',
-   //                "The documents has been updated."
-   //             )
-   //             UserDatabyId()
-   //          } else {
-   //             toast.error("something went wrong")
-
-   //          }
-   //       }
-   //    })
-   // }
+            }
+         }
+      })
+   }
 
    console.log(status, "status")
    return (
@@ -283,14 +287,14 @@ const UserDetail = () => {
                         <div className="nk-block-between g-3">
                            <div className="nk-block-head-content">
                               {/*<h3 className="nk-block-title page-title">Customer Details</h3>*/}
-                              <h5 className="headingUserNewD">User / <span>{name}{data?.middle_name} {lastname}</span> <span><a href="" className="pendingEmail">Email: Pending</a></span></h5>
+                              <h5 className="headingUserNewD">User / <span>{name}{data?.middle_name} {lastname}</span> </h5>
                               <ul className="detaiverifyUserNew">
                                  <li>User ID : <span>{data?.placed_on == null ? <span>N/A </span> : <span>{data?.placed_on}</span>}</span></li>
-
-
                                  <li>Email : {
-                                    emailVarified == null ? <span className="badge badge-dim bg-warning"><span>Pending Verify </span></span> : <span className="badge badge-dim bg-success"><span>Success Verify</span></span>
-                                 }</li>
+                                    (emailVarified == null && emailVarified == "") && <span className="badge badge-dim bg-warning" style={{ cursor: "pointer" }} onClick={() => { emailVarify() }}><span><a className="pendingEmail">Pending Verify</a></span></span>
+                                 }{
+                                       emailVarified !== null && <span className="badge badge-dim bg-success"><span>Success Verify</span></span>
+                                    }</li>
 
 
                                  <li>Document  :   {
@@ -1067,8 +1071,8 @@ const UserDetail = () => {
                                                       <div className="previewimageUpload">
 
                                                          {
-                                                            verification_doc_image == "null" ? <Image src="./images/imagesnot found.jpg" style={{ objectFit: 'cover', height:'180px' }} /> :
-                                                               <Image src={verification_doc_image}  style={{ objectFit: 'cover', height:'180px', marginBottom:'0px' }} />
+                                                            verification_doc_image == "null" ? <Image src="./images/imagesnot found.jpg" style={{ objectFit: 'cover', height: '180px' }} /> :
+                                                               <Image src={verification_doc_image} style={{ objectFit: 'cover', height: '180px', marginBottom: '0px' }} />
                                                          }
 
                                                          {/* <img src="../images/imagesnot found.jpg" /> */}
@@ -1078,8 +1082,8 @@ const UserDetail = () => {
                                                    <div className="col-6  col-md-4 mt-1">
                                                       <div className="previewimageUpload">
                                                          {
-                                                            verification_id == "null" ? <Image src="./images/imagesnot found.jpg" style={{ objectFit: 'cover',height:'180px' }} /> :
-                                                               <Image src={verification_id} style={{ objectFit: 'cover', height:'180px', marginBottom:'0px' }} />
+                                                            verification_id == "null" ? <Image src="./images/imagesnot found.jpg" style={{ objectFit: 'cover', height: '180px' }} /> :
+                                                               <Image src={verification_id} style={{ objectFit: 'cover', height: '180px', marginBottom: '0px' }} />
                                                          }
                                                          <p>Proof / Self <span><a href=''><em class="icon ni ni-download"></em></a></span></p>
                                                       </div>

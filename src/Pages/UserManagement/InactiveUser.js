@@ -300,28 +300,23 @@ const InactiveUser = () => {
                                     </div>{/* .nk-block-head-content */}
                                 </div>{/* .nk-block-between */}
                             </div>{/* .nk-block-head */}
-                            <div className="card card-full">
+                            {/* <div className="card card-full">
                                 <div className="card-inner" style={{ borderBottom: "1px solid #ddd" }}>
                                     <div className="card-title-group">
-                                        {/* <div className="card-title">
-                                        <h6 className="title"><span className="me-2"> Recent Transactions </span> <a href="#" className="link d-none d-sm-inline">See
-                                            History</a></h6>
-                                    </div> */}
+                           
                                         <div className="card-tools">
                                             <ul className="card-tools-nav">
                                                 <li className={search == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch(""); setTotalSize(0) }}><span >{search == "" ? <b>All</b> : <span>All</span>}</span></a></li>
                                                 <li className={search == "pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("pending"); setTotalSize(0) }}><span>{search == "pending" ? <b>In progress</b> : <span>In progress</span>}</span></a></li>
-                                                {/* <li className={recentTab == "Oh - hold" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("Oh - hold")}><span>Oh - hold</span></a></li> */}
                                                 <li className={search == "approved" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("approved"); setTotalSize(0) }}><span> {search == "approved" ? <b>Approved </b> : <span>Approved </span>}</span></a></li>
                                                 <li className={search == "rejected" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("rejected"); setTotalSize(0) }}><span>{search == "rejected" ? <b>Rejected </b> : <span>Rejected </span>}</span></a></li>
                                                 <li className={search == "Not_applied" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("Not_applied"); setTotalSize(0) }}><span>{search == "Not_applied" ? <b>Not Applied </b> : <span>Not Applied </span>}</span></a></li>
-                                                {/* <li className={recentTab == "approved by receiver" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("approved by receiver"); setTotalSize(0) }}><span> {recentTab == "approved by receiver" ? <b>Approved by receiver</b> : <span>Approved by receiver</span>}</span></a></li> */}
-                                                {/* <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => setrecentTab("")}><span>All</span></a></li> */}
+
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="nk-block">
                                 <div className="nk-tb-list is-separate mb-3">
                                     <div className="nk-tb-item nk-tb-head">

@@ -50,3 +50,12 @@ export const VerifyDocStatus = async (token, id, data) => {
         console.log(error)
     }
 }
+
+export const Verifyemail = async (token, id, data) => {
+    try {
+        const res = await axios.post(`${Base_Url}client/update-email/${id}`, (data), { headers: { "Authorization": `Bearer ${token}` } })
+        return res.data
+    } catch (error) {
+        console.log(error)
+    }
+}
