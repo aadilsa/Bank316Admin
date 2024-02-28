@@ -15,7 +15,7 @@ import Loader from '../Loader/Loader';
 import { Getusermanagement } from '../../API/userManagement';
 const token = localStorage.getItem("logintoken")
 
-const UserMangement = () => {
+const ActiveUser = () => {
 
     const [userdata, setuserdata] = useState([])
     const [count, setcount] = useState(0)
@@ -39,7 +39,7 @@ const UserMangement = () => {
     const token = localStorage.getItem("logintoken")
     const location = useLocation()
     const [recentTab, setrecentTab] = useState("")
-    const [tab, settab] = useState("")
+    const [tab, settab] = useState(1)
 
     const Profiledata = localStorage.getItem("Profiledata");
 
@@ -259,7 +259,6 @@ const UserMangement = () => {
             })
         }
     }, [permission])
-
     return (
         <Container>
             <div className="nk-content ">
@@ -270,7 +269,7 @@ const UserMangement = () => {
                                 <div className="nk-block-between">
                                     <div className="nk-block-head-content">
                                         {/* <h3 className="nk-block-title page-title">Customers</h3> */}
-                                        <h5 >Users List</h5>
+                                        <h5 >Active Users</h5>
                                         <div className="nk-block-des text-soft">
                                             <p>Total <span className='fw-bold'>({count})</span> User account.</p>
                                         </div>
@@ -291,9 +290,9 @@ const UserMangement = () => {
                                                     <li ><a href={BaseUrl + `clients/export`} className="btn btn-white btn-outline-primary"><em className="icon ni ni-download-cloud" /><span>Export</span></a></li>
 
                                                     {/* <li className="nk-block-tools-opt">
-                                                        <a href="#" className="btn btn-icon btn-primary d-md-none"><em className="icon ni ni-plus" /></a>
-                                                        <a href="#" className="btn btn-primary d-none d-md-inline-flex"><em className="icon ni ni-plus" /><span>Add</span></a>
-                                                    </li> */}
+                                                <a href="#" className="btn btn-icon btn-primary d-md-none"><em className="icon ni ni-plus" /></a>
+                                                <a href="#" className="btn btn-primary d-none d-md-inline-flex"><em className="icon ni ni-plus" /><span>Add</span></a>
+                                            </li> */}
                                                 </ul>
                                             </div>
                                         </div>
@@ -304,9 +303,9 @@ const UserMangement = () => {
                                 <div className="card-inner" style={{ borderBottom: "1px solid #ddd" }}>
                                     <div className="card-title-group">
                                         {/* <div className="card-title">
-                                        <h6 className="title"><span className="me-2"> Recent Transactions </span> <a href="#" className="link d-none d-sm-inline">See
-                                            History</a></h6>
-                                    </div> */}
+                                <h6 className="title"><span className="me-2"> Recent Transactions </span> <a href="#" className="link d-none d-sm-inline">See
+                                    History</a></h6>
+                            </div> */}
                                         <div className="card-tools">
                                             <ul className="card-tools-nav">
                                                 <li className={search == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch(""); setTotalSize(0) }}><span >{search == "" ? <b>All</b> : <span>All</span>}</span></a></li>
@@ -327,24 +326,24 @@ const UserMangement = () => {
                                     <div className="nk-tb-item nk-tb-head">
 
                                         {/* <div className="nk-tb-col "><span className="sub-text fw-bold">User Detail  {sortedBy == "first_name" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('first_name') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('first_name') }} />} </span></div>
-                                        <div className="nk-tb-col tb-col-lg"><span className="sub-text fw-bold">DOB  {sortedBy == "date_of_birth" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('date_of_birth') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('date_of_birth') }} />}</span></div>
-                                        <div className="nk-tb-col tb-col-lg"><span className="sub-text fw-bold">Verified  {sortedBy == "email_verified_at" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('email_verified_at') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('email_verified_at') }} />}</span></div>
-                                        <div className="nk-tb-col tb-col-lg"><span className="sub-text fw-bold">Created At  {sortedBy == "created_at" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} />}</span></div>
-                                        <div className="nk-tb-col tb-col-md"><span className="sub-text fw-bold">Referral Id  {sortedBy == "date_of_birth" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('referral_code') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('referral_code') }} />}</span></div>
-                                        <div className="nk-tb-col nk-tb-col-tools">
-                                            {
-                                                (get_single_client == true || profile?.user_type == "SUPERADMIN") &&
+                                <div className="nk-tb-col tb-col-lg"><span className="sub-text fw-bold">DOB  {sortedBy == "date_of_birth" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('date_of_birth') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('date_of_birth') }} />}</span></div>
+                                <div className="nk-tb-col tb-col-lg"><span className="sub-text fw-bold">Verified  {sortedBy == "email_verified_at" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('email_verified_at') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('email_verified_at') }} />}</span></div>
+                                <div className="nk-tb-col tb-col-lg"><span className="sub-text fw-bold">Created At  {sortedBy == "created_at" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('created_at') }} />}</span></div>
+                                <div className="nk-tb-col tb-col-md"><span className="sub-text fw-bold">Referral Id  {sortedBy == "date_of_birth" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange('referral_code') }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange('referral_code') }} />}</span></div>
+                                <div className="nk-tb-col nk-tb-col-tools">
+                                    {
+                                        (get_single_client == true || profile?.user_type == "SUPERADMIN") &&
 
-                                                <ul className="nk-tb-actions gx-1 my-n1">
-                                                    <li>
-                                                        <div className="drodown">
-                                                            <span className="sub-text fw-bold">Action</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                        <ul className="nk-tb-actions gx-1 my-n1">
+                                            <li>
+                                                <div className="drodown">
+                                                    <span className="sub-text fw-bold">Action</span>
+                                                </div>
+                                            </li>
+                                        </ul>
 
-                                            }
-                                        </div> */}
+                                    }
+                                </div> */}
 
                                         <div className="nk-tb-col"><span className="sub-text">User {sortedBy == "first_name" && orderBy === "desc" ? <em className="icon ni ni-arrow-down" style={{ cursor: 'pointer' }} onClick={() => { sortChange("first_name") }} /> : <em className="icon ni ni-arrow-up" style={{ cursor: 'pointer' }} onClick={() => { sortChange("first_name") }} />}</span></div>
                                         <div className="nk-tb-col tb-col-mb"><span className="sub-text">
@@ -518,11 +517,11 @@ const UserMangement = () => {
                                                             <>
                                                                 <div className="nk-tb-item" key={data.id}>
                                                                     {/* <div className="nk-tb-col nk-tb-col-check">
-                                                                            <div className="custom-control custom-control-sm custom-checkbox notext">
-                                                                                <input type="checkbox" className="custom-control-input" id="uid1" />
-                                                                                <label className="custom-control-label" htmlFor="uid1" />
-                                                                            </div>
-                                                                        </div> */}
+                                                                    <div className="custom-control custom-control-sm custom-checkbox notext">
+                                                                        <input type="checkbox" className="custom-control-input" id="uid1" />
+                                                                        <label className="custom-control-label" htmlFor="uid1" />
+                                                                    </div>
+                                                                </div> */}
                                                                     <div className="nk-tb-col">
                                                                         <a >
                                                                             <div className="user-card">
@@ -574,15 +573,15 @@ const UserMangement = () => {
                                                                     <div className="nk-tb-col nk-tb-col-tools">
                                                                         <ul className="nk-tb-actions gx-1">
                                                                             {/* <li className="nk-tb-action-hidden" onClick={() => { Custmerdetails(data.id) }}>
-                                                                                <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
-                                                                                    <em class="icon ni ni-user-alt" ></em>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li className="nk-tb-action-hidden" >
-                                                                                <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                                    <em class="icon ni ni-eye" ></em>
-                                                                                </a>
-                                                                            </li> */}
+                                                                        <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
+                                                                            <em class="icon ni ni-user-alt" ></em>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li className="nk-tb-action-hidden" >
+                                                                        <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                                            <em class="icon ni ni-eye" ></em>
+                                                                        </a>
+                                                                    </li> */}
                                                                             <li>
                                                                                 <div className="drodown">
                                                                                     <a href="#" className="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
@@ -596,19 +595,19 @@ const UserMangement = () => {
 
                                                                                             {/* <li class="divider"></li> */}
                                                                                             {/* <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-check-circle-cut  "></em><span>Confrim</span></a></li>
-                                                                                                <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-cross-c"></em><span>Reject</span></a></li> */}
+                                                                                        <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-report"><a ><em class="icon ni ni-cross-c"></em><span>Reject</span></a></li> */}
                                                                                         </ul>
                                                                                     </div>
 
                                                                                     {/* {
-                                                                                        (data?.status == "failed" || data?.status == "completed") &&
-                                                                                        <div className="dropdown-menu dropdown-menu-end">
-                                                                                            <ul className="link-list-opt no-bdr">
-                                                                                                <li style={{ cursor: "pointer" }} onClick={() => GoToUserDetail(data.client_id)}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
-                                                                                                <li style={{ cursor: "pointer" }} onClick={() => { GoAllreqTxn(data.id) }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
-                                                                                            </ul>
-                                                                                        </div>
-                                                                                    } */}
+                                                                                (data?.status == "failed" || data?.status == "completed") &&
+                                                                                <div className="dropdown-menu dropdown-menu-end">
+                                                                                    <ul className="link-list-opt no-bdr">
+                                                                                        <li style={{ cursor: "pointer" }} onClick={() => GoToUserDetail(data.client_id)}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
+                                                                                        <li style={{ cursor: "pointer" }} onClick={() => { GoAllreqTxn(data.id) }}><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            } */}
 
                                                                                 </div>
                                                                             </li>
@@ -659,35 +658,35 @@ const UserMangement = () => {
 
 
                                             {/* 
-                                            <div className="g">
-                                                <div className="pagination-goto d-flex justify-content-center justify-content-md-start gx-3">
-                                                    <div>Page</div>
-                                                    <div>
-                                                        <select className="form-select js-select2" data-search="on" data-dropdown="xs center">
-                                                            <option value="page-1">1</option>
-                                                            <option value="page-2">2</option>
-                                                            <option value="page-4">4</option>
-                                                            <option value="page-5">5</option>
-                                                            <option value="page-6">6</option>
-                                                            <option value="page-7">7</option>
-                                                            <option value="page-8">8</option>
-                                                            <option value="page-9">9</option>
-                                                            <option value="page-10">10</option>
-                                                            <option value="page-11">11</option>
-                                                            <option value="page-12">12</option>
-                                                            <option value="page-13">13</option>
-                                                            <option value="page-14">14</option>
-                                                            <option value="page-15">15</option>
-                                                            <option value="page-16">16</option>
-                                                            <option value="page-17">17</option>
-                                                            <option value="page-18">18</option>
-                                                            <option value="page-19">19</option>
-                                                            <option value="page-20">20</option>
-                                                        </select>
-                                                    </div>
-                                                    <div>OF 102</div>
-                                                </div>
-                                            </div> */}
+                                    <div className="g">
+                                        <div className="pagination-goto d-flex justify-content-center justify-content-md-start gx-3">
+                                            <div>Page</div>
+                                            <div>
+                                                <select className="form-select js-select2" data-search="on" data-dropdown="xs center">
+                                                    <option value="page-1">1</option>
+                                                    <option value="page-2">2</option>
+                                                    <option value="page-4">4</option>
+                                                    <option value="page-5">5</option>
+                                                    <option value="page-6">6</option>
+                                                    <option value="page-7">7</option>
+                                                    <option value="page-8">8</option>
+                                                    <option value="page-9">9</option>
+                                                    <option value="page-10">10</option>
+                                                    <option value="page-11">11</option>
+                                                    <option value="page-12">12</option>
+                                                    <option value="page-13">13</option>
+                                                    <option value="page-14">14</option>
+                                                    <option value="page-15">15</option>
+                                                    <option value="page-16">16</option>
+                                                    <option value="page-17">17</option>
+                                                    <option value="page-18">18</option>
+                                                    <option value="page-19">19</option>
+                                                    <option value="page-20">20</option>
+                                                </select>
+                                            </div>
+                                            <div>OF 102</div>
+                                        </div>
+                                    </div> */}
                                         </div>
                                     </div>
                                 </div>{/* .card */}
@@ -700,4 +699,5 @@ const UserMangement = () => {
     )
 }
 
-export default UserMangement
+export default ActiveUser
+

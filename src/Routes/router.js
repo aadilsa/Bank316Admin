@@ -58,6 +58,8 @@ import UsersDashboard from '../Pages/Dashboard/UsersDashboard';
 import Withdrawals from '../Pages/Withdrawals/Withdrawals';
 import UserMangement from '../Pages/UserManagement/UserMangement';
 import VerificationCentre from '../Pages/UserManagement/VerificationCentre';
+import ActiveUser from '../Pages/UserManagement/ActiveUser';
+import InactiveUser from '../Pages/UserManagement/InactiveUser';
 const Router = () => {
     return (
         <BrowserRouter>
@@ -111,7 +113,11 @@ const Router = () => {
                 <Route path="/outside-transactions" element={<PrivateRoute><Outsidetxns /></PrivateRoute>} />
                 <Route path="/outside-transaction" element={<PrivateRoute><Outsidetxn /></PrivateRoute>} />
                 <Route path="/account-managers" element={<PrivateRoute><AccountManagers /></PrivateRoute>} />
+
                 <Route path="/admin/user-mangement" element={<PrivateRoute><UserMangement /></PrivateRoute>} />
+                <Route path="/admin/active-users" element={<PrivateRoute><ActiveUser /></PrivateRoute>} />
+                <Route path="/admin/inactive-users" element={<PrivateRoute><InactiveUser /></PrivateRoute>} />
+
                 <Route path="/admin/verification-Centre" element={<PrivateRoute><VerificationCentre /></PrivateRoute>} />
                 <Route path="/admin/faq" element={<PrivateRoute><FAQ /></PrivateRoute>} />
                 <Route path="/create-faq" element={<PrivateRoute><CreateFAQ /></PrivateRoute>} />

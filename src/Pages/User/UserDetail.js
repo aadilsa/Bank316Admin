@@ -55,26 +55,7 @@ const UserDetail = () => {
    const location = useLocation();
    const ref2 = useRef()
    const navigate = useNavigate()
-   // useEffect(async () => {
-   //     try {
-   //         const res = await axios.get(`${Base_Url}client/${id}`, { headers: { "Authorization": `Bearer ${token}` } })
-   //         return res.data
-   //     } catch (error) {
-   //         console.log(error)
-   //     }
-   // }, [])
-   // const documentVerifyed = async () => {
-   //     try {
-   //         const responce = await docVerify(token, location.state)
-   //         console.log(responce, "VEIFFFFFFFYYYY")
-   //     }
-   //     catch (err) {
-   //         console.log(err)
-   //     }
-   // }
-   // useEffect(() => {
-   //     documentVerifyed()
-   // }, [])
+
    const documentVerifyedstatus = async (e) => {
       const value = e.target.value
       const val = JSON.parse(value)
@@ -94,6 +75,7 @@ const UserDetail = () => {
          console.log(err)
       }
    }
+
    const UserDatabyId = async () => {
       try {
          const resp = await getUserById(token, location.state)
@@ -145,8 +127,6 @@ const UserDetail = () => {
          const resp = await getcurrencycustom(token, id)
          setTimeout(() => {
             setcurrencycustom(resp?.data)
-            // console.log(resp.data, "llllllllll")
-            // console.log(resp.data, "respogetcurrencycustom   getcurrencycustom")
             setmodalloader(false)
          }, 2000);
          setmodalloader(true)
@@ -189,13 +169,13 @@ const UserDetail = () => {
    const SuccessApproved = () => {
       Swal.fire({
          title: 'Approve Submission',
-         text: "Please review all the documents before take any action.",
+         text: "Please review all the documents before taking any action.",
          icon: 'warning',
          showCancelButton: true,
          confirmButtonColor: '#3085d6',
          cancelButtonColor: '#d33',
-         cancelButtonText: "No",
-         confirmButtonText: 'Yes, Approve'
+         cancelButtonText: "Cancel",
+         confirmButtonText: 'Proceed'
       }).then(async (result) => {
          // Check if the user clicked "Yes"
          if (result.value) {
@@ -212,12 +192,8 @@ const UserDetail = () => {
             if (responce?.status) {
                // ref3.current.click()
                Swal.fire(
-                  'Approve Submission',
-
-
-
-                  "The documents has been updated and requested for submit."
-
+                  ' Submission Approved ',
+                  " Documents has been Approved successfully.'"
                )
                UserDatabyId()
             } else {
@@ -233,13 +209,13 @@ const UserDetail = () => {
       console.log("------------>>>>>>>>>>>>>>>>>")
       Swal.fire({
          title: 'Reject Submission??',
-         text: "Please review all the documents before take any action. You can request for resubmission if provided documents are not valid",
+         text: "Are you sure you really want to reject this request ?",
          icon: 'warning',
          showCancelButton: true,
          confirmButtonColor: '#3085d6',
          cancelButtonColor: '#d33',
-         cancelButtonText: "No",
-         confirmButtonText: 'Yes, Reject'
+         cancelButtonText: "Cancel",
+         confirmButtonText: 'Proceed'
       }).then(async (result) => {
          if (result.value) {
 
@@ -251,8 +227,8 @@ const UserDetail = () => {
             if (responce?.status) {
                // ref3.current.click()
                Swal.fire(
-                  'Approved!',
-                  ' Documents has been successfully Approved.',
+                  'Rejected',
+                  ' Documents has been rejected successfully.',
                   'success'
                )
                UserDatabyId()
@@ -264,6 +240,37 @@ const UserDetail = () => {
          }
       })
    }
+
+   // const emailVarified = () => {
+   //    Swal.fire({
+   //       title: 'email verify Submission',
+   //       text: "Please review all the documents before take any action.",
+   //       icon: 'warning',
+   //       showCancelButton: true,
+   //       confirmButtonColor: '#3085d6',
+   //       cancelButtonColor: '#d33',
+   //       cancelButtonText: "No",
+   //       confirmButtonText: 'Yes, Approve'
+   //    }).then(async (result) => {
+   //       if (result.value) {
+   //          const data = {
+   //             "is_email_verified": true
+   //          }
+
+   //          const responce = await VerifyDocStatus(token, location.state, data)
+   //          if (responce?.status) {
+   //             Swal.fire(
+   //                'Approve Submission',
+   //                "The documents has been updated."
+   //             )
+   //             UserDatabyId()
+   //          } else {
+   //             toast.error("something went wrong")
+
+   //          }
+   //       }
+   //    })
+   // }
 
    console.log(status, "status")
    return (
@@ -279,9 +286,13 @@ const UserDetail = () => {
                               <h5 className="headingUserNewD">User / <span>{name}{data?.middle_name} {lastname}</span></h5>
                               <ul className="detaiverifyUserNew">
                                  <li>User ID : <span>{data?.placed_on == null ? <span>N/A </span> : <span>{data?.placed_on}</span>}</span></li>
+
+
                                  <li>Email : {
                                     emailVarified == null ? <span className="badge badge-dim bg-warning"><span>Pending Verify </span></span> : <span className="badge badge-dim bg-success"><span>Success Verify</span></span>
                                  }</li>
+
+
                                  <li>Document  :   {
                                     status == "approved" && <span className="badge badge-dim bg-success"><span>Approved</span></span>
                                  }
@@ -679,7 +690,7 @@ const UserDetail = () => {
                                                                         <li className="widthCurrency">{data?.currency?.title}</li>
                                                                         <li>
                                                                            <div class="dropdown">
-                                                                              <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                              <a class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false">
                                                                                  <em class="icon ni ni-more-h"></em></a>
                                                                               <div class="dropdown-menu dropdown-menu-end">
                                                                                  <ul class="link-list-opt no-bdr mt-0">
@@ -928,9 +939,7 @@ const UserDetail = () => {
                                                 <div className="nk-block-between pb-2">
                                                    <div className="nk-block-head-content">
                                                       <h5 className="nk-block-title mb-0">Personal Information</h5>
-                                                      <div className="nk-block-des">
-                                                         <p>Basic info, like your name and address, that you use on Nio Platform.</p>
-                                                      </div>
+
                                                    </div>
 
 

@@ -15,7 +15,7 @@ import Loader from '../Loader/Loader';
 import { Getusermanagement } from '../../API/userManagement';
 const token = localStorage.getItem("logintoken")
 
-const UserMangement = () => {
+const InactiveUser = () => {
 
     const [userdata, setuserdata] = useState([])
     const [count, setcount] = useState(0)
@@ -39,7 +39,7 @@ const UserMangement = () => {
     const token = localStorage.getItem("logintoken")
     const location = useLocation()
     const [recentTab, setrecentTab] = useState("")
-    const [tab, settab] = useState("")
+    const [tab, settab] = useState(0)
 
     const Profiledata = localStorage.getItem("Profiledata");
 
@@ -270,7 +270,7 @@ const UserMangement = () => {
                                 <div className="nk-block-between">
                                     <div className="nk-block-head-content">
                                         {/* <h3 className="nk-block-title page-title">Customers</h3> */}
-                                        <h5 >Users List</h5>
+                                        <h5 >Inactive Users</h5>
                                         <div className="nk-block-des text-soft">
                                             <p>Total <span className='fw-bold'>({count})</span> User account.</p>
                                         </div>
@@ -700,4 +700,5 @@ const UserMangement = () => {
     )
 }
 
-export default UserMangement
+export default InactiveUser
+

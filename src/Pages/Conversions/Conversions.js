@@ -210,6 +210,23 @@ const Conversions = () => {
     var singleStillUtcs = moment.utc(singletxn?.created_at).toDate();
     var singleTimeZones = moment(singleStillUtcs).local().format('MMM D, YYYY hh:mm A');
 
+
+
+    // let singlebase_currency_rate = singletxn.base_currency_rate;
+    // let singlebasebalance = parseFloat(singlebase_currency_rate);
+    // if (!isNaN(singlebasebalance)) {
+    //     // Format the balance to have two digits after the decimal point
+    //     singlebase_currency_rate = singlebasebalance.toFixed(2);
+    // }
+
+
+    // let singletxnconvert_currency_rate = singletxn.converted_currency_rate;
+    // let singletxnbalance = parseFloat(singletxnconvert_currency_rate);
+    // if (!isNaN(singletxnbalance)) {
+    //     // Format the balance to have two digits after the decimal point
+    //     singletxnconvert_currency_rate = singletxnbalance.toFixed(2);
+    // }
+
     return (
         <Container>
             <div className="nk-content ">
@@ -371,11 +388,29 @@ const Conversions = () => {
                                                         var stillUtcs = moment.utc(data?.created_at).toDate();
                                                         var timeZones = moment(stillUtcs).local().format('MMM D, YYYY hh:mm A');
 
-                                                        let base_currency_rate = data.base_currency_rate;
-                                                        let formattedRate = base_currency_rate.toFixed(2);
+                                                        // let base_currency_rate = data.base_currency_rate;
+                                                        // let formattedRate = base_currency_rate.toFixed(2);
 
-                                                        let converted_currency_rate = data.converted_currency_rate;
-                                                        let converted_currencyrate = converted_currency_rate.toFixed(2);
+                                                        let base_currency_rate = data.base_currency_rate;
+                                                        let basebalance = parseFloat(base_currency_rate);
+                                                        if (!isNaN(basebalance)) {
+                                                            // Format the balance to have two digits after the decimal point
+                                                            base_currency_rate = basebalance.toFixed(2);
+                                                        }
+
+
+
+
+
+                                                        let convert_currency_rate = data.converted_currency_rate;
+                                                        let balance = parseFloat(convert_currency_rate);
+                                                        if (!isNaN(balance)) {
+                                                            // Format the balance to have two digits after the decimal point
+                                                            convert_currency_rate = balance.toFixed(2);
+                                                        }
+
+                                                        // let converted_currency_rate = data.converted_currency_rate;
+                                                        // let converted_currencyrate = converted_currency_rate.toFixed(2);
                                                         return (
 
                                                             <>
@@ -413,7 +448,7 @@ const Conversions = () => {
                                                                         {/* <span className="tb-amount">{data?.transcation?.txn_id} <span className="currency">USD</span></span> */}
                                                                     </div>
                                                                     <div className="nk-tb-col tb-col-md">
-                                                                        <span className="tb-amount"> {formattedRate} {data?.base_currency} = {converted_currencyrate} {data?.converted_currency}</span>
+                                                                        <span className="tb-amount"> {base_currency_rate} {data?.base_currency} = {convert_currency_rate} {data?.converted_currency}</span>
                                                                     </div>
                                                                     <div className="nk-tb-col tb-col-lg">
                                                                         <span className="tb-amount" >{data?.coversion_user_name} </span>
@@ -613,7 +648,7 @@ const Conversions = () => {
                                         <ul>
                                             <li className="mb-3">To <span className="d-block">{singletxn?.converted_currency} Balance</span></li>
                                             <li className="mb-3">EURO Balance <span className="d-block">Jan 23, 2024 6:30 PM</span></li>
-                                            <li className="mb-3">Exchange Rate <span className="d-block"> {singletxn.base_currency_rate} {singletxn?.base_currency} =  {singletxn.converted_currency_rate}  {singletxn?.converted_currency}</span></li>
+                                            {/* <li className="mb-3">Exchange Rate <span className="d-block"> {singletxn?.singlebase_currency_rate} {singletxn?.base_currency} =  {singletxnconvert_currency_rate}  {singletxn?.converted_currency}</span></li> */}
                                             <li className="mb-3">Converted Amount <span className="d-block">{singletxn?.converted_amount} {singletxn?.converted_currency}</span></li>
                                             {/* <li className="mb-3">Wallet Balance after Txn <span className="d-block">{singletxn?.transcation?.other_closing_balance} {singletxn?.sender?.currencywallets[0]?.currency.short_name}</span></li> */}
                                         </ul>

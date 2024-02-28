@@ -201,7 +201,7 @@ const Sidebar = () => {
 
 
     useEffect(() => {
-        if (roletab == "/admin/user-mangement") {
+        if (roletab == "/admin/user-mangement" || roletab == "/admin/active-users" || roletab == "/admin/inactive-users") {
             setUserManagement(true);
         }
         else {
@@ -433,24 +433,26 @@ const Sidebar = () => {
                                     <span className="nk-menu-text">User Management</span>
                                 </a>
                                 <ul className="nk-menu-sub dropdown-contain" style={{ display: UserManagement ? 'block' : 'none', marginLeft: 10, paddingLeft: 2 }}>
-                                    <li className={tab == "/admin/user-mangement" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                    {/* <li className={tab == "/admin/user-mangement" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                         <Link to="/admin/user-mangement" className="nk-menu-link"><span className="nk-menu-text">User Mangement </span></Link>
+                                    </li> */}
+                                    <li className={tab == "/admin/user-mangement" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                        <Link to="/admin/user-mangement" className="nk-menu-link"><span className="nk-menu-text">All Users</span></Link>
                                     </li>
-                                    <li className={tab == "/admin/verification-Centre" ? "nk-menu-item active current-page" : "nk-menu-item"}>
-                                        <Link to="/admin/verification-Centre" className="nk-menu-link"><span className="nk-menu-text">Active Users</span></Link>
+
+                                    <li className={tab == "/admin/active-users" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                        <Link to="/admin/active-users" className="nk-menu-link"><span className="nk-menu-text">Active Users</span></Link>
                                     </li>
-                                    <li className={tab == "/admin/verification-Centre" ? "nk-menu-item active current-page" : "nk-menu-item"}>
-                                        <Link to="/admin/verification-Centre" className="nk-menu-link"><span className="nk-menu-text">Inactive Users </span></Link>
+                                    <li className={tab == "/admin/inactive-users" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                        <Link to="/admin/inactive-users" className="nk-menu-link"><span className="nk-menu-text">Inactive Users </span></Link>
                                     </li>
-                                    <li className={tab == "/admin/verification-Centre" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                    {/* <li className={tab == "/admin/verification-Centre" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                         <Link to="/admin/verification-Centre" className="nk-menu-link"><span className="nk-menu-text">Suspendded Users </span></Link>
-                                    </li>
-                                    <li className={tab == "/admin/verification-Centre" ? "nk-menu-item active current-page" : "nk-menu-item"}>
-                                        <Link to="/admin/verification-Centre" className="nk-menu-link"><span className="nk-menu-text">All Users</span></Link>
-                                    </li>
-                                    <li className={tab == "/admin/verification-Centre" ? "nk-menu-item active current-page" : "nk-menu-item"}>
+                                    </li> */}
+
+                                    {/* <li className={tab == "/admin/verification-Centre" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                         <Link to="/admin/verification-Centre" className="nk-menu-link"><span className="nk-menu-text">Administratiors</span></Link>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </li>
 
