@@ -50,7 +50,9 @@ const Withdrawals = () => {
 
    const WithdrawalsTxnData = async () => {
       try {
-         const totaldata = await WithdrawalsTxn(token, recentTab, sortedBy, orderBy, search, pageNumber)
+         const totaldata = await WithdrawalsTxn(token,
+            //  recentTab, sortedBy, orderBy, search, pageNumber
+         )
          console.log(totaldata.data.rows, "daatattadsddddddd")
          if (totaldata.status == true) {
             setTimeout(() => {
@@ -85,6 +87,9 @@ const Withdrawals = () => {
    useEffect(() => {
       WithdrawalsTxnData()
    }, [sortedBy, orderBy, search, pageNumber, recentTab])
+
+
+
    const sortChange = (col) => {
       if (col === sortedBy) {
          setSortedBy(col);
@@ -219,8 +224,8 @@ const Withdrawals = () => {
                                           Pending</b> : <span>
                                           Pending</span>}</span></a></li>
                                        <li className={search == "Success" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("Success"); setTotalSize(0) }}><span> {search == "Success" ? <b>
-                                          Confirmed</b> : <span>
-                                          Confirmed</span>}</span></a></li>
+                                          Completed</b> : <span>
+                                          Completed</span>}</span></a></li>
                                        <li className={search == "Failed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("Failed"); setTotalSize(0) }}><span>{search == "Failed" ? <b>Rejected</b> : <span>Rejected</span>}</span></a></li>
                                     </ul>
                                  </div>
@@ -292,36 +297,36 @@ const Withdrawals = () => {
                                                                   <em class="icon ni ni-wallet-fill walletIconNew"></em>
                                                                </div>
                                                                <div className="user-info" style={{ cursor: "pointer", }} onClick={() => GoToUserDetail(data?.transcation?.client_id)}>
-                                                                  <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.transcation?.recipient_name} <span className="dot dot-success d-md-none ms-1" /></span>
-                                                                  <span>{data?.client?.email}</span>
+                                                                  <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.client_name} <span className="dot dot-success d-md-none ms-1" /></span>
+                                                                  <span>{data?.client_email}</span>
                                                                </div>
                                                             </div>
                                                          </a>
                                                       </div>
                                                       <div className="nk-tb-col tb-col-mb">
-                                                         <span className="tb-amount" style={{ cursor: "pointer" }}>{data?.transcation?.txn_id} <span className="dot dot-success d-md-none ms-1" /></span>
+                                                         <span className="tb-amount" style={{ cursor: "pointer" }}>{data?.txn_id} <span className="dot dot-success d-md-none ms-1" /></span>
                                                          <span className=" tb-status  text-warning ">
                                                             <em class="icon ni ni-bullet-fill"></em>Withdraw
                                                          </span>
                                                       </div>
                                                       <div className="nk-tb-col tb-col-md">
-                                                         <span> {data?.transcation?.title}</span>
+                                                         <span> {data?.title}</span>
                                                       </div>
                                                       <div className="nk-tb-col tb-col-lg">
-                                                         <span>{data?.walletDetails?.currencyDetails?.symbol} {data?.transcation?.base_amount}</span>
+                                                         <span>{data?.amount} {data?.short_name}</span>
                                                       </div>
                                                       <div className="nk-tb-col tb-col-lg">
                                                          <span>{timeZones}</span>
                                                       </div>
                                                       <div className="nk-tb-col tb-col-md">
                                                          {
-                                                            data?.transcation?.payment_status == "pending" && <span className="tb-status text-warning">Pending</span>
+                                                            data?.payment_status == "pending" && <span className="tb-status text-warning">Pending</span>
                                                          }
                                                          {
-                                                            data?.transcation?.payment_status == "success" && <span className="tb-status text-success">Completed</span>
+                                                            data?.payment_status == "success" && <span className="tb-status text-success">Completed</span>
                                                          }
                                                          {
-                                                            data?.transcation?.payment_status == "failed" && <span className="tb-status text-danger">Rejected</span>
+                                                            data?.payment_status == "failed" && <span className="tb-status text-danger">Rejected</span>
                                                          }
                                                       </div>
                                                       <div className="nk-tb-col nk-tb-col-tools" onClick={() => { reqmoneystatus(data); setmodaldata(data) }}>

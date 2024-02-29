@@ -364,10 +364,19 @@ const Sidebar = () => {
                             </li> */}
 
 
+                            {/* 
+                            <li class="nk-menu-item">
+                                <a href="html/ecommerce/index.html" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-bag"></em></span>
+                                    <span class="nk-menu-text">E-Commerce Panel</span><span class="nk-menu-badge">3</span>
+                                </a>
+                            </li> */}
+
+
                             <li className={tab == "/admin/deposits" ? "nk-menu-item active current-page" : "nk-menu-item"}>
                                 <Link to={"/admin/deposits"} className={"nk-menu-link "}>
                                     <span className="nk-menu-icon"><em className="icon ni ni-wallet-in" /></span>
-                                    <span className="nk-menu-text">Deposits</span>
+                                    <span className="nk-menu-text">Deposits</span><span class="nk-menu-badge">3</span>
                                 </Link>
                             </li>
 
@@ -393,9 +402,6 @@ const Sidebar = () => {
                                     <span className="nk-menu-text">Conversions</span>
                                 </Link>
                             </li>
-
-
-
 
 
                             <li className={tab == "/admin/Referrals" ? "nk-menu-item active current-page" : "nk-menu-item"}>

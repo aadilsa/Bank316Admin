@@ -94,7 +94,9 @@ const Transfers = () => {
 
     const TransfersData = async () => {
         try {
-            const totaldata = await GetTransfers(token, recentTab, sortedBy, orderBy, search, pageNumber)
+            const totaldata = await GetTransfers(token,
+                // recentTab, sortedBy, orderBy, search, pageNumber
+            )
             console.log(totaldata.data.rows, "daatattadsddddddd")
             if (totaldata.status == true) {
                 setTimeout(() => {
@@ -291,8 +293,8 @@ const Transfers = () => {
                                                         Pending</b> : <span>
                                                         Pending</span>}</span></a></li>
                                                     <li className={search == "Success" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("Success"); setTotalSize(0) }}><span> {search == "Success" ? <b>
-                                                        Confirmed</b> : <span>
-                                                        Confirmed</span>}</span></a></li>
+                                                        Completed</b> : <span>
+                                                        Completed</span>}</span></a></li>
                                                     <li className={search == "Failed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("Failed"); setTotalSize(0) }}><span>{search == "Failed" ? <b>Rejected</b> : <span>Rejected</span>}</span></a></li>
                                                 </ul>
                                             </div>
@@ -356,15 +358,32 @@ const Transfers = () => {
                                                                             <a >
                                                                                 <div className="user-card">
                                                                                     <div className="user-avatar bg-primary">
-                                                                                        {data?.txn_type == "Credit" && <span className="user-avatar bg-success-dim"><e className="icon ni ni-arrow-down-left">
-                                                                                        </e></span>}
+                                                                                        {data?.txn_type == "Credit" &&
+                                                                                            // <span className="user-avatar bg-success-dim"><e className="icon ni ni-arrow-down-left">
+                                                                                            // </e></span>
+                                                                                            <div className="user-avatar bg-primary posRealative">
+                                                                                                <span className="user-avatar bg-success-dim"><e className="icon ni ni-arrow-up-right">
+                                                                                                </e></span>
+                                                                                                <em class="icon ni ni-wallet-fill walletIconNew"></em>
+                                                                                            </div>
+                                                                                        }
 
-                                                                                        {data?.txn_type == "Debit" && <span className="user-avatar bg-danger-dim"><e className="icon ni ni-arrow-up-right">
-                                                                                        </e></span>}
+                                                                                        {data?.txn_type == "Debit" &&
+
+                                                                                            <div className="user-avatar bg-primary posRealative">
+                                                                                                <span className="user-avatar bg-danger-dim"><e className="icon ni ni-arrow-up-right">
+                                                                                                </e></span>
+                                                                                                <em class="icon ni ni-wallet-fill walletIconNew"></em>
+                                                                                            </div>
+                                                                                            //  <span className="user-avatar bg-danger-dim"><e className="icon ni ni-arrow-up-right">
+                                                                                            // </e></span>
+                                                                                        }
+
+
                                                                                     </div>
                                                                                     <div className="user-info" style={{ cursor: "pointer", }} onClick={() => GoToUserDetail(data?.client?.id)}>
-                                                                                        <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.client?.first_name}  {data?.client?.last_name}<span className="dot dot-success d-md-none ms-1" /></span>
-                                                                                        <span>{data?.client?.email}</span>
+                                                                                        <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.client_name}  <span className="dot dot-success d-md-none ms-1" /></span>
+                                                                                        <span>{data?.client_email}</span>
                                                                                     </div>
                                                                                 </div>
                                                                             </a>
@@ -383,7 +402,7 @@ const Transfers = () => {
                                                                             <span> {data?.title}</span>
                                                                         </div>
                                                                         <div className="nk-tb-col tb-col-lg">
-                                                                            <span>{data?.amount} {data?.currency} </span>
+                                                                            <span>{data?.amount} {data?.short_name} </span>
                                                                         </div>
                                                                         <div className="nk-tb-col tb-col-lg">
                                                                             <span>{timeZones}</span>
@@ -591,7 +610,7 @@ const Transfers = () => {
                         {
                             (singletxn?.identifier == "CurrencyTransaction" && singletxn?.txn_type == "Debit" && singletxn?.txn_for == "transfer") && <div className="modal-content">
                                 <div className="modal-header">
-                                    <h5 className="modal-title">Transfer ID# <span>{singletxn?.txn_id} <br></br> identifier ={singletxn?.identifier}</span></h5>
+                                    <h5 className="modal-title">Transfer ID# <span>{singletxn?.txn_id} </span></h5>
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ref={ref1} data-dismiss="modal" />
                                 </div>
                                 <div className="modal-body">
@@ -678,7 +697,7 @@ const Transfers = () => {
                                                 <li className="mb-3">Payment Currency <span className="d-block"> { }</span></li>
                                                 <li className="mb-3">Payment Amount <span className="d-block">pending</span></li>
                                                 <li className="mb-3">Funding Method  <span className="d-block">{singletxn?.payment_method}</span></li>
-                                                {singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed On  <span className="d-block">Jan 23 2024, 5:30 PM</span></li>}
+                                                {/* {singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed On  <span className="d-block">Jan 23 2024, 5:30 PM</span></li>} */}
                                             </ul>
                                         </div>
                                     </div>
@@ -691,9 +710,9 @@ const Transfers = () => {
                                                 <li className="mb-3">Transfer Limit   <span className="d-block">pending </span></li>
                                                 <li className="mb-3">Transaction Description<span className="d-block">{singletxn?.title}</span></li>
                                                 <li className="mb-3">Payment Gateway <span className="d-block">{singletxn?.payment_method}</span></li>
-                                                {
+                                                {/* {
                                                     singletxn?.completed_by !== null && <li className="mb-3">Completed By  <span className="d-block">{singletxn?.completed_by}</span></li>
-                                                }
+                                                } */}
                                             </ul>
                                         </div>
                                         <div className="col-md-6">
@@ -701,9 +720,9 @@ const Transfers = () => {
                                                 <li className="mb-3">Account Type <span className="d-block">Personal</span></li>
                                                 <li className="mb-3">Verification Status <span className="d-block">{singletxn?.client?.doc_verified_status}</span></li>
                                                 <li className="mb-3">Transaction Status <span className="d-block">{singletxn?.payment_status}</span></li>
-                                                {
+                                                {/* {
                                                     singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed On  <span className="d-block">{completedsingletimeZones}</span></li>
-                                                }
+                                                } */}
                                             </ul>
                                         </div>
                                     </div>
@@ -823,9 +842,9 @@ const Transfers = () => {
                                                 <li className="mb-3">Transfer Limit   <span className="d-block">pending </span></li>
                                                 <li className="mb-3">Transaction Description<span className="d-block">{singletxn?.title}</span></li>
                                                 <li className="mb-3">Payment Gateway <span className="d-block">{singletxn?.payment_method}</span></li>
-                                                {
+                                                {/* {
                                                     singletxn?.transaction?.payment_status !== "pending" && <li className="mb-3">Completed By  <span className="d-block">{singletxn?.completed_by}</span></li>
-                                                }
+                                                } */}
 
                                             </ul>
                                         </div>

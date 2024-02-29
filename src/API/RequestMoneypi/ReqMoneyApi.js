@@ -2,9 +2,13 @@ import axios from "axios"
 import { BaseUrl } from "../config";
 const Base_Url = BaseUrl
 
-export const RequestMoneyData = async (token, recentTab, sortedBy, orderBy, search, pageNumber) => {
+export const RequestMoneyData = async (token,
+    // recentTab, sortedBy, orderBy, search, pageNumber
+) => {
     try {
-        const res = await axios.get(`${Base_Url}request-moneys?status=${recentTab}&sortby=${sortedBy}&orderby=${orderBy}&search=${search}&page_number=${pageNumber}`, { headers: { "Authorization": `Bearer ${token}` } })
+        // const res = await axios.get(`${Base_Url}request-moneys?status=${recentTab}&sortby=${sortedBy}&orderby=${orderBy}&search=${search}&page_number=${pageNumber}`, { headers: { "Authorization": `Bearer ${token}` } })
+
+        const res = await axios.get(`${Base_Url}getDepositeList`, { headers: { "Authorization": `Bearer ${token}` } })
         return res.data
     }
     catch (err) {

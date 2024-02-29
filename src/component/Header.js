@@ -12,7 +12,7 @@ import { setHeaderState } from '../Services/reducers';
 import { Getnotifications, readalldata, readonedata } from '../API/HeaderApi/Header';
 const Header = () => {
   const [data, setdata] = useState([])
-  const [count, setcount] = useState()
+  const [count, setcount] = useState(0)
   const [user_type, setuser_type] = useState(null)
 
 
