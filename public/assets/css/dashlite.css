@@ -51449,6 +51449,7 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
 }
 
 
+
 @media (min-width: 320px) and (max-width: 767px) {
   .cardInnerBorder canvas {
     width: 100%;
@@ -51530,9 +51531,9 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   border-radius: 10px;
   line-height: normal;
   position: absolute;
-  right: -4px;
+  right: -8px;
+  top: -6px;
 }
-
 
 
 /*! END @iO */
