@@ -423,7 +423,7 @@ const Header = () => {
                 </div>
               </li>
               <li className="dropdown notification-dropdown">
-                <a className="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
+                <a className="dropdown-toggle nk-quick-nav-icon bellNotificationhover" data-bs-toggle="dropdown">
                   {/* <div className="icon-status icon-status-info"><em className="icon ni ni-bell" /> */}
                   {/* {
                     count !== 0 && <div class=""><span className="countbadge">{count > 9 ? <span>{count}</span> : <span>0{count}</span>}</span><em class="icon ni ni-bell"></em></div>

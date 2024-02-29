@@ -51441,6 +51441,13 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   border-radius: 3px;
   font-weight: 400;
 }
+.bellNotificationhover:before {
+  width: 41.75px !important;
+  height: 41.75px !important;
+  left: 55%;
+  top: 48%;
+}
+
 
 @media (min-width: 320px) and (max-width: 767px) {
   .cardInnerBorder canvas {
