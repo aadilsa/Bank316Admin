@@ -7,7 +7,8 @@ import axios from 'axios';
 import { date } from 'yup';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setHeaderState } from "../Services/store"
+// import { setHeaderState } from "../Services/store"
+import { setHeaderState } from '../Services/reducers';
 import { Getnotifications, readalldata, readonedata } from '../API/HeaderApi/Header';
 const Header = () => {
   const [data, setdata] = useState([])
@@ -139,8 +140,9 @@ const Header = () => {
 
 
   const readOne = async (id) => {
+    console.log(id, "iddddddddddddddd", token)
     try {
-      const resp = await readonedata(id)
+      const resp = await readonedata(id, token)
       if (resp?.status) {
         NotificationData()
       }
@@ -421,9 +423,23 @@ const Header = () => {
                 </div>
               </li>
               <li className="dropdown notification-dropdown">
-                <a href="#" className="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
+                <a className="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
                   {/* <div className="icon-status icon-status-info"><em className="icon ni ni-bell" /> */}
-                  <div class=""><span className="countbadge">0{count}</span><em class="icon ni ni-bell"></em></div>
+                  {/* {
+                    count !== 0 && <div class=""><span className="countbadge">{count > 9 ? <span>{count}</span> : <span>0{count}</span>}</span><em class="icon ni ni-bell"></em></div>
+
+                  } */}
+
+
+                  {
+                    count == 0 && <div className="icon-status icon-status-info"><em className="icon ni ni-bell" /></div>
+                  }
+                  {
+                    count > 9 && <div class=""><span className="countbadge">{count}</span><em class="icon ni ni-bell"></em></div>
+                  }
+                  {
+                    (count <= 9 && count !== 0) && <div class=""><span className="countbadge">0{count}</span><em class="icon ni ni-bell"></em></div>
+                  }
 
                 </a>
                 <div className="dropdown-menu dropdown-menu-xl dropdown-menu-end">
@@ -441,9 +457,9 @@ const Header = () => {
                                 <div className="nk-notification-icon">
                                   <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right" />
                                 </div>
-                                <div className="nk-notification-content">
-                                  <div className="nk-notification-text">
-                                    <span onClick={() => { readOne(data.id) }}>{data?.body}</span>
+                                <div className="nk-notification-content" onClick={() => { readOne(data.id) }}>
+                                  <div className="nk-notification-text" >
+                                    <span >{data?.body}</span>
                                   </div>
                                   <div className="nk-notification-time">2 hrs ago</div>
                                 </div>

@@ -24,9 +24,9 @@ export const readalldata = async (token) => {
     }
 }
 
-export const readonedata = async (token, id) => {
+export const readonedata = async (id, token) => {
     try {
-        const res = await axios.post(`${Base_Url}notifications/read/${id}`)
+        const res = await axios.get(`${Base_Url}notifications/read/${id}`, { headers: { "Authorization": `Bearer ${token}` } })
         return res.data
     }
     catch (err) {

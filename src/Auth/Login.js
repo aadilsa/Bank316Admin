@@ -57,6 +57,7 @@ const Login = () => {
                 data: {
                     email: values.email,
                     password: values.password,
+                    // afc
                 }
             }).then((Response) => {
                 // console.log(Response.data.data, "responcc .oppppppppp")
@@ -168,11 +169,6 @@ const Login = () => {
 
 
         </>
-
-
-
-
-
 
     );
 }

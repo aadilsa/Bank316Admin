@@ -291,7 +291,7 @@ const UserDetail = () => {
                               <ul className="detaiverifyUserNew">
                                  <li>User ID : <span>{data?.placed_on == null ? <span>N/A </span> : <span>{data?.placed_on}</span>}</span></li>
                                  <li>Email : {
-                                    (emailVarified == null && emailVarified == "") && <span className="badge badge-dim bg-warning" style={{ cursor: "pointer" }} onClick={() => { emailVarify() }}><span><a className="pendingEmail">Pending Verify</a></span></span>
+                                    (emailVarified == null || emailVarified == "") && <span className="badge badge-dim bg-warning" style={{ cursor: "pointer" }} onClick={() => { emailVarify() }}><span><a className="pendingEmail">Pending Verify</a></span></span>
                                  }{
                                        emailVarified !== null && <span className="badge badge-dim bg-success"><span>Success Verify</span></span>
                                     }</li>

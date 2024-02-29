@@ -13,10 +13,13 @@ const appSlice = createSlice({
         setHeaderState: (state, action) => {
             state.header = action.payload;
         },
+        setToken: (state, action) => {
+            state.token = action.payload;
+        },
     },
 });
 
-export const { setHeaderState } = appSlice.actions;
+export const { setHeaderState, setToken } = appSlice.actions;
 
 const store = configureStore({
     reducer: {

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setHeaderState } from "../Services/store"
+// import { setHeaderState } from "../Services/store"
+import { setHeaderState } from '../Services/reducers';
 
 const Sidebar = () => {
     const [activeMenu, setActiveMenu] = useState(true);
