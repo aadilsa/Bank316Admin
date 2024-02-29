@@ -106,8 +106,7 @@ function RequestMoney() {
 
     const GetRequestMoneyData = async () => {
         try {
-            const totaldata = await RequestMoneyData(token,
-                // recentTab, sortedBy, orderBy, search, pageNumber
+            const totaldata = await RequestMoneyData(token, recentTab, sortedBy, orderBy, search, pageNumber
             )
             console.log(totaldata.data.rows, "daatattadsddddddd")
             if (totaldata.status == true) {
@@ -302,9 +301,10 @@ function RequestMoney() {
                                     <div className="card-title-group">
                                         <div className="card-tools">
                                             <ul className="card-tools-nav">
-                                                <li className={search == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch(""); setTotalSize(0) }}><span >{search == "" ? <b>History</b> : <span>History</span>}</span></a></li>
-                                                <li className={search == "pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("pending"); setTotalSize(0) }}><span>{search == "pending" ? <b>Pending</b> : <span>Pending</span>}</span></a></li>                                                <li className={search == "completed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("completed"); setTotalSize(0) }}><span> {search == "completed" ? <b>Completed</b> : <span>Completed</span>}</span></a></li>
-                                                <li className={search == "rejected" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("rejected"); setTotalSize(0) }}><span>{search == "rejected" ? <b>Rejected</b> : <span>Rejected</span>}</span></a></li>
+                                                <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab(""); setTotalSize(0) }}><span >{recentTab == "" ? <b>All</b> : <span>All</span>}</span></a></li>
+                                                <li className={recentTab == "pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("pending"); setTotalSize(0) }}><span>{recentTab == "pending" ? <b>Pending</b> : <span>Pending</span>}</span></a></li>
+                                                <li className={recentTab == "success" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("success"); setTotalSize(0) }}><span> {recentTab == "success" ? <b>Completed</b> : <span>Completed</span>}</span></a></li>
+                                                <li className={recentTab == "failed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("failed"); setTotalSize(0) }}><span>{recentTab == "failed" ? <b>Rejected</b> : <span>Rejected</span>}</span></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -374,8 +374,8 @@ function RequestMoney() {
                                                                                     </e></span>   <em class="icon ni ni-wallet-fill walletIconNew"></em>
                                                                                 </div>
                                                                                 <div className="user-info" style={{ cursor: "pointer", }} onClick={() => GoToUserDetail(data.client_id)}>
-                                                                                    <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.client_name}  <span className="dot dot-success d-md-none ms-1" /></span>
-                                                                                    <span>{data?.client_email}</span>
+                                                                                    <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.client?.first_name} {data?.client?.last_name} <span className="dot dot-success d-md-none ms-1" /></span>
+                                                                                    <span>{data?.client?.email}</span>
                                                                                 </div>
                                                                             </div>
                                                                         </a>
@@ -386,23 +386,23 @@ function RequestMoney() {
                                                                             <em class="icon ni ni-bullet-fill"></em>Deposit
                                                                         </span>                                                                    </div>
                                                                     <div className="nk-tb-col tb-col-md">
-                                                                        <span> {data?.title}</span>
+                                                                        <span> {data?.description}</span>
                                                                     </div>
                                                                     <div className="nk-tb-col tb-col-lg">
-                                                                        <span> {data.amount} {data.short_name}</span>
+                                                                        <span> {data?.amount} {data?.currencyWalletDetail?.currencyDetail?.short_name}</span>
                                                                     </div>
                                                                     <div className="nk-tb-col tb-col-lg">
                                                                         <span>{timeZones}</span>
                                                                     </div>
                                                                     <div className="nk-tb-col tb-col-md">
                                                                         {
-                                                                            data?.payment_status == "pending" && <span className="tb-status text-warning">Pending</span>
+                                                                            data?.status == "pending" && <span className="tb-status text-warning">Pending</span>
                                                                         }
                                                                         {
-                                                                            data?.payment_status == "success" && <span className="tb-status text-success">Completed</span>
+                                                                            data?.status == "completed" && <span className="tb-status text-success">Completed</span>
                                                                         }
                                                                         {
-                                                                            data?.payment_status == "rejected" && <span className="tb-status text-danger">Rejected</span>
+                                                                            data?.status == "rejected" && <span className="tb-status text-danger">Rejected</span>
                                                                         }
                                                                     </div>
                                                                     <div className="nk-tb-col nk-tb-col-tools">
@@ -458,7 +458,7 @@ function RequestMoney() {
                                                                                             </ul>
                                                                                         </div>
                                                                                     }{
-                                                                                        (data?.status == "rejected" || data?.status == "completed") &&
+                                                                                        (data?.status == "rejected" || data?.status == "success") &&
                                                                                         <div className="dropdown-menu dropdown-menu-end">
                                                                                             <ul className="link-list-opt no-bdr">
                                                                                                 <li style={{ cursor: "pointer" }} onClick={() => GoToUserDetail(data.client_id)}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>

@@ -2,12 +2,11 @@ import axios from "axios"
 import { BaseUrl } from "../config";
 const Base_Url = BaseUrl
 
-export const WithdrawalsTxn = async (token) => {
+export const WithdrawalsTxn = async (token, recentTab, sortedBy, orderBy, search, pageNumber) => {
     // console.log(id)
     try {
-        const res = await axios.get(`${Base_Url}getWithDrawalList`, { headers: { "Authorization": `Bearer ${token}` } })
-
-        // const res = await axios.get(`${Base_Url}all-withdrawals?payment_status=${recentTab}&sortby=${sortedBy}&orderby=${orderBy}&search=${search}&page_number=${pageNumber}`, { headers: { "Authorization": `Bearer ${token}` } })
+        // const res = await axios.get(`${Base_Url}getWithDrawalList?sortby=${sortedBy}&orderby=${orderBy}&search=${search}&page_number=${pageNumber}`, { headers: { "Authorization": `Bearer ${token}` } })
+        const res = await axios.get(`${Base_Url}getWithDrawalList?status=${recentTab}&sortby=${sortedBy}&orderby=${orderBy}&search=${search}&page_number=${pageNumber}`, { headers: { "Authorization": `Bearer ${token}` } })
         return res.data
 
     }

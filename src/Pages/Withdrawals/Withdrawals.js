@@ -50,8 +50,8 @@ const Withdrawals = () => {
 
    const WithdrawalsTxnData = async () => {
       try {
-         const totaldata = await WithdrawalsTxn(token,
-            //  recentTab, sortedBy, orderBy, search, pageNumber
+         const totaldata = await WithdrawalsTxn(token, recentTab, sortedBy, orderBy, search, pageNumber
+
          )
          console.log(totaldata.data.rows, "daatattadsddddddd")
          if (totaldata.status == true) {
@@ -219,7 +219,7 @@ const Withdrawals = () => {
                               <div className="card-title-group">
                                  <div className="card-tools">
                                     <ul className="card-tools-nav">
-                                       <li className={search == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch(""); setTotalSize(0) }}><span >{search == "" ? <b>History</b> : <span>History</span>}</span></a></li>
+                                       <li className={search == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch(""); setTotalSize(0) }}><span >{search == "" ? <b>All</b> : <span>All</span>}</span></a></li>
                                        <li className={search == "Pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("Pending"); setTotalSize(0) }}><span>{search == "Pending" ? <b>
                                           Pending</b> : <span>
                                           Pending</span>}</span></a></li>
