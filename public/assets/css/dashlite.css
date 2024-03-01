@@ -51441,6 +51441,7 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   border-radius: 3px;
   font-weight: 400;
 }
+
 .bellNotificationhover:before {
   width: 41.75px !important;
   height: 41.75px !important;
@@ -51534,6 +51535,5 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   right: -8px;
   top: -6px;
 }
-
 
 /*! END @iO */

@@ -25,7 +25,6 @@ const ReqMoneyTxn = () => {
     }
 
     useEffect(() => {
-        d
         ReqMoneyTxndata()
     }, [])
 

@@ -10,12 +10,17 @@ import * as yup from "yup"
 import { useNavigate } from 'react-router-dom';
 import { Switch } from 'antd';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import BaseUrl from '../../API/config'
 import { WithdrawalsApprove } from '../../API/Withdrawals/WithdrawalsAPI'
 import { GetTransfers } from '../../API/TransferAPi/TransferAPI'
-import Swal from 'sweetalert2';
+import { DateRangePicker } from 'react-bootstrap-daterangepicker';
+
+
+
+
 const AddSuccessToast = () => {
     toast.success('Status Change successfully.', { autoClose: 2000 });
 }
@@ -45,7 +50,8 @@ const Transfers = () => {
     const [selectedValue, setSelectedValue] = useState(true)
     const [recentTab, setrecentTab] = useState("")
     const [reqmoneymsg, setreqmoneymsg] = useState("")
-
+    const [startDate, setstartDate] = useState("")
+    const [endDate, setEndDate] = useState("")
     const [singletxn, setsingletxn] = useState()
     const [comment, setcomment] = useState()
     const navigate = useNavigate()
@@ -57,6 +63,7 @@ const Transfers = () => {
         ShortName: yup.string().required("Please Enter Massage"),
         role: yup.string().required('Please select Role'),
     });
+
     const initialValues = {
         ShortName: "",
     }
@@ -94,7 +101,7 @@ const Transfers = () => {
 
     const TransfersData = async () => {
         try {
-            const totaldata = await GetTransfers(token, recentTab, sortedBy, orderBy, search, pageNumber)
+            const totaldata = await GetTransfers(token, recentTab, startDate, endDate, sortedBy, orderBy, search, pageNumber)
             console.log(totaldata.data.rows, "daatattadsddddddd")
             if (totaldata.status == true) {
                 setTimeout(() => {
@@ -129,7 +136,7 @@ const Transfers = () => {
     }
     useEffect(() => {
         TransfersData()
-    }, [sortedBy, orderBy, search, pageNumber, recentTab])
+    }, [sortedBy, orderBy, search, pageNumber, recentTab, startDate, endDate])
 
     const sortChange = (col) => {
         if (col === sortedBy) {
@@ -242,6 +249,21 @@ const Transfers = () => {
             }
         })
     }
+
+    const handleCallbackOnCancel = (event, picker) => {
+        picker.element.val('');
+        setstartDate('')
+        setEndDate('')
+    }
+
+    function handleCallback(event, picker) {
+        const startDate = picker.startDate.format('YYYY-MM-DD');
+        const endDate = picker.endDate.format('YYYY-MM-DD');
+        setstartDate(startDate)
+        setEndDate(endDate)
+        console.log("Start Date:", startDate);
+        console.log("End Date:", endDate);
+    }
     var stillUtcs = moment.utc(singletxn?.created_at).toDate();
     var singletimeZones = moment(stillUtcs).local().format('MMM D, YYYY hh:mm A');
     var completedstillUtcs = moment.utc(singletxn?.updated_at).toDate();
@@ -266,6 +288,22 @@ const Transfers = () => {
                                                 <a className="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em className="icon ni ni-menu-alt-r" /></a>
                                                 <div className="toggle-expand-content" data-content="pageMenu">
                                                     <ul className="nk-block-tools g-3">
+
+
+                                                        <li>
+                                                            <div className="form-control-wrap">
+                                                                <DateRangePicker
+                                                                    onApply={handleCallback}
+                                                                    onCancel={handleCallbackOnCancel}
+                                                                    initialSettings={{ autoUpdateInput: false, locale: { cancelLabel: 'Clear' } }}>
+                                                                    <input
+                                                                        placeholder="Search By Date"
+                                                                        className="form-control fc-datepicker hasDatepicker"
+                                                                        type="text" defaultValue=""
+                                                                        style={{ cursor: 'pointer' }}
+                                                                    />
+                                                                </DateRangePicker>                                                            </div>
+                                                        </li>
                                                         <li>
                                                             <div className="form-control-wrap">
                                                                 <div className="form-icon form-icon-right">
@@ -286,14 +324,14 @@ const Transfers = () => {
                                         <div className="card-title-group">
                                             <div className="card-tools">
                                                 <ul className="card-tools-nav">
-                                                    <li className={search == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch(""); setTotalSize(0) }}><span >{search == "" ? <b>All</b> : <span>All</span>}</span></a></li>
-                                                    <li className={search == "Pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("Pending"); setTotalSize(0) }}><span>{search == "Pending" ? <b>
+                                                    <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab(""); setTotalSize(0) }}><span >{recentTab == "" ? <b>All</b> : <span>All</span>}</span></a></li>
+                                                    <li className={recentTab == "pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("pending"); setTotalSize(0) }}><span>{recentTab == "pending" ? <b>
                                                         Pending</b> : <span>
                                                         Pending</span>}</span></a></li>
-                                                    <li className={search == "Success" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("Success"); setTotalSize(0) }}><span> {search == "Success" ? <b>
+                                                    <li className={recentTab == "success" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("success"); setTotalSize(0) }}><span> {recentTab == "success" ? <b>
                                                         Completed</b> : <span>
                                                         Completed</span>}</span></a></li>
-                                                    <li className={search == "Failed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("Failed"); setTotalSize(0) }}><span>{search == "Failed" ? <b>Rejected</b> : <span>Rejected</span>}</span></a></li>
+                                                    <li className={recentTab == "failed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("failed"); setTotalSize(0) }}><span>{recentTab == "failed" ? <b>Rejected</b> : <span>Rejected</span>}</span></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -347,7 +385,7 @@ const Transfers = () => {
 
                                                     {
                                                         data.length > 0 && data.map((data) => {
-                                                            var stillUtcs = moment.utc(data?.transcation?.created_at).toDate();
+                                                            var stillUtcs = moment.utc(data?.created_at).toDate();
                                                             var timeZones = moment(stillUtcs).local().format('YYYY-MM-DD HH:mm:ss A');
                                                             return (
                                                                 <>
@@ -376,8 +414,6 @@ const Transfers = () => {
                                                                                             //  <span className="user-avatar bg-danger-dim"><e className="icon ni ni-arrow-up-right">
                                                                                             // </e></span>
                                                                                         }
-
-
                                                                                     </div>
                                                                                     <div className="user-info" style={{ cursor: "pointer", }} onClick={() => GoToUserDetail(data?.client?.id)}>
                                                                                         <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.client_name}  <span className="dot dot-success d-md-none ms-1" /></span>

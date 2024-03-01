@@ -13,6 +13,8 @@ import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import 'react-toastify/dist/ReactToastify.css';
 import BaseUrl from '../../API/config'
+import { DateRangePicker } from 'react-bootstrap-daterangepicker';
+
 
 const AddSuccessToast = () => {
     toast.success('Status Change successfully.', { autoClose: 2000 });
@@ -44,6 +46,10 @@ function RequestMoney() {
     const [txnid, settxnid] = useState()
     const [singletxn, setsingletxn] = useState([])
     const [alldata, setalldata] = useState([])
+
+    const [startDate, setstartDate] = useState("")
+    const [endDate, setEndDate] = useState("")
+
     const navigate = useNavigate()
     const ref2 = useRef()
     const ref1 = useRef()
@@ -106,8 +112,7 @@ function RequestMoney() {
 
     const GetRequestMoneyData = async () => {
         try {
-            const totaldata = await RequestMoneyData(token, recentTab, sortedBy, orderBy, search, pageNumber
-            )
+            const totaldata = await RequestMoneyData(token, recentTab, startDate, endDate, sortedBy, orderBy, search, pageNumber)
             console.log(totaldata.data.rows, "daatattadsddddddd")
             if (totaldata.status == true) {
                 setTimeout(() => {
@@ -141,7 +146,7 @@ function RequestMoney() {
     }
     useEffect(() => {
         GetRequestMoneyData()
-    }, [sortedBy, orderBy, search, pageNumber, recentTab])
+    }, [sortedBy, orderBy, search, pageNumber, recentTab, startDate, endDate])
 
     const sortChange = (col) => {
         if (col === sortedBy) {
@@ -258,6 +263,25 @@ function RequestMoney() {
             console.log(err)
         }
     }
+
+
+    const handleCallbackOnCancel = (event, picker) => {
+        picker.element.val('');
+        setstartDate('')
+        setEndDate('')
+    }
+
+    function handleCallback(event, picker) {
+        const startDate = picker.startDate.format('YYYY-MM-DD');
+        const endDate = picker.endDate.format('YYYY-MM-DD');
+        setstartDate(startDate)
+        setEndDate(endDate)
+        console.log("Start Date:", startDate);
+        console.log("End Date:", endDate);
+    }
+
+
+
     var singlestillUtcs = moment.utc(singletxn?.transaction?.created_at).toDate();
     var singletimeZones = moment(singlestillUtcs).local().format('MMM D, YYYY hh:mm A');
     console.log(singletxn, "singletxn?.transaction?.created_at")
@@ -281,6 +305,23 @@ function RequestMoney() {
                                             <a className="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em className="icon ni ni-menu-alt-r" /></a>
                                             <div className="toggle-expand-content" data-content="pageMenu">
                                                 <ul className="nk-block-tools g-3">
+
+                                                    <li>
+                                                        <div className="form-control-wrap">
+                                                            <DateRangePicker
+                                                                onApply={handleCallback}
+                                                                onCancel={handleCallbackOnCancel}
+                                                                initialSettings={{ autoUpdateInput: false, locale: { cancelLabel: 'Clear' } }}>
+                                                                <input
+                                                                    placeholder="Search By Date"
+                                                                    className="form-control fc-datepicker hasDatepicker"
+                                                                    type="text" defaultValue=""
+                                                                    style={{ cursor: 'pointer' }}
+                                                                />
+                                                            </DateRangePicker> </div>
+                                                    </li>
+
+
                                                     <li>
                                                         <div className="form-control-wrap">
                                                             <div className="form-icon form-icon-right">
@@ -360,7 +401,6 @@ function RequestMoney() {
 
                                                 {
                                                     data.length > 0 && data.map((data) => {
-                                                        console.log(data, "dddddddddd")
                                                         var stillUtcs = moment.utc(data.created_at).toDate();
                                                         var timeZones = moment(stillUtcs).local().format('YYYY-MM-DD HH:mm:ss A');
                                                         return (
@@ -374,8 +414,8 @@ function RequestMoney() {
                                                                                     </e></span>   <em class="icon ni ni-wallet-fill walletIconNew"></em>
                                                                                 </div>
                                                                                 <div className="user-info" style={{ cursor: "pointer", }} onClick={() => GoToUserDetail(data.client_id)}>
-                                                                                    <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.client?.first_name} {data?.client?.last_name} <span className="dot dot-success d-md-none ms-1" /></span>
-                                                                                    <span>{data?.client?.email}</span>
+                                                                                    <span className="tb-lead" style={{ textTransform: "capitalize" }}>{data?.client_name}  <span className="dot dot-success d-md-none ms-1" /></span>
+                                                                                    <span>{data?.client_email}</span>
                                                                                 </div>
                                                                             </div>
                                                                         </a>
@@ -386,29 +426,29 @@ function RequestMoney() {
                                                                             <em class="icon ni ni-bullet-fill"></em>Deposit
                                                                         </span>                                                                    </div>
                                                                     <div className="nk-tb-col tb-col-md">
-                                                                        <span> {data?.description}</span>
+                                                                        <span> {data?.title}</span>
                                                                     </div>
                                                                     <div className="nk-tb-col tb-col-lg">
-                                                                        <span> {data?.amount} {data?.currencyWalletDetail?.currencyDetail?.short_name}</span>
+                                                                        <span> {data.amount} {data.short_name}</span>
                                                                     </div>
                                                                     <div className="nk-tb-col tb-col-lg">
                                                                         <span>{timeZones}</span>
                                                                     </div>
                                                                     <div className="nk-tb-col tb-col-md">
                                                                         {
-                                                                            data?.status == "pending" && <span className="tb-status text-warning">Pending</span>
+                                                                            data?.payment_status == "pending" && <span className="tb-status text-warning">Pending</span>
                                                                         }
                                                                         {
-                                                                            data?.status == "completed" && <span className="tb-status text-success">Completed</span>
+                                                                            data?.payment_status == "success" && <span className="tb-status text-success">Completed</span>
                                                                         }
                                                                         {
-                                                                            data?.status == "rejected" && <span className="tb-status text-danger">Rejected</span>
+                                                                            data?.payment_status == "rejected" && <span className="tb-status text-danger">Rejected</span>
                                                                         }
                                                                     </div>
                                                                     <div className="nk-tb-col nk-tb-col-tools">
                                                                         <ul className="nk-tb-actions gx-1">
                                                                             {
-                                                                                data?.status == "pending" &&
+                                                                                data?.payment_status == "pending" &&
                                                                                 <>
                                                                                     <li className="nk-tb-action-hidden" tooltip="Reject" flow="Top" onClick={() => { setid(data.id); settxnid(data.txn_id) }}>
                                                                                         <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
@@ -429,16 +469,16 @@ function RequestMoney() {
                                                                             }
 
                                                                             {
-                                                                                (data?.status == "rejected" || data?.status == "completed") &&
+                                                                                (data?.payment_status == "rejected" || data?.payment_status == "success") &&
                                                                                 <>
                                                                                     <li className="nk-tb-action-hidden" tooltip="User Detail" flow="Top">
                                                                                         <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
-                                                                                            <em class="icon ni ni-user-alt-fill" onClick={() => GoToUserDetail(data.client_id)}></em>
+                                                                                            <em class="icon ni ni-user-alt-fill" onClick={() => GoToUserDetail(data?.client_id)}></em>
                                                                                         </a>
                                                                                     </li>
                                                                                     <li className="nk-tb-action-hidden" tooltip="TXN Detail" flow="Top" >
                                                                                         <a className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                                            <em class="icon ni ni-eye-fill" onClick={() => { ReqMoneyTxndata(data.id) }} data-bs-toggle="modal" data-bs-target="#modal-viewTxn"></em>
+                                                                                            <em class="icon ni ni-eye-fill" onClick={() => { ReqMoneyTxndata(data?.id) }} data-bs-toggle="modal" data-bs-target="#modal-viewTxn"></em>
                                                                                         </a>
                                                                                     </li>
                                                                                 </>
@@ -447,7 +487,7 @@ function RequestMoney() {
                                                                                 <div className="drodown">
                                                                                     <a className="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
                                                                                     {
-                                                                                        data?.status == "pending" &&
+                                                                                        data?.payment_status == "pending" &&
                                                                                         <div className="dropdown-menu dropdown-menu-end">
                                                                                             <ul className="link-list-opt no-bdr">
                                                                                                 <li style={{ cursor: "pointer" }} onClick={() => GoToUserDetail(data.client_id)}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
@@ -458,7 +498,7 @@ function RequestMoney() {
                                                                                             </ul>
                                                                                         </div>
                                                                                     }{
-                                                                                        (data?.status == "rejected" || data?.status == "success") &&
+                                                                                        (data?.payment_status == "rejected" || data?.payment_status == "success") &&
                                                                                         <div className="dropdown-menu dropdown-menu-end">
                                                                                             <ul className="link-list-opt no-bdr">
                                                                                                 <li style={{ cursor: "pointer" }} onClick={() => GoToUserDetail(data.client_id)}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
@@ -513,6 +553,8 @@ function RequestMoney() {
                     </div>
                 </div>
             </div >
+
+
 
             <div className="modal modal-blur fade" id="modal-report" tabIndex={-1} role="dialog" aria-hidden="true">
                 <div className="modal-dialog" role="document">

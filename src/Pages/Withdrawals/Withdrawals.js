@@ -11,6 +11,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import BaseUrl from '../../API/config'
 import { WithdrawalsApprove } from '../../API/Withdrawals/WithdrawalsAPI'
 import Swal from 'sweetalert2';
+import { DateRangePicker } from 'react-bootstrap-daterangepicker';
+
 const AddSuccessToast = () => {
    toast.success('Status Change successfully.', { autoClose: 2000 });
 }
@@ -39,6 +41,8 @@ const Withdrawals = () => {
    const [txn_id, settxn_id] = useState()
    const [modaldata, setmodaldata] = useState([])
    const [singletxn, setsingletxn] = useState()
+   const [startDate, setstartDate] = useState("")
+   const [endDate, setEndDate] = useState("")
    const navigate = useNavigate()
    const ref2 = useRef()
    const ref3 = useRef()
@@ -50,9 +54,7 @@ const Withdrawals = () => {
 
    const WithdrawalsTxnData = async () => {
       try {
-         const totaldata = await WithdrawalsTxn(token, recentTab, sortedBy, orderBy, search, pageNumber
-
-         )
+         const totaldata = await WithdrawalsTxn(token, recentTab, sortedBy, orderBy, search, pageNumber)
          console.log(totaldata.data.rows, "daatattadsddddddd")
          if (totaldata.status == true) {
             setTimeout(() => {
@@ -86,7 +88,7 @@ const Withdrawals = () => {
    }
    useEffect(() => {
       WithdrawalsTxnData()
-   }, [sortedBy, orderBy, search, pageNumber, recentTab])
+   }, [sortedBy, orderBy, search, pageNumber, recentTab, startDate, endDate])
 
 
 
@@ -175,6 +177,24 @@ const Withdrawals = () => {
          }
       })
    }
+
+
+   const handleCallbackOnCancel = (event, picker) => {
+      picker.element.val('');
+      setstartDate('')
+      setEndDate('')
+   }
+
+   function handleCallback(event, picker) {
+      const startDate = picker.startDate.format('YYYY-MM-DD');
+      const endDate = picker.endDate.format('YYYY-MM-DD');
+      setstartDate(startDate)
+      setEndDate(endDate)
+      console.log("Start Date:", startDate);
+      console.log("End Date:", endDate);
+   }
+
+
    var singlestillUtcs = moment.utc(modaldata?.transcation?.created_at).toDate();
    var singletimeZones = moment(singlestillUtcs).local().format('MMM D, YYYY hh:mm A');
    var completed_on = moment.utc(modaldata?.transcation?.completed_on).toDate();
@@ -201,6 +221,20 @@ const Withdrawals = () => {
                                        <ul className="nk-block-tools g-3">
                                           <li>
                                              <div className="form-control-wrap">
+                                                <DateRangePicker
+                                                   onApply={handleCallback}
+                                                   onCancel={handleCallbackOnCancel}
+                                                   initialSettings={{ autoUpdateInput: false, locale: { cancelLabel: 'Clear' } }}>
+                                                   <input
+                                                      placeholder="Search By Date"
+                                                      className="form-control fc-datepicker hasDatepicker"
+                                                      type="text" defaultValue=""
+                                                      style={{ cursor: 'pointer' }}
+                                                   />
+                                                </DateRangePicker>                                                            </div>
+                                          </li>
+                                          <li>
+                                             <div className="form-control-wrap">
                                                 <div className="form-icon form-icon-right">
                                                    <em className="icon ni ni-search" />
                                                 </div>
@@ -219,14 +253,14 @@ const Withdrawals = () => {
                               <div className="card-title-group">
                                  <div className="card-tools">
                                     <ul className="card-tools-nav">
-                                       <li className={search == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch(""); setTotalSize(0) }}><span >{search == "" ? <b>All</b> : <span>All</span>}</span></a></li>
-                                       <li className={search == "Pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("Pending"); setTotalSize(0) }}><span>{search == "Pending" ? <b>
+                                       <li className={recentTab == "" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab(""); setTotalSize(0) }}><span >{recentTab == "" ? <b>All</b> : <span>All</span>}</span></a></li>
+                                       <li className={recentTab == "pending" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("pending"); setTotalSize(0) }}><span>{recentTab == "pending" ? <b>
                                           Pending</b> : <span>
                                           Pending</span>}</span></a></li>
-                                       <li className={search == "Success" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("Success"); setTotalSize(0) }}><span> {search == "Success" ? <b>
+                                       <li className={recentTab == "success " ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("success"); setTotalSize(0) }}><span> {recentTab == "success" ? <b>
                                           Completed</b> : <span>
                                           Completed</span>}</span></a></li>
-                                       <li className={search == "Failed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setsearch("Failed"); setTotalSize(0) }}><span>{search == "Failed" ? <b>Rejected</b> : <span>Rejected</span>}</span></a></li>
+                                       <li className={recentTab == "failed" ? "active" : ""} style={{ cursor: "pointer" }}><a onClick={() => { setrecentTab("failed"); setTotalSize(0) }}><span>{recentTab == "failed" ? <b>Rejected</b> : <span>Rejected</span>}</span></a></li>
                                     </ul>
                                  </div>
                               </div>
@@ -332,7 +366,7 @@ const Withdrawals = () => {
                                                       <div className="nk-tb-col nk-tb-col-tools" onClick={() => { reqmoneystatus(data); setmodaldata(data) }}>
                                                          <ul className="nk-tb-actions gx-1">
                                                             {
-                                                               data?.transcation?.payment_status == "pending" && <>
+                                                               data?.payment_status == "pending" && <>
                                                                   <li className="nk-tb-action-hidden" tooltip="Reject" flow="Top" onClick={() => { settxn_id(data?.transcation?.txn_id) }}>
                                                                      <a className="btn btn-trigger btn-icon">
                                                                         <em class="icon ni ni-cross-fill-c" data-bs-toggle="modal" data-bs-target="#modal-reject" ></em>
@@ -351,7 +385,7 @@ const Withdrawals = () => {
                                                                </>
                                                             }
                                                             {
-                                                               (data?.transcation?.payment_status == "failed" || data?.transcation?.payment_status == "success") && <>
+                                                               (data?.payment_status == "failed" || data?.payment_status == "success") && <>
                                                                   <li className="nk-tb-action-hidden" tooltip="User detail" flow="Top">
                                                                      <a onClick={() => GoToUserDetail(data?.transcation?.client_id)} className="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
                                                                         <em class="icon ni ni-user-alt-fill"></em>
@@ -368,7 +402,7 @@ const Withdrawals = () => {
                                                                <div className="drodown">
                                                                   <a href="#" className="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em className="icon ni ni-more-h" /></a>
                                                                   {
-                                                                     data?.transcation?.payment_status == "pending" && <div className="dropdown-menu dropdown-menu-end">
+                                                                     data?.payment_status == "pending" && <div className="dropdown-menu dropdown-menu-end">
                                                                         <ul className="link-list-opt no-bdr">
                                                                            <li onClick={() => GoToUserDetail(data?.transcation?.client_id)} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>
                                                                            <li style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#modal-txn"><a ><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
@@ -378,7 +412,7 @@ const Withdrawals = () => {
                                                                         </ul>
                                                                      </div>
                                                                   }{
-                                                                     (data?.transcation?.payment_status == "failed" || data?.transcation?.payment_status == "success") &&
+                                                                     (data?.payment_status == "failed" || data?.payment_status == "success") &&
                                                                      <div className="dropdown-menu dropdown-menu-end">
                                                                         <ul className="link-list-opt no-bdr">
                                                                            <li onClick={() => GoToUserDetail(data?.transcation?.client_id)} style={{ cursor: "pointer" }}><a ><em class="icon ni ni-user-alt"></em><span>User Profile</span></a></li>

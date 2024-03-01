@@ -143,7 +143,7 @@ const Header = () => {
     console.log(id, "iddddddddddddddd", token)
     try {
       const resp = await readonedata(id, token)
-      if (resp?.status) {
+      if (resp?.success) {
         NotificationData()
       }
       else {
@@ -417,20 +417,17 @@ const Header = () => {
                       </li>{/* .chat-item */}
                     </ul>{/* .chat-list */}
                   </div>{/* .nk-dropdown-body */}
-                  <div className="dropdown-foot center">
+                  {/* <div className="dropdown-foot center">
                     <a href="html/apps-chats.html">View All</a>
-                  </div>
+                  </div> */}
                 </div>
               </li>
               <li className="dropdown notification-dropdown">
                 <a className="dropdown-toggle nk-quick-nav-icon bellNotificationhover" data-bs-toggle="dropdown">
-                  {/* <div className="icon-status icon-status-info"><em className="icon ni ni-bell" /> */}
                   {/* {
                     count !== 0 && <div class=""><span className="countbadge">{count > 9 ? <span>{count}</span> : <span>0{count}</span>}</span><em class="icon ni ni-bell"></em></div>
 
                   } */}
-
-
                   {
                     count == 0 && <div className="icon-status icon-status-info"><em className="icon ni ni-bell" /></div>
                   }
@@ -451,30 +448,50 @@ const Header = () => {
                     <div className="nk-notification">
                       {
                         data.map((data) => {
+                          const createdAtDate = new Date(data.created_at);
+                          const currentDate = new Date();
+
+                          const timeDifferenceInMilliseconds = currentDate - createdAtDate;
+
+                          // Convert milliseconds to seconds, minutes, hours, and days
+                          const seconds = Math.floor(timeDifferenceInMilliseconds / 1000);
+                          const minutes = Math.floor(seconds / 60);
+                          const hours = Math.floor(minutes / 60);
+                          const days = Math.floor(hours / 24);
+
+                          // Calculate remaining hours, minutes, and seconds
+                          const remainingHours = hours % 24;
+                          const remainingMinutes = minutes % 60;
+                          const remainingSeconds = seconds % 60;
                           return (
                             <>
                               <div className="nk-notification-item dropdown-inner">
-                                <div className="nk-notification-icon">
+                                {/* <div className="nk-notification-icon">
                                   <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right" />
-                                </div>
+                                </div> */}
                                 <div className="nk-notification-content" onClick={() => { readOne(data.id) }}>
                                   <div className="nk-notification-text" >
                                     <span >{data?.body}</span>
                                   </div>
-                                  <div className="nk-notification-time">2 hrs ago</div>
+                                  <div className="nk-notification-time"> {
+                                    (days == 0 && remainingHours == 0) && <span className="time">{remainingMinutes == 0 ? <span>just now</span> : <span> {remainingMinutes} Minutes ago</span>}  </span>
+                                  }
+                                    {
+                                      (days !== 0 && remainingHours > 24) && <span className="time"> {days} days ago </span>
+                                    }
+                                    {
+                                      (days == 0 && remainingHours > 0) && <span className="time"> {remainingHours} Hours ago </span>
+                                    }</div>
                                 </div>
                               </div>
                             </>
                           )
                         })
                       }
-
-
-
                     </div>{/* .nk-notification */}
                   </div>{/* .nk-dropdown-body */}
                   <div className="dropdown-foot center">
-                    <a href="#">View All</a>
+                    <a >View All</a>
                   </div>
                 </div>
               </li>
