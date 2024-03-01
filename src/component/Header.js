@@ -435,7 +435,7 @@ const Header = () => {
                     count > 9 && <div class="icon-status icon-status-na"><span className="countbadge">{count}</span><em class="icon ni ni-bell"></em></div>
                   }
                   {
-                    (count <= 9 && count !== 0) && <div class=""><span className="countbadge">0{count}</span><em class="icon ni ni-bell"></em></div>
+                    (count <= 9 && count !== 0) && <div className="icon-status icon-status-info"><span className="countbadge">0{count}</span><em class="icon ni ni-bell"></em></div>
                   }
 
                 </a>

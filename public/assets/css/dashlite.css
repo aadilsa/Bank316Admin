@@ -51536,4 +51536,9 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode .nk-header-search input,
   top: -6px;
 }
 
+.bellNotificationhover .icon-status-info:after {
+  display:none;
+}
+
+
 /*! END @iO */
